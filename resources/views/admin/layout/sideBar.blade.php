@@ -24,7 +24,7 @@
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start active ">
-					<a href="index.html">
+					<a href="{{ url('admin/dashboard') }}">
 						<i class="fa fa-home"></i>
 						<span class="title">
 							Dashboard
@@ -717,33 +717,23 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="table_basic.html">
-								 Basic Datatables
+							<a href="{{ url("admin/user") }}" >
+								Users
 							</a>
 						</li>
 						<li>
 							<a href="table_responsive.html">
-								 Responsive Datatables
+								Caterers
 							</a>
 						</li>
 						<li>
 							<a href="table_managed.html">
-								 Managed Datatables
+								Products
 							</a>
 						</li>
 						<li>
 							<a href="table_editable.html">
-								 Editable Datatables
-							</a>
-						</li>
-						<li>
-							<a href="table_advanced.html">
-								 Advanced Datatables
-							</a>
-						</li>
-						<li>
-							<a href="table_ajax.html">
-								 Ajax Datatables
+								Orders
 							</a>
 						</li>
 					</ul>

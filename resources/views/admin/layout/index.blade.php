@@ -24,7 +24,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-{!! Html::style('administration/assets/plugins/font-awesome/css/font-awesome.min.css' ) !!}
+{!! Html::style('administration/assets/plugins/uniform/css/uniform.default.css' ) !!}
 {!! Html::style('administration/assets/plugins/bootstrap/css/bootstrap.min.css' ) !!}
 {!! Html::style('administration/assets/plugins/uniform/css/uniform.default.css' ) !!}
 <!-- END GLOBAL MANDATORY STYLES -->
@@ -119,7 +119,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {!! Html::script('administration/assets/scripts/custom/index.js') !!}
 {!! Html::script('administration/assets/scripts/custom/tasks.js') !!}
 <!-- END PAGE LEVEL SCRIPTS -->
-{!! Html::script('administration/common.js') !!}
+{!! Html::script('administration/assets/scripts/common.js') !!}
 
 @yield('js')
 <!-- END JAVASCRIPTS -->

@@ -1,5 +1,21 @@
 @extends('admin/layout/index')
 
+@section('css')
+{!! Html::style('administration/assets/plugins/select2/select2.css') !!}
+{!! Html::style('administration/assets/plugins/select2/select2-metronic.css') !!}
+{!! Html::style('administration/assets/plugins/select2/select2.css') !!}
+{!! Html::style('administration/assets/plugins/data-tables/DT_bootstrap.css') !!}
+
+@stop
+
+@section('script')
+{!! Html::script('administration/assets/plugins/select2/select2.min.js') !!}
+{!! Html::script('administration/assets/plugins/data-tables/jquery.dataTables.js') !!}
+{!! Html::script('administration/assets/plugins/data-tables/DT_bootstrap.js') !!}
+{!! Html::script('administration/assets/scripts/custom/table-editable.js') !!}
+
+@stop
+
 @section('content')
     <div class="page-content-wrapper">
 		<div class="page-content">
