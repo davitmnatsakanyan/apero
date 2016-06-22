@@ -1,0 +1,7 @@
+Ok, Let's clarify, the roles of the site are:
+- website admin (when I'am talking about admins, I mean this user group), who can manage the entire site (users, orders, caterer, CMS)
+ using the admin backend template. We can start with one admin account, but later more admins should be possible. The admin credentials are also stored in the user table? 
+
+- caterer: supply and deliver the food for the customers (registered and guest users). Food can be ordered and paid upfront via creditcard or cash on delivery. The food order is commonly delivered by the caterer itself but possible that caterer allows pickup on their site. Caterer should be able to manage orders and products. Caterer functions are displayed using   the main website template and not the admin backend
+
+- customers: registered or guest users who ordered some food. Registered users see their orders and can manage their profile. Guest user get a unique username and can only the status of their order.
