@@ -28,8 +28,7 @@ Route::get('aaa',function(\Mailchimp $mailchimp){
 Route::group(array('prefix'=>'/templates/'),function(){
     Route::get('{template}', array( function($template)
     {
-        $template = str_replace(".php","",$template);
-        view()->addExtension('html','php');
+        $template = str_replace(".blade.php","",$template);
         return view('templates.' . $template);
     }));
 });
