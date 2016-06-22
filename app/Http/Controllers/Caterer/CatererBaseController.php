@@ -13,6 +13,12 @@ class CatererBaseController extends Controller
     public function __construct() 
     {
         $this->caterer = Auth::guard('caterer');
+
+
+        $this->caterer->attempt(['email' => 'caterer@gmail.com',
+                                'password' => 'caterer',
+         ]);
+
         View::share('caterer', $this->caterer->user());
     }
 }

@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="{{url('caterer/product')}}">Product managment</a></li>
             <li>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -19,8 +19,8 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                       <li><a href={{ url('caterer/settings/update')}}>Update Data</a></li>
-                       <li><a href={{ url('caterer/settings/change-password')}}>Change Password</a></li>
+                       <li><a href="{{ url('caterer/settings/update')}}">Update Data</a></li>
+                       <li><a href="{{ url('caterer/settings/change-password')}}">Change Password</a></li>
                        <li><a href="#">Delete</a></li>
                        <li role="separator" class="divider"></li>
                        <li><a href="#">Separated link</a></li>
