@@ -1,18 +1,6 @@
 <?php
-Route::get('aaa',function(\Mailchimp $mailchimp){
-    try {
-            $mailchimp
-                ->lists
-                ->subscribe(
-                    111111111,
-                    ['email' => 'bastianjung8@gmail.com']
-                );
-        } catch (\Mailchimp_List_AlreadySubscribed $e) {
-            dd($e->getMessage());
-        }
-        catch (\Mailchimp_Error $e) {
-            dd($e->getMessage());
-        }
+Route::get('aaa',function(){
+  dd(bcrypt('caterer'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +47,7 @@ Route::group([],function(){
     
      ],function(){
         Route::controller('dashboard', 'DashboardController');
+        Route::controller('user','UserManagmentController');
         
    } );
    
@@ -86,13 +75,32 @@ Route::group([],function(){
     
     Route::group([
     'prefix'     => 'caterer',
-    'middleware' => 'caterer',   
+//    'middleware' => 'caterer',
     'namespace'  => 'Caterer',
     
      ],function(){
       
         Route::controller('account', 'AccountController');
         Route::controller('settings', 'SettingsController');
+        Route::group([
+            'prefix'    => 'product',
+            'namespace' => 'ProductManagment',
+        ],function(){
+           Route::get('/', 'ProductManagmentController@index');
+           Route::group([
+               'prefix' => 'single'
+           ],function(){
+               Route::get('add','SingleProductController@getAdd');
+               Route::post('add','SingleProductController@postAdd');
+
+               Route::get('view/{id}','SingleProductController@getView');
+
+               Route::get('edit/{id}','SingleProductController@getEdit');
+               Route::post('edit/{id}','SingleProductController@postEdit');
+
+               Route::get('delete/{id}','SingleProductController@getDelete');
+           });
+        });
         
    } );
    

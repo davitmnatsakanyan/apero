@@ -2,27 +2,198 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd10cd9e-26e7-46d8-9488-71207fcfe438" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/templates/login.blade.php" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\forms\caterer_reg.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\forms\login.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\forms\reg_form_layout.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\forms\user_reg.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\login.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\auth\register.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\login.php" afterPath="" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\bestellen.php" afterPath="$PROJECT_DIR$/resources/views/templates/bestellen.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\caterer.php" afterPath="$PROJECT_DIR$/resources/views/templates/caterer.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\footer.php" afterPath="$PROJECT_DIR$/resources/views/templates/footer.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\hillfe.php" afterPath="$PROJECT_DIR$/resources/views/templates/hillfe.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\home.php" afterPath="$PROJECT_DIR$/resources/views/templates/home.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\input.php" afterPath="$PROJECT_DIR$/resources/views/templates/input.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\kategori.php" afterPath="$PROJECT_DIR$/resources/views/templates/kategori.blade.php" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\apero\resources\views\templates\nav.php" afterPath="$PROJECT_DIR$/resources/views/templates/nav.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/NavigationController.js" afterPath="$PROJECT_DIR$/public/js/controllers/NavigationController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/ProductManagmentController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_06_14_073214_create_categories_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/administration/assets/scripts/common.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/caterer/product/single/add.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/caterer/product/single/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/caterer/product/single/forms/add.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/caterer/product/single/forms/edit.blade.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Traits/newEmptyPHP.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Caterer/CatererBaseController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Caterer/CatererBaseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Product.php" afterPath="$PROJECT_DIR$/app/Models/Product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htmlCss/bestellen.html" afterPath="$PROJECT_DIR$/htmlCss/bestellen.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htmlCss/caterer.html" afterPath="$PROJECT_DIR$/htmlCss/caterer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htmlCss/hillfe.html" afterPath="$PROJECT_DIR$/htmlCss/hillfe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htmlCss/index.html" afterPath="$PROJECT_DIR$/htmlCss/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htmlCss/kategori.html" afterPath="$PROJECT_DIR$/htmlCss/kategori.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-daterangepicker/examples.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-daterangepicker/examples.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-datetimepicker/sample/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-datetimepicker/sample/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-hover-dropdown/demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/bootstrap-hover-dropdown/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/plugins/wsc/dialogs/ciframe.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/plugins/wsc/dialogs/ciframe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/plugins/wsc/dialogs/tmpFrameset.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/plugins/wsc/dialogs/tmpFrameset.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/ajax.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/ajax.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/api.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/api.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/appendto.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/appendto.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/divreplace.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/divreplace.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/inlineall.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/inlineall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/inlinebycode.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/inlinebycode.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/dialog/dialog.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/dialog/dialog.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/enterkey/enterkey.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/enterkey/enterkey.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/htmlwriter/outputforflash.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/htmlwriter/outputforflash.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/htmlwriter/outputhtml.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/htmlwriter/outputhtml.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/magicline/magicline.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/magicline/magicline.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/toolbar/toolbar.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/toolbar/toolbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/wysiwygarea/fullpage.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/plugins/wysiwygarea/fullpage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/readonly.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/readonly.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/replacebyclass.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/replacebyclass.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/replacebycode.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/replacebycode.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/tabindex.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/tabindex.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/uicolor.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/uicolor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/uilanguages.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/uilanguages.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/xhtmlstyle.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/ckeditor/samples/xhtmlstyle.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/countdown/plugin/countdownBasic.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/countdown/plugin/countdownBasic.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fancybox/demo/iframe.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fancybox/demo/iframe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fancybox/demo/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fancybox/demo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/ajax/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/ajax/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/annotating/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/annotating/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-interacting/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-interacting/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-multiple/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-multiple/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-time-zones/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-time-zones/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-time/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/axes-time/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/basic-options/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/basic-options/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/basic-usage/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/basic-usage/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/canvas/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/canvas/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/categories/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/categories/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/image/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/image/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/interacting/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/interacting/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/navigate/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/navigate/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/percentiles/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/percentiles/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/realtime/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/realtime/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/resize/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/resize/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/selection/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/selection/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-errorbars/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-errorbars/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-pie/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-pie/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-toggle/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-toggle/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-types/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/series-types/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/stacking/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/stacking/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/symbols/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/symbols/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/threshold/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/threshold/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/tracking/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/tracking/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/visitors/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/visitors/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/zooming/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/flot/examples/zooming/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/agenda-views.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/agenda-views.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/basic-views.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/basic-views.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/default.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/default.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/external-dragging.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/external-dragging.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/gcal.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/gcal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/json.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/json.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/selectable.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/selectable.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/theme.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/fullcalendar/demos/theme.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/gritter/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/gritter/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/non-image.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/non-image.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/styling.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/styling.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial1.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial2.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial3.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial3.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial4.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial4.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial5.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/demos/tutorial5.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jcrop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-easy-pie-chart/examples/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-easy-pie-chart/examples/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/angularjs.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/angularjs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/basic-plus.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/basic-plus.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/basic.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/basic.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/cors/postmessage.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/cors/postmessage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/cors/result.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/cors/result.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/jquery-ui.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-file-upload/jquery-ui.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-knob/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-knob/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-nestable/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-nestable/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/example.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/example.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/test/fake_json_endpoint.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/test/fake_json_endpoint.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/test/fake_plaintext_endpoint.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-tags-input/test/fake_plaintext_endpoint.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/ajaxSubmit-integration-demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/ajaxSubmit-integration-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/custom-messages-data-demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/custom-messages-data-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/custom-methods-demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/custom-methods-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/dynamic-totals.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/dynamic-totals.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/errorcontainer-demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/errorcontainer-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/file_input.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/file_input.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/jquerymobile.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/jquerymobile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/login/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/login/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/marketo/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/marketo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/marketo/step2.htm" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/marketo/step2.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/milk/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/milk/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/multipart/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/multipart/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/radio-checkbox-select-demo.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/radio-checkbox-select-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/tabs/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/tabs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/themerollered.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/themerollered.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/tinymce/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery-validation/demo/tinymce/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery.pwstrength.bootstrap/test/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery.pwstrength.bootstrap/test/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jquery.pwstrength.bootstrap/test/rules.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jquery.pwstrength.bootstrap/test/rules.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/europe.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/europe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/germany.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/germany.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/multi.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/multi.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/russia.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/russia.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/usa.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/usa.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/world.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jqvmap/samples/world.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jstree/docs/assets/ajax_nodes.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jstree/docs/assets/ajax_nodes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/jstree/docs/index.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/jstree/docs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/custom.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/custom.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/all_runtimes.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/all_runtimes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/jquery_ui_widget.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/jquery_ui_widget.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/queue_widget.html" afterPath="$PROJECT_DIR$/public/administration/assets/plugins/plupload/examples/jquery/queue_widget.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-bootstrap-datetimepicker/demo/index.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-bootstrap-datetimepicker/demo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-bootstrap-datetimepicker/src/templates/datetimepicker.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-bootstrap-datetimepicker/src/templates/datetimepicker.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/misc/demo/index.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/misc/demo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/accordion/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/accordion/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/alert/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/alert/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/buttons/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/buttons/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/carousel/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/carousel/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/collapse/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/collapse/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/dateparser/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/dateparser/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/datepicker/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/datepicker/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/datepickerPopup/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/datepickerPopup/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/dropdown/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/dropdown/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/modal/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/modal/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/pager/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/pager/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/pagination/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/pagination/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/popover/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/popover/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/position/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/position/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/position/test/test.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/position/test/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/progressbar/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/progressbar/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/rating/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/rating/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/tabs/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/tabs/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/timepicker/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/timepicker/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/tooltip/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/tooltip/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/typeahead/docs/demo.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/src/typeahead/docs/demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/accordion/accordion-group.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/accordion/accordion-group.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/accordion/accordion.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/accordion/accordion.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/alert/alert.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/alert/alert.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/carousel/carousel.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/carousel/carousel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/carousel/slide.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/carousel/slide.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/datepicker.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/datepicker.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/day.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/day.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/month.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/month.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/year.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepicker/year.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepickerPopup/popup.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/datepickerPopup/popup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/modal/backdrop.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/modal/backdrop.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/modal/window.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/modal/window.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/pager/pager.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/pager/pager.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/pagination/pagination.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/pagination/pagination.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover-html.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover-html.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover-template.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover-template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/popover/popover.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/bar.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/bar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/progress.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/progress.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/progressbar.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/progressbar/progressbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/rating/rating.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/rating/rating.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tabs/tab.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tabs/tab.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tabs/tabset.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tabs/tabset.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/timepicker/timepicker.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/timepicker/timepicker.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-html-popup.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-html-popup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-popup.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-popup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-template-popup.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/tooltip/tooltip-template-popup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/typeahead/typeahead-match.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/typeahead/typeahead-match.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/typeahead/typeahead-popup.html" afterPath="$PROJECT_DIR$/public/bower_components/angular-ui-bootstrap/template/typeahead/typeahead-popup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/caterer/layout/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/caterer/layout/header.blade.php" />
     </list>
     <ignored path="apero.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,48 +214,14 @@
     <favorites_list name="apero" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.384615">
-              <caret line="37" column="3" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6344086">
-              <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavigationController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/controllers/NavigationController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -101,35 +238,43 @@
         <option value="$PROJECT_DIR$/resources/views/index.php" />
         <option value="$PROJECT_DIR$/resources/views/templates/bestellen.php" />
         <option value="$PROJECT_DIR$/resources/views/templates/caterer.php" />
+        <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/resources/views/templates/hillfe.php" />
+        <option value="$PROJECT_DIR$/resources/views/templates/nav.php" />
         <option value="$PROJECT_DIR$/public/js/controllers/HomeController.js" />
         <option value="$PROJECT_DIR$/resources/views/templates/home.php" />
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/templates/kategori.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/nav.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/login.php" />
-        <option value="$PROJECT_DIR$/public/js/app.js" />
-        <option value="$PROJECT_DIR$/resources/views/templates/bestellen.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/caterer.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/hillfe.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/home.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/nav.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/public/js/controllers/NavigationController.js" />
-        <option value="$PROJECT_DIR$/resources/views/auth/forms/user_reg.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/login.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/forms/caterer_reg.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/register.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/auth/forms/caterer_reg.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/templates/auth/forms/user_reg.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Caterer/CatererBaseController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/ProductManagmentController" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/layout/header.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/te.php" />
+        <option value="$PROJECT_DIR$/app/Http/Services/ProductService.php" />
+        <option value="$PROJECT_DIR$/app/Models/Product.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/singleProducts/addSingleProduct.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/singleProducts/forms/addProduct.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/single/forms/add.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/single/add.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/ProductManagmentController.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/single/view.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/single/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/caterer/product/single/forms/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/SingleProductController.php" />
+        <option value="$PROJECT_DIR$/public/administration/assets/scripts/common.js" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/CatererMiddleware.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_14_073214_create_categories_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_22_142148_create_package_product_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_22_141501_create_packages_table.php" />
+        <option value="$PROJECT_DIR$/database/seeds/CaterersTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
     <package-json value="$PROJECT_DIR$/package.json" />
   </component>
@@ -140,9 +285,7 @@
         <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
       </GulpfileState>
     </gulpfiles>
-  </component>
-  <component name="NamedScopeManager">
-    <order />
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpServers">
     <servers />
@@ -175,8 +318,11 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -193,7 +339,7 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -203,15 +349,15 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -221,19 +367,19 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="caterer" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -243,27 +389,23 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="caterer" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="auth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="product" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -273,19 +415,27 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="caterer" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="product" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="single" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -295,19 +445,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -317,25 +459,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -345,37 +473,15 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="seeds" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -385,33 +491,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -421,15 +505,15 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -439,76 +523,45 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Middleware" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apero" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apero" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Http" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Auth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apero" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -533,19 +586,20 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="829" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\apero\resources\views\templates\auth\forms" />
       <recent name="C:\xampp\htdocs\apero\resources\views" />
       <recent name="C:\xampp\htdocs\apero\resources\views\templates" />
       <recent name="C:\xampp\htdocs\apero\resources" />
       <recent name="C:\xampp\htdocs\apero" />
+      <recent name="C:\xampp\htdocs\apero\public\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\apero\resources\views\templates\auth" />
-      <recent name="C:\xampp\htdocs\apero\resources\views\templates" />
       <recent name="C:\xampp\htdocs\apero\public" />
+      <recent name="C:\xampp\htdocs\apero\resources\views\templates" />
       <recent name="C:\xampp\htdocs\apero\resources\views" />
     </key>
   </component>
@@ -568,6 +622,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
@@ -576,8 +631,17 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -586,36 +650,44 @@
       <changelist id="cd10cd9e-26e7-46d8-9488-71207fcfe438" name="Default" comment="" />
       <created>1466414532643</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1466414532643</updated>
       <workItem from="1466414535184" duration="5117000" />
       <workItem from="1466490667562" duration="1573000" />
       <workItem from="1466494926454" duration="55000" />
       <workItem from="1466495574734" duration="12000" />
       <workItem from="1466496315362" duration="325000" />
+      <workItem from="1466582751575" duration="23184000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7082000" />
+    <option name="totallyTimeSpent" value="30266000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32526475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5904437" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24670571" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5904437" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -634,140 +706,80 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/mailchimp/mailchimp/src/Mailchimp/Exceptions.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="25" />
+        <state relative-caret-position="0">
+          <caret line="42" column="6" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073246_create_order_products_table.php">
+    <entry file="file://$PROJECT_DIR$/public/js/controllers/AuthController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073301_create_order_transactions_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073347_create_zip_codes_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/factories/ModelFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/AdminsTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/auth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="10" selection-start-line="86" selection-start-column="8" selection-end-line="93" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/bower_components/jquery/src/css/var/swap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1153846">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View/Factory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.461538">
-          <caret line="827" column="46" selection-start-line="827" selection-start-column="36" selection-end-line="827" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/bower_components/angular/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.028673835">
-          <caret line="12017" column="24" selection-start-line="12017" selection-start-column="13" selection-end-line="12017" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/BestellenController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/CatererController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php">
+    <entry file="file://$PROJECT_DIR$/public/js/controllers/HomeController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073213_create_caterers_table.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/kategori.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="334" column="6" selection-start-line="334" selection-start-column="2" selection-end-line="334" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073118_create_admins_table.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="12" column="50" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/nav.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="20" column="54" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+    <entry file="file://$PROJECT_DIR$/public/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controllers/NavigationController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073229_create_orders_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="527">
           <caret line="32" column="33" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="33" />
           <folding />
         </state>
@@ -775,219 +787,331 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073118_create_admins_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073213_create_caterers_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.576923">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="241">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/header.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6616541">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/home/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39285713">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5432331">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/models/HomeModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers/HomeController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27419356">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/bestellen.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.538462">
-          <caret line="165" column="40" selection-start-line="165" selection-start-column="40" selection-end-line="165" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/caterer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.538462">
-          <caret line="76" column="40" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="25.961538">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/hillfe.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/input.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="2" column="54" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/kategori.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-218.38461">
-          <caret line="334" column="6" selection-start-line="334" selection-start-column="2" selection-end-line="334" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8082707">
-          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307">
-          <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers/AuthController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/register.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/auth/forms/caterer_reg.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/auth/forms/user_reg.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/auth/forms/reg_form_layout.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/auth/forms/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/LoginRequest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58458644">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+        <state relative-caret-position="258">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Caterer/CatererBaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding>
+            <element signature="e#47#83#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/layout/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Caterer/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/te.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Services/UserService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/user/account/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="44" />
+          <folding>
+            <element signature="e#56#94#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/layout/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Caterer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Services/ProductService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/user_managment/forms/edit_user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/messages.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/single/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
+          <folding>
+            <element signature="e#64#121#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/single/forms/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="72" selection-start-line="0" selection-start-column="72" selection-end-line="0" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/single/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/single/view.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/single/forms/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/administration/assets/scripts/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Traits/CRUD.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="56" column="30" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UserManagmentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/ProductManagmentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/caterer/product/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="73" selection-start-line="27" selection-start-column="73" selection-end-line="27" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.384615">
-          <caret line="37" column="3" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
+        <state relative-caret-position="192">
+          <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers/NavigationController.js">
+    <entry file="file://$PROJECT_DIR$/database/seeds/CaterersTableSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+        <state relative-caret-position="238">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/login.blade.php">
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5056391">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="255">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
+    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6344086">
-          <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
+        <state relative-caret-position="85">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding>
+            <element signature="e#7#38#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_22_141501_create_packages_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_22_142148_create_package_product_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073214_create_categories_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_14_073228_create_products_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CatererMiddleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Caterer/ProductManagment/SingleProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding>
+            <element signature="e#64#119#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
