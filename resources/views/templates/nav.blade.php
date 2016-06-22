@@ -21,7 +21,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-href="/#/">Apero bestellen</a></li>
                     <li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/hillfe">Hilfe</a></li>
-                    <li><a ng-href="#/" ng-click="login()">Login/Registrieren</a></li>
+                    <li><a ng-href="#/" ng-click="login()">Login</a></li>
+                    <li><a ng-href="#/" ng-click="register()">Registrieren</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

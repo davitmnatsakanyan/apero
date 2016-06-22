@@ -10,19 +10,19 @@ app.config(function($interpolateProvider) {
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'templates/home.php',
+            templateUrl: 'templates/home.blade.php',
             controller: 'HomeController'
         })
         .when('/hillfe', {
-            templateUrl: 'templates/hillfe.php',
+            templateUrl: 'templates/hillfe.blade.php',
             controller: 'HilfeController'
         })
         .when('/caterer', {
-            templateUrl: 'templates/caterer.php',
+            templateUrl: 'templates/caterer.blade.php',
             controller: 'CatererController'
         })
         .when('/bestellen', {
-            templateUrl: 'templates/bestellen.php',
+            templateUrl: 'templates/bestellen.blade.php',
             controller: 'BestellenController'
         })
         .otherwise({

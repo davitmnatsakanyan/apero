@@ -1,6 +1,6 @@
 <?php
 Route::get('aaa',function(){
-
+  dd(bcrypt('caterer'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +16,7 @@ Route::get('aaa',function(){
 Route::group(array('prefix'=>'/templates/'),function(){
     Route::get('{template}', array( function($template)
     {
-        $template = str_replace(".php","",$template);
-        view()->addExtension('html','php');
+        $template = str_replace(".blade.php","",$template);
         return view('templates.' . $template);
     }));
 });
@@ -76,7 +75,7 @@ Route::group([],function(){
     
     Route::group([
     'prefix'     => 'caterer',
-    'middleware' => 'caterer',
+//    'middleware' => 'caterer',
     'namespace'  => 'Caterer',
     
      ],function(){
