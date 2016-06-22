@@ -9,6 +9,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
 use Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -54,6 +55,7 @@ class AuthController extends Controller
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
         $data = request()->except(['_token','role']);
+       dd($data);
         $data['password'] = bcrypt($data['password']);
         $model = $service->create($data);
         if($model)

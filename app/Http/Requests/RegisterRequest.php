@@ -26,7 +26,7 @@ class RegisterRequest extends Request
         return [
            'company'   => 'required|max:250',
            'name'      => 'required|max:250',
-           'avatar'    => 'image|max:250',
+//           'avatar'    => 'image|max:250',
            'address'   => 'required|max:250',
            'pobox'     => 'required|max:100',
            'zip'       => 'required|max:4',
@@ -35,8 +35,8 @@ class RegisterRequest extends Request
            'email'     => 'required|email|max:100',
            'phone'     => 'required|max:50',
            'mobile'    => 'required|max:50',
-           'password'  => 'required|confirmed',
-           'password_confirmation' => 'required',
+//           'password'  => 'required|confirmed',
+//           'password_confirmation' => 'required',
            //'created_ip' => 'required|ip',
         ];
         

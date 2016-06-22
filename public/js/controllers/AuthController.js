@@ -1,17 +1,40 @@
-app.controller('AuthController', ['$scope', '$uibModalInstance', 'items', function ($scope, $uibModalInstance, items) {
+app.controller('AuthController', ['$scope', '$http',  function ($scope, $http) {
 
-    $scope.items = items;
+    $scope.login_submit = function(){
+        event.preventDefault();
+        $http({
+            data: $scope.data,
+            method : "POST",
+            url : "auth/login"
+        }).then(function mySucces(response) {
+            console.log(response);
+        }, function myError(error) {
+            console.log(error);
 
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+        });
+    }
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.selected.item);
-    };
+    $scope.reg_submit = function(){
+        event.preventDefault();
+        console.log($scope.data)
+        $http({
+            data: $scope.data,
+            method : "POST",
+            url : "auth/register"
+        }).then(function mySucces(response) {
+            //console.log(response);
+        }, function myError(error) {
+            console.log(error);
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
+        });
+    }
+
+    //$scope.ok = function () {
+    //    $uibModalInstance.close($scope.selected.item);
+    //};
+    //
+    //$scope.cancel = function () {
+    //    $uibModalInstance.dismiss('cancel');
+    //};
 
 }]);

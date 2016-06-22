@@ -1,16 +1,16 @@
-{!! Form::open(['url' => url('auth/login'), 'method' => 'post','role'=>"form"])!!}
-    {!! Form::hidden('role', $userType) !!}
+<form ng-submit="login_submit()" ng-controller="AuthController">
 
-  <div class="form-group">
-    {!! Form::label('email','Email')!!}
-    {!! Form::text('email', NULL, ["class"=>"form-control"])!!}
-  </div>
+    <input type="hidden" name="_token" ng-init="data._token='{{ csrf_token() }}'" ng-model="data._token">
+    <input type="hidden" name="role" ng-init="data.role='{{ $userType }}'" ng-model="data.role">
 
-  <div class="form-group">
-    {!! Form::label('password','Password')!!}
-    {!! Form::password('password', ["class"=>"form-control"] )!!}
-  </div>
+    <div class="form-group">
+        <input type="email" name="email" class="form-control" ng-model="data.email" required>
+    </div>
 
-    {!! Form::button('Log In',['type'=>'submit','class'=>'btn btn-default'])!!}
-{!! Form::close() !!}
+    <div class="form-group">
+        <input type="password" name="password" class="form-control" ng-model="data.password" required>
+    </div>
+    <button class="btn btn-default" id="submit">Log In</button>
+</form>
+
 
