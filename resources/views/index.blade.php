@@ -39,5 +39,7 @@
     <script src="/js/controllers/BestellenController.js"></script>
 
     <script src="/js/directives/inputText.js"></script>
+
+    <script src="/js/models/CatererModel.js"></script>
 </body>
 </html>

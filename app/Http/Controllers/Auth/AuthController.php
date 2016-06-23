@@ -10,6 +10,7 @@ use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
@@ -33,16 +34,16 @@ class AuthController extends Controller
         { 
            if( $this->$role->attempt(request()->except(['_token','role'])) )
             {
-               return redirect('home');
+               return Response::json(1);
             }
             else 
             {
-              dd( request()->all() );
+              return Response::json(0);
             }
         }
         else 
         {
-          return back();
+            return Response::json(2);
         }
    }
    
@@ -55,7 +56,6 @@ class AuthController extends Controller
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
         $data = request()->except(['_token','role']);
-       dd($data);
         $data['password'] = bcrypt($data['password']);
         $model = $service->create($data);
         if($model)

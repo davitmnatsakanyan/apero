@@ -19,7 +19,7 @@ class CatererBaseController extends Controller
                                 'password' => 'caterer',
          ]);
 
-        View::share('caterer', $this->caterer->user());
+//        View::share('caterer', $this->caterer->user());
     }
 }
 

@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Caterer;
 
 use App\Http\Controllers\Caterer\CatererBaseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class AccountController extends CatererBaseController
 {
@@ -10,9 +12,12 @@ class AccountController extends CatererBaseController
      * 
      * @return view
      */
+
+    protected  $caterer;
+
     public function getIndex()
     {
-        return view('caterer/account/index');
+        return Response::json($this->caterer->user());
     }
     
    

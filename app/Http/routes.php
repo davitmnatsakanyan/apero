@@ -21,6 +21,14 @@ Route::group(array('prefix'=>'/templates/'),function(){
     }));
 });
 
+Route::group(array('prefix'=>'/templates/caterer/account'),function(){
+    Route::get('{template}', array( function($template)
+    {
+        $template = str_replace(".blade.php","",$template);
+        return view('templates/caterer/account.' . $template);
+    }));
+});
+
 /**
  * Main routes
  */

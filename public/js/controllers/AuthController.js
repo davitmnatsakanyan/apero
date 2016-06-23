@@ -1,17 +1,34 @@
-app.controller('AuthController', ['$scope', '$http',  function ($scope, $http) {
+app.controller('AuthController', ['$scope', '$http', '$location', '$uibModalInstance', 'data',   function ($scope, $http, $location, $uibModalInstance, data) {
 
     $scope.login_submit = function(){
-        event.preventDefault();
+        console.log($scope.data);
+        return ;
         $http({
             data: $scope.data,
             method : "POST",
             url : "auth/login"
-        }).then(function mySucces(response) {
-            console.log(response);
-        }, function myError(error) {
+        }).then(function (response) {
+
+            alert('dfdf');
+            return;
+            if(response.data == 1) {
+                //$location.path('caterer/account');
+
+            }
+            if(response.data == 0){
+                $location.path('/');
+
+            }
+            if(response.data == 2){
+                $location.path('/');
+
+            }
+
+        }, function (error) {
             console.log(error);
 
         });
+        $uibModalInstance.dismiss();
     }
 
     $scope.reg_submit = function(){
@@ -21,9 +38,12 @@ app.controller('AuthController', ['$scope', '$http',  function ($scope, $http) {
             data: $scope.data,
             method : "POST",
             url : "auth/register"
-        }).then(function mySucces(response) {
-            //console.log(response);
-        }, function myError(error) {
+        }).then(function (response) {
+            $http({
+                method : "get",
+                url : "caterer/account"
+            })
+        }, function (error) {
             console.log(error);
 
         });

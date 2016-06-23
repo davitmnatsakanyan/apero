@@ -39,12 +39,14 @@
   </div>
   <div class="form-group">
     {!! Form::label('password','Password')!!}
-    {!! Form::password('password',NULL, ['class' => 'form-control', 'ng-model' => 'data.password'])!!}
-  </div>  
+    {{--{!! Form::password('password',NULL, ['class' => 'form-control', 'ng-model' => 'data.password'])!!}--}}
+    <input type="password" name="password" class="form-control" ng-model="data.password">
+  </div>
   <div class="form-group">
     {!! Form::label('password_confirmation','Confirm Password')!!}
-    {!! Form::password('password_confirmation',NULL, ['class' => 'form-control', 'ng-model' => 'data.password_confirmation'])!!}
-  </div>  
+    {{--{!! Form::password('password_confirmation',NULL, ['class' => 'form-control', 'ng-model' => 'data.password_confirmation'])!!}--}}
+    <input type="password" name="password_confirmation"  class="form-control" ng-model="data.password_confirmation">
+  </div>
   <div class="form-group">
     {!! Form::label('phone','Telefon')!!}
     {!! Form::text('phone',NULL, ['placeholder' => 'Telefon','class' => 'form-control', 'ng-model'=> 'data.phone'])!!}
