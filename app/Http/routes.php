@@ -86,10 +86,12 @@ Route::group([],function(){
             'prefix'    => 'product',
             'namespace' => 'ProductManagment',
         ],function(){
-           Route::get('/', 'ProductManagmentController@index');
+
            Route::group([
                'prefix' => 'single'
            ],function(){
+               Route::get('/','SingleProductController@getIndex');
+
                Route::get('add','SingleProductController@getAdd');
                Route::post('add','SingleProductController@postAdd');
 
@@ -99,6 +101,16 @@ Route::group([],function(){
                Route::post('edit/{id}','SingleProductController@postEdit');
 
                Route::get('delete/{id}','SingleProductController@getDelete');
+           });
+
+
+           Route::group([
+                   'prefix'    => 'package',
+               ],function() {
+               Route::get('/','PackageController@getIndex');
+
+               Route::get('add', 'PackageController@getAdd');
+
            });
         });
         

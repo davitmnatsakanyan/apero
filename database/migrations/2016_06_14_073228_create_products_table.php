@@ -22,6 +22,11 @@ class CreateProductsTable extends Migration
                 ->onUpdate('cascade');
             $table->string('name');
             $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->text('ingredients');
             $table->float('price');
             $table->timestamps();

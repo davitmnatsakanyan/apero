@@ -11,6 +11,13 @@
     {!! Form::label('pobox','Price(EUR)')!!}
     {!! Form::text('price',NULL, ['class' => 'form-control'])!!}
 </div>
+<div class="form-group">
+    @foreach($categories as $category)
+      {!! Form::label('category_id',$category['name'])!!}
+      {!! Form::radio('category_id',$category['id'])!!}
+    @endforeach
+</div>
+
 <div>
 {!! Form::submit('Add',['class' => 'btn btn-primary'])!!}
 </div>

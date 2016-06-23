@@ -7,11 +7,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">{{ $caterer->name }}</a>
+          <a class="navbar-brand" href="{{ url('caterer/account') }}">{{$caterer->name}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{url('caterer/product')}}">Product managment</a></li>
+              <li>
+                  <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          Product Managment
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="{{ url('caterer/product/single')}}">Single Product</a></li>
+                          <li><a href="{{ url('caterer/product/package')}}">Package</a></li>
+                      </ul>
+                  </div>
+              </li>
             <li>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

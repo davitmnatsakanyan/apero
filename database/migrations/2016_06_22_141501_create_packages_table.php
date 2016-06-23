@@ -32,6 +32,6 @@ class CreatePackagesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('packages');
     }
 }
