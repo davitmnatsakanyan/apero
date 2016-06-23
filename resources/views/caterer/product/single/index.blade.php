@@ -5,6 +5,8 @@
         @include ('layouts/messages')
         <div><h2>Simple Products</h2></div>
         <div><h3><a href="{{url('caterer/product/single/add')}}">Add Single Product</a></h3></div>
+        @foreach($products as $key => $category)
+        <h3>{{ $key }}</h3>
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
@@ -16,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($products as $key => $product)
+                @foreach($category as $key => $product)
                    <tr>
                        <td>{{ $key+1 }}</td>
                        <td>{{ $product['name']}}</td>
@@ -31,5 +33,6 @@
                 @endforeach
             </tbody>
         </table>
+        @endforeach
     </div>
 @stop

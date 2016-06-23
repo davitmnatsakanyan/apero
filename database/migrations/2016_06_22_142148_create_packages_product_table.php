@@ -14,13 +14,14 @@ class CreatePackageProductTable extends Migration
     {
         Schema::create('package_product', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('caterer_id')->unsigned();
-            $table->foreign('caterer_id')
+            $table->integer('package_id')->unsigned();
+            $table->foreign('package_id')
                 ->references('id')
-                ->on('caterers')
+                ->on('packages')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->integer('product_id')->unsigned();
+            $table->integer('product_count')->unsigned();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreatePackageProductTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('package_product');
     }
 }
