@@ -13,23 +13,26 @@ class PackageController extends CatererBaseController{
 
     public function getIndex(){
         $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id())->toArray();
-        return view('caterer/product/package/index',['packages' => $packages ]);
+        return view('caterer/product/package/index',compact('packages'));
     }
 
-
-
-
     public function getAdd(){
-      //  $catModel = new Category();
-      //  $categories = $catModel->products()->get()->where('caterer_id',$this->caterer->id())->toArray();
-        $categories = Product::with('categories')->get()->where('caterer_id',$this->caterer->id())->toArray();
+        $categories = Category::get()->all();
+        $data=[];
+        foreach($categories as $key => $category){
+            $data[$key]['id'] = $category->id;
+            $data[$key]['name'] = $category->name;
+        }
+        $categories = $data;
+        return view('caterer/product/package/add',compact('categories'));
+    }
 
-        dd($categories);
-        return view('caterer/product/package/add',['categories' => $categories]);
+    public function postAdd(PackageService $packageService){
+        
     }
 
     public function getDelete(ProductService $service,$id){
-        if($this->hasAccess($service,$id)) {
+        if($this->hasAccess($service,$id)->caterer_id) {
             if ($service->deleteById($id))
                 return redirect('caterer/product/single')->with('success', 'Product successfully Deleted.');
             else
@@ -47,7 +50,16 @@ class PackageController extends CatererBaseController{
 
     public function hasAccess(ProductService $service,$id){
         return $this->caterer->id() == $service
-            ->getById($id)
-            ->getOriginal()['caterer_id'];
+            ->getById($id);
+    }
+    
+    public  function getProducts($category_id){
+        $data = [];
+        foreach( Category::find($category_id)->products as $key => $product){
+            $data[$key]['id'] = $product->id;
+            $data[$key]['text'] = $product->name;
+        }
+
+        return  $data;
     }
 }

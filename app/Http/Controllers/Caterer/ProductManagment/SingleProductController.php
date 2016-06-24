@@ -69,9 +69,12 @@ class SingleProductController extends CatererBaseController
 
 
 
-    public function getEdit(ProductService $service,$id){
+    public function getEdit(ProductService $service,CategoryService $catService,$id){
         if($this->hasAccess($service,$id)) {
-            return view('caterer/product/single/edit', ['product' => $service->getByID($id)->getOriginal()]);
+            return view('caterer/product/single/edit', [
+                'product' => $service->getByID($id)->getOriginal(),
+                'categories' => $catService->getAll()
+            ]);
         }
 
         else{

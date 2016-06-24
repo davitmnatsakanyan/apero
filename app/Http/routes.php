@@ -118,6 +118,10 @@ Route::group([],function(){
                Route::get('/','PackageController@getIndex');
 
                Route::get('add', 'PackageController@getAdd');
+               Route::post('add', 'PackageController@postAdd');
+               
+               Route::get('products/{category_id}', 'PackageController@getProducts');
+               
 
            });
         });

@@ -27,7 +27,7 @@
                        <td>
                            <a href="{{ url('caterer/product/single/view' , $product['id']) }}">View</a> |
                            <a href="{{ url('caterer/product/single/edit' , $product['id']) }}">Edit</a> |
-                           <a href="{{ url('caterer/product/single/delete' , $product['id']) }}">Delete</a>
+                           <a href="#" data-toggle="modal" data-target="#myModal">Delete</a>
                        </td>
                    </tr>
                 @endforeach
@@ -35,4 +35,5 @@
         </table>
         @endforeach
     </div>
+    @include('caterer/product/single/modals/delete')
 @stop
