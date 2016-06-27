@@ -12,6 +12,7 @@ class Caterer extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'company',
         'name', 
         'email', 
         'password',
@@ -23,6 +24,15 @@ class Caterer extends Authenticatable
         'country',
         'phone',
         'mobile',
+        'desc',
+        'remember_token',
+        'description',
+        'products_origin',
+        'created_at',
+        'updated_at',
+        'deleted_time',
+        'created_ip',
+        'deliter_id'
     ];
 
     /**

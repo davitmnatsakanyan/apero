@@ -57,6 +57,9 @@ Route::group([],function(){
         Route::controller('dashboard', 'DashboardController');
         Route::controller('user','UserManagmentController');
         Route::resource('members', 'MembersController');
+
+
+       Route::resource('caterers', 'CaterersController');
         
    } );
    

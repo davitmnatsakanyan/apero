@@ -162,7 +162,6 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Skovmand\Mailchimp\MailchimpServiceProvider::class,
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class
 

@@ -14,7 +14,7 @@
 <div class = "form-groupe">
     @foreach($categories as $category)
         {!! Form::label('category_id',$category['name'])!!}
-    @if($category['id']!=$product['category_id'])
+    @if($category['id']==$product['category_id'])
         {!! Form::radio('category_id',$category['id'],true)!!}
         @else
             {!! Form::radio('category_id',$category['id'])!!}
