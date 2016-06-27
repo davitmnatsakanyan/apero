@@ -10,8 +10,11 @@
         "laravelcollective/html": "5.2.*",
         "anouar/paypalpayment": "~1.0",
         "laravel/socialite": "~2.0",
-        "skovmand/mailchimp-laravel": "1.*"
-        
+        "skovmand/mailchimp-laravel": "1.*",
+        "appzcoder/crud-generator": "^1.1",
+        "intervention/image": "^2.3"
+
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

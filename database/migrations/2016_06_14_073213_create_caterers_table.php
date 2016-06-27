@@ -17,6 +17,7 @@ class CreateCaterersTable extends Migration
             $table->string('company',250);
             $table->string('name',100);
             $table->string('address',250);
+            $table->string('avatar');
             $table->string('pobox',100);
             $table->string('zip',4);
             $table->string('city',250);

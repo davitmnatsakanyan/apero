@@ -56,6 +56,9 @@ Route::group([],function(){
      ],function(){
         Route::controller('dashboard', 'DashboardController');
         Route::controller('user','UserManagmentController');
+
+
+       Route::resource('caterers', 'CaterersController');
         
    } );
    
@@ -186,3 +189,5 @@ Route::group([],function(){
     
     
     
+Route::resource('admin/caterers', 'Admin\\CaterersController');
+Route::resource('admin/caterers', 'Admin\\CaterersController');
