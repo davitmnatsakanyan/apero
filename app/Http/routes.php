@@ -56,6 +56,7 @@ Route::group([],function(){
      ],function(){
         Route::controller('dashboard', 'DashboardController');
         Route::controller('user','UserManagmentController');
+        Route::resource('members', 'MembersController');
         
    } );
    
