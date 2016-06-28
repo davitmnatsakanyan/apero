@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('company',250);
             $table->string('name',250);
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('address',250);
             $table->string('pobox',100);
             $table->string('zip',4);
@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->boolean('role');
             $table->boolean('deleted');
             $table->integer('deliter_id')->unsigned();
-            $table->dateTime('deletedTime');
+            $table->dateTime('deleted_at');
             $table->rememberToken();
             $table->timestamps();
             $table->string('created_ip',30);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Admin\AdminBaseController;
+use App\User;
 
 class DashboardController extends AdminBaseController
 {
@@ -14,7 +15,8 @@ class DashboardController extends AdminBaseController
      */
     public function getIndex()
     {
-        return view('admin/dashboard/index');
+        $total_users = count(User::all());
+        return view('admin/dashboard/index', compact('total_users'));
     }
     
    

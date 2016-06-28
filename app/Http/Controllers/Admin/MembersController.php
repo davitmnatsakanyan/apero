@@ -55,7 +55,7 @@ class MembersController extends AdminBaseController
             'phone' => 'required',
             'mobile' => 'required',
             'password' => 'required',
-            'avatar' => 'required|image'
+            'avatar' => 'image'
         ]);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
@@ -66,7 +66,7 @@ class MembersController extends AdminBaseController
         User::create([
             'company' => $request->company,
             'name' => $request->name,
-            'avatar' => $avatar,
+            'avatar' => isset($avatar) ? $avatar : null,
             'address' => $request->address,
             'pobox' => $request->pobox,
             'zip' => $request->zip,
@@ -197,5 +197,14 @@ class MembersController extends AdminBaseController
         $avatar = time() . '.' . $extension;
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath.'/'.$avatar);
         return $avatar;
+    }
+
+    /**
+     * @param $user_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getBlock($user_id){
+        User::destroy($user_id);
+        return redirect()->back();
     }
 }

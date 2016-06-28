@@ -9,7 +9,11 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th> Name </th><th> Address </th><th> Pobox </th><th>Actions</th>
+                    <th>S.No</th>
+                    <th> Name </th>
+                    <th> Address </th>
+                    <th> Pobox </th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,10 +22,14 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->name }}</td><td>{{ $item->address }}</td><td>{{ $item->pobox }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->address }}</td>
+                    <td>{{ $item->pobox }}</td>
                     <td>
                         <a href="{{ url('/admin/members/' . $item->id) }}" class="btn btn-success btn-xs" title="View Member"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <a href="{{ url('/admin/members/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Member"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/members/block/'.$item->id) }}" class="btn btn-warning btn-xs" title="Remove"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
+
                         {!! Form::open([
                             'method'=>'DELETE',
                             'url' => ['/admin/members', $item->id],

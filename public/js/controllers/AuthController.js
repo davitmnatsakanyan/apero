@@ -1,39 +1,39 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$uibModalInstance', 'data',   function ($scope, $http, $location, $uibModalInstance, data) {
+app.controller('AuthController', ['$scope', '$http', '$location',   function ($scope, $http, $location) {
 
-    $scope.login_submit = function(){
-        console.log($scope.data);
-        return ;
-        $http({
-            data: $scope.data,
-            method : "POST",
-            url : "auth/login"
-        }).then(function (response) {
-
-            alert('dfdf');
-            return;
-            if(response.data == 1) {
-                //$location.path('caterer/account');
-
-            }
-            if(response.data == 0){
-                $location.path('/');
-
-            }
-            if(response.data == 2){
-                $location.path('/');
-
-            }
-
-        }, function (error) {
-            console.log(error);
-
-        });
-        $uibModalInstance.dismiss();
-    }
+    //$scope.reg_submit = function(){
+    //    console.log('dfdfdf');
+    //    return ;
+    //    $http({
+    //        data: $scope.data,
+    //        method : "POST",
+    //        url : "auth/login"
+    //    }).then(function (response) {
+    //
+    //        alert('dfdf');
+    //        return;
+    //        if(response.data == 1) {
+    //            //$location.path('caterer/account');
+    //
+    //        }
+    //        if(response.data == 0){
+    //            $location.path('/');
+    //
+    //        }
+    //        if(response.data == 2){
+    //            $location.path('/');
+    //
+    //        }
+    //
+    //    }, function (error) {
+    //        console.log(error);
+    //
+    //    });
+    //    $uibModalInstance.dismiss();
+    //}
 
     $scope.reg_submit = function(){
-        event.preventDefault();
-        console.log($scope.data)
+        console.log($scope.data);
+        return;
         $http({
             data: $scope.data,
             method : "POST",

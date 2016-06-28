@@ -37,40 +37,22 @@
 					<a href="javascript:;">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="title">
-							E-Commerce
+							Members
 						</span>
 						<span class="arrow ">
 						</span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="ecommerce_index.html">
+							<a href="{{ url('admin/members/create') }}">
 								<i class="fa fa-bullhorn"></i>
-								Dashboard
+								New Member
 							</a>
 						</li>
 						<li>
-							<a href="ecommerce_orders.html">
+							<a href="{{ url('admin/members') }}">
 								<i class="fa fa-shopping-cart"></i>
-								Orders
-							</a>
-						</li>
-						<li>
-							<a href="ecommerce_orders_view.html">
-								<i class="fa fa-tags"></i>
-								Order View
-							</a>
-						</li>
-						<li>
-							<a href="ecommerce_products.html">
-								<i class="fa fa-sitemap"></i>
-								Products
-							</a>
-						</li>
-						<li>
-							<a href="ecommerce_products_edit.html">
-								<i class="fa fa-file-o"></i>
-								Product Edit
+								All Members
 							</a>
 						</li>
 					</ul>

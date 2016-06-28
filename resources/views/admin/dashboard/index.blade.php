@@ -157,13 +157,13 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 1349
+								 {{ $total_users }}
 							</div>
 							<div class="desc">
-								 New Feedbacks
+								 Total Users
 							</div>
 						</div>
-						<a class="more" href="#">
+						<a class="more" href="{{ url('admin/members') }}">
 							 View more <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>

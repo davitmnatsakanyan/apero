@@ -91,7 +91,7 @@
 
                 {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required', 'id' => "uploadFile"]) !!}
+                    {!! Form::file('avatar', ['class' => 'form-control', 'id' => "uploadFile"]) !!}
                     {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

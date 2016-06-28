@@ -9,6 +9,14 @@ app.config(function($interpolateProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
+        .when('/caterer/login', {
+            templateUrl: 'templates/caterer/auth/login.blade.php',
+            controller: 'CatererController'
+        })
+        .when('/caterer/register', {
+            templateUrl: 'templates/caterer/auth/register.blade.php',
+            controller: 'AuthController'
+        })
         .when('/caterer/account', {
             templateUrl: 'templates/caterer/account/index.blade.php',
             controller: 'CatererController'

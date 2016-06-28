@@ -28,6 +28,13 @@ Route::group(array('prefix'=>'/templates/caterer/account'),function(){
         return view('templates/caterer/account.' . $template);
     }));
 });
+Route::group(array('prefix'=>'/templates/caterer/auth'),function(){
+    Route::get('{template}', array( function($template)
+    {
+        $template = str_replace(".blade.php","",$template);
+        return view('templates/caterer/auth.' . $template);
+    }));
+});
 
 /**
  * Main routes
@@ -57,6 +64,7 @@ Route::group([],function(){
         Route::controller('dashboard', 'DashboardController');
         Route::controller('user','UserManagmentController');
         Route::resource('members', 'MembersController');
+        Route::controller('members', 'MembersController');
 
 
        Route::resource('caterers', 'CaterersController');
@@ -186,6 +194,10 @@ Route::group([],function(){
     {
         return view('bestellen/index');
     });
+
+Route::get('test', function(){
+    return view('templates/caterer/auth/register');
+});
 
     
     
