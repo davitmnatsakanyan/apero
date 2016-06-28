@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Caterer extends Authenticatable
 {
+
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -30,9 +33,10 @@ class Caterer extends Authenticatable
         'products_origin',
         'created_at',
         'updated_at',
-        'deleted_time',
+        'deleted_at',
         'created_ip',
-        'deliter_id'
+        'is_deleted',
+        'admin_id'
     ];
 
     /**
@@ -43,4 +47,12 @@ class Caterer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

@@ -79,23 +79,23 @@
 					<a href="javascript:;">
 						<i class="fa fa-gift"></i>
 						<span class="title">
-							Frontend Themes
+							Product Managmnet
 						</span>
 						<span class="arrow">
 						</span>
 					</a>
 					<ul class="sub-menu">
-						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Complete E-Commerce Frontend Theme For Metronic Admin">
-							<a href="http://keenthemes.com/preview/index.php?theme=metronic_ecommerce" target="_blank">
+						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Kitchen managment">
+							<a href="{{ url('admin/kitchens') }}" target="_self">
 								<span class="title">
-									E-Commerce Frontend
+									Kitchen Managment
 								</span>
 							</a>
 						</li>
-						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Complete Multipurpose Corporate Frontend Theme For Metronic Admin">
-							<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Menu managment">
+							<a href="{{ url('admin/menus') }}" target="_self">
 								<span class="title">
-									Corporate Frontend
+									Menu Managment
 								</span>
 							</a>
 						</li>

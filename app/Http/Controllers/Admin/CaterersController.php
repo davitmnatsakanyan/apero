@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AdminBaseController;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Caterer;
 use Illuminate\Http\Request;
@@ -60,19 +61,20 @@ class CaterersController extends AdminBaseController
         $caterer['password'] = bcrypt($request->password);
         $caterer ['created_ip'] = $request->ip();
         $caterer['remember_token'] = $request->_token;
-        $caterer['avatar'] = time();
         $image = $request->file('avatar');
+        $extension = $image->getClientOriginalExtension();
+        $caterer['avatar'] = time() . "." . $extension;
        if(Caterer::create($caterer)){
            $this->uploadFile($image,$caterer['avatar']);
-           return response()->json(['success' => true], 200);
-           Session::flash('flash_message', 'Caterer added!');
+          // return response()->json(['success' => true], 200);
+           return redirect('admin/caterers')->with('success' ,'Caterer successfully added.');
        }
 
         else {
-            Session::flash('flash_message', 'Somenting went wrong.');
+            return redirect('admin/caterers')->withErrors('Something went wrong.');
         }
 
-        return redirect('admin/caterers');
+
 
 
     }
@@ -143,6 +145,8 @@ class CaterersController extends AdminBaseController
         }
 
         $image = $request->file('avatar');
+        $extension = $image->getClientOriginalExtension();
+        $caterer['avatar'] = time() . "." . $extension;
         if($caterer->update($caterer_update))
         {
             $this->uploadFile($image,$caterer_update['avatar'], true);
@@ -160,6 +164,18 @@ class CaterersController extends AdminBaseController
      */
     public function destroy($id)
     {
+        $caterer = Caterer::withTrashed()->where('id', $id)->get();
+        $avatar = $caterer[0]->avatar;
+        unlink('images/caterers/' . $avatar);
+        Caterer::withTrashed()->where('id', $id)->forceDelete();
+        Session::flash('flash_message', 'Caterer deleted!');
+
+        return redirect('admin/caterers');
+    }
+
+
+    public function block($id)
+    {
         Caterer::destroy($id);
 
         Session::flash('flash_message', 'Caterer deleted!');
@@ -167,15 +183,24 @@ class CaterersController extends AdminBaseController
         return redirect('admin/caterers');
     }
 
+    public function activate($id)
+    {
+        Caterer::withTrashed()->where('id', $id)->restore();
+        return redirect('admin/caterers');
+    }
 
-    public function uploadFile($image,$name, $old_image = null)
+    public function blockedCaterers()
+    {
+        $caterers = Caterer::onlyTrashed()->get();
+        return view('admin.caterers.blocked', compact('caterers'));
+    }
+
+    public function uploadFile($image,$avatar, $old_image = null)
     {
         if(!is_null($old_image)){
-            unlink('../resources/images/caterers/'.$old_image);
+            unlink('images/caterers/'.$old_image);
         }
-        $destinationPath = '../resources/images/caterers/';
-        $extension = $image->getClientOriginalExtension();
-        $avatar = $name . $extension;
+        $destinationPath = 'images/caterers/';
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath.'/'.$avatar);
         return $avatar;
     }
