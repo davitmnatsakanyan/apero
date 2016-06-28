@@ -28,9 +28,9 @@ class CreateCaterersTable extends Migration
             $table->string('description',255);
             $table->string('products_origin',255);
             $table->string('password');
-            $table->boolean('deleted');
-            $table->integer('deliter_id')->unsigned();
-            $table->dateTime('deleted_time');
+            $table->boolean('is_deleted');
+            $table->integer('admin_id')->unsigned();
+            $table->dateTime('deleted_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->string('created_ip',30);
