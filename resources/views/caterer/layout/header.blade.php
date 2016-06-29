@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url('caterer/account') }}">{{$caterer->name}}</a>
+          <a class="navbar-brand" href="{{ url('caterer/account') }}">{{ $caterer->company }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

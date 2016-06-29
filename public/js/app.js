@@ -9,9 +9,13 @@ app.config(function($interpolateProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
+        .when('/caterer/logout', {
+            templateUrl: '',
+            controller: 'AuthController'
+        })
         .when('/caterer/login', {
             templateUrl: 'templates/caterer/auth/login.blade.php',
-            controller: 'CatererController'
+            controller: 'AuthController'
         })
         .when('/caterer/register', {
             templateUrl: 'templates/caterer/auth/register.blade.php',
@@ -19,7 +23,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/caterer/account', {
             templateUrl: 'templates/caterer/account/index.blade.php',
-            controller: 'CatererController'
+            controller: 'CatererController',
         })
         .when('/', {
             templateUrl: 'templates/home.blade.php',
@@ -41,3 +45,9 @@ app.config(['$routeProvider', function ($routeProvider) {
             redirectTo: '/'
         });
 }]);
+
+//app.run(function ($rootScope, $location, $route, AuthService) {
+//
+//
+//})
+

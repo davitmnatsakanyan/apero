@@ -49,12 +49,14 @@
     <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
 
     <script src="/js/app.js"></script>
+    <script src="/js/services/AuthService.js"></script>
     <script src="/js/controllers/NavigationController.js"></script>
     <script src="/js/controllers/AuthController.js"></script>
     <script src="/js/controllers/HomeController.js"></script>
     <script src="/js/controllers/HilfeController.js"></script>
     <script src="/js/controllers/CatererController.js"></script>
     <script src="/js/controllers/BestellenController.js"></script>
+
 
     <script src="/js/directives/inputText.js"></script>
 

@@ -1,4 +1,5 @@
-app.controller('AuthController', ['$scope', '$http', '$location',   function ($scope, $http, $location) {
+app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService',   function ($scope, $http, $location, $window, AuthService) {
+
 
     //$scope.reg_submit = function(){
     //    console.log('dfdfdf');
@@ -32,18 +33,16 @@ app.controller('AuthController', ['$scope', '$http', '$location',   function ($s
     //}
 
     $scope.reg_submit = function(){
-        console.log($scope.data);
-        return;
         $http({
             data: $scope.data,
             method : "POST",
             url : "auth/register"
-        }).then(function (response) {
-            $http({
-                method : "get",
-                url : "caterer/account"
-            })
-        }, function (error) {
+        }
+        ).success(function (response) {
+            if(response.success == 1){
+                $location.path('caterer/account');
+            }
+        }).error( function (error) {
             console.log(error);
 
         });

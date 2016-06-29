@@ -8,8 +8,8 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
@@ -52,18 +52,21 @@ class AuthController extends Controller
     */
    public function postRegister(RegisterRequest $request)
    {
-        $role = strtolower(request()->get('role'));
+        $role = strtolower($request->role);
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
-        $data = request()->except(['_token','role']);
+        $data = $request->except(['_token','role']);
+        $password = $data['password'];
         $data['password'] = bcrypt($data['password']);
         $model = $service->create($data);
         if($model)
         {
-           $this->$role->attempt($model->getOriginal());
-           return redirect($role . '/account')->with('success','Success registration');
+           if($this->$role->attempt(['email' => $model->email, 'password' => $password]))
+               return response()->json(['success' => 1, 'caterer' => $model]);
+           else
+               return response()->json(['success' => 0]);
         }
-        return back()->withErrors('Something wet wrong,can not save data');
+       return response()->json(['success' => 2]);
    }   
    
    
@@ -72,5 +75,14 @@ class AuthController extends Controller
        $this->$role->logout();
        return redirect('home');
    }
+
+    public function getCheck(){
+       if($this->caterer->check()){
+           return response()->json(['success' => 1]);
+       }
+        else{
+            return response()->json(['success' => 0]);
+        }
+    }
    
 }

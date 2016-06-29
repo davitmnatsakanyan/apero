@@ -15,10 +15,6 @@ class CatererBaseController extends Controller
         $this->caterer = Auth::guard('caterer');
 
 
-        $this->caterer->attempt(['email' => 'caterer@gmail.com',
-                                'password' => 'caterer',
-         ]);
-
        View::share('caterer', $this->caterer->user());
     }
 }

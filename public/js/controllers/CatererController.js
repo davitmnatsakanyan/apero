@@ -1,14 +1,16 @@
-app.controller('CatererController', ['$scope', 'CatererModel', function ($scope, CatererModel) {
+app.controller('CatererController', ['$scope', 'CatererModel', '$window', 'AuthService',  function ($scope, CatererModel, $window, AuthService) {
 
-    //$('#datetimepicker4').datetimepicker();
+    AuthService.auth();
+
+    $('#datetimepicker4').datetimepicker();
 
     $scope.link = 'caterer';
 
     CatererModel.getAccount().then(function (response) {
-        $scope.caterer = response.data.name;
+        console.log($window.localStorage.getItem('caterer_id'));
+        $scope.name = response.data.company;
     }, function (error) {
         console.log(error);
-
     });
 
 }]);

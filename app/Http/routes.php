@@ -106,7 +106,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'caterer',
-//    'middleware' => 'caterer',
+    'middleware' => 'caterer',
     'namespace' => 'Caterer',
 
 ], function () {
