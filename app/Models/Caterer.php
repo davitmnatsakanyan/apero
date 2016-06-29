@@ -55,4 +55,10 @@ class Caterer extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+
+    public function kitchens()
+    {
+        return $this->belongsToMany(Kitchen::class);
+    }
 }

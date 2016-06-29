@@ -78,6 +78,12 @@ Route::group([
     Route::get('menus/{id}/active', 'MenusController@activate');
     Route::get('menus/blocked', 'MenusController@blockedMenus');
     Route::resource('menus', 'MenusController');
+
+    Route::get('products/{id}/block', 'ProductsController@block');
+    Route::get('products/{id}/active', 'ProductsController@activate');
+    Route::get('products/blocked', 'ProductsController@blockedProducts');
+    Route::get('products/create/{id}', 'ProductsController@getMenus');
+    Route::resource('products', 'ProductsController');
 }
 );
 
@@ -190,4 +196,5 @@ Route::get('caterer', function () {
 Route::get('bestellen', function () {
     return view('bestellen/index');
 });
+
 

@@ -38,8 +38,8 @@ class Menu extends Model
     protected $dates = ['deleted_at'];
 
 
-    public function kitchen()
+    public function kitchens()
     {
-        return $this->belongsTo(Kitchen::class);
+        return $this->belongsToMany(Kitchen::class);
     }
 }

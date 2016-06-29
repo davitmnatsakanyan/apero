@@ -18,6 +18,25 @@ class CreateKitchensTable extends Migration
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
+
+
+
+        Schema::create('caterer_kitchen', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('caterer_id')->unsigned();
+            $table->foreign('caterer_id')
+                ->references('id')
+                ->on('caterers')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->integer('kitchen_id')->unsigned();
+            $table->foreign('kitchen_id')
+                ->references('id')
+                ->on('kitchens')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,5 +47,6 @@ class CreateKitchensTable extends Migration
     public function down()
     {
         Schema::drop('kitchens');
+        Schema::drop('caterer_kitchen');
     }
 }
