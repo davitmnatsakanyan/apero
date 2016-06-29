@@ -16,7 +16,6 @@ class UpdateCaterersTable extends Migration
             $table->dropColumn('name');
             $table->dropColumn('mobile');
             $table->dropColumn('deleted_time');
-            $table->dateTime('deleted_at');
             $table->string('fax');
             $table->integer('kitchen_id')->unsigned();
             $table->integer('zipcode_id')->unsigned();
@@ -40,7 +39,6 @@ class UpdateCaterersTable extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->dateTime('deleted_time');
-            $table->dropColumn('deleted_at');
             $table->dropColumn('fax');
             $table->dropColumn('kitchen_id');
             $table->dropColumn('zipcode_id');
