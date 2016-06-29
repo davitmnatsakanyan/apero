@@ -3,26 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    protected $fillable = [
-        'name',
-        'caterer_id',
-        'ingredients',
-        'category_id',
-        'price',
-    ];
+    use SoftDeletes;
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'products';
 
-    public function packages()
-    {
-        return $this->belongsToMany(Package::class)->withPivot('product_count');
-    }
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
 
-    public function categories()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name','avatar', 'ingredinets', 'price', 'caterer_id', 'menu_id', 'deleted_at'];
+
+    protected $dates = ['deleted_at'];
 }
-
-

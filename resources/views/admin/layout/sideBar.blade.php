@@ -70,14 +70,21 @@
 						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Kitchen managment">
 							<a href="{{ url('admin/kitchens') }}" target="_self">
 								<span class="title">
-									Kitchen Managment
+									Kitchen
 								</span>
 							</a>
 						</li>
 						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Menu managment">
 							<a href="{{ url('admin/menus') }}" target="_self">
 								<span class="title">
-									Menu Managment
+									Menu
+								</span>
+							</a>
+						</li>
+						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Products managment">
+							<a href="{{ url('admin/products') }}" target="_self">
+								<span class="title">
+									Products
 								</span>
 							</a>
 						</li>

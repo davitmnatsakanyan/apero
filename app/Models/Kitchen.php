@@ -41,22 +41,13 @@ class Kitchen extends Model
 
     public function menus()
     {
-        return $this->hasMany(Menu::class);
+        return $this->belongsToMany(Menu::class);
     }
 
-
-    protected static function boot() {
-        parent::boot();
-
-        static::restoring(function($kitchens){
-            dd(11);
-            $kitchens->menus()->restore();
-        });
-
-        static::deleting(function($kitchens) {
-            $kitchens->menus()->delete();
-        });
-
-
+    public function caterers()
+    {
+        return $this->belongsToMany(Caterer::class);
     }
+
+    
 }

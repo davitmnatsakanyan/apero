@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\AdminBaseController;
 
 use App\Models\Menu;
 use App\Models\Kitchen;
+use App\Models\KitchenMenu;
+
 use Illuminate\Http\Request;
+
 use Carbon\Carbon;
 use Session;
 
@@ -21,7 +24,8 @@ class MenusController extends AdminBaseController
     public function index()
     {
 
-        $menus = Menu::with('kitchen')->paginate(15);
+        $menus = Menu::with('kitchens')->paginate(15);
+       // return $menus;
         return view('admin.menus.index', compact('menus'));
     }
 
@@ -43,12 +47,19 @@ class MenusController extends AdminBaseController
      */
     public function store(Request $request)
     {
+        dd($request->all());
+        return $request->kitchen;
         $this->validate($request, ['name' => 'required', 'kitchen' => 'required',]);
 
         $menu = $request->except('kitchen');
         $menu['kitchen_id'] = $request->kitchen;
 
-        Menu::create($menu);
+        $menu = Menu::create($menu);
+
+        KitchenMenu::create([
+            'menu_id' => $menu->id,
+            'kitchen_id' => $menu->kitchen_id,
+        ]);
 
         return redirect('admin/menus')->with('success', 'Menu created successfully');
     }

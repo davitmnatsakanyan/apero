@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProductsTable extends Migration
 {
@@ -12,23 +12,25 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('products', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('avatar');
+            $table->text('ingredinets');
+            $table->float('price');
             $table->integer('caterer_id')->unsigned();
             $table->foreign('caterer_id')
                 ->references('id')
                 ->on('caterers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('name');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')
+            $table->integer('menu_id')->unsigned();
+            $table->foreign('menu_id')
                 ->references('id')
-                ->on('categories')
+                ->on('menus')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->text('ingredients');
-            $table->float('price');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

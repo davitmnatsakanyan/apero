@@ -5,38 +5,41 @@
         <div class="page-content">
             @include ('layouts/messages')
 
-            <h1>Menus</h1>
+            <h1>Products <a href="{{ url('/admin/products/create') }}" class="btn btn-primary btn-xs"
+                            title="Add New Product"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
             <div class="table">
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
                         <th>S.No</th>
                         <th> Name</th>
-                        <th> Kitchen</th>
+                        <th> Ingredinets</th>
+                        <th> Price</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {{-- */$x=0;/* --}}
-                    @foreach($menus as $item)
+                    @foreach($products as $item)
                         {{-- */$x++;/* --}}
                         <tr>
                             <td>{{ $x }}</td>
                             <td>{{ $item->name }}</td>
-                            <td><a href = "{{url( 'admin/menus/' . $item->kitchen_id) }}"> {{$item->kitchen->name}}</a></td>
+                            <td>{{ $item->ingredinets }}</td>
+                            <td>{{ $item->price }}</td>
                             <td>
-                                <a href="{{ url('/admin/menus/' . $item->id . '/active') }}"
-                                   class="btn btn-warning btn-xs" title="Block Menu"><span
-                                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
+                                <a href="{{ url('/admin/products/' . $item->id . '/active') }}"
+                                   class="btn btn-success btn-xs" title="Active Product"><span
+                                            class="glyphicon glyphicon-ok-sign" aria-hidden="true"/></a>
                                 {!! Form::open([
                                     'method'=>'DELETE',
-                                    'url' => ['/admin/menus', $item->id],
+                                    'url' => ['/admin/products', $item->id],
                                     'style' => 'display:inline'
                                 ]) !!}
-                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Menu" />', array(
+                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Product" />', array(
                                         'type' => 'submit',
                                         'class' => 'btn btn-danger btn-xs',
-                                        'title' => 'Delete Menu',
+                                        'title' => 'Delete Product',
                                         'onclick'=>'return confirm("Confirm delete?")'
                                 ))!!}
                                 {!! Form::close() !!}
@@ -45,8 +48,8 @@
                     @endforeach
                     </tbody>
                 </table>
-                <a href="{{ url('/admin/menus') }}" class="btn btn-success btn-xs" title="View Caterer">
-                    Active Menus <span class="glyphicon  glyphicon-list-alt" aria-hidden="true"/></a>
+                <a href="{{ url('/admin/products') }}" class="btn btn-success btn-xs" title="View Product">
+                    Active Products <span class="glyphicon  glyphicon-list-alt" aria-hidden="true"/></a>
             </div>
         </div>
     </div>

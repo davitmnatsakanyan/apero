@@ -46,6 +46,9 @@ License: You must have a valid license purchased only from themeforest(the above
 {!! Html::style('administration/assets/css/custom.css') !!}
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+	<script>
+		var BASE_URL = '{{ url("/") }}'
+	</script>
 @yield('css')
 </head>
 <!-- END HEAD -->
@@ -113,6 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {!! Html::script('administration/assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js') !!}
 {!! Html::script('administration/assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js') !!}
 {!! Html::script('administration/assets/plugins/jquery.sparkline.min.js') !!}
+
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 {!! Html::script('administration/assets/scripts/core/app.js') !!}
