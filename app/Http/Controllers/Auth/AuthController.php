@@ -14,14 +14,30 @@ use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
-    private $user, $caterer;
+    private $user, $caterer, $catererService;
     /**
      * Initializing registration data
      */
-    public function __construct()
+    public function __construct(CatererService $catererService)
     {
         $this->user    = Auth::guard('user');
         $this->caterer = Auth::guard('caterer');
+        $this->catererService = $catererService;
+    }
+
+    public  function getRegister(){
+        $zipCode = array();
+        $data=array();
+        $data['zip_codes'] = array();
+        $zip_codes = $this->catererService->zipCodes();
+            foreach($zip_codes as $zip_code){
+                $zipCode['id'] = $zip_code['id'];
+                $zipCode['zip'] = $zip_code['ZIP'];
+                $zipCode['text'] = $zip_code['ZIP'].' '.$zip_code['city'];
+                array_push($data['zip_codes'], $zipCode );
+            }
+        $data['categories'] = $this->catererService->foodCategories();
+        return $data;
     }
 
     /**

@@ -1,16 +1,14 @@
-
+<div ng-include='"templates/nav.blade.php"'></div>
 <div class="modal-header">
     <h3 class="modal-title">Registration</h3>
 </div>
-<div class="modal-body">
-    <uib-tabset active="active">
-        <uib-tab index="0" heading="User">
-            @include ('templates/auth/forms/user_reg',['userType' => 'user'])
+<div class="register">
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Caterer">
+            <div ng-include='"templates/caterer/auth/register.blade.php"'></div>
         </uib-tab>
-        <uib-tab index="1" heading="Caterer">
-            @include ('templates/auth/forms/caterer_reg',['userType' => 'caterer'])
+        <uib-tab index="1" heading="User">
+            Some Tab Content
         </uib-tab>
     </uib-tabset>
-</div>
-<div class="modal-footer">
 </div>

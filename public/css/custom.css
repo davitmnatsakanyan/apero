@@ -4,3 +4,7 @@
 .page-content{
     margin-left: 0 !important;
 }
+
+.register .nav-tabs>li{
+    width: 50%;
+}

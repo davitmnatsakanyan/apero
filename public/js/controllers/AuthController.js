@@ -1,36 +1,9 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService',   function ($scope, $http, $location, $window, AuthService) {
+app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService', 'CatererModel',   function ($scope, $http, $location, $window, AuthService, CatererModel) {
 
-
-    //$scope.reg_submit = function(){
-    //    console.log('dfdfdf');
-    //    return ;
-    //    $http({
-    //        data: $scope.data,
-    //        method : "POST",
-    //        url : "auth/login"
-    //    }).then(function (response) {
-    //
-    //        alert('dfdf');
-    //        return;
-    //        if(response.data == 1) {
-    //            //$location.path('caterer/account');
-    //
-    //        }
-    //        if(response.data == 0){
-    //            $location.path('/');
-    //
-    //        }
-    //        if(response.data == 2){
-    //            $location.path('/');
-    //
-    //        }
-    //
-    //    }, function (error) {
-    //        console.log(error);
-    //
-    //    });
-    //    $uibModalInstance.dismiss();
-    //}
+    CatererModel.getRegister().then(function(response){
+        $scope.zip_codes = response.data.zip_codes;
+        $scope.categories = response.data.categories;
+    });
 
     $scope.reg_submit = function(){
         $http({
@@ -47,6 +20,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
 
         });
     }
+
 
     //$scope.ok = function () {
     //    $uibModalInstance.close($scope.selected.item);

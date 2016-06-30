@@ -13,12 +13,12 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '',
             controller: 'AuthController'
         })
-        .when('/caterer/login', {
-            templateUrl: 'templates/caterer/auth/login.blade.php',
+        .when('/login', {
+            templateUrl: 'templates/login.blade.php',
             controller: 'AuthController'
         })
-        .when('/caterer/register', {
-            templateUrl: 'templates/caterer/auth/register.blade.php',
+        .when('/register', {
+            templateUrl: 'templates/register.blade.php',
             controller: 'AuthController'
         })
         .when('/caterer/account', {

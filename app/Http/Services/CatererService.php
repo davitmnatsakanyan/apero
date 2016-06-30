@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Services;
 use App\Models\Caterer;
+use App\Models\CatererDeliveryArea;
+use App\Models\CatererKitchen;
+use App\Models\Kitchen;
+use App\Models\ZipCode;
 
 class CatererService
 {
@@ -19,7 +23,8 @@ class CatererService
     }
 
     public function create($data){
-        $data = Caterer::create([
+
+        $caterer = Caterer::create([
             'company'   => $data['company'],
             'address'   => $data['address'],
             'pobox'     => $data['pobox'],
@@ -31,11 +36,33 @@ class CatererService
             'phone' => $data['phone'],
             'fax' => $data['fax'],
             'description' => $data['description'],
-            'kitchen_id' => json_encode($data['kitchen']),
-            'zipcode_id' => json_encode($data['delivery_area']),
+//            'kitchen_id' => json_encode($data['kitchen']),
+//            'zipcode_id' => json_encode($data['delivery_area']),
             'products_origin' => $data['product_origin']
         ]);
-        return $data;
+
+        foreach($data['kitchen'] as $kitchen) {
+            CatererKitchen::create([
+                'caterer_id' => $caterer->id,
+                'kitchen_id' => $kitchen
+            ]);
+        }
+
+        foreach($data['delivery_area'] as $zip_code_id){
+            CatererDeliveryArea::create([
+               'caterer_id' =>  $caterer->id,
+                'zip_code_id' => $zip_code_id
+            ]);
+        }
+
+        return $caterer;
+    }
+
+    public function zipCodes(){
+       return  ZipCode::all();
+    }
+    public  function foodCategories(){
+        return Kitchen::all();
     }
  
 }

@@ -5,6 +5,13 @@ app.factory('CatererModel', ['$http', function($http) {
                 method : "get",
                 url : "caterer/account"
             });
+        },
+
+        getRegister: function(){
+            return $http({
+                method : "get",
+                url : "auth/register"
+            });
         }
     };
 }]);

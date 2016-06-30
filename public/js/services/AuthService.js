@@ -1,4 +1,4 @@
-app.service('AuthService', ['$http', '$location', function ($http, $location) {
+app.service('AuthService', ['$http', '$location', '$window', function ($http, $location, $window) {
     this.auth = function () {
            $http({
                 method: "GET",

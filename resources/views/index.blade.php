@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen">
     <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/custom.css">
 
 
     {{--<!-- BEGIN GLOBAL MANDATORY STYLES -->--}}

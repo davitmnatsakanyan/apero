@@ -1,48 +1,18 @@
 
-<!-- END HEAD -->
 <!-- BEGIN BODY -->
 
-
-<div class="clearfix">
+<div class="clearfix" >
 </div>
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="page-container" ng-controller="AuthController">
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Widget settings form goes here
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn blue">Save changes</button>
-                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
-            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet box blue" id="form_wizard_1">
                         <div class="portlet-title">
-                            <div class="caption">
-                                <i class="fa fa-reorder"></i> Form Wizard -
-								<span class="step-title">
-									 Step 1 of 4
-								</span>
-                            </div>
                         </div>
                         <div class="portlet-body form">
                             <form action="#" class="form-horizontal" id="submit_form" ng-submit="reg_submit()">
@@ -105,7 +75,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="company" ng-model="data.company" required/>
+                                                            <input type="text" class="form-control" name="company" ng-model="data.company" />
                                                             <span class="help-block">
                                                                  Provide your company
                                                             </span>
@@ -118,7 +88,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="address" ng-model="data.address" required/>
+                                                            <input type="text" class="form-control" name="address" ng-model="data.address" />
                                                             <span class="help-block">
                                                                  Provide your address.
                                                             </span>
@@ -131,7 +101,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="pobox" ng-model="data.pobox" required/>
+                                                            <input type="text" class="form-control" name="pobox" ng-model="data.pobox" />
                                                             <span class="help-block">
                                                                  Confirm your pobox
                                                             </span>
@@ -144,8 +114,10 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="zip" ng-model="data.zip" required/>
-                                                            <span class="help-block">
+                                                            <select class="zip form-control">
+                                                                <option ng-repeat="item in zip_codes" ng-selected="item.selected" ng-init="data.zip=item.zip" ng-model="data.zip" ><% item.zip %></option>
+                                                            </select>
+                                                                <span class="help-block">
                                                                  Provide your zip
                                                             </span>
                                                         </div>
@@ -157,7 +129,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="city" ng-model="data.city" required/>
+                                                            <input type="text" class="form-control" name="city" ng-model="data.city" />
                                                             <span class="help-block">
                                                                  Provide your city
                                                             </span>
@@ -166,7 +138,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-5">Country</label>
                                                         <div class="col-md-7">
-                                                            <select name="country" id="country_list"  class="form-control" ng-model="data.country" required>
+                                                            <select name="country" id="country_list"  class="form-control" ng-model="data.country" >
                                                                 <option value=""></option>
                                                                 <option value="AF">Afghanistan</option>
                                                                 <option value="AL">Albania</option>
@@ -413,7 +385,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="email" class="form-control" name="email" ng-model="data.email" required/>
+                                                            <input type="email" class="form-control" name="email" ng-model="data.email" />
                                                             <span class="help-block">
                                                                  Provide your email
                                                             </span>
@@ -426,7 +398,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="password" class="form-control" name="password" ng-model="data.password" id="submit_form_password" required/>
+                                                            <input type="password" class="form-control" name="password" ng-model="data.password" id="submit_form_password" />
                                                             <span class="help-block">
                                                                  Provide your password
                                                             </span>
@@ -439,7 +411,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="password" class="form-control" name="rpassword" ng-model="data.rpassword" required/>
+                                                            <input type="password" class="form-control" name="rpassword" ng-model="data.rpassword" />
                                                             <span class="help-block">
 
                                                             </span>
@@ -452,7 +424,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="phone" ng-model="data.phone" required/>
+                                                            <input type="text" class="form-control" name="phone" ng-model="data.phone" />
                                                             <span class="help-block">
                                                                  Provide your phone
                                                             </span>
@@ -465,7 +437,7 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="fax" ng-model="data.fax" required/>
+                                                            <input type="text" class="form-control" name="fax" ng-model="data.fax" />
                                                             <span class="help-block">
                                                                  Provide your fax
                                                             </span>
@@ -478,7 +450,7 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <textarea class="form-control" name="description" ng-model="data.description" required></textarea>
+                                                        <textarea class="form-control" name="description" ng-model="data.description" ></textarea>
 														<span class="help-block">
 															 Provide your description
 														</span>
@@ -494,7 +466,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="person_title" ng-model="data.person_title" required/>
+                                                            <input type="text" class="form-control" name="person_title" ng-model="data.person_title" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -507,7 +479,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="person_prename" ng-model="data.person_prename" required/>
+                                                            <input type="text" class="form-control" name="person_prename" ng-model="data.person_prename" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -520,7 +492,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="person_name" ng-model="data.person_name" required/>
+                                                            <input type="text" class="form-control" name="person_name" ng-model="data.person_name" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -533,7 +505,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="person_mobile" ng-model="data.person_mobile" required/>
+                                                            <input type="text" class="form-control" name="person_mobile" ng-model="data.person_mobile" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -546,7 +518,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" class="form-control" name="person_phone" ng-model="data.person_phone" required/>
+                                                            <input type="text" class="form-control" name="person_phone" ng-model="data.person_phone" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -559,7 +531,7 @@
                                                     </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="email" class="form-control" name="person_email" ng-model="data.person_email" required/>
+                                                            <input type="email" class="form-control" name="person_email" ng-model="data.person_email" />
                                                         <span class="help-block">
 
                                                         </span>
@@ -577,11 +549,8 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-4">
-                                                        <select name="kitchen[]" class="kitchen js-states form-control" ng-model="data.kitchen"  multiple="multiple" required >
-                                                            <option>sdrtrytrysd</option>
-                                                            <option>sfdgfdgdsd</option>
-                                                            <option>fdgg</option>
-                                                            <option>sdsd</option>
+                                                        <select name="kitchen[]" class="kitchen js-states form-control" ng-model="data.kitchen"  multiple="multiple"  >
+                                                            <option value="<% item.id %>" ng-repeat="item in categories" ng-selected="item.selected" ><% item.name %></option>
                                                         </select>
 														<span class="help-block">
 
@@ -595,11 +564,8 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-4">
-                                                        <select name="delivery_area[]" class="delivery_area js-states form-control" ng-model="data.delivery_area"  multiple="multiple" required>
-                                                            <option>sdrtrytrysd</option>
-                                                            <option>sfdgfdgdsd</option>
-                                                            <option>fdgg</option>
-                                                            <option>sdsd</option>
+                                                        <select name="delivery_area[]" class="delivery_area js-states form-control" ng-model="data.delivery_area"  multiple="multiple" >
+                                                            <option ng-repeat="item in zip_codes" ng-selected="item.selected"  value="<% item.id %>"><% item.text %></option>
                                                         </select>
 														<span class="help-block">
 
@@ -613,7 +579,7 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control" name="product_origin" ng-model="data.product_origin" required>
+                                                        <input type="text" class="form-control" name="product_origin" ng-model="data.product_origin" >
 														<span class="help-block">
 
 														</span>
@@ -699,7 +665,9 @@
         FormWizard.init();
 
         $(".kitchen").select2();
-        $(".delivery_area").select2();
+        $(".zip").select2();
+        $(".delivery_area").select2({
+        });
     });
 </script>
 <!-- END JAVASCRIPTS -->
