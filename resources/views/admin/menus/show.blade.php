@@ -8,6 +8,9 @@
             <h1>Menu {{ $menu->id }}
                 <a href="{{ url('admin/menus/' . $menu->id . '/edit') }}" class="btn btn-primary btn-xs"
                    title="Edit Menu"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                <a href="{{ url('/admin/menus/' . $menu->id . '/block') }}"
+                   class="btn btn-warning btn-xs" title="Block Menu"><span
+                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
                 {!! Form::open([
                     'method'=>'DELETE',
                     'url' => ['admin/menus', $menu->id],
@@ -33,8 +36,12 @@
                         <td> {{ $menu->name }} </td>
                     </tr>
                     <tr>
-                        <th> Kitechen</th>
-                        <td> {{ $menu->kitchen->name }} </td>
+                        <th> Kitechens</th>
+                        <td>
+                        @foreach($menu->kitchens as $kitchen)
+                        <a href = "{{ url('admin/kitchens/' . $kitchen->id) }}">{{ $kitchen->name }} </a>
+                            @endforeach
+                        </td>
                     </tr>
                     </tbody>
                 </table>

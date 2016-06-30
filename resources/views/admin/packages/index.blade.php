@@ -3,42 +3,42 @@
 @section('content')
     <div class="page-content-wrapper">
         <div class="page-content">
-            @include ('layouts/messages')
 
-            <h1>Blocked Products</h1>
+            <h1>Packages <a href="{{ url('/admin/packages/create') }}" class="btn btn-primary btn-xs"
+                            title="Add New Package"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
             <div class="table">
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
                         <th>S.No</th>
                         <th> Name</th>
-                        <th> Ingredinets</th>
-                        <th> Price</th>
+                        <th> Caterer Id</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {{-- */$x=0;/* --}}
-                    @foreach($products as $item)
+                    @foreach($packages as $item)
                         {{-- */$x++;/* --}}
                         <tr>
                             <td>{{ $x }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->ingredinets }}</td>
-                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->caterer_id }}</td>
                             <td>
-                                <a href="{{ url('/admin/products/' . $item->id . '/active') }}"
-                                   class="btn btn-success btn-xs" title="Active Product"><span
-                                            class="glyphicon glyphicon-ok-sign" aria-hidden="true"/></a>
+                                <a href="{{ url('/admin/packages/' . $item->id) }}" class="btn btn-success btn-xs"
+                                   title="View Package"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                                <a href="{{ url('/admin/packages/' . $item->id . '/edit') }}"
+                                   class="btn btn-primary btn-xs" title="Edit Package"><span
+                                            class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                                 {!! Form::open([
                                     'method'=>'DELETE',
-                                    'url' => ['/admin/products', $item->id],
+                                    'url' => ['/admin/packages', $item->id],
                                     'style' => 'display:inline'
                                 ]) !!}
-                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Product" />', array(
+                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Package" />', array(
                                         'type' => 'submit',
                                         'class' => 'btn btn-danger btn-xs',
-                                        'title' => 'Delete Product',
+                                        'title' => 'Delete Package',
                                         'onclick'=>'return confirm("Confirm delete?")'
                                 ))!!}
                                 {!! Form::close() !!}
@@ -47,9 +47,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <a href="{{ url('/admin/products') }}" class="btn btn-success btn-xs" title="View Product">
-                    Active Products <span class="glyphicon  glyphicon-list-alt" aria-hidden="true"/></a>
+                <div class="pagination-wrapper"> {!! $packages->render() !!} </div>
             </div>
+
         </div>
     </div>
 @endsection

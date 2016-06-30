@@ -25,7 +25,6 @@ class MenusController extends AdminBaseController
     {
 
         $menus = Menu::with('kitchens')->paginate(15);
-       // return $menus;
         return view('admin.menus.index', compact('menus'));
     }
 
@@ -47,19 +46,20 @@ class MenusController extends AdminBaseController
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        return $request->kitchen;
-        $this->validate($request, ['name' => 'required', 'kitchen' => 'required',]);
-
+       // return $request->kitchen;
+        $this->validate($request, ['name' => 'required','kitchen'=> 'required']);
         $menu = $request->except('kitchen');
-        $menu['kitchen_id'] = $request->kitchen;
+        $menu['kitchen'] = $request->kitchen;
 
         $menu = Menu::create($menu);
 
-        KitchenMenu::create([
-            'menu_id' => $menu->id,
-            'kitchen_id' => $menu->kitchen_id,
-        ]);
+        if(!is_null($request->kitchen))
+        foreach ($request->kitchen as $kitchen_id) {
+            KitchenMenu::create([
+                'menu_id' => $menu->id,
+                'kitchen_id' => $kitchen_id
+            ]);
+        }
 
         return redirect('admin/menus')->with('success', 'Menu created successfully');
     }
@@ -73,7 +73,7 @@ class MenusController extends AdminBaseController
      */
     public function show($id)
     {
-        $menu = Menu::with('kitchen')->findOrFail($id);
+        $menu = Menu::with('kitchens')->findOrFail($id);
 
         return view('admin.menus.show', compact('menu'));
     }
@@ -87,8 +87,20 @@ class MenusController extends AdminBaseController
      */
     public function edit($id)
     {
-        $menu = Menu::findOrFail($id);
+        $menu = Menu::with('kitchens')->findOrFail($id);
         $kitchens = Kitchen::all();
+
+        foreach($kitchens as $kitchen) {
+            $flag = false;
+            foreach ($menu->kitchens as $menu_kitchen)
+                if ($kitchen->id == $menu_kitchen->id) {
+                    $kitchen['belongs'] = true;
+                    $flag = true;
+                }
+
+            if(!$flag)
+                $kitchen['belongs'] = false;
+        }
 
         return view('admin.menus.edit', compact('menu','kitchens'));
     }
@@ -102,15 +114,21 @@ class MenusController extends AdminBaseController
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'kitchen' => 'required']);
+        $this->validate($request, ['name' => 'required']);
 
 
         $updated_menu = Menu::findOrFail($id);
         $menu = $request->except('kitchen');
-        $menu['kitchen_id'] = $request->kitchen;
+        KitchenMenu::where('menu_id' , $id) ->delete();
+
+        if(!is_null($request->kitchen))
+        foreach ($request->kitchen as $kitchen_id)
+            KitchenMenu::create([
+                'menu_id' => $id,
+                'kitchen_id' => $kitchen_id
+            ]);
 
         $updated_menu->update($menu);
-
         return redirect('admin/menus')->with('success' , 'Menu successfully updated.');
     }
 
@@ -138,15 +156,14 @@ class MenusController extends AdminBaseController
 
     public function blockedMenus()
     {
-        $data = Menu::with('kitchen')->onlyTrashed()->get();
+        $data = Menu::with('kitchens')->onlyTrashed()->get();
         $menus=[];
         $i=0;
         foreach($data as $item)
-            if(!is_null($item->kitchen)){
+            if(!is_null($item->kitchens)){
                 $menus[$i] = $item;
                 $i++;
             }
-
         return view('admin.menus.blocked', compact('menus'));
     }
 

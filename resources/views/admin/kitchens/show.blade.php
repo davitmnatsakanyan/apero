@@ -7,6 +7,9 @@
             <h1>Kitchen {{ $kitchen->id }}
                 <a href="{{ url('admin/kitchens/' . $kitchen->id . '/edit') }}" class="btn btn-primary btn-xs"
                    title="Edit Kitchen"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                <a href="{{ url('/admin/kitchens/' . $kitchen->id . '/block') }}"
+                   class="btn btn-warning btn-xs" title="Block Product"><span
+                        class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
                 {!! Form::open([
                     'method'=>'DELETE',
                     'url' => ['admin/kitchens', $kitchen->id],
@@ -30,6 +33,15 @@
                     <tr>
                         <th> Name</th>
                         <td> {{ $kitchen->name }} </td>
+                    </tr>
+
+                    <tr>
+                        <th> Menus</th>
+                        <td>
+                            @foreach($kitchen->menus as $menu)
+                                <a href="{{url('admin/menus/' . $menu->id)}}">{{ $menu->name }} </a>
+                            @endforeach
+                        </td>
                     </tr>
                     </tbody>
                 </table>

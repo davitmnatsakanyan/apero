@@ -30,4 +30,9 @@ class Product extends Model
     protected $fillable = ['name','avatar', 'ingredinets', 'price', 'caterer_id', 'menu_id', 'deleted_at'];
 
     protected $dates = ['deleted_at'];
+
+    public function menus()
+    {
+        return $this->belongsTo(Menu::class);
+    }
 }

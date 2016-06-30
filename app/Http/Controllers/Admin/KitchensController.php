@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Admin\AdminBaseController;
 
 use App\Models\Kitchen;
+use App\Models\Menu;
+use App\Models\KitchenMenu;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
@@ -19,7 +21,7 @@ class KitchensController extends AdminBaseController
      */
     public function index()
     {
-        $kitchens = Kitchen::paginate(15);
+        $kitchens = Kitchen::with('menus')->paginate(15);
 
         return view('admin.kitchens.index', compact('kitchens'));
     }
@@ -43,11 +45,15 @@ class KitchensController extends AdminBaseController
     {
         $this->validate($request, ['name' => 'required',]);
 
-        Kitchen::create($request->all());
+        $data = $request->except(['_token']);
+        $data['remember_token'] = $request->_token;
 
-        Session::flash('flash_message', 'Kitchen added!');
+        if (Kitchen::create($data)) {
+            
+            return redirect('admin/kitchens')->with('success', 'Kitchen successfully added.');
 
-        return redirect('admin/kitchens');
+        }
+        return back()->withErrors('Somenthing went wrong');
     }
 
     /**
@@ -59,7 +65,7 @@ class KitchensController extends AdminBaseController
      */
     public function show($id)
     {
-        $kitchen = Kitchen::findOrFail($id);
+        $kitchen = Kitchen::with('menus')->findOrFail($id);
 
         return view('admin.kitchens.show', compact('kitchen'));
     }
@@ -73,9 +79,22 @@ class KitchensController extends AdminBaseController
      */
     public function edit($id)
     {
-        $kitchen = Kitchen::findOrFail($id);
+        $kitchen = Kitchen::with('menus')->findOrFail($id);
+        $menus = Menu::all();
 
-        return view('admin.kitchens.edit', compact('kitchen'));
+        foreach ($menus as $menu) {
+            $flag = false;
+            foreach ($kitchen->menus as $kitchen_menu)
+                if ($menu->id == $kitchen_menu->id) {
+                    $menu['belongs'] = true;
+                    $flag = true;
+                }
+
+            if (!$flag)
+                $menu['belongs'] = false;
+        }
+
+        return view('admin.kitchens.edit', compact('menus', 'kitchen'));
     }
 
     /**
@@ -89,12 +108,23 @@ class KitchensController extends AdminBaseController
     {
         $this->validate($request, ['name' => 'required',]);
 
-        $kitchen = Kitchen::findOrFail($id);
-        $kitchen->update($request->all());
+        KitchenMenu::where('kitchen_id', $id)->delete();
 
-        Session::flash('flash_message', 'Kitchen updated!');
+        if (!is_null($request->menu))
+            foreach ($request->menu as $menu_id)
+                KitchenMenu::create([
+                    'menu_id' => $menu_id,
+                    'kitchen_id' => $id
+                ]);
 
-        return redirect('admin/kitchens')->with('success', 'Kitchen successfully updated');
+        $data = $request->except('menu', '_token');
+        $data['remember_token'] = $request->_token;
+
+        if (Kitchen::findOrFail($id)->update($request->except('menu', '_token')))
+
+            return redirect('admin/kitchens')->with('success', 'Kitchen successfully updated');
+
+        return back()->withErrors('Something went wrong');
     }
 
     /**

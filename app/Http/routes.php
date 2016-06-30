@@ -84,6 +84,10 @@ Route::group([
     Route::get('products/blocked', 'ProductsController@blockedProducts');
     Route::get('products/create/{id}', 'ProductsController@getMenus');
     Route::resource('products', 'ProductsController');
+
+
+    Route::get('packages/create/{id}', 'PackagesController@getProducts');
+    Route::resource('packages', 'PackagesController');
 }
 );
 

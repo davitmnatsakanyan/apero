@@ -13,6 +13,7 @@
                     <tr>
                         <th>S.No</th>
                         <th> Name</th>
+                        <th> Menus </th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -23,6 +24,11 @@
                         <tr>
                             <td>{{ $x }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>
+                                @foreach($item->menus as $menu)
+                                    <a href="{{url( 'admin/menus/' . $menu->id) }}"> {{$menu->name}}</a>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ url('/admin/kitchens/' . $item->id) }}" class="btn btn-success btn-xs"
                                    title="View Kitchen"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>

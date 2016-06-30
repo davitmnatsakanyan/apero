@@ -45,7 +45,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menus');
         Schema::drop('kitchen_menu');
+        Schema::drop('menus');
     }
 }

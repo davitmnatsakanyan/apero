@@ -88,6 +88,13 @@
 								</span>
 							</a>
 						</li>
+						<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Packages managment">
+							<a href="{{ url('admin/packages') }}" target="_self">
+								<span class="title">
+									Packages
+								</span>
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li>

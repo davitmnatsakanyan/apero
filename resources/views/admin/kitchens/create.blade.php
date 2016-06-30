@@ -9,6 +9,7 @@
 
             {!! Form::open(['url' => '/admin/kitchens', 'class' => 'form-horizontal']) !!}
 
+
             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                 {!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">

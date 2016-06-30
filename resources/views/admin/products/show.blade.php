@@ -5,9 +5,12 @@
         <div class="page-content">
             @include ('layouts/messages')
 
-            <h1>Product {{ $product->id }}
+            <h1> {{ $product->name }}
                 <a href="{{ url('admin/products/' . $product->id . '/edit') }}" class="btn btn-primary btn-xs"
                    title="Edit Product"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                <a href="{{ url('/admin/products/' . $product->id . '/block') }}"
+                   class="btn btn-warning btn-xs" title="Block Product"><span
+                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
                 {!! Form::open([
                     'method'=>'DELETE',
                     'url' => ['admin/products', $product->id],
@@ -43,11 +46,11 @@
                     </tr>
                     <tr>
                         <th> Menu</th>
-                        <td> <a href = "{{url('admin/menus/' , $product->menu_id )}}">{{ $product->menu }} </a></td>
+                        <td> <a href = "{{url('admin/menus' , $product->menu_id )}}">{{ $product->menu }} </a></td>
                     </tr>
                     <tr>
                         <th> Caterer</th>
-                        <td> <a href = "{{url('admin/caterers/' , $product->caterer_id )}}">{{ $product->caterer }} </a></td>
+                        <td> <a href = "{{url('admin/caterers' , $product->caterer_id )}}">{{ $product->caterer }} </a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -17,10 +17,10 @@ class Menu extends Model
     protected $table = 'menus';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -41,5 +41,30 @@ class Menu extends Model
     public function kitchens()
     {
         return $this->belongsToMany(Kitchen::class);
+    }
+
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($menu) {
+            foreach($menu->products as $product) {
+                $product->delete();
+            }
+        });
+
+        static::restored(function ($menu) {
+            dd('lklk');
+            foreach($menu->products->onlyTrashed() as $product) {
+                $product->restore();
+            }
+        });
+
     }
 }

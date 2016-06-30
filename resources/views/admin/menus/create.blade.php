@@ -14,7 +14,7 @@
             <div class="form-group {{ $errors->has('kitchen') ? 'has-error' : ''}}">
                 {!! Form::label('kitchen', 'Kitchen', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    <select class="selectpicker" id="kitchen" name = "kitchen[]" multiple="multiple">
+                    <select class="selectpicker form-control" id="kitchen" name = "kitchen[]" multiple="multiple">
                         @foreach($kitchens as $kitchen)
                             <option value="{{ $kitchen['id'] }}"  >{{$kitchen['name']}}</option>
                         @endforeach

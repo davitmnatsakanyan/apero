@@ -141,12 +141,11 @@ class CaterersController extends AdminBaseController
 
         if($request->avatar != NULL)
         {
-            $caterer_update['avatar'] = time();
+            $image = $request->file('avatar');
+            $extension = $image->getClientOriginalExtension();
+            $caterer['avatar'] = time() . "." . $extension;
         }
-
-        $image = $request->file('avatar');
-        $extension = $image->getClientOriginalExtension();
-        $caterer['avatar'] = time() . "." . $extension;
+        
         if($caterer->update($caterer_update))
         {
             $this->uploadFile($image,$caterer_update['avatar'], true);
@@ -198,7 +197,9 @@ class CaterersController extends AdminBaseController
     public function uploadFile($image,$avatar, $old_image = null)
     {
         if(!is_null($old_image)){
-            unlink('images/caterers/'.$old_image);
+            $file = 'images/products/' . $old_image;
+            if(file_exists($file))
+                unlink($file);
         }
         $destinationPath = 'images/caterers/';
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath.'/'.$avatar);
