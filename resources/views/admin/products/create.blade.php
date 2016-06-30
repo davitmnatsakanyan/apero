@@ -14,10 +14,10 @@
                 {!! Form::label('caterer', 'Caterer', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     <div class="col-sm-6">
-                        <select class="selectpicker" id="caterer" name = "caterer">
-                            <option value=""  >Select caterer</option>
+                        <select class="selectpicker form-control" id="caterer" name="caterer">
+                            <option value="">Select caterer</option>
                             @foreach($caterers as $caterer)
-                                <option value="{{ $caterer['id'] }}"  >{{$caterer['name']}}</option>
+                                <option value="{{ $caterer['id'] }}">{{$caterer['company']}}</option>
                             @endforeach
                         </select>
                         {!! $errors->first('caterer', '<p class="help-block">:message</p>') !!}
@@ -29,7 +29,7 @@
                 {!! Form::label('menu', 'Menu', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     <div class="col-sm-6">
-                        <select class="selectpicker" id="menu" name = "menu">
+                        <select class="selectpicker form-control" id="menu" name="menu">
                         </select>
                         {!! $errors->first('menu', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -37,12 +37,21 @@
             </div>
 
 
-
             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                 {!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div id="imagePreview" style="width: 120px;
+                                                height: 120px;
+                                                background-position: center center;
+                                                background-size: cover;
+                                                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
                 </div>
             </div>
 
@@ -81,31 +90,52 @@
         </div>
     </div>
 @endsection
+
 @section('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    @endsection
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+@endsection
+
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script type="text/javascript">
         $('select').select2();
 
 
-        $( "#caterer " ).on( "change", function() {
+        $("#caterer ").on("change", function () {
             var caterer_id = $(this).val();
-            if(caterer_id != "")
-            $.ajax({
-                type: "GET",
-                url: BASE_URL+'/admin/products/create/'+caterer_id,
-                success : function(data){
-                    $( "#menu" ).html('');
-                    $( "#menu" ).select2({
-                        data : data
-                    })
-                },
-                error: function(error){
-                    console.log(error);
+            if (caterer_id != "")
+                $.ajax({
+                    type: "GET",
+                    url: BASE_URL + '/admin/products/create/' + caterer_id,
+                    success: function (data) {
+                        $("#menu").html('');
+                        $("#menu").select2({
+                            data: data
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $("#avatar").on("change", function()
+            {
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        $("#imagePreview").css("background-image", "url("+this.result+")");
+                    }
                 }
             });
         });
     </script>
-    @endsection
+@endsection

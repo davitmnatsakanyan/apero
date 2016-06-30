@@ -5,7 +5,7 @@
         <div class="page-content">
             @include ('layouts/messages')
 
-            <h1>Menus</h1>
+            <h1>Blocked Menus</h1>
             <div class="table">
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
@@ -23,11 +23,15 @@
                         <tr>
                             <td>{{ $x }}</td>
                             <td>{{ $item->name }}</td>
-                            <td><a href = "{{url( 'admin/menus/' . $item->kitchen_id) }}"> {{$item->kitchen->name}}</a></td>
+                            <td>
+                                @foreach($item->kitchens as $kitchen)
+                                    <a href="{{url( 'admin/kitchens/' . $kitchen->id) }}"> {{$kitchen->name}}</a>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ url('/admin/menus/' . $item->id . '/active') }}"
-                                   class="btn btn-warning btn-xs" title="Block Menu"><span
-                                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
+                                   class="btn btn-success btn-xs" title="Active Product"><span
+                                            class="glyphicon glyphicon-ok-sign" aria-hidden="true"/></a>
                                 {!! Form::open([
                                     'method'=>'DELETE',
                                     'url' => ['/admin/menus', $item->id],

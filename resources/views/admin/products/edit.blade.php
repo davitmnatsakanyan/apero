@@ -5,7 +5,7 @@
         <div class="page-content">
             @include ('layouts/messages')
 
-            <h1>Edit Product {{ $product->id }}</h1>
+            <h1>Edit {{ $product->name }}</h1>
 
             {!! Form::model($product, [
                 'method' => 'PATCH',
@@ -17,9 +17,9 @@
             <div class="form-group {{ $errors->has('caterer') ? 'has-error' : ''}}">
                 {!! Form::label('caterer', 'Caterer', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    <select class="selectpicker" id="caterer" name="caterer">
+                    <select class="selectpicker form-control" id="caterer" name="caterer">
                         @foreach($caterers as $caterer)
-                            <option value="{{ $caterer['id'] }}" {{ $caterer['id'] == $product->caterer_id ? 'selected' :'' }}>{{$caterer['name']}}</option>
+                            <option value="{{ $caterer['id'] }}" {{ $caterer['id'] == $product->caterer_id ? 'selected' :'' }}>{{$caterer['company']}}</option>
                         @endforeach
                     </select>
                     {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
@@ -29,7 +29,7 @@
             <div class="form-group {{ $errors->has('menu') ? 'has-error' : ''}}">
                 {!! Form::label('menu', 'Menu', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    <select class="selectpicker" id="menu" name="menu">
+                    <select class="selectpicker form-control" id="menu" name="menu">
                         @foreach($menus as $menu)
                             <option value="{{ $menu['id'] }}" {{ $menu['id'] == $product->menu_id ? 'selected' :'' }}>{{$menu['text']}}</option>
                         @endforeach
@@ -39,12 +39,24 @@
             </div>
 
 
-            <img src="{{url('images/products/' . $product->avatar)}}", alt="Mountain View" style="width:304px;height:228px;" id="avatar">
+            {{--<img src="{{url('images/products/' . $product->avatar)}}", alt="Mountain View" style="width:304px;height:228px;" id="avatar">--}}
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div id="imagePreview" style="width: 120px;
+                                                height: 120px;
+                                                background-position: center center;
+                                                background-size: cover;
+                                                background-image: url( {{url('images/products/' . $product->avatar)}} );
+                                                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
+                </div>
+            </div>
+
 
             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : ''}}" id="file_avatar">
                 {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
                     {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -116,6 +128,26 @@
                         console.log(error);
                     }
                 });
+        });
+    </script>
+
+
+    <script>
+        $(function() {
+            $("#avatar").on("change", function()
+            {
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        $("#imagePreview").css("background-image", "url("+this.result+")");
+                    }
+                }
+            });
         });
     </script>
 @endsection
