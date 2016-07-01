@@ -6,14 +6,32 @@
 
             <h1>Create New Package</h1>
             <hr/>
-
-            {!! Form::open(['url' => '/admin/packages', 'class' => 'form-horizontal']) !!}
+              @include ('layouts/messages')
+            {!! Form::open(['url' => '/admin/packages', 'class' => 'form-horizontal','files' => true]) !!}
 
             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                 {!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div id="imagePreview" style="width: 120px;
+                                                height: 120px;
+                                                background-position: center center;
+                                                background-size: cover;
+                                                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
+                </div>
+            </div>
+
+            <div class="form-group {{ $errors->has('avatar') ? 'has-error' : ''}}">
+                {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
 
@@ -40,7 +58,7 @@
                 </div>
             </div>
 
-            <ul class="ul_current" >
+            <ul class="ul_current" style = "list-style-type: none" >
             </ul>
 
 
@@ -75,6 +93,24 @@
         $('select').select2();
 
 
+        $(function() {
+            $("#avatar").on("change", function()
+            {
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test( files[0].type)){ // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+
+                    reader.onloadend = function(){ // set image data as background of div
+                        $("#imagePreview").css("background-image", "url("+this.result+")");
+                    }
+                }
+            });
+        });
+
+
         $( "#caterer " ).on( "change", function() {
             var caterer_id = $(this).val();
             if(caterer_id != "")
@@ -94,16 +130,18 @@
         });
 
         $( "#product " ).on( "select2:select", function(e) {
-            console.log(e);
+//            console.log(e);
             var products = $(this).val();
-            var product_name = $('').text();
-            alert(product_name);
+//            var product_name = $('').text();
+            products = $( "#product " ).select2('data');
             if(products != "") {
                 $('.ul_current' ).html('');
                 $.each(products, function( index, value ) {
-                    alert( index + ": " + value );
-                    $('.ul_current').append($('<li> <label></label><input type="text"></li>', {
-                    }));
+                    console.log(value );
+                    $('.ul_current').append($('<li>' +
+                            '<label >' + value.text + '</label>' +
+                            '<input type="number" name="product_count.' + value.id + '">' +
+                            '</li>'));
                 });
             }
         });

@@ -140,7 +140,7 @@ class ProductsController extends AdminBaseController
     {
         $product = Product::withTrashed()->where('id', $id)->get();
         $avatar = $product[0]->avatar;
-        unlink('images/cproducts/' . $avatar);
+        unlink('images/products/' . $avatar);
         Product::withTrashed()->where('id', $id)->forceDelete();
 
         return redirect('admin/products')->with('success', 'Product successfully deleted.');

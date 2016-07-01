@@ -12,7 +12,7 @@ class CaterersTableSeeder extends Seeder
     public function run()
     {
         DB::table('caterers')->insert([
-            'name' => 'caterer',
+            'company' => 'caterer',
             'email' => 'caterer@gmail.com',
             'password' => bcrypt('caterer'),
         ]);

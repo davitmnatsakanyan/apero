@@ -99,6 +99,9 @@ Route::group([
     Route::resource('products', 'ProductsController');
 
 
+    Route::get('packages/{id}/block', 'PackagesController@block');
+    Route::get('packages/{id}/active', 'PackagesController@activate');
+    Route::get('packages/blocked', 'PackagesController@blockedProducts');
     Route::get('packages/create/{id}', 'PackagesController@getProducts');
     Route::resource('packages', 'PackagesController');
 }

@@ -14,7 +14,8 @@ class AdminBaseController extends Controller
     {
         $this->admin = Auth::guard('admin');
         View::share('admin', $this->admin->user());
-    } 
+    }
+    
 }
 
 
