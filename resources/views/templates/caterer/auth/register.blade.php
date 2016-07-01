@@ -66,7 +66,7 @@
                                             <div class="tab-pane active" id="tab1">
                                                 <div class="col-md-6">
                                                     <h3 class="block">Provide your caterer details</h3>
-                                                    <input type="hidden" name="role" ng-init="data.role='Caterer'" ng-model="data.role">
+                                                    <input type="hidden" name="role" ng-init="data.role='caterer'" ng-model="data.role">
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
                                                         <label class="control-label col-md-5">Company
@@ -79,6 +79,7 @@
                                                             <span class="help-block">
                                                                  Provide your company
                                                             </span>
+                                                            <span class="error"><% caterer_error.company[0] %></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -664,10 +665,8 @@
         App.init();
         FormWizard.init();
 
-        $(".kitchen").select2();
-        $(".zip").select2();
-        $(".delivery_area").select2({
-        });
+        $("select").select2();
+
     });
 </script>
 <!-- END JAVASCRIPTS -->

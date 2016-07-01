@@ -12,7 +12,7 @@ Route::get('aaa',function(){
 | and give it the controller to call when that URI is requested.
 |
 */
-// Templates
+// Angular Templates
 Route::group(array('prefix' => '/templates/'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
@@ -31,6 +31,19 @@ Route::group(array('prefix' => '/templates/caterer/auth'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
         return view('templates/caterer/auth.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/user/auth'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('templates/user/auth.' . $template);
+    }));
+});
+Route::group(array('prefix' => '/templates/user/account'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('templates/user/account.' . $template);
     }));
 });
 

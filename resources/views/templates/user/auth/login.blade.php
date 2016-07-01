@@ -8,10 +8,10 @@
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-md-12">
-                    <div ng-if="caterer_error_msg == 1" class="alert alert-danger"><button class="close" data-dismiss="alert"></button><% caterer_error_msg_text %></div>
+                    <div ng-if="user_error_msg == 1" class="alert alert-danger"><button class="close" data-dismiss="alert"></button><% user_error_msg_text %></div>
                     <form action="#" class="form-horizontal" id="submit_form" ng-submit="login_submit()">
                         {{ csrf_field() }}
-                        <input type="hidden" name="role" ng-init="data.role='caterer'" ng-model="data.role">
+                        <input type="hidden" name="role" ng-init="data.role='user'" ng-model="data.role">
                         <div class="form-group">
                             <label class="control-label col-md-2">Email
                                                         <span class="required">
@@ -23,7 +23,7 @@
                                                             <span class="help-block">
                                                                  Provide your email
                                                             </span>
-                                <span class="error"><% caterer_error.email[0] %></span>
+                                <span class="error"><% user_error.email[0] %></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,7 +37,7 @@
                                                             <span class="help-block">
                                                                  Provide your password
                                                             </span>
-                                <span class="error"><% caterer_error.password[0] %></span>
+                                <span class="error"><% user_error.password[0] %></span>
                             </div>
                         </div>
                         <div class="form-group">

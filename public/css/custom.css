@@ -8,3 +8,6 @@
 .register .nav-tabs>li{
     width: 50%;
 }
+.error {
+    color: red;
+}

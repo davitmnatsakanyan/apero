@@ -9,10 +9,6 @@ app.config(function($interpolateProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/caterer/logout', {
-            templateUrl: '',
-            controller: 'AuthController'
-        })
         .when('/login', {
             templateUrl: 'templates/login.blade.php',
             controller: 'AuthController'
@@ -24,6 +20,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/account', {
             templateUrl: 'templates/caterer/account/index.blade.php',
             controller: 'CatererController',
+        })
+        .when('/user/account', {
+            templateUrl: 'templates/user/account/index.blade.php',
+            controller: 'UserController',
         })
         .when('/', {
             templateUrl: 'templates/home.blade.php',

@@ -16,7 +16,6 @@ class Caterer extends Authenticatable
      */
     protected $fillable = [
         'company',
-        'name', 
         'email', 
         'password',
         'avatar',
@@ -26,8 +25,6 @@ class Caterer extends Authenticatable
         'city',
         'country',
         'phone',
-        'mobile',
-        'desc',
         'remember_token',
         'description',
         'products_origin',
@@ -35,8 +32,8 @@ class Caterer extends Authenticatable
         'updated_at',
         'deleted_at',
         'created_ip',
-        'is_deleted',
-        'admin_id'
+        'admin_id',
+        'fax'
     ];
 
     /**

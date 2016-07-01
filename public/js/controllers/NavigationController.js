@@ -1,25 +1,27 @@
-app.controller('NavigationController', ['$scope', '$uibModal', '$log',  function ($scope, $uibModal, $log) {
+app.controller('NavigationController', ['$scope', '$uibModal', '$log', '$http', '$location',  function ($scope, $uibModal, $log, $http, $location) {
 
-    $scope.animationsEnabled = true;
 
-    $scope.login = function (size) {
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'templates/login.blade.php',
-            controller: 'AuthController',
-            size: size,
-            resolve: {
-                data: function () {
-                    return $scope.data;
-                }
+     $http({
+        method : "GET",
+        url : "auth/logedin"
+    }).success(function(response){
+         $scope.is_logedin = response.success;
+     });
+
+    $scope.logout = function () {
+        $http({
+                data: $scope.data,
+                method : "GET",
+                url : "auth/logout"
             }
-        });
+        ).success(function (response) {
+                if(response.success == 1){
+                    $location.path('login');
+                }
+            }).error( function (error) {
+                console.log(error);
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    }
+            });
+    };
 
 }]);

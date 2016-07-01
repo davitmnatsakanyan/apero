@@ -21,9 +21,14 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-href="/#/">Apero bestellen</a></li>
                     <li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/hillfe">Hilfe</a></li>
-                    <li><a ng-href="#/login">Login</a></li>
-                    <li><a ng-href="#/register">Registrieren</a></li>
-                    <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
+
+                    <li ng-if="is_logedin == 1"><a ng-href="/#/" ng-click="logout()">Logout</a></li>
+
+                    <li ng-if="is_logedin == 0"><a ng-href="#/login">Login</a></li>
+                    <li ng-if="is_logedin == 0"><a ng-href="#/register">Registrieren</a></li>
+
+
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

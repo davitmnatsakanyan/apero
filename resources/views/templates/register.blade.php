@@ -8,7 +8,8 @@
             <div ng-include='"templates/caterer/auth/register.blade.php"'></div>
         </uib-tab>
         <uib-tab index="1" heading="User">
-            Some Tab Content
+            <div ng-include='"templates/user/auth/register.blade.php"'></div>
         </uib-tab>
     </uib-tabset>
 </div>
+

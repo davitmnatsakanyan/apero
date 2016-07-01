@@ -1,12 +1,12 @@
-app.service('AuthService', ['$http', '$location', '$window', function ($http, $location, $window) {
-    this.auth = function () {
+app.service('AuthService', ['$http', '$location',  function ($http, $location) {
+    this.auth = function (role) {
            $http({
                 method: "GET",
-                url: "auth/check"
+                url: "auth/check/"+role
             })
             .success(function (response) {
                 if(response.success == 0){
-                    $location.path('caterer/login');
+                    $location.path('login');
                 }
             });
 

@@ -23,7 +23,6 @@ class CatererService
     }
 
     public function create($data){
-
         $caterer = Caterer::create([
             'company'   => $data['company'],
             'address'   => $data['address'],
@@ -38,7 +37,8 @@ class CatererService
             'description' => $data['description'],
 //            'kitchen_id' => json_encode($data['kitchen']),
 //            'zipcode_id' => json_encode($data['delivery_area']),
-            'products_origin' => $data['product_origin']
+            'products_origin' => $data['product_origin'],
+            'created_ip' => $data['created_ip']
         ]);
 
         foreach($data['kitchen'] as $kitchen) {

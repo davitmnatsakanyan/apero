@@ -45,55 +45,116 @@ class AuthController extends Controller
     */
    public function postLogin(LoginRequest $request)
    {
-       $role = request()->get('role');
+       $role = $request->role;
        if(!$this->$role->check())
         { 
-           if( $this->$role->attempt(request()->except(['_token','role'])) )
+           if( $this->$role->attempt(['email' => $request->email, 'password' => $request->password]))
             {
-               return Response::json(1);
+                session(['role' => $role]);
+               return response()->json(['success' => 1]);
             }
             else 
             {
-              return Response::json(0);
+              return response()->json(['success' => 0]);
             }
         }
         else 
         {
-            return Response::json(2);
+            return response()->json(['success' => 2]);
         }
    }
    
    /**
     * Registering user
     */
-   public function postRegister(RegisterRequest $request)
+   public function postRegister(Request $request)
    {
+       if($request->role == 'user'){
+           $this->validate($request, [
+               'address'            => 'required|max:250',
+               'pobox'              => 'required|max:100',
+               'zip'                => 'required|max:5',
+               'city'               => 'required|max:250',
+               'country'            => 'required|max:250',
+               'email'              => 'required|email|max:100|unique:users',
+               'phone'              => 'required|max:50',
+               'password'           => 'required|confirmed',
+               'password_confirmation'  => 'required',
+               'fax'                => 'required',
+               'name'               => 'required',
+               'title'              => 'required',
+               'mobile'             => 'required'
+           ]);
+       }
+//       elseif($request->role == 'caterer'){
+//           $this->validate($request, [
+//               'company'            => 'required|max:250',
+//               'address'            => 'required|max:250',
+//               'pobox'              => 'required|max:100',
+//               'zip'                => 'required|max:4',
+//               'city'               => 'required|max:250',
+//               'country'            => 'required|max:250',
+//               'email'              => 'required|email|max:100',
+//               'phone'              => 'required|max:50',
+//               'password'           => 'required|confirmed',
+//               'rpassword' => 'required',
+//                'fax'               => 'required',
+//                'description'       => 'required',
+//                'person_title'      => 'required',
+//                'person_prename'    => 'required',
+//                'person_name'       => 'required',
+//                'person_mobile'     => 'required',
+//                'person_phone'      => 'required',
+//                'person_email'      => 'required',
+//                'kitchen'           => 'required',
+//                'delivery_area'     => 'required',
+//                'product_origin'    => 'required'
+//           ]);
+//
+//       }
         $role = strtolower($request->role);
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
         $data = $request->except(['_token','role']);
         $password = $data['password'];
         $data['password'] = bcrypt($data['password']);
+        $data['created_ip'] = $request->ip();
         $model = $service->create($data);
         if($model)
         {
-           if($this->$role->attempt(['email' => $model->email, 'password' => $password]))
-               return response()->json(['success' => 1, 'caterer' => $model]);
-           else
+           if($this->$role->attempt(['email' => $model->email, 'password' => $password])) {
+               session(['role' => $role]);
+               return response()->json(['success' => 1]);
+           }
+           else {
                return response()->json(['success' => 0]);
+           }
         }
        return response()->json(['success' => 2]);
    }   
    
    
-   public function getLogout($role)
+   public function getLogout()
    {
+       $role = session('role');
+       session()->forget('role');
        $this->$role->logout();
-       return redirect('home');
-   }
+       return response()->json(['success' => 1]);
+}
 
-    public function getCheck(){
-       if($this->caterer->check()){
+    public function getCheck($role){
+
+       if($this->$role->check()){
+           return response()->json(['success' => 1]);
+       }
+        else{
+            return response()->json(['success' => 0]);
+        }
+    }
+
+    public function getLogedin(){
+
+       if($this->caterer->check() || $this->user->check()){
            return response()->json(['success' => 1]);
        }
         else{
