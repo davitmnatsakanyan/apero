@@ -7,10 +7,12 @@ use App\Http\Controllers\Admin\AdminBaseController;
 
 use App\Models\Package;
 use App\Models\Caterer;
+use App\Models\PackageProduct;
 use App\Models\Product;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Session;
+use Session, Image;
 
 class PackagesController extends AdminBaseController
 {
@@ -21,7 +23,7 @@ class PackagesController extends AdminBaseController
      */
     public function index()
     {
-        $packages = Package::paginate(15);
+        $packages = Package::with('caterer')->paginate(15);
 
         return view('admin.packages.index', compact('packages'));
     }
@@ -44,14 +46,30 @@ class PackagesController extends AdminBaseController
      */
     public function store(Request $request)
     {
-        return $request->all();
-        $this->validate($request, ['name' => 'required', 'caterer_id' => 'required', 'deleted_at' => 'required',]);
+        $this->validate($request, ['name' => 'required', 'caterer' => 'required', 'price' => 'required|integer', 'product_count.*' => 'required|integer']);
 
-        Package::create($request->all());
+        $package['caterer_id'] = $request->caterer;
+        $package['name'] = $request->name;
+        $package['price'] = $request->price;
 
-        Session::flash('flash_message', 'Package added!');
+        $image = $request->file('avatar');
+        $extension = $image->getClientOriginalExtension();
+        $package['avatar'] = time() . "." . $extension;
 
-        return redirect('admin/packages');
+        if ($package = Package::create($package)) {
+            $this->uploadFile($image, $package['avatar']);
+            foreach ($request->product as $product_id) {
+                $product_count = 'product_count_' . $product_id;
+                $data['package_id'] = $package->id;
+                $data['product_id'] = $product_id;
+                $data['product_count'] = $request->$product_count;
+                PackageProduct::create($data);
+            }
+
+            return redirect('admin/packages')->with('success', 'Package created sucessfully.');
+        }
+
+        return back()->withErrors('Sonmething went wrong.');
     }
 
     /**
@@ -63,7 +81,7 @@ class PackagesController extends AdminBaseController
      */
     public function show($id)
     {
-        $package = Package::findOrFail($id);
+        $package = Package::with(['products', 'caterer'])->findOrFail($id);
 
         return view('admin.packages.show', compact('package'));
     }
@@ -77,9 +95,21 @@ class PackagesController extends AdminBaseController
      */
     public function edit($id)
     {
-        $package = Package::findOrFail($id);
+        $package = Package::with('products')->findOrFail($id);
+        $products = Product::all();
+        foreach ($products  as $product) {
+            $flag = false;
+            foreach ($package->products as $package_product)
+                if ($product->id == $package_product->id) {
+                    $product['belong'] = true;
+                    $flag = true;
+                }
 
-        return view('admin.packages.edit', compact('package'));
+            if(!$flag)
+                $product['belong'] = false;
+        }
+
+        return view('admin.packages.edit', compact('package','products'));
     }
 
     /**
@@ -110,11 +140,41 @@ class PackagesController extends AdminBaseController
      */
     public function destroy($id)
     {
-        Package::destroy($id);
+        $package = Package::withTrashed()->where('id', $id)->get();
+        $avatar = $package[0]->avatar;
+        unlink('images/packages/' . $avatar);
+        Package::withTrashed()->where('id', $id)->forceDelete();
 
-        Session::flash('flash_message', 'Package deleted!');
+        return redirect('admin/packages')->with('success', 'Package sucessfully deleted.');
+    }
 
-        return redirect('admin/packages');
+
+    public function block($id)
+    {
+         Package::findOrFail($id)->update(['admin_id' => $this->admin->id()]);
+        if (Package::destroy($id)) {
+            return redirect('admin/packages')->with('success', 'Packages successfully blocked.');
+        }
+        return back()->withErrors('Something went wrong.');
+    }
+
+    public function blockedProducts()
+    {
+        $packages = Package::onlyTrashed()->with('caterer')->get();
+        foreach( $packages as $package)
+           $package ['admin'] = Admin::findOrFail($package->admin_id);
+
+        return view('admin.packages.blocked', compact('packages'));
+    }
+
+    public function activate($id)
+    {
+        if(Package::withTrashed()->where('id', $id)->restore()) {
+            Package::findOrFail($id)->update(['admin_id' => NULL]);
+            return redirect('admin/packages')->with('success', 'Package successfully activated.');
+        }
+
+        return back()->withErrors('Something went wrong.');
     }
 
     public function getProducts($id)
@@ -128,5 +188,18 @@ class PackagesController extends AdminBaseController
             $i++;
         }
         return $data;
+    }
+
+
+    public function uploadFile($image, $avatar, $old_image = null)
+    {
+        if (!is_null($old_image)) {
+            $file = 'images/products/' . $old_image;
+            if (file_exists($file))
+                unlink($file);
+        }
+        $destinationPath = 'images/packages/';
+        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
+        return $avatar;
     }
 }

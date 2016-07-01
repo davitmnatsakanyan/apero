@@ -61,4 +61,10 @@ class Caterer extends Authenticatable
     {
         return $this->belongsToMany(Kitchen::class);
     }
+
+
+    public function packages()
+    {
+        return $this->belongsTo(Package::class);
+    }
 }
