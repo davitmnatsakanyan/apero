@@ -5,8 +5,12 @@
         @include ('layouts/messages')
         <div><h2>Simple Products</h2></div>
         <div><h3><a href="{{url('caterer/product/single/add')}}">Add Single Product</a></h3></div>
-        @foreach($products as $key => $category)
-        <h3>{{ $key }}</h3>
+        @foreach($kitchens as $kitchen)
+            @if(count($kitchen->menus)>0)
+          <h2>{{ $kitchen->name }}</h2>
+        @foreach($kitchen->menus as $key => $menu)
+                @if(count($menu->products)>0)
+        <h3>{{ $menu->name }}</h3>
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
@@ -18,15 +22,15 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($category as $key => $product)
+                @foreach($menu->products as $key => $product)
                    <tr>
                        <td>{{ $key+1 }}</td>
-                       <td>{{ $product['name']}}</td>
-                       <td>{{ $product['ingredients']}}</td>
-                       <td>{{ $product['price']}}</td>
+                       <td>{{ $product->name}}</td>
+                       <td>{{ $product->ingredients}}</td>
+                       <td>{{ $product->price}}</td>
                        <td>
-                           <a href="{{ url('caterer/product/single/view' , $product['id']) }}">View</a> |
-                           <a href="{{ url('caterer/product/single/edit' , $product['id']) }}">Edit</a> |
+                           <a href="{{ url('caterer/product/single/view' , $product->id) }}">View</a> |
+                           <a href="{{ url('caterer/product/single/edit' , $product->id) }}">Edit</a> |
                            <a href="#" data-toggle="modal" data-target="#myModal">Delete</a>
                        </td>
                        @include('caterer/product/single/modals/delete')
@@ -34,7 +38,10 @@
                 @endforeach
             </tbody>
         </table>
+                @endif
         @endforeach
+            @endif
+            @endforeach
     </div>
 
 @stop

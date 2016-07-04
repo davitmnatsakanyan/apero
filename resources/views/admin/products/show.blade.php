@@ -5,7 +5,7 @@
         <div class="page-content">
             @include ('layouts/messages')
 
-            <h1> {{ $product->name }}
+            <h1> {{ $product['name'] }}
                 <a href="{{ url('admin/products/' . $product->id . '/edit') }}" class="btn btn-primary btn-xs"
                    title="Edit Product"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                 <a href="{{ url('/admin/products/' . $product->id . '/block') }}"

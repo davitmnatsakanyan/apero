@@ -35,6 +35,8 @@
     <script>
       var BASE_URL = '{{ url('/') }}';
     </script>
+
+    @yield ('css')
   </head>
 
   <body>
@@ -58,6 +60,8 @@
     {!! Html::script('assets/js/ie10-viewport-bug-workaround.js') !!}
 
     {!! Html::script('js/bootstrap.min.js') !!}
+
+    @yield ('js')
   </body>
 </html>
 
