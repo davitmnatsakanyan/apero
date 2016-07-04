@@ -9,7 +9,7 @@
 
             {!! Form::model($product, [
                 'method' => 'PATCH',
-                'url' => ['/admin/products', $product->id],
+                'url' => ['/adminr/products', $product->id],
                 'class' => 'form-horizontal',
                 'files' => true,
             ]) !!}

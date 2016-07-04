@@ -12,4 +12,6 @@ class KitchenMenu extends Model
         'kitchen_id',
         'menu_id',
     ];
+    
+    
 }

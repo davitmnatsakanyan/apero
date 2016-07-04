@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
-                    <a class="btn btn-primary" href="{{url('caterer/product/single/delete' , $product['id'])}}">Delete</a>
+                    <a class="btn btn-primary" href="{{url('caterer/product/single/delete' , $product->id)}}">Delete</a>
             </div>
         </div>
     </div>

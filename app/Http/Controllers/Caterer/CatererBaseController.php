@@ -13,9 +13,7 @@ class CatererBaseController extends Controller
     public function __construct() 
     {
         $this->caterer = Auth::guard('caterer');
-
-
-       View::share('caterer', $this->caterer->user());
+        View::share('caterer', $this->caterer->user());
     }
 }
 

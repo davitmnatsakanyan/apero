@@ -17,7 +17,8 @@ class AccountController extends CatererBaseController
 
     public function getIndex()
     {
-        return response()->json($this->caterer->user());
+      //  return response()->json($this->caterer->user());
+        return view('caterer/layout/index');
     }
     
    

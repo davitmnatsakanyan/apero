@@ -150,6 +150,7 @@ Route::group([
             'prefix' => 'single'
         ], function () {
             Route::get('/', 'SingleProductController@getIndex');
+            Route::get('getMenus/{id}', 'SingleProductController@getMenus');
 
             Route::get('add', 'SingleProductController@getAdd');
             Route::post('add', 'SingleProductController@postAdd');
