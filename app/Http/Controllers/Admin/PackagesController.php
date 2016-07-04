@@ -121,14 +121,33 @@ class PackagesController extends AdminBaseController
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'caterer_id' => 'required', 'deleted_at' => 'required',]);
+        $this->validate($request, ['name' => 'required',  'price' => 'required|integer', 'product_count.*' => 'required|integer']);
 
-        $package = Package::findOrFail($id);
-        $package->update($request->all());
+        $package['name'] = $request->name;
+        $package['price'] = $request->price;
 
-        Session::flash('flash_message', 'Package updated!');
 
-        return redirect('admin/packages');
+        $image = $request->file('avatar');
+
+        if(!is_null($image)) {
+            $extension = $image->getClientOriginalExtension();
+            $package['avatar'] = time() . "." . $extension;
+            $this->uploadFile($image, $package['avatar']);
+        }
+        if (Package::where('id', $id)->update($package)) {
+
+            foreach ($request->product as $product_id) {
+                $product_count = 'product_count_' . $product_id;
+                $data['package_id'] = $id;
+                $data['product_id'] = $product_id;
+                $data['product_count'] = $request->$product_count;
+                PackageProduct::create($data);
+            }
+
+            return redirect()->back()->with('success', 'Package created sucessfully.');
+        }
+
+        return back()->withErrors('Sonmething went wrong.');
     }
 
     /**
@@ -201,5 +220,24 @@ class PackagesController extends AdminBaseController
         $destinationPath = 'images/packages/';
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
         return $avatar;
+    }
+
+    public  function editProductCount(Request $request){
+        $product = PackageProduct::where('package_id', $request->package)
+            ->where('product_id', $request->product)
+            ->update(['product_count' => $request->count]);
+        if($product) {
+            return response()->json(['success' => 1, 'product' => $request->product, 'count' => $request->count]);
+        }
+    }
+
+    public function deleteProduct($id, Request $request){
+       $delete =  PackageProduct::where('package_id', $request->package)
+            ->where('product_id', $id)
+            ->delete();
+
+        if($delete){
+            return response()->json(['success' => 1, 'product' => $id]);
+        }
     }
 }

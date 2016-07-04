@@ -100,6 +100,8 @@ Route::group([
 
 
     Route::get('packages/{id}/block', 'PackagesController@block');
+    Route::post('packages/editcount', 'PackagesController@editProductCount');
+    Route::delete('packages/product/{id}', 'PackagesController@deleteProduct');
     Route::get('packages/{id}/active', 'PackagesController@activate');
     Route::get('packages/blocked', 'PackagesController@blockedProducts');
     Route::get('packages/create/{id}', 'PackagesController@getProducts');

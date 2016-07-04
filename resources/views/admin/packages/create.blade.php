@@ -129,21 +129,37 @@
                 });
         });
 
+//        $( "#product " ).on( "select2:select", function(e) {
+////            console.log(e);
+//            var products = $(this).val();
+////            var product_name = $('').text();
+//            products = $( "#product " ).select2('data');
+//            if(products != "") {
+//                $('.ul_current' ).html('');
+//                $.each(products, function( index, value ) {
+//                    console.log(value );
+//                    $('.ul_current').append($('<li>' +
+//                            '<label >' + value.text + '</label>' +
+//                            '<input type="number" name="product_count.' + value.id + '">' +
+//                            '</li>'));
+//                });
+//            }
+//        });
+
+
         $( "#product " ).on( "select2:select", function(e) {
-//            console.log(e);
-            var products = $(this).val();
-//            var product_name = $('').text();
-            products = $( "#product " ).select2('data');
-            if(products != "") {
-                $('.ul_current' ).html('');
-                $.each(products, function( index, value ) {
-                    console.log(value );
-                    $('.ul_current').append($('<li>' +
-                            '<label >' + value.text + '</label>' +
-                            '<input type="number" name="product_count.' + value.id + '">' +
-                            '</li>'));
-                });
-            }
+            var product = e.params.data.id;
+            $('.ul_current').append($('<li>' +
+                '<label >' + e.params.data.text + '</label>' +
+                '<input type="number" name="product_count.' + e.params.data.id + '">' +
+                '</li>'));
         });
+
+        $( "#product " ).on( "select2:unselect", function(e) {
+            var product = e.params.data.id;
+            console.log($("input[name='product_count."+ product+"']").closest('li').html(''));
+        });
+
+
     </script>
 @endsection

@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -160,6 +161,14 @@ class AuthController extends Controller
         else{
             return response()->json(['success' => 0]);
         }
+    }
+
+    public function getIsEmailUnique(Request $request){
+       $count = User::where('email', $request->email)->get()->count();
+        if($count > 0)
+            return response()->json('false');
+        else
+            return response()->json('true');
     }
    
 }

@@ -10,7 +10,8 @@
             {!! Form::model($package, [
                 'method' => 'PATCH',
                 'url' => ['/admin/packages', $package->id],
-                'class' => 'form-horizontal'
+                'class' => 'form-horizontal',
+                'id' => 'main_form'
             ]) !!}
 
             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
@@ -36,7 +37,7 @@
             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : ''}}">
                 {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::file('avatar', ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
                     {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -44,7 +45,7 @@
             <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
                 {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('Price', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::text('price', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -65,6 +66,7 @@
 
             <ul class="ul_current" style = "list-style-type: none" >
             </ul>
+            {!! Form::close() !!}
 
             <div class="table-responsive">
                 <h2>Package Products</h2>
@@ -79,23 +81,20 @@
                     </thead>
                     <tbody>
                     @foreach($package->products as $product)
-                        <tr>
+                        <tr id="product_raw_{{ $product->id }}">
                             <td>{{ $product->id }}</td>
                             <td> <a href = " {{ url('admin/products' ,$product->id) }}">{{ $product->name }} </a> </td>
-                            <td> {{ $product->pivot->product_count}}</td>
+                            <td id="product_{{ $product->id }}"> {{ $product->pivot->product_count}}</td>
                             <td>
-                                {!! Form::open([
-                                    'method'=>'DELETE',
-                                    'url' => ['/admin/packages/' . $package->id . "/product/" . $product->id],
-                                    'style' => 'display:inline'
-                                ]) !!}
-                                {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Package" />', array(
-                                        'type' => 'submit',
-                                        'class' => 'btn btn-danger btn-xs',
-                                        'title' => 'Delete Package',
-                                        'onclick'=>'return confirm("Confirm delete?")'
-                                ))!!}
-                                {!! Form::close() !!}
+
+                                <form id="remove_product" method="POST" action="{{ url('admin/packages/product/'.$product->id) }}" style="display: inline">
+                                    {{  csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="package" value="{{ $package->id }}">
+                                    <button type="submit" class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-trash"></span></button>
+                                </form>
+
+                                <a class="btn btn-primary btn-xs edit_product_count" data-package_id="{{ $package->id }}" data-product_id="{{ $product->id }}" data-product_name="{{ $product->name }}" data-toggle="modal" data-product_count="{{ $product->pivot->product_count }}" href="#edit_product_count"><span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Edit Count" /></a>
                             </td>
                         </tr>
                     @endforeach
@@ -105,10 +104,10 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-3">
-                    {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::submit('Update', ['class' => 'btn btn-primary form-control', 'form'=> 'main_form']) !!}
                 </div>
             </div>
-            {!! Form::close() !!}
+
 
             @if ($errors->any())
                 <ul class="alert alert-danger">
@@ -119,6 +118,7 @@
             @endif
         </div>
     </div>
+    @include('admin.packages.modals.edit_product_count')
 @endsection
 
 
@@ -153,25 +153,80 @@
         });
 
 
-        $( "#product " ).on( "select2:select", function() {
-            var products = $(this).val();
-            products = $( "#product " ).select2('data');
-            if(products != "") {
-                $('.ul_current' ).html('');
-                $.each(products, function( index, value ) {
-                    console.log(value );
-                    $('.ul_current').append($('<li>' +
-                            '<label >' + value.text + '</label>' +
-                            '<input type="number" name="product_count.' + value.id + '">' +
-                            '</li>'));
-                });
-            }
+        $( "#product " ).on( "select2:select", function(e) {
+            var product = e.params.data.id;
+            $('.ul_current').append($('<li>' +
+                    '<label >' + e.params.data.text + '</label>' +
+                    '<input type="number" name="product_count.' + e.params.data.id + '">' +
+                    '</li>'));
+        });
 
+        $( "#product " ).on( "select2:unselect", function(e) {
+            var product = e.params.data.id;
+            console.log($("input[name='product_count."+ product+"']").closest('li').html(''));
+        });
+
+        $('.edit_product_count').on('click', function(){
+            var count = $(this).data('product_count');
+            var product_name = $(this).data('product_name');
+            var product_id = $(this).data('product_id');
+            var package_id = $(this).data('package_id');
+
+            $('input[name="count"]').val(count);
+            $('.product_name').html(product_name);
+            $('input[name="product"]').val(product_id);
+            $('input[name="package"]').val(package_id);
+        })
+
+        $("#form_count").submit(function(e) {
+            e.preventDefault();
+            var postData = $(this).serialize();
+            var formURL = $(this).attr("action");
+            $.ajax(
+                    {
+                        url: formURL,
+                        type: "POST",
+                        dataType: 'JSON',
+                        data: postData,
+                        success: function (data) {
+                            if(data.success == 1){
+                                $('#edit_product_count').modal('hide');
+                                $('#product_'+data.product).html(data.count);
+
+                            }
+                        },
+                        error: function(error){
+                            alert(error);
+                        }
+                    });
 
         });
 
-        $( "#product " ).on( "select2:unselect", function() {
-            alert('item unselected');
+        $("#remove_product").submit(function(e) {
+            e.preventDefault();
+            var postData = $(this).serialize();
+            var formURL = $(this).attr("action");
+            $.ajax(
+                    {
+                        url: formURL,
+                        type: "POST",
+                        dataType: 'JSON',
+                        data: postData,
+                        success: function (data) {
+                            if(data.success == 1){
+
+                                $('#product_raw_'+data.product).html('');
+
+                            }
+                        },
+                        error: function(error){
+                            alert(error);
+                        }
+                    });
+
         });
+
+
+
 </script>
 @endsection

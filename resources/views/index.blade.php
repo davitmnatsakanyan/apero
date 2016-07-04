@@ -30,6 +30,9 @@
     <link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+    <script>
+        var BASE_URL = '{{ url('/') }}';
+    </script>
     <!-- END THEME STYLES -->
 </head>
 <body>

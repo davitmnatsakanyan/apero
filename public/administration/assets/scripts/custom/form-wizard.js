@@ -53,7 +53,8 @@ var FormWizard = function () {
                     },
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        uniqueEmail : true
                     },
                     phone: {
                         required: true
@@ -91,7 +92,7 @@ var FormWizard = function () {
                     'payment[]': {
                         required: true,
                         minlength: 1
-                    }
+                    },
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes
