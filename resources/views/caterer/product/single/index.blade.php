@@ -7,7 +7,7 @@
         <div><h3><a href="{{url('caterer/product/single/add')}}">Add Single Product</a></h3></div>
         @foreach($kitchens as $kitchen)
             @if(count($kitchen->menus)>0)
-          <h2>{{ $kitchen->name }}</h2>
+          <h2><a href = "{{ url('caterer/product/kitchens#kitchen_' . $kitchen->id ) }}">{{ $kitchen->name }}</a></h2>
         @foreach($kitchen->menus as $key => $menu)
                 @if(count($menu->products)>0)
         <h3>{{ $menu->name }}</h3>
