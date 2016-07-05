@@ -29,7 +29,7 @@
                             height: 120px;
                             background-position: center center;
                             background-size: cover;
-                            background-image: url( {{url('images/packages/' . $package->avatar)}} );
+                            background-image: url( '{{ url('images/packages/' . $package->avatar)}}' );
                             -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                             <td id="product_{{ $product->id }}"> {{ $product->pivot->product_count}}</td>
                             <td>
 
-                                <form id="remove_product" method="POST" action="{{ url('admin/packages/product/'.$product->id) }}" style="display: inline">
+                                <form class="remove_product" method="POST" action="{{ url('admin/packages/product/'.$product->id) }}" style="display: inline">
                                     {{  csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="package" value="{{ $package->id }}">
@@ -202,7 +202,7 @@
 
         });
 
-        $("#remove_product").submit(function(e) {
+        $(".remove_product").submit(function(e) {
             e.preventDefault();
             var postData = $(this).serialize();
             var formURL = $(this).attr("action");

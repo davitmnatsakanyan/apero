@@ -136,15 +136,17 @@ class PackagesController extends AdminBaseController
         }
         if (Package::where('id', $id)->update($package)) {
 
-            foreach ($request->product as $product_id) {
-                $product_count = 'product_count_' . $product_id;
-                $data['package_id'] = $id;
-                $data['product_id'] = $product_id;
-                $data['product_count'] = $request->$product_count;
-                PackageProduct::create($data);
+            if(!is_null($request->product)) {
+                foreach ($request->product as $product_id) {
+                    $product_count = 'product_count_' . $product_id;
+                    $data['package_id'] = $id;
+                    $data['product_id'] = $product_id;
+                    $data['product_count'] = $request->$product_count;
+                    PackageProduct::create($data);
+                }
             }
 
-            return redirect()->back()->with('success', 'Package created sucessfully.');
+            return redirect()->back()->with('success', 'Package updated sucessfully.');
         }
 
         return back()->withErrors('Sonmething went wrong.');

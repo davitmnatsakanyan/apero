@@ -44,7 +44,7 @@
     @include ('caterer/layout/header')
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" style="margin-top: 30px">
         @yield ('content')
       </div>
     </div>

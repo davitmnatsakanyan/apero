@@ -2,7 +2,7 @@
 @section ('content')
     <div style="margin-top: 70px;margin-left:50px; width: 800px">
         <h1>Packages</h1>
-        <h3><a href = "{{ url('caterer/product/package/add') }}">Add Package</a></h3>
+        <h3><a href = "{{ url('caterer/product/package/create') }}">Add Package</a></h3>
         @foreach($packages as  $package)
             <h3>{{ $package['name'] }}</h3>
             <table class="table table-striped table-bordered">
