@@ -18,8 +18,9 @@
                           <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                          <li><a href="{{ url('caterer/product/single')}}">Single Product</a></li>
-                          <li><a href="{{ url('caterer/product/package')}}">Package</a></li>
+                          <li><a href="{{ url('caterer/product/single')}}">My Single Product</a></li>
+                          <li><a href="{{ url('caterer/product/package')}}">My Packages</a></li>
+                          <li><a href="{{ url('caterer/product/kitchens')}}">My kitchens</a></li>
                       </ul>
                   </div>
               </li>

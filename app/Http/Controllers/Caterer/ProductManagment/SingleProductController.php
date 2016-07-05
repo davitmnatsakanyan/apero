@@ -18,8 +18,8 @@ class SingleProductController extends CatererBaseController
 
     public function getIndex(ProductService $productService, CategoryService $categotyService )
     {
-
-          $kitchens = Kitchen::with(['menus' => function ($menu){
+        
+         $kitchens = Kitchen::with(['menus' => function ($menu){
             $menu->with(['products' => function($product)
             {
                 $product->where('caterer_id',$this->caterer->id());

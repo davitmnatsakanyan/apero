@@ -176,6 +176,14 @@ Route::group([
         Route::resource('/', 'PackageController');
 
         });
+        
+        Route::group([
+            'prefix' => 'kitchens'
+        ],function(){
+            Route::get('/' ,'KitchensController@getIndex');
+            Route::post('add' ,'KitchensController@getAdd');
+            Route::delete('delete/{id}' ,'KitchensController@getDelete');
+        });
     });
 
 });
