@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
+use App\Models\Caterer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,7 @@ class AuthController extends Controller
     */
    public function postRegister(Request $request)
    {
+
        if($request->role == 'user'){
            $this->validate($request, [
                'address'            => 'required|max:250',
@@ -87,32 +89,7 @@ class AuthController extends Controller
                'mobile'             => 'required'
            ]);
        }
-//       elseif($request->role == 'caterer'){
-//           $this->validate($request, [
-//               'company'            => 'required|max:250',
-//               'address'            => 'required|max:250',
-//               'pobox'              => 'required|max:100',
-//               'zip'                => 'required|max:4',
-//               'city'               => 'required|max:250',
-//               'country'            => 'required|max:250',
-//               'email'              => 'required|email|max:100',
-//               'phone'              => 'required|max:50',
-//               'password'           => 'required|confirmed',
-//               'rpassword' => 'required',
-//                'fax'               => 'required',
-//                'description'       => 'required',
-//                'person_title'      => 'required',
-//                'person_prename'    => 'required',
-//                'person_name'       => 'required',
-//                'person_mobile'     => 'required',
-//                'person_phone'      => 'required',
-//                'person_email'      => 'required',
-//                'kitchen'           => 'required',
-//                'delivery_area'     => 'required',
-//                'product_origin'    => 'required'
-//           ]);
-//
-//       }
+
         $role = strtolower($request->role);
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
@@ -164,7 +141,7 @@ class AuthController extends Controller
     }
 
     public function getIsEmailUnique(Request $request){
-       $count = User::where('email', $request->email)->get()->count();
+       $count = Caterer::where('email', $request->email)->get()->count();
         if($count > 0)
             return response()->json('false');
         else

@@ -227,5 +227,6 @@ Route::get('caterer', function () {
 Route::get('bestellen', function () {
     return view('bestellen/index');
 });
+Route::get('search/caterers', 'SearchController@getCaterers');
 
 

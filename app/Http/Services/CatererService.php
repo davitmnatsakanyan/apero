@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Services;
+use App\ContactPerson;
 use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\CatererKitchen;
@@ -31,14 +32,22 @@ class CatererService
             'city'      => $data['city'],
             'country'   => $data['country'],
             'email'     => $data['email'],
-            'password' => $data['password'],
-            'phone' => $data['phone'],
-            'fax' => $data['fax'],
+            'password'  => $data['password'],
+            'phone'     => $data['phone'],
+            'fax'       => $data['fax'],
             'description' => $data['description'],
-//            'kitchen_id' => json_encode($data['kitchen']),
-//            'zipcode_id' => json_encode($data['delivery_area']),
             'products_origin' => $data['product_origin'],
             'created_ip' => $data['created_ip']
+        ]);
+
+        $contact_person = ContactPerson::create([
+            'caterer_id' => $caterer->id,
+            'title' => $data['person_title'],
+            'prename' => $data['person_prename'],
+            'name' => $data['person_name'],
+            'mobile' => $data['person_mobile'],
+            'phone' => $data['person_phone'],
+            'email' => $data['person_email']
         ]);
 
         foreach($data['kitchen'] as $kitchen) {

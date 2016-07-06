@@ -57,14 +57,17 @@
     <script src="/js/controllers/NavigationController.js"></script>
     <script src="/js/controllers/AuthController.js"></script>
     <script src="/js/controllers/HomeController.js"></script>
-    <script src="/js/controllers/HilfeController.js"></script>
+    <script src="/js/controllers/SearchController.js"></script>
     <script src="/js/controllers/CatererController.js"></script>
     <script src="/js/controllers/BestellenController.js"></script>
 
 
     <script src="/js/directives/inputText.js"></script>
 
+    <script src="/js/filters/homeFilter.js"></script>
+
     <script src="/js/models/CatererModel.js"></script>
+    <script src="/js/models/SearchModel.js"></script>
 @yield('scrips')
 </body>
 </html>

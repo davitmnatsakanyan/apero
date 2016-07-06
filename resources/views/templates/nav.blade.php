@@ -20,7 +20,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-href="/#/">Apero bestellen</a></li>
-                    <li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/hillfe">Hilfe</a></li>
+                    {{--<li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/">Hilfe</a></li>--}}
+                    <li><a ng-href="/#/">Hilfe</a></li>
+
 
                     <li ng-if="is_logedin == 1"><a ng-href="/#/" ng-click="logout()">Logout</a></li>
 

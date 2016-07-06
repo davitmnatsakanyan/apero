@@ -13,16 +13,14 @@
 							<form action="" class="clearfix">
 
 								<h2>Kuche</h2>
+								<span ng-repeat="kitchen in kitchens">
+									<label class="checkbox-inline kitchen">
+										<input type="checkbox" ng-click="includeKitchen(kitchen.name)"><% kitchen.name %>
+									</label>
+								</span>
 
-								<label class="checkbox-inline"><input type="checkbox" value="">Japanische</label>
 
-								<label class="checkbox-inline"><input type="checkbox" value="">Spanisch</label>
-
-								<label class="checkbox-inline"><input type="checkbox" value="">Italienisch</label>
-
-								<label class="checkbox-inline"><input type="checkbox" value="">Schweizersch</label>
-
-								<h3>Kuche</h3>
+								<h3>Anlassgrosse</h3>
 								<div class="" data-toggle="buttons-checkbox">
 									<button class="btn" type="submit">
 										<i class="fa fa-user-times" aria-hidden="true"></i>1-5
@@ -51,16 +49,17 @@
 
 						<h1>Apero - Anbieter in 9000 St. Gallin</h1>
 
-						<div class="col-md-12 anbieter-item" ng-repeat="data in [1, 2, 3]">
+						<div  class="col-md-12 anbieter-item" ng-repeat="caterer in caterers | filter:kitchenFilter ">
 							<div class="col-md-6">
 								<div class="anbieter-img">
-									<img src="../images/layer2.png" alt="">
+									<img ng-if="caterer.avatar != '' " ng-src="../images/<% caterer.avatar %>" alt="">
+									<img ng-if="caterer.avatar == '' " ng-src="../images/no_caterer.png" alt="">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="anbieter-adres">
 									<div class="anbiter-name">
-										Spitzen - Apero Caterer
+										<% caterer.company %> - Apero Caterer
 									</div>
 									<div class="anbiter-place">
 										Bahnhofstrasse 18, 9000 St. Gallen

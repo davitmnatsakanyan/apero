@@ -29,9 +29,9 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/home.blade.php',
             controller: 'HomeController'
         })
-        .when('/hillfe', {
-            templateUrl: 'templates/hillfe.blade.php',
-            controller: 'HilfeController'
+        .when('/caterers', {
+            templateUrl: 'templates/caterers.blade.php',
+            controller: 'SearchController'
         })
         .when('/caterer', {
             templateUrl: 'templates/caterer.blade.php',

@@ -550,8 +550,8 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-4">
-                                                        <select name="kitchen[]" class="kitchen js-states form-control" ng-model="data.kitchen"  multiple="multiple"  >
-                                                            <option value="<% item.id %>" ng-repeat="item in categories" ng-selected="item.selected" ><% item.name %></option>
+                                                        <select name="kitchen[]" class="kitchen js-states form-control" ng-model="data.kitchen"
+                                                                ng-options="item as item.name for item in categories"  multiple="multiple"  >
                                                         </select>
 														<span class="help-block">
 
@@ -565,8 +565,9 @@
 													</span>
                                                     </label>
                                                     <div class="col-md-4">
-                                                        <select name="delivery_area[]" class="delivery_area js-states form-control" ng-model="data.delivery_area"  multiple="multiple" >
-                                                            <option ng-repeat="item in zip_codes" ng-selected="item.selected"  value="<% item.id %>"><% item.text %></option>
+                                                        <select name="delivery_area[]" class="delivery_area js-states form-control" ng-model="data.delivery_area"
+                                                                ng-options="item as item.text for item in zip_codes" multiple="multiple" >
+                                                            {{--<option ng-repeat="item in zip_codes" ng-selected="item.selected"  value="<% item.id %>"><% item.text %></option>--}}
                                                         </select>
 														<span class="help-block">
 
@@ -603,8 +604,8 @@
                                                     <p>Phone : <%  data.phone %></p>
                                                     <p>Fax : <%  data.fax %></p>
                                                     <p>Desctiption : <%  data.description %></p>
-                                                    <p>Food category : <%  data.kitchen %></p>
-                                                    <p>Delivery area : <%  data.delivery_area %></p>
+                                                    <p>Food category : <span ng-repeat="item in data.kitchen"><% item.name %>, </span></p>
+                                                    <p>Delivery area : <span ng-repeat="item in data.delivery_area"><% item.text %>, </span></p></p>
                                                     <p>Products origin : <%  data.product_origin %></p>
                                                 </div>
                                                 <div class="col-md-6">
