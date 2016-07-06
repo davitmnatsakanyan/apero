@@ -46,7 +46,6 @@ class MenusController extends AdminBaseController
      */
     public function store(Request $request)
     {
-       // return $request->kitchen;
         $this->validate($request, ['name' => 'required','kitchen'=> 'required']);
         $menu = $request->except('kitchen');
         $menu['kitchen'] = $request->kitchen;

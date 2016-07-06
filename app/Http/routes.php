@@ -1,6 +1,6 @@
 <?php
-Route::get('aaa',function(){
-  dd(bcrypt('caterer'));
+Route::get('aaa', function () {
+    dd(bcrypt('caterer'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -167,22 +167,20 @@ Route::group([
         Route::group([
             'prefix' => 'package',
         ], function () {
-        //            Route::get('/', 'PackageController@getIndex');
-        //
-        //            Route::get('add', 'PackageController@getAdd');
-        //            Route::post('add', 'PackageController@postAdd');
-        //
-        //            Route::get('products/{category_id}', 'PackageController@getProducts');
-        Route::resource('/', 'PackageController');
+
+            Route::post('editcount', 'PackageController@editProductCount');
+            Route::delete('product/{id}', 'PackagesController@deleteProduct');
+            Route::get('{id}/edit' , 'PackageController@edit');
+            Route::resource('/', 'PackageController');
 
         });
-        
+
         Route::group([
             'prefix' => 'kitchens'
-        ],function(){
-            Route::get('/' ,'KitchensController@getIndex');
-            Route::post('add' ,'KitchensController@getAdd');
-            Route::delete('delete/{id}' ,'KitchensController@getDelete');
+        ], function () {
+            Route::get('/', 'KitchensController@getIndex');
+            Route::post('add', 'KitchensController@getAdd');
+            Route::delete('delete/{id}', 'KitchensController@getDelete');
         });
     });
 

@@ -67,9 +67,19 @@
 <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
     {!! Form::label('price', 'Price (EUR)', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::number('price', null, ['class' => 'form-control']) !!}
         {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
     </div>
+</div>
+
+<div class="form-group">
+    {!! Form::label('subproduct', 'Costumize', ['class' => 'col-sm-3 control-label']) !!}
+    <button type="button" class="btn btn-success btn-xs">
+     <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "costumize_button"/>
+    </button>
+    <ul class="col-sm-6" id = "ul_costumize" style="list-style-type: none">
+
+    </ul>
 </div>
 
 <div class="form-group">
@@ -77,6 +87,7 @@
         {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
     </div>
 </div>
+
 {!! Form::close() !!}
 
 

@@ -32,6 +32,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                        <li><a href="{{ url('caterer/settings/update')}}">Update Data</a></li>
+                        <li><a href="{{ url('caterer/settings/delivery-area')}}">Delivey Area</a></li>
                        <li><a href="{{ url('caterer/settings/change-password')}}">Change Password</a></li>
                        <li><a href="#">Delete</a></li>
                        <li role="separator" class="divider"></li>

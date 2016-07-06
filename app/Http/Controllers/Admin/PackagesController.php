@@ -132,10 +132,9 @@ class PackagesController extends AdminBaseController
         if(!is_null($image)) {
             $extension = $image->getClientOriginalExtension();
             $package['avatar'] = time() . "." . $extension;
-            $this->uploadFile($image, $package['avatar']);
+           // $this->uploadFile($image, $package->avatar);
         }
         if (Package::where('id', $id)->update($package)) {
-
             if(!is_null($request->product)) {
                 foreach ($request->product as $product_id) {
                     $product_count = 'product_count_' . $product_id;
@@ -163,6 +162,7 @@ class PackagesController extends AdminBaseController
     {
         $package = Package::withTrashed()->where('id', $id)->get();
         $avatar = $package[0]->avatar;
+        if(file_exists('images/packages/' . $avatar))
         unlink('images/packages/' . $avatar);
         Package::withTrashed()->where('id', $id)->forceDelete();
 

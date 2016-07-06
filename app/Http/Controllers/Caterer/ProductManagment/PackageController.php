@@ -55,6 +55,69 @@ class PackageController extends CatererBaseController{
         }
     }
 
+
+    public function edit($id)
+    {
+        $package = Package::with('products')->findOrFail($id);
+        $products = Product::all();
+        foreach ($products  as $product) {
+            $flag = false;
+            foreach ($package->products as $package_product)
+                if ($product->id == $package_product->id) {
+                    $product['belong'] = true;
+                    $flag = true;
+                }
+
+            if(!$flag)
+                $product['belong'] = false;
+        }
+
+
+        return view('caterer.product.package.edit', compact('package','products'));
+    }
+
+
+    public function update($id, Request $request)
+    {
+        dd('mta');
+        if($this->hasAccess($id)) {
+            $this->validate($request, [
+                'name' => 'required',
+                'price' => 'required|integer',
+                'product_count.*' => 'required|integer']);
+
+            $package['name'] = $request->name;
+            $package['price'] = $request->price;
+
+
+            $image = $request->file('avatar');
+
+            if (!is_null($image)) {
+                $extension = $image->getClientOriginalExtension();
+                $package['avatar'] = time() . "." . $extension;
+                $this->uploadFile($image, $package['avatar']);
+            }
+            if ( Package::where('id', $id)->update($package)) {
+                if (!is_null($request->product)) {
+                    foreach ($request->product as $product_id) {
+                        $product_count = 'product_count_' . $product_id;
+                        $data['package_id'] = $id;
+                        $data['product_id'] = $product_id;
+                        $data['product_count'] = $request->$product_count;
+                        PackageProduct::create($data);
+                    }
+                }
+
+                return redirect()->back()->with('success', 'Package updated sucessfully.');
+            }
+
+            return back()->withErrors('Sonmething went wrong.');
+        }
+
+        return back();
+    }
+
+
     public function uploadFile($image, $avatar, $old_image = null)
     {
         if (!is_null($old_image)) {
@@ -68,14 +131,16 @@ class PackageController extends CatererBaseController{
     }
 
 
-    public function getDelete(ProductService $service,$id){
-        if($this->hasAccess($service,$id)->caterer_id) {
-            if ($service->deleteById($id))
-                return redirect('caterer/product/single')->with('success', 'Product successfully Deleted.');
-            else
-                return redirect()
-                    ->back()
-                    ->withErrors('Something went wrong.');
+    public function destroy($id){
+        if($this->hasAccess($id)) {
+            $package = Package::withTrashed()->where('id', $id)->get();
+            $avatar = $package[0]->avatar;
+            if(file_exists('images/packages/' . $avatar))
+                unlink('images/packages/' . $avatar);
+            if(Package::withTrashed()->where('id', $id)->forceDelete())
+                return redirect('caterer/product/package')->with('sucess' , 'Package sucessfully deleted.');
+             return back()->withErrors('Something went wrong');
+
         }
         else{
             return redirect()->back()->withErrors('You have no access.');
@@ -84,10 +149,30 @@ class PackageController extends CatererBaseController{
     }
 
 
+    public  function editProductCount(Request $request){
+        $product = PackageProduct::where('package_id', $request->package)
+            ->where('product_id', $request->product)
+            ->update(['product_count' => $request->count]);
+        if($product) {
+            return response()->json(['success' => 1, 'product' => $request->product, 'count' => $request->count]);
+        }
+    }
 
-    public function hasAccess(ProductService $service,$id){
-        return $this->caterer->id() == $service
-            ->getById($id);
+    public function deleteProduct($id, Request $request){
+        dd(11);
+        $delete =  PackageProduct::where('package_id', $request->package)
+            ->where('product_id', $id)
+            ->delete();
+
+        if($delete){
+            return response()->json(['success' => 1, 'product' => $id]);
+        }
+    }
+
+
+
+    public function hasAccess($id){
+        return $this->caterer->id() == Package::findOrFail($id)->caterer_id;
     }
     
     public  function getProducts($category_id){

@@ -11,7 +11,8 @@
                 'method' => 'PATCH',
                 'url' => ['/admin/packages', $package->id],
                 'class' => 'form-horizontal',
-                'id' => 'main_form'
+                'id' => 'main_form',
+                'files' =>true,
             ]) !!}
 
             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">

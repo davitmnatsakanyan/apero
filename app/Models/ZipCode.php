@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ZipCode extends Model
 {
-    //
+
+    protected $fillable = ['ZIP' , 'city'];
+
+ 
 }

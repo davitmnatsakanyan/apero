@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Services;
-use App\ContactPerson;
+use App\Models\ContactPerson;
 use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\CatererKitchen;

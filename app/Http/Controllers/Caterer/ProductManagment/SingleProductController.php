@@ -9,54 +9,53 @@ use App\Models\Menu;
 use App\Models\Kitchen;
 use App\Models\Caterer;
 use App\Models\Product;
-use Auth, View, Validator,Image;
-
+use App\Models\Subproduct;
+use Auth, View, Validator, Image;
 
 
 class SingleProductController extends CatererBaseController
 {
 
-    public function getIndex(ProductService $productService, CategoryService $categotyService )
+    public function getIndex(ProductService $productService, CategoryService $categotyService)
     {
-        
-         $kitchens = Kitchen::with(['menus' => function ($menu){
-            $menu->with(['products' => function($product)
-            {
-                $product->where('caterer_id',$this->caterer->id());
+
+        $kitchens = Kitchen::with(['menus' => function ($menu) {
+            $menu->with(['products' => function ($product) {
+                $product->where('caterer_id', $this->caterer->id());
             }]);
-        }])->get()->filter(function($kitchen){
-             $flag =false;
-             if( count($kitchen->menus)>0)
-                 foreach($kitchen->menus as $menu)
-                      if(count($menu->products)>0)
-                          $flag =true;
+        }])->get()->filter(function ($kitchen) {
+            $flag = false;
+            if (count($kitchen->menus) > 0)
+                foreach ($kitchen->menus as $menu)
+                    if (count($menu->products) > 0)
+                        $flag = true;
 
-             return $flag;
-         });
+            return $flag;
+        });
 
-        return view('caterer/product/single/index',compact('kitchens'));
+        return view('caterer/product/single/index', compact('kitchens'));
     }
 
 
-    public function getAdd(CategoryService $categoryService){
+    public function getAdd(CategoryService $categoryService)
+    {
 
         $kitchens = Caterer::with('kitchens')->find($this->caterer->id())->kitchens;
-        return view('caterer/product/single/add',compact('kitchens'));
+        return view('caterer/product/single/add', compact('kitchens'));
     }
-    
+
     public function getMenus($id)
     {
-      //  dd(request()->id);
-      $menus = Menu::with(['kitchens' => function($kitchen){
-                $kitchen->where('kitchens.id',request()->id);
-        }])->get()->filter(function($item){
-           return count($item->kitchens) > 0;
-       })->all();
+        $menus = Menu::with(['kitchens' => function ($kitchen) {
+            $kitchen->where('kitchens.id', request()->id);
+        }])->get()->filter(function ($item) {
+            return count($item->kitchens) > 0;
+        })->all();
 
 
         $data = [];
         $i = 0;
-        foreach($menus as $menu) {
+        foreach ($menus as $menu) {
             $data[$i]['id'] = $menu->id;
             $data[$i++]['text'] = $menu->name;
         }
@@ -64,9 +63,20 @@ class SingleProductController extends CatererBaseController
         return $data;
     }
 
-    public function postAdd(){
-        $this->validate(request(), ['name' => 'required', 'avatar' => 'required|image', 'ingredinets' => 'required', 'price' => 'required|integer', 'menu' => 'required']);
-        $product = request()->except( 'menu');
+    public function postAdd()
+    {
+
+        $this->validate(request(), [
+            'name' => 'required',
+            'avatar' => 'required|image',
+            'ingredinets' => 'required',
+            'price' => 'required_without_all:costumize|integer',
+            'costumize.*.name' => 'required_without:price',
+            'costumize.*.price' => 'required_without:price|integer',
+            'menu' => 'required'
+        ]);
+
+        $product = request()->except('menu');
         $product ['caterer_id'] = $this->caterer->id();
         $product ['menu_id'] = request()->menu;
 
@@ -74,86 +84,92 @@ class SingleProductController extends CatererBaseController
         $extension = $image->getClientOriginalExtension();
         $product['avatar'] = time() . "." . $extension;
 
-        if (Product::create($product)) {
+        if ($product = Product::create($product)) {
             $this->uploadFile($image, $product['avatar']);
+            if (!is_null(request()->costumize))
+                foreach (request()->costumize as $costumize)
+                    Subproduct::create([
+                        'product_id' => $product->id,
+                        'price' => $costumize['price'],
+                        'name' => $costumize['name'],
+                    ]);
             return redirect('caterer/product/single')->with('success', 'Product successfully added.');
         } else {
             return back()->withErrors('Something went wrong.');
         }
     }
-    
-    public function getView(ProductService $service,$id){
-        if($this->hasAccess($service,$id)) {
-            $product = Product::findOrFail($id);
+
+    public function getView(ProductService $service, $id)
+    {
+        if ($this->hasAccess($service, $id)) {
+            $product = Product::with('subproducts')->findOrFail($id);
             $product['menu'] = Menu::findOrFail($product->menu_id)->name;
             return view('caterer/product/single/view', compact('product'));
-        }
-
-        else{
+        } else {
             return redirect()->back()->withErrors('You have no access.');
         }
     }
 
 
-
-    public function getEdit(ProductService $service,$id){
-        if($this->hasAccess($service,$id)) {
-            $product = Product::findOrFail($id);
-            return view('caterer/product/single/edit',compact('product'));
-        }
-
-        else{
+    public function getEdit(ProductService $service, $id)
+    {
+        if ($this->hasAccess($service, $id)) {
+            $product = Product::with('subproducts')->findOrFail($id);
+            return view('caterer/product/single/edit', compact('product'));
+        } else {
             return redirect()->back()->withErrors('You have no access.');
         }
     }
-    
-    public function postEdit(ProductService $service,$id){
-        if($this->hasAccess($service,$id)) {
+
+    public function postEdit(ProductService $service, $id)
+    {
+        if ($this->hasAccess($service, $id)) {
             $this->validate(request(), ['name' => 'required', 'ingredinets' => 'required', 'price' => 'required|integer']);
             $data = request()->except('avatar');
             $old_image = NULL;
-            if(request()->avatar != NULL)
-            {
+            if (request()->avatar != NULL) {
                 $image = request()->file('avatar');
                 $extension = $image->getClientOriginalExtension();
                 $data['avatar'] = time() . "." . $extension;
                 $product = Product::findOrFail($id);
                 $old_image = $product['avatar'];
-            }
-
-            else {
+            } else {
                 $product = Product::findOrFail($id);
             }
 
             if ($product->update($data)) {
-                $this->uploadFile($image, $product['avatar'],$old_image);
+                $this->uploadFile($image, $product['avatar'], $old_image);
                 return redirect('caterer/product/single/view/' . $id)->with('success', 'Product updated successfully.');
             } else {
                 return back()->withErrors('Something went wrong.');
             }
-        }
-        else{
+        } else {
             return redirect()->back()->withErrors('You have no access.');
         }
     }
-    
-    public function getDelete(ProductService $service,$id){
-        if($this->hasAccess($service,$id)) {
-            if ($service->deleteById($id))
+
+    public function getDelete(ProductService $service, $id)
+    {
+        if ($this->hasAccess($service, $id)) {
+            $product = Product::withTrashed()->where('id', $id)->get();
+            $avatar = $product[0]->avatar;
+            if (file_exists('images/products/' . $avatar))
+                unlink('images/products/' . $avatar);
+            if (Product::withTrashed()->where('id', $id)->forceDelete())
                 return redirect('caterer/product/single')->with('success', 'Product successfully Deleted.');
             else
                 return redirect()
                     ->back()
                     ->withErrors('Something went wrong.');
-        }
-        else{
+        } else {
             return redirect()->back()->withErrors('You have no access.');
         }
 
     }
 
 
-    public function hasAccess(ProductService $service,$id){
+    public function hasAccess(ProductService $service, $id)
+    {
         return $this->caterer->id() == $service
             ->getById($id)
             ->getOriginal()['caterer_id'];
@@ -163,7 +179,7 @@ class SingleProductController extends CatererBaseController
     {
         if (!is_null($old_image)) {
             $file = 'images/products/' . $old_image;
-            if(file_exists($file))
+            if (file_exists($file))
                 unlink($file);
         }
         $destinationPath = 'images/products/';

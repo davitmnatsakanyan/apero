@@ -64,4 +64,10 @@ class Caterer extends Authenticatable
     {
         return $this->belongsTo(Package::class);
     }
+    
+    
+    public function zips()
+    {
+       return  $this->belongsToMany(ZipCode::class);
+    }
 }

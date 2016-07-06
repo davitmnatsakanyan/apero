@@ -35,4 +35,10 @@ class Product extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+
+    public function subproducts()
+    {
+        return $this->hasMany(Subproduct::class);
+
+    }
 }
