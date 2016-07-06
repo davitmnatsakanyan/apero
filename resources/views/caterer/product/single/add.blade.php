@@ -9,6 +9,8 @@
 @section ('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script type="text/javascript">
+
+
         $('select').select2();
 
 
@@ -31,23 +33,38 @@
         });
 
 
-
-
-        $(function() {
-            $("#avatar").on("change", function()
-            {
+        $(function () {
+            $("#avatar").on("change", function () {
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
-                if (/^image/.test( files[0].type)){ // only image file
+                if (/^image/.test(files[0].type)) { // only image file
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[0]); // read the local file
 
-                    reader.onloadend = function(){ // set image data as background of div
-                        $("#imagePreview").css("background-image", "url("+this.result+")");
+                    reader.onloadend = function () { // set image data as background of div
+                        $("#imagePreview").css("background-image", "url(" + this.result + ")");
                     }
                 }
             });
+        });
+
+        var i=0;
+
+        $("#costumize_button ").on("click", function () {
+//            alert('costumize');
+            $('#ul_costumize').append($('<li>' +
+                    '<label>Name</label><input type="text" name="costumize['+i+']['+'name'+']" class = "form-control" >' +
+                    '<label>Price</label><input type="text" name="costumize[' + i++ +']['+'price'+']" class = "form-control" >' +
+                       '<a  class="btn btn-danger btn-xs unselect_button">' +
+                          '<span class="glyphicon glyphicon-minus" aria-hidden="true" />' +
+                       '</a>' +
+                    '</li>'));
+        });
+
+
+        $(document ).on( "click", ".unselect_button" , function() {
+          $(this).closest('li').html('');
         });
 
 

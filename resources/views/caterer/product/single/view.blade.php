@@ -6,10 +6,11 @@
             <a href="{{ url('caterer/product/single/edit/' . $product->id) }}" class="btn btn-primary btn-xs"
                title="Edit Product"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
             {!! Form::open([
-                'method'=>'DELETE',
+                'method'=>'get',
                 'url' => ['caterer/product/single/delete/' . $product->id],
                 'style' => 'display:inline'
             ]) !!}
+
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(
                     'type' => 'submit',
                     'class' => 'btn btn-danger btn-xs',
@@ -34,16 +35,34 @@
                     <th> Ingredinets</th>
                     <td> {{ $product->ingredinets }} </td>
                 </tr>
+                @if($product->price)
                 <tr>
                     <th> Price</th>
                     <td> {{ $product->price }} </td>
                 </tr>
+                @endif
                 <tr>
                     <th> Menu</th>
                     <td> <a href = "{{url('admin/menus' , $product->menu_id )}}">{{ $product->menu }} </a></td>
                 </tr>
                 </tbody>
             </table>
+
+            @if(count($product->subproducts)!=0)
+          <h3>Costum products</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <tbody>
+                @foreach($product->subproducts as $subproduct)
+                    <tr>
+                        <th>{{$subproduct->name}}</th>
+                        <td>{{$subproduct->price}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+                @endif
+
+
         </div>
     </div>
 @stop

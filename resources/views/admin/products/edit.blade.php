@@ -9,11 +9,11 @@
 
             {!! Form::model($product, [
                 'method' => 'PATCH',
-                'url' => ['/adminr/products', $product->id],
+                'url' => ['/admin/products', $product->id],
                 'class' => 'form-horizontal',
                 'files' => true,
             ]) !!}
-
+           <h3>Optional information</h3>
             <div class="form-group {{ $errors->has('caterer') ? 'has-error' : ''}}">
                 {!! Form::label('caterer', 'Caterer', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
@@ -68,6 +68,7 @@
                     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+
             <div class="form-group {{ $errors->has('ingredinets') ? 'has-error' : ''}}">
                 {!! Form::label('ingredinets', 'Ingredinets', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">

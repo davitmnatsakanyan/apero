@@ -96,8 +96,12 @@ class KitchensController extends CatererBaseController
         foreach($kitchens as $kitchen)
             if($kitchen->id == $id)
                 foreach($kitchen->menus as $menu)
-                    foreach($menu->products as $product)
-                        Product::where('id',$product->id)->forceDelete();
+                    foreach($menu->products as $product) {
+                        if(file_exists('images/products/' . $product->avatar))
+                        unlink('images/products/' . $product->avatar);
+                        Product::where('id', $product->id)->forceDelete();
+                        
+                    }
 
 
         if(CatererKitchen::where(['caterer_id' => $this->caterer->id(),'kitchen_id' => $id])->delete())

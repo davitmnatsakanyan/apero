@@ -26,8 +26,19 @@
 
            <div>
                <h4>Actions</h4>
-               <a href = " {{ url('caterer/product/package/edit',$package['id']) }}">Edit </a>|
-               <a href = " {{ url('caterer/product/package/delete',$package['id']) }}">Delete </a>
+               <a href = "{{ url('caterer/product/package/' . $package['id'] . '/edit') }}">Edit </a>|
+               {!! Form::open([
+                                    'method'=>'DELETE',
+                                    'url' => ['caterer/product/package', $package['id']],
+                                    'style' => 'display:inline'
+                                ]) !!}
+               {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Package" />', array(
+                       'type' => 'submit',
+                       'class' => 'btn btn-danger btn-xs',
+                       'title' => 'Delete Package',
+                       'onclick'=>'return confirm("Confirm delete?")'
+               ))!!}
+               {!! Form::close() !!}
            </div>
         @endforeach
     </div>
