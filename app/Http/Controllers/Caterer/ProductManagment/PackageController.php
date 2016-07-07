@@ -79,7 +79,6 @@ class PackageController extends CatererBaseController{
 
     public function update($id, Request $request)
     {
-        dd('mta');
         if($this->hasAccess($id)) {
             $this->validate($request, [
                 'name' => 'required',
@@ -95,7 +94,8 @@ class PackageController extends CatererBaseController{
             if (!is_null($image)) {
                 $extension = $image->getClientOriginalExtension();
                 $package['avatar'] = time() . "." . $extension;
-                $this->uploadFile($image, $package['avatar']);
+                $old_image = Package::findOrFail($id)->avatar;
+                $this->uploadFile($image, $package['avatar'],$old_image);
             }
             if ( Package::where('id', $id)->update($package)) {
                 if (!is_null($request->product)) {

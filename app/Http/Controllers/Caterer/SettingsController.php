@@ -5,6 +5,7 @@ use App\Http\Controllers\Caterer\CatererBaseController;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Services\CatererService;
 use App\Models\Caterer;
+use App\Models\CatererDeliveryArea;
 use App\Models\ContactPerson;
 use App\Models\DeliveryArea;
 use App\Models\ZipCode;
@@ -83,8 +84,16 @@ class SettingsController extends CatererBaseController
     public function getDeliveryArea()
     {
 
-        $delivery_area = Caterer::with('zips')->findOrFail($this->caterer->id());
-        return $delivery_area;
+        $delivery_areas = Caterer::with('deliveryAreas')->find($this->caterer->id())->deliveryAreas;
+        $zip_codes = ZipCode::with('caterers')->get();
+        $zip_codes=  $zip_codes->filter(function($zip_code,$key){
+            foreach($zip_code->caterers as $caterer)
+                if($caterer->id ==$this->caterer->id() )
+                    return false;
+            return true;
+        });
+
+        return view('caterer/settings/deliveryArea',compact('delivery_areas','zip_codes'));
     }
     
     
@@ -114,6 +123,23 @@ class SettingsController extends CatererBaseController
         return redirect()->back()->withErrors($val);
         
         
+    }
+
+    public function postAdd()
+    {
+        $this->validate(request(),['zip_codes' => 'required']);
+
+        foreach(request()->zip_codes as $zip_code)
+            CatererDeliveryArea::create(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $zip_code]);
+
+        return back()->with('success' , 'Zip code added successfully');
+    }
+
+    public function getRemove($id)
+    {
+        if(CatererDeliveryArea::where(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $id])->delete())
+            return back()->with('success','Delivery area successfully deleted.');
+        return back()->withErrors('Something went wrong.');
     }
 
 

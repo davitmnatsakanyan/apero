@@ -168,6 +168,7 @@ Route::group([
             'prefix' => 'package',
         ], function () {
 
+            Route::post('edit/{id}','PackageController@update');
             Route::post('editcount', 'PackageController@editProductCount');
             Route::delete('product/{id}', 'PackagesController@deleteProduct');
             Route::get('{id}/edit' , 'PackageController@edit');
