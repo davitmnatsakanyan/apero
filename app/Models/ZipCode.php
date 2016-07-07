@@ -12,5 +12,5 @@ class ZipCode extends Model
     public function caterers(){
         return $this->belongsToMany(Caterer::class);
     }
- 
+
 }

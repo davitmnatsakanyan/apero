@@ -9,8 +9,9 @@
         <h1>Edit  {{ $package->name }}</h1>
 
         {!! Form::model($package, [
-            'method' => 'PATCH',
-            'url' => ['/caterer/product/package', $package->id],
+           // 'method' => 'PATCH',
+            'method' =>'post',
+            'url' => ['/caterer/product/package/edit', $package->id],
             'class' => 'form-horizontal',
             'id' => 'main_form',
             'files' =>true,
