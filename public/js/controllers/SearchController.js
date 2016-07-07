@@ -16,18 +16,23 @@ app.controller('SearchController', ['$scope', 'SearchModel', function ($scope, S
     $scope.kitchenFilter = function(caterer) {
         var exist = true;
         if ($scope.kitchenIncludes.length > 0) {
-            $.each(caterer.kitchens, function(index, value){
-                if ($.inArray(value.name, $scope.kitchenIncludes) < 0) {
-                    console.log('-');
-                     exist = false;
-                }
-                else {
-                    console.log('+');
-                    exist = true;
-                    return false;
-                }
+            if(caterer.kitchens.length > 0) {
+                $.each(caterer.kitchens, function (index, value) {
+                    if ($.inArray(value.name, $scope.kitchenIncludes) < 0) {
+                        console.log('-');
+                        exist = false;
+                    }
+                    else {
+                        console.log('+');
+                        exist = true;
+                        return false;
+                    }
 
-            });
+                });
+            }
+            else{
+                var exist = false;
+            }
         }
         if(exist){
             return caterer;

@@ -66,8 +66,8 @@ class Caterer extends Authenticatable
     }
     
     
-    public function zips()
+    public function deliveryAreas()
     {
-       return  $this->belongsToMany(ZipCode::class);
+       return  $this->belongsToMany(ZipCode::class, 'caterer_delivery_areas');
     }
 }
