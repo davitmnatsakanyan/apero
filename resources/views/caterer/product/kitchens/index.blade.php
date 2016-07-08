@@ -11,9 +11,7 @@
             <div class="col-sm-6">
                 <select class="selectpicker form-control" id="kitchen" name = "kitchen[]" multiple="multiple">
                     @foreach($adding_kitchens as $kitchen)
-                        @if(!$kitchen->belongs)
                         <option value="{{ $kitchen->id }}"  >{{$kitchen->name}}</option>
-                        @endif
                     @endforeach
                 </select>
                 {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}

@@ -17,7 +17,6 @@
                 <th>#</th>
                 <th>Product Name</th>
                 <th>Ingredients</th>
-                <th>Price</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -26,8 +25,7 @@
                    <tr>
                        <td>{{ $key+1 }}</td>
                        <td>{{ $product->name}}</td>
-                       <td>{{ $product->ingredients}}</td>
-                       <td>{{ $product->price}}</td>
+                       <td>{{ $product->ingredinets}}</td>
                        <td>
                            <a href="{{ url('caterer/product/single/view' , $product->id) }}">View</a> |
                            <a href="{{ url('caterer/product/single/edit' , $product->id) }}">Edit</a> |

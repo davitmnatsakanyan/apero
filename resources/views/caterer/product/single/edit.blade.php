@@ -31,6 +31,40 @@
         });
 
 
+
+        var i=0;
+        $("#customize_button ").on("click", function () {
+//           alert('costumize');
+            $('#ul_customize').append($('<li>' +
+                    '<label>Name</label><input type="text" name="customize['+i+']['+'name'+']" class = "form-control" >' +
+                    '<label>Price</label><input type="text" name="customize[' + i++ +']['+'price'+']" class = "form-control" >' +
+                    '<a  class="btn btn-danger btn-xs unselect_button">' +
+                    '<span class="glyphicon glyphicon-minus" aria-hidden="true" />' +
+                    '</a>' +
+                    '</li>'));
+        });
+
+
+        $(document ).on( "click", ".unselect_button" , function() {
+            $(this).closest('li').html('');
+        });
+
+
+        $(".edit").on("click",function(){
+            var name = $(this).data('name');
+            var price = $(this).data('price');
+            var id = $(this).data('id');
+
+           $('#updateSubproduct').find("input[name='name']").val(name);
+           $('#updateSubproduct').find("input[name='price']").val(price);
+            $('#updateSubproduct').find("input[name='id']").val(id);
+        });
+
+        $('.delete').on('click',function(){
+            $('#deleteSubproduct').find("input[name='id']").val($(this).data('id'));
+        });
+
+
     </script>
 
 

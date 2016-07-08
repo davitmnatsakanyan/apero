@@ -80,7 +80,15 @@ class KitchensController extends AdminBaseController
     public function edit($id)
     {
         $kitchen = Kitchen::with('menus')->findOrFail($id);
-        $menus = Menu::all();
+        $menus = Menu::with('kitchens')->get();
+//        return $menus;
+//
+//        $kitchen_menus = $menus->filter(function($menu){
+//            foreach($menu->kitchens as $kitchen)
+//                if($kitchen->id = request()->id)
+//                    return true;
+//            return false;
+//        });
 
         foreach ($menus as $menu) {
             $flag = false;
