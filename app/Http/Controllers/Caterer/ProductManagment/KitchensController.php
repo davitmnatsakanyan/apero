@@ -34,26 +34,18 @@ class KitchensController extends CatererBaseController
                 $data[$menu->id] = count($menu->products);
             }
 
-         $adding_kitchens = Kitchen::all();
-        
+        $adding_kitchens = Kitchen::with('caterers')->get();
+
+        $adding_kitchens = $adding_kitchens->filter(function($adding_kitchen){
+            foreach($adding_kitchen->caterers as $caterer)
+                if($caterer->id == $this->caterer->id())
+                    return false;
+             return true;
+        });
 
         $kitchens = Caterer::with(['kitchens' => function($kitchen){
             $kitchen->with('menus');
         }])->findOrFail($this->caterer->id())->kitchens;
-
-
-
-        foreach($adding_kitchens as $adding_kitchen)
-        {
-            $flag = false;
-            foreach($kitchens as $kitchen)
-                if($adding_kitchen->id == $kitchen->id){
-                    $flag = true;
-                    break;
-                }
-
-                $flag ? $adding_kitchen->belongs = true:$adding_kitchen->belongs = false;
-        }
         
         foreach($kitchens as $kitchen)
             foreach ($kitchen->menus as $menu)
@@ -81,6 +73,7 @@ class KitchensController extends CatererBaseController
                CatererKitchen::create(['caterer_id' => $this->caterer->id() ,'kitchen_id' => $kitchen_id]);
         return back() -> with('success' , 'Kitchen add sucessfully');
     }
+
     
     public function getDelete($id)
     {

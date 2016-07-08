@@ -24,13 +24,12 @@ class SingleProductController extends CatererBaseController
                 $product->where('caterer_id', $this->caterer->id());
             }]);
         }])->get()->filter(function ($kitchen) {
-            $flag = false;
             if (count($kitchen->menus) > 0)
                 foreach ($kitchen->menus as $menu)
                     if (count($menu->products) > 0)
-                        $flag = true;
+                        return true;
 
-            return $flag;
+             return false;
         });
 
         return view('caterer/product/single/index', compact('kitchens'));
@@ -124,11 +123,36 @@ class SingleProductController extends CatererBaseController
     public function postEdit(ProductService $service, $id)
     {
         if ($this->hasAccess($service, $id)) {
-            $this->validate(request(), ['name' => 'required', 'ingredinets' => 'required', 'price' => 'required|integer']);
+            $request = request();
+
+            $this->validate($request, [
+                'name' => 'required',
+                'avatar' => 'image',
+                'ingredinets' => 'required',
+            ]);
+
+            if(isset($request->price))
+                $this->validate($request,[
+                    'price' => 'required',
+                ]);
+
             $data = request()->except('avatar');
+
+            if(isset($request->customize)) {
+                $this->validate($request, [
+                    'customize.*.name' => 'required',
+                    'customize.*.price' => 'required|integer',
+                ]);
+
+                $data['price'] = 0;
+            }
+
+            if (!is_null($request->customize))
+                $data['price'] = 0;
+
             $old_image = NULL;
-            if (request()->avatar != NULL) {
-                $image = request()->file('avatar');
+            if ($request->avatar != NULL) {
+                $image = $request->file('avatar');
                 $extension = $image->getClientOriginalExtension();
                 $data['avatar'] = time() . "." . $extension;
                 $product = Product::findOrFail($id);
@@ -138,7 +162,17 @@ class SingleProductController extends CatererBaseController
             }
 
             if ($product->update($data)) {
+                $product = Product::findOrFail($id);
+                if (!is_null($request->customize))
+                    foreach ($request->customize as $customize)
+                        Subproduct::create([
+                            'product_id' => $product->id,
+                            'price' => $customize['price'],
+                            'name' => $customize['name'],
+                        ]);
+                if ($request->avatar != NULL)
                 $this->uploadFile($image, $product['avatar'], $old_image);
+
                 return redirect('caterer/product/single/view/' . $id)->with('success', 'Product updated successfully.');
             } else {
                 return back()->withErrors('Something went wrong.');
@@ -146,6 +180,34 @@ class SingleProductController extends CatererBaseController
         } else {
             return redirect()->back()->withErrors('You have no access.');
         }
+    }
+
+    public function postUpdateSubproduct()
+    {
+        $request =  request();
+        $subproduct = Subproduct::findOrFail( $request->id);
+        if(Product::findOrFail($subproduct->product_id)->caterer_id === $this->caterer->id())
+        {
+            if($subproduct->update(['name' => $request->name,'price' => $request->price]) )
+                return back()->with('success','Subproduct updated successfully.');
+            return back()->withErrors('Something went wrong.');
+        }
+
+        return back();
+    }
+
+    public function postDeleteSubproduct()
+    {
+        $request =  request();
+        $subproduct = Subproduct::findOrFail( $request->id);
+        if(Product::findOrFail($subproduct->product_id)->caterer_id === $this->caterer->id())
+        {
+            if($subproduct->delete() )
+                return back()->with('success','Subproduct deleted successfully.');
+            return back()->withErrors('Something went wrong.');
+        }
+
+        return back();
     }
 
     public function getDelete(ProductService $service, $id)
@@ -183,7 +245,7 @@ class SingleProductController extends CatererBaseController
                 unlink($file);
         }
         $destinationPath = 'images/products/';
-        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
+        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . $avatar);
         return $avatar;
     }
 }

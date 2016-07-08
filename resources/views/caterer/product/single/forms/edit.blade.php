@@ -45,12 +45,26 @@
         {!! $errors->first('ingredinets', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
-    {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required','step'=>"any"]) !!}
-        {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+
+@if(count($product->subproducts)==0)
+    <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
+        {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
+        <div class="col-sm-6">
+            {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required','step'=>"any"]) !!}
+            {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
+@endif
+
+<h3>Add subproduct</h3>
+<div class="form-group">
+    {!! Form::label('subproduct', 'Customize', ['class' => 'col-sm-3 control-label']) !!}
+    <button type="button" class="btn btn-success btn-xs">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "customize_button"/>
+    </button>
+    <ul class="col-sm-6" id = "ul_customize" style="list-style-type: none">
+
+    </ul>
 </div>
 
 <div class="form-group">
@@ -59,3 +73,42 @@
     </div>
 </div>
 {!! Form::close() !!}
+
+@if(count($product->subproducts)!=0)
+    <hr>
+    <h2>Subproducts</h2>
+    <hr>
+    <div style="width:600px;">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Subproduct_name</th>
+                <th>Subproduct price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($product->subproducts as $key => $subproduct)
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $subproduct->name }}</td>
+                    <td>{{$subproduct->price }}</td>
+                    <td> <a class = "edit" href="#" data-toggle="modal"
+                            data-target="#editSubproduct"
+                            data-name="{{$subproduct->name}}"
+                            data-price="{{$subproduct->price}}"
+                            data-id="{{$subproduct->id}}">Edit
+                        </a> |
+                        <a  class = "delete" href="#"
+                            data-toggle="modal"
+                            data-target="#deleteSubproductModal"
+                            data-id="{{$subproduct->id}}">Delete</a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+@endif
+@include('caterer/product/single/modals/edit')
+@include('caterer/product/single/modals/deleteSubproduct')

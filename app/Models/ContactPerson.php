@@ -16,5 +16,6 @@ class ContactPerson extends Model
         'email',
         'phone',
         'mobile',
+        'caterer_id',
     ];
 }

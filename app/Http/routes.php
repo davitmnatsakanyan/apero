@@ -165,6 +165,9 @@ Route::group([
             Route::post('edit/{id}', 'SingleProductController@postEdit');
 
             Route::get('delete/{id}', 'SingleProductController@getDelete');
+
+            Route::post('change_cutom','SingleProductController@postUpdateSubproduct');
+            Route::post('deleteSubproduct', 'SingleProductController@postDeleteSubproduct');
         });
 
 
