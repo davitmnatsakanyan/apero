@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use Paypalpayment;
 use Redirect;
@@ -42,7 +43,7 @@ private $_apiContext;
 
     $transaction = Paypalpayment::Transaction();
     $transaction->setAmount($amount);
-    $transaction->setDescription('What are you selling?');
+    $transaction->setDescription('What are you bying?');
 
     $redirectUrls = Paypalpayment:: RedirectUrls();
     $redirectUrls->setReturnUrl(url('paypal/done'));
@@ -56,15 +57,16 @@ private $_apiContext;
 
     $response = $payment->create($this->_apiContext);
     $redirectUrl = $response->links[1]->href;
-
     return Redirect::to( $redirectUrl );
 }
 
-public function getDone()
+public function getDone(Request $request)
 {
-    $id = request()->get('paymentId');
-    $token = request()->get('token');
-    $payer_id = request()->get('PayerID');
+    $id = $request->paymentId;
+    $token = $request->token;
+    $payer_id = $request->PayerID;
+
+    dd($id,$token,$payer_id);
     $payment = Paypalpayment::getById($id, $this->_apiContext);
 
     $paymentExecution = Paypalpayment::PaymentExecution();

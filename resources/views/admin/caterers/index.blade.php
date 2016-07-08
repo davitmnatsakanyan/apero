@@ -8,7 +8,7 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th> Company </th><th> Name </th><th> Address </th><th>Actions</th>
+                    <th>S.No</th><th> Company </th><th>Email </th><th> Address </th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +17,7 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->company }}</td><td>{{ $item->name }}</td><td>{{ $item->address }}</td>
+                    <td>{{ $item->company }}</td><td>{{ $item->email }}</td><td>{{ $item->address }}</td>
                     <td>
                         <a href="{{ url('/admin/caterers/' . $item->id) }}" class="btn btn-success btn-xs" title="View Caterer"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <a href="{{ url('/admin/caterers/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Caterer"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>

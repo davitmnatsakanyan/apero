@@ -7,11 +7,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">{{ $user->name }}</a>
+          <a class="navbar-brand" href="{{url('user/account')}}">{{ $user->name }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
             <li>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -19,6 +18,7 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href={{ url('user/account/view')}}>My information</a></li>
                        <li><a href={{ url('user/settings/update')}}>Update Data</a></li>
                        <li><a href={{ url('user/settings/change-password')}}>Change Password</a></li>
                        <li><a href="#">Delete</a></li>

@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Caterer;
 use App\Http\Controllers\Caterer\CatererBaseController;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Services\CatererService;
+use Illuminate\Http\Request;
 use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\ContactPerson;
 use App\Models\DeliveryArea;
 use App\Models\ZipCode;
-use Validator,Image;
+use Validator,Image , Hash;
 
 
 class SettingsController extends CatererBaseController
@@ -30,6 +31,7 @@ class SettingsController extends CatererBaseController
 
         return view('caterer/settings/update', compact('my_caterer','zips'));
     }
+
     
     public function postUpdate(CatererService $catererService)
     {
@@ -101,29 +103,27 @@ class SettingsController extends CatererBaseController
     {
         return view('caterer/settings/changePassword',['role' => 'caterer']);
     }
+
     
-    public function postChangePassword(CatererService $catererService)
+    public function postChangePassword(Request $request)
     {
-        $val=Validator::make(request()->except('_token'),
-                [
-                    'password' => 'required|confirmed',
-                    'password_confirmation' =>'required',
-                ]);
-        
-         if(!$val->fails())
+        $this->validate($request ,[
+            'old_password' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' =>'required',
+        ]);
+
+
+        if(Hash::check($request->old_password, $this->caterer->user()->password))
         {
-            $caterer_id   = $this->caterer->user()->id;
-            $new_password = bcrypt(request()->get('password'));
-            $update = $catererService->updateById( $caterer_id, ['password' => $new_password]);
-            
-            if($update)
-              return redirect('caterer/account')->with('message' , 'Your password sucsessfuly changed');
-            return back()->withErrors("Something went wrong can not change password.");
+            Caterer::findOrFail($this->caterer->id())->update( ['password' => bcrypt($request->password)]);
+            return back()->with('success' , 'Password changed successfully.');
         }
-        return redirect()->back()->withErrors($val);
-        
-        
+
+        return back()->withErrors('Enter correct old password');
+
     }
+
 
     public function postAdd()
     {
@@ -134,6 +134,7 @@ class SettingsController extends CatererBaseController
 
         return back()->with('success' , 'Zip code added successfully');
     }
+
 
     public function getRemove($id)
     {

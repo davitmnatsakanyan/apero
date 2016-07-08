@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Admin\AdminBaseController;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\ContactPerson;
 use App\Models\Caterer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -88,9 +88,10 @@ class CaterersController extends AdminBaseController
      */
     public function show($id)
     {
-        $caterer = Caterer::findOrFail($id);
+        $caterer = Caterer::with('zips')->findOrFail($id);
+        $contact_person = ContactPerson::where('caterer_id' ,$id)->first();
 
-        return view('admin.caterers.show', compact('caterer'));
+        return view('admin.caterers.show', compact('caterer','contact_person'));
     }
 
     /**

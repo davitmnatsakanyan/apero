@@ -45,6 +45,7 @@
 
     <div class="container-fluid">
       <div class="row" style="margin-top: 30px">
+
         @yield ('content')
       </div>
     </div>

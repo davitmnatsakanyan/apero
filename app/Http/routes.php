@@ -1,6 +1,6 @@
 <?php
 Route::get('aaa', function () {
-    dd(bcrypt('caterer'));
+    dd(bcrypt('user'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -122,7 +122,11 @@ Route::group([
     'namespace' => 'User',
 
 ], function () {
-    Route::controller('account', 'AccountController');
+    Route::get('/' ,'AccountController@getIndex');
+    Route::group(['prefix' => 'account'],function(){
+        Route::get('/', 'AccountController@getIndex');
+        Route::get('view', 'AccountController@getView');
+    });
     Route::controller('settings', 'SettingsController');
 
 });
@@ -138,7 +142,7 @@ Route::group([
     'namespace' => 'Caterer',
 
 ], function () {
-
+    Route::get('/' ,'AccountController@getIndex');
     Route::controller('account', 'AccountController');
     Route::controller('settings', 'SettingsController');
     Route::group([
@@ -208,7 +212,9 @@ Route::group([
 Route::group([
     'prefix' => 'paypal',
 ], function () {
-    Route::controller('', 'PaypalController');
+    Route::get('checkout', 'PaypalController@getCheckout');
+    Route::get('done', 'PaypalController@getDone');
+    Route::get('cancel', 'PaypalController@getCancel');
 });
 
 
