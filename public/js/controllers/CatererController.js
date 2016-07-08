@@ -1,17 +1,34 @@
-app.controller('CatererController', ['$scope', '$routeParams', 'CatererModel', 'sharedProperties',   function ($scope, $routeParams, CatererModel, sharedProperties) {
+app.controller('CatererController', ['$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($scope, $routeParams, CatererModel, sharedProperties, $timeout) {
 
-    $('#datetimepicker4').datetimepicker();
+    $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
     var caterer_id = $routeParams.caterer_id;
     var caterer = CatererModel.getCaterer(caterer_id).then(function(response){
-        console.log(response.data.caterer);
+
         $scope.menus = response.data.menus;
         $scope.caterer  = response.data.caterer;
 
     });
-    var orders = [];
+    if(localStorage.getItem('cart'))
+        var orders = JSON.parse(localStorage.getItem('cart'));
+    else
+        var orders = [];
+
+
+    if(localStorage.getItem('total_price')) {
+        var total_price = localStorage.getItem('total_price');
+
+    }
+    else {
+        var total_price = 0;
+    }
+
+    $scope.total_price = total_price;
+    $scope.orders = JSON.parse(localStorage.getItem('cart'));
+
+
     var i=0;
-    $scope.getData = function(order, product_count){
+    $scope.addToCart = function(order, product_count){
         var  data = {};
 
         data.count = product_count;
@@ -25,16 +42,19 @@ app.controller('CatererController', ['$scope', '$routeParams', 'CatererModel', '
         data.price = order.price;
 
         orders.push(data);
-        $scope.orders = orders;
 
         var total_price = 0;
         $.each(orders, function(index, value){
             total_price = total_price + (value.price * value.count);
         });
 
-        $scope.total_price = total_price;
 
-        sharedProperties.setProperty(orders);
+        localStorage.setItem('cart', JSON.stringify(orders));
+        localStorage.setItem('total_price', total_price);
+
+        $scope.orders = JSON.parse(localStorage.getItem('cart'));
+        $scope.total_price = localStorage.getItem('total_price');
+
     }
 
 }]);

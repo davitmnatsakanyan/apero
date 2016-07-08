@@ -40,6 +40,7 @@ class CatererService
             'created_ip' => $data['created_ip']
         ]);
 
+
         $contact_person = ContactPerson::create([
             'caterer_id' => $caterer->id,
             'title' => $data['person_title'],
@@ -50,17 +51,18 @@ class CatererService
             'email' => $data['person_email']
         ]);
 
+
         foreach($data['kitchen'] as $kitchen) {
             CatererKitchen::create([
                 'caterer_id' => $caterer->id,
-                'kitchen_id' => $kitchen
+                'kitchen_id' => $kitchen['id']
             ]);
         }
 
-        foreach($data['delivery_area'] as $zip_code_id){
+        foreach($data['delivery_area'] as $zip_code){
             CatererDeliveryArea::create([
                'caterer_id' =>  $caterer->id,
-                'zip_code_id' => $zip_code_id
+                'zip_code_id' => $zip_code['id']
             ]);
         }
 

@@ -90,7 +90,7 @@
 										  <label ng-repeat="product in menu.products track by $index">
 										  	<span><% product.name %></span>
 										    <input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
-										    <i class="fa fa-shopping-cart btn" ng-disabled="product_count == 0" ng-click="getData(product, product_count)" aria-hidden="true"></i>
+										    <i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count)" aria-hidden="true"></i>
 										  </label>
 										 </form>
 									</div>
@@ -119,7 +119,7 @@
 									</div>
 
 									<div class="bestellung-produkts-total">
-										Total <span ng-init="total_price = 0" ><% total_price %></span>
+										Total <span><% total_price %></span>
 									</div>
 
 									<div class="bestellung-bestellen">

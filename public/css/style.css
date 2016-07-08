@@ -618,7 +618,7 @@ a{
 	color: #4c4a4a;
 	font-size: 17px;
 	font-family: OpenSansLight;
-	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 .bestellung-produkt-number-price{
 	float: right;

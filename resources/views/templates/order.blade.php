@@ -61,8 +61,11 @@
 							<div class="adresse-col">
 
 								<form class="form-inline">
-
-									<input-text class="form-group" label="{{data.label}}" placeholder="{{data.placeholder}}" type="{{data.type}}" ng-repeat="data in datas"></input-text>
+									<div class="form-group" ng-repeat="data in datas">
+										<label for=""><% data.label %></label>
+										<input type="<% data.type %>" class="form-control" id="" placeholder="<% data.placeholder %>">
+									</div>
+									{{--<input-text class="form-group" label="<% data.label %>" placeholder="<% data.placeholder %>" type="<% data.type %>" ng-repeat="data in datas"></input-text>--}}
 
 									<div class="loging">
 

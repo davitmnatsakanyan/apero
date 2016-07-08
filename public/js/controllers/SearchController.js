@@ -1,7 +1,7 @@
-app.controller('SearchController', ['$scope', 'SearchModel', function ($scope, SearchModel) {
-    $('#datetimepicker4').datetimepicker();
+app.controller('SearchController', ['$scope', 'SearchModel', '$timeout', function ($scope, SearchModel, $timeout) {
 
-    $scope.link = 'caterers';
+    $timeout($('#datetimepicker4').datetimepicker(), 2000);
+
 
     $scope.kitchenIncludes = [];
     $scope.includeKitchen = function(kitchen){
@@ -19,11 +19,11 @@ app.controller('SearchController', ['$scope', 'SearchModel', function ($scope, S
             if(caterer.kitchens.length > 0) {
                 $.each(caterer.kitchens, function (index, value) {
                     if ($.inArray(value.name, $scope.kitchenIncludes) < 0) {
-                        console.log('-');
+
                         exist = false;
                     }
                     else {
-                        console.log('+');
+
                         exist = true;
                         return false;
                     }
@@ -39,13 +39,10 @@ app.controller('SearchController', ['$scope', 'SearchModel', function ($scope, S
         }
     };
 
-    $scope.caterers = SearchModel.getIndex().then(function (response) {
+    SearchModel.getIndex().then(function (response) {
         $scope.caterers = response.data.caterers;
         $scope.kitchens = response.data.kitchens;
-        console.log(response.data.caterers);
-        console.log(response.data.kitchens);
-    }, function (error) {
-        console.log(error);
+
     });
 
 }]);

@@ -23,16 +23,16 @@
 							</label>
 						</div>
 
-						<div class="carterer-product" ng-repeat="order in orders">
+						<div class="carterer-product" ng-repeat="order in orders track by $index">
 							<ul>
 								<li>
-									<img src="../images/products/<% order.avatar %>" alt="">
+									<img ng-src="../images/products/<% order.avatar %>" alt="">
 								</li>
 								<li>
 									<p>
 										<% order.count %>x <% order.name %>
-										<span class="bestellung-produkt-number-price">
-											<i class="fa fa-times-circle btn" aria-hidden="true"></i>
+										<span class="bestellung-produkt-number-price" >
+											<i class="fa fa-times-circle btn" aria-hidden="true"  ng-click="removeFromCart($index, total_price)"></i>
 										</span>
 										<span class="bestellung-produkt-number-price"><% order.price %></span>
 									</p>
@@ -42,7 +42,7 @@
 
 
 						<div class="bestellung-produkts-total">
-							Total <span>21.70</span>
+							Total <span ng-bind="total_price"></span>
 						</div>
 
 						<div class="bestellung-bestellen">

@@ -1,4 +1,4 @@
-app.controller('BestellenController', ['$scope', function ($scope) {
+app.controller('OrderController', ['$scope', function ($scope) {
     
     $('#datetimepicker4').datetimepicker();
 

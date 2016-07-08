@@ -17,16 +17,14 @@
 
     {{--<!-- BEGIN GLOBAL MANDATORY STYLES -->--}}
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-
-    <link href="/administration/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    
     {{--<!-- END GLOBAL MANDATORY STYLES -->--}}
     {{--<!-- BEGIN PAGE LEVEL STYLES -->--}}
     <link rel="stylesheet" type="text/css" href="/administration/assets/plugins/select2/select2.css"/>
     <link rel="stylesheet" type="text/css" href="/administration/assets/plugins/select2/select2-metronic.css"/>
     {{--<!-- END PAGE LEVEL SCRIPTS -->--}}
     {{--<!-- BEGIN THEME STYLES -->--}}
-    <link href="/administration/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
-    <link href="/administration/assets/css/style.css" rel="stylesheet" type="text/css"/>
+
     <link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -61,7 +59,7 @@
     <script src="/js/controllers/SearchController.js"></script>
     <script src="/js/controllers/CatererAccountController.js"></script>
     <script src="/js/controllers/CatererController.js"></script>
-    <script src="/js/controllers/BestellenController.js"></script>
+    <script src="/js/controllers/OrderController.js"></script>
     <script src="/js/controllers/CartController.js"></script>
 
 

@@ -31,7 +31,7 @@
 							</div>
 							<div class="col-xs-12">
 								<div class="finden">
-									<a ng-href="#/hillfe" class="btn">Apero-Anbieter finden</a>
+									<a ng-href="#/caterers" class="btn">Apero-Anbieter finden</a>
 								</div>
 							</div>
 						</form>

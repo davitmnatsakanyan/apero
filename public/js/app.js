@@ -9,10 +9,6 @@ app.config(function($interpolateProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        //.when('/caterer/show/:caterer_id', {
-        //    templateUrl: 'templates/login.blade.php',
-        //    controller: 'CatererController'
-        //})
         .when('/login', {
             templateUrl: 'templates/login.blade.php',
             controller: 'AuthController'
@@ -29,10 +25,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/user/account/index.blade.php',
             controller: 'UserController',
         })
-        .when('/', {
-            templateUrl: 'templates/home.blade.php',
-            controller: 'HomeController'
-        })
         .when('/caterers', {
             templateUrl: 'templates/caterers.blade.php',
             controller: 'SearchController'
@@ -45,9 +37,13 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/cart.blade.php',
             controller: 'CartController'
         })
-        .when('/bestellen', {
-            templateUrl: 'templates/bestellen.blade.php',
-            controller: 'BestellenController'
+        .when('/order', {
+            templateUrl: 'templates/order.blade.php',
+            controller: 'OrderController'
+        })
+        .when('/', {
+            templateUrl: 'templates/home.blade.php',
+            controller: 'HomeController'
         })
         .otherwise({
             redirectTo: '/'

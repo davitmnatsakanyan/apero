@@ -1,9 +1,6 @@
-app.controller('HomeController', ['$scope', function ($scope) {
+app.controller('HomeController', ['$scope', '$timeout', function ($scope, $timeout) {
 
     $('#datetimepicker4').datetimepicker();
 
-    $scope.link = '/';
-
-    $scope.test = "dfsdfsdf";
 
 }]);
