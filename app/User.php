@@ -22,7 +22,7 @@ class User extends Authenticatable
         'pobox',
         'zip',
         'city',
-        'country',
+        'title',
         'email',
         'phone',
         'mobile',

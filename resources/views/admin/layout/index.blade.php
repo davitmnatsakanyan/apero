@@ -5,7 +5,7 @@ Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter
 Version: 2.0.2
 Author: 
 Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
+Contact: supportkeenthemes.com
 Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
 -->
@@ -24,14 +24,15 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+{!! Html::style('administration/assets/plugins/font-awesome/css/font-awesome.min.css' ) !!}
 {!! Html::style('administration/assets/plugins/uniform/css/uniform.default.css' ) !!}
 {!! Html::style('administration/assets/plugins/bootstrap/css/bootstrap.min.css' ) !!}
-{!! Html::style('administration/assets/plugins/uniform/css/uniform.default.css' ) !!}
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
 {!! Html::style('administration/assets/plugins/gritter/css/jquery.gritter.css' ) !!}
 {!! Html::style('administration/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css' ) !!}
 {!! Html::style('administration/assets/plugins/fullcalendar/fullcalendar/fullcalendar.css' ) !!}
+
 {!! Html::style('administration/assets/plugins/jqvmap/jqvmap/jqvmap.css' ) !!}
 {!! Html::style('administration/assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css' ) !!}
 <!-- END PAGE LEVEL PLUGIN STYLES -->
@@ -45,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {!! Html::style('administration/assets/css/print.css',[ 'media' => "print" ]) !!}
 {!! Html::style('administration/assets/css/custom.css') !!}
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="administration/favicon.ico"/>
 	<script>
 		var BASE_URL = '{{ url("/") }}'
 	</script>

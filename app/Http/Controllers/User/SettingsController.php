@@ -2,23 +2,39 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\User\UserBaseController;
-use App\Http\Requests\RegisterRequest;
+use Illuminate\Http\Request;
 use App\Http\Services\UserService;
-use Validator;
+use App\Models\ZipCode;
+use App\User;
+use Validator, Hash;
 
 class SettingsController extends UserBaseController
 {
     
     public function getUpdate()
     {
-        return view('user/settings/update');
+        $zips = ZipCode::all();
+        return view('user/settings/update',compact('zips'));
     }
     
-    public function postUpdate(UserService $userService)
+    public function postUpdate(Request $request)
     {
-        $update = $userService->updateById( request()->get('id'), request()->except(['_token'.'id']));
-        if( $update)
-           return redirect('user/account');
+        $this->validate($request,[
+            'title' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'pobox' => 'required',
+            'zip' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'mobile' => 'required',
+
+        ]);
+
+       if(User::findOrFail($this->user->id()) -> update($request->all()))
+           return redirect('user/account/view')->with('sucsess' ,'Your account updated successfully.');
         return back()->withErrors("Something went wrong can not update datas.");
             
     }
@@ -29,27 +45,24 @@ class SettingsController extends UserBaseController
         return view('user/settings/changePassword',['role' => 'user']);
     }
     
-    public function postChangePassword(UserService $userService)
+    public function postChangePassword(Request $request)
     {
-        $val=Validator::make(request()->except('_token'),
-                [
+       $this->validate($request,[
+                    'old_password' =>'required',
                     'password' => 'required|confirmed',
                     'password_confirmation' =>'required',
                 ]);
-        
-         if(!$val->fails())
+
+        if(Hash::check($request->old_password, $this->user->user()->password))
         {
-            $user_id   = $this->user->user()->id;
-            $new_password = bcrypt(request()->get('password'));
-            $update = $userService->updateById( $user_id, ['password' => $new_password]);
-            
-            if($update)
-              return redirect('user/account')->with('message' , 'Your password sucsessfuly changed');
-            return back()->withErrors("Something went wrong can not change password.");
+            User::findOrFail($this->user->id())->update( ['password' => bcrypt($request->password)]);
+            return back()->with('success' , 'Password changed successfully.');
         }
-        return redirect()->back()->withErrors($val);
-        
-        
+
+        return back()->withErrors('Enter correct old password');
+
+
+
     }
     
 }
