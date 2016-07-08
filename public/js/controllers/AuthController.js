@@ -1,7 +1,7 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService', 'CatererModel',   function ($scope, $http, $location, $window, AuthService, CatererModel) {
+app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService', 'CatererAccountModel',   function ($scope, $http, $location, $window, AuthService, CatererAccountModel) {
 
     if($location.path() == '/register') {
-        CatererModel.getRegister().then(function (response) {
+        CatererAccountModel.getRegister().then(function (response) {
             $scope.zip_codes = response.data.zip_codes;
             $scope.categories = response.data.categories;
         });

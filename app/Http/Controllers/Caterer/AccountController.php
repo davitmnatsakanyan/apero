@@ -20,6 +20,8 @@ class AccountController extends CatererBaseController
       //  return response()->json($this->caterer->user());
         return view('caterer/layout/index');
     }
+
+
     
    
 }

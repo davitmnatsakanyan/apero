@@ -9,6 +9,10 @@ app.config(function($interpolateProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
+        //.when('/caterer/show/:caterer_id', {
+        //    templateUrl: 'templates/login.blade.php',
+        //    controller: 'CatererController'
+        //})
         .when('/login', {
             templateUrl: 'templates/login.blade.php',
             controller: 'AuthController'
@@ -19,7 +23,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/caterer/account', {
             templateUrl: 'templates/caterer/account/index.blade.php',
-            controller: 'CatererController',
+            controller: 'CatererAccountController',
         })
         .when('/user/account', {
             templateUrl: 'templates/user/account/index.blade.php',
@@ -33,9 +37,13 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/caterers.blade.php',
             controller: 'SearchController'
         })
-        .when('/caterer', {
+        .when('/caterer/show/:caterer_id', {
             templateUrl: 'templates/caterer.blade.php',
             controller: 'CatererController'
+        })
+        .when('/cart', {
+            templateUrl: 'templates/cart.blade.php',
+            controller: 'CartController'
         })
         .when('/bestellen', {
             templateUrl: 'templates/bestellen.blade.php',

@@ -1,65 +1,132 @@
 <div ng-include='"templates/nav.blade.php"'></div>
 
-<!-- Content -->
-<section id="content">
+	<!-- Content -->
+	<section id="content">
+			
+		<div  class="hillfe-content kategori-content">
+			<div class="container">
 
-	<div  class="hillfe-content caterer-content">
-		<div class="container">
+				<div class="row">
 
-			<div class="row">
+					<div class="col-md-9 col-sm-8">
 
-				<div class="col-md-10 col-md-offset-1">
+						<div class="apero-anbieter clearfix">
 
-					<div class="apero-carterer clearfix">
+							<h1>Apero - Anbieter in 9000 St. Gallin</h1>
 
-						<h2 class="clearfix">Ihr Warenkorb bei Spitzen-Apero Caterer
-							<img src="../images/layer7.png" alt="">
-						</h2>
+							<div class="col-md-12 anbieter-item">
+								<div class="col-md-6">
+									<div class="anbieter-img">
+										<img src="../images/layer2.png" alt="">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="anbieter-adres">
+										<div class="anbiter-name">
+											<% caterer.company %> - Apero Caterer
+										</div>
+										<div class="anbiter-place">
+											Bahnhofstrasse 18, 9000 St. Gallen
+										</div>
+									</div>
+									<div class="ratings">
+										<fieldset class="rating">
+											<input type="radio" id="star-1-5" name="rating" value="5">
+											<label class="full" for="star-1-5" title="Awesome - 5 stars"></label>
+											<input type="radio" id="star-1-4half" name="rating" value="4 and a half">
+											<input type="radio" id="star-1-4" name="rating" value="4">
+											<label class="full" for="star-1-4" title="Pretty good - 4 stars"></label>
+											<input type="radio" id="star-1-3half" name="rating" value="3 and a half">
+											<input type="radio" id="star-1-3" name="rating" value="3">
+											<label class="full" for="star-1-3" title="Meh - 3 stars"></label>
+											<input type="radio" id="star-1-2half" name="rating" value="2 and a half">
+											<input type="radio" id="star-1-2" name="rating" value="2">
+											<label class="full" for="star-1-2" title="Kinda bad - 2 stars"></label>
+											<input type="radio" id="star-1-1half" name="rating" value="1 and a half">
+											<input type="radio" id="star-1-1" name="rating" value="1">
+											<label class="full" for="star-1-1" title="Sucks big time - 1 star"></label>
+											<input type="radio" id="starha-1-lf" name="rating" value="half">
+										</fieldset>
+			                        </div>
+			                        <div class="anbieter-filter">
+				                        <div class="" data-toggle="buttons-checkbox"> 
+									        <button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>1-5</button>
+									        <button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>6-10</button>
+									        <button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>11-X</button>
+									        <a href="#">Bestellen</a>
+									    </div>
+									</div>
+								</div>
+							</div>
 
-						<div class="lieferdatum carterer-lieferdatum">
-							<label>
-								<span>Lieferdatum</span>
-								<input type="text" id="datetimepicker4">
-							</label>
-						</div>
-
-						<div class="carterer-product" ng-repeat="data in [1, 2, 3, 4]">
-							<ul>
-								<li>
-									<img src="../images/layer7.png" alt="">
-								</li>
-								<li>
-									<p>
-										2x Produkt 1
-										<span class="bestellung-produkt-number-price">
-											<i class="fa fa-times-circle btn" aria-hidden="true"></i>
-										</span>
-										<span class="bestellung-produkt-number-price">10.50</span>
-									</p>
-								</li>
-							</ul>
-						</div>
-
-
-						<div class="bestellung-produkts-total">
-							Total <span>21.70</span>
-						</div>
-
-						<div class="bestellung-bestellen">
-							<a ng-href="#/bestellen">Bestellen</a>
 						</div>
 
 					</div>
 
-					<div class="einlosern">
-						<h2>Gutschein einlosern</h2>
-						<div class="gutschein clearfix">
-							<input type="text">
-							<div class="gutschein-einlosern">
-								<a ng-href="#/">Gutschein einlosern</a>
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-9 col-sm-8">
+
+						<div class="apero-kat clearfix">
+
+							<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
+
+								<div class="col-md-12">
+									<div class="kategori-name">
+										<% menu.name %>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="anbieter-img">
+										<img src="../images/layer3.png" alt="">
+									</div>
+								</div>
+								<div class="col-md-7">
+
+									<div class="kategori-item">
+										<form name="myForm" >
+										  <label ng-repeat="product in menu.products track by $index">
+										  	<span><% product.name %></span>
+										    <input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
+										    <i class="fa fa-shopping-cart btn" ng-disabled="product_count == 0" ng-click="getData(product, product_count)" aria-hidden="true"></i>
+										  </label>
+										 </form>
+									</div>
+
+								</div>
+								
 							</div>
-							<div class="einlosern-bestellen">
-								<a ng-href="#/bestellen">Bestellen</a>
+
+						</div>
+
+					</div>
+
+					<div class="col-md-3 col-sm-4">
+						<div class="filter bestellung">
+							<h2>Bestellung</h2>
+							<div class="filter-content">
+								<form action="" class="clearfix">
+
+									<h4>Lieferdatium</h4>
+									<div class="lieferdatum">
+										<input type="text" id="datetimepicker4">
+									</div>
+
+									<div class="bestellung-produkt-number" ng-repeat="order in orders track by $index">
+										<p><% order.count %>x <% order.name %> <span class="bestellung-produkt-number-price"><% order.price %></span></p>
+									</div>
+
+									<div class="bestellung-produkts-total">
+										Total <span ng-init="total_price = 0" ><% total_price %></span>
+									</div>
+
+									<div class="bestellung-bestellen">
+										<a ng-href="/#/cart">Bestellen</a>
+									</div>
+
+								</form>
 							</div>
 						</div>
 					</div>
@@ -67,11 +134,9 @@
 				</div>
 
 			</div>
-
 		</div>
-	</div>
 
-</section>
-<!-- End Content -->
+	</section>
+	<!-- End Content -->
 
 <div ng-include='"templates/footer.blade.php"'></div>

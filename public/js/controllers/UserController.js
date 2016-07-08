@@ -1,4 +1,4 @@
-app.controller('UserController', ['$scope', 'CatererModel', '$window', 'AuthService',  function ($scope, CatererModel, $window, AuthService) {
+app.controller('UserController', ['$scope', 'CatererAccountModel', '$window', 'AuthService',  function ($scope, CatererModel, $window, AuthService) {
 
     AuthService.auth('user');
 

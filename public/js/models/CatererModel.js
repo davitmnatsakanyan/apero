@@ -1,17 +1,10 @@
 app.factory('CatererModel', ['$http', function($http) {
     return {
-        getAccount: function () {
+        getCaterer: function (caterer_id) {
             return $http({
                 method : "get",
-                url : "caterer/account"
+                url : "get/caterer/"+caterer_id
             });
         },
-
-        getRegister: function(){
-            return $http({
-                method : "get",
-                url : "auth/register"
-            });
-        }
     };
 }]);

@@ -59,7 +59,7 @@
 							<div class="col-md-6">
 								<div class="anbieter-adres">
 									<div class="anbiter-name">
-										<% caterer.company %> - Apero Caterer
+										<a ng-href="/#/caterer/show/<% caterer.id %>"><% caterer.company %> - Apero Caterer </a>
 									</div>
 									<div class="anbiter-place">
 										Bahnhofstrasse 18, 9000 St. Gallen

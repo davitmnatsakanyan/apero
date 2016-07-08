@@ -223,6 +223,8 @@ Route::get('caterer', function () {
     return view('caterer/index');
 });
 
+Route::get('get/caterer/{id}', 'Caterer\CatererController@getCaterer');
+
 Route::get('bestellen', function () {
     return view('bestellen/index');
 });

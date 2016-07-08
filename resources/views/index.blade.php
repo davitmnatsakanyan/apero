@@ -54,18 +54,22 @@
 
     <script src="/js/app.js"></script>
     <script src="/js/services/AuthService.js"></script>
+    <script src="/js/services/sharedProperties.js"></script>
     <script src="/js/controllers/NavigationController.js"></script>
     <script src="/js/controllers/AuthController.js"></script>
     <script src="/js/controllers/HomeController.js"></script>
     <script src="/js/controllers/SearchController.js"></script>
+    <script src="/js/controllers/CatererAccountController.js"></script>
     <script src="/js/controllers/CatererController.js"></script>
     <script src="/js/controllers/BestellenController.js"></script>
+    <script src="/js/controllers/CartController.js"></script>
 
 
     <script src="/js/directives/inputText.js"></script>
 
     <script src="/js/filters/homeFilter.js"></script>
 
+    <script src="/js/models/CatererAccountModel.js"></script>
     <script src="/js/models/CatererModel.js"></script>
     <script src="/js/models/SearchModel.js"></script>
 @yield('scrips')
