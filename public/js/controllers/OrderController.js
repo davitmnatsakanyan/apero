@@ -1,4 +1,4 @@
-app.controller('OrderController', ['$scope', function ($scope) {
+app.controller('OrderController', ['$scope', '$http', function ($scope,$http) {
     
     $('#datetimepicker4').datetimepicker();
 
@@ -59,20 +59,8 @@ app.controller('OrderController', ['$scope', function ($scope) {
         var billing_address  =$scope.billing_address;
         var payment_type = $scope.payment.name;
         var comment = $scope.comment;
-
-
-        var data =  {
-            products : products,
-                delivery_address : delivery_address,
-                delivery_zip : delivery_zip,
-                email: email,
-                mobile : mobile,
-                phone: phone,
-                billing_address : billing_address,
-                payment_type : payment_type,
-                comment : comment
-        };
-        console.log(data);
+        var is_accepted = $scope.is_accepted;
+        
         $http({
                 data: {
                     products : products,
@@ -83,7 +71,8 @@ app.controller('OrderController', ['$scope', function ($scope) {
                     phone: phone,
                     billing_address : billing_address,
                     payment_type : payment_type,
-                    comment : comment
+                    comment : comment,
+                    is_accepted : is_accepted
                 },
                 method : "POST",
                 url : "order"
