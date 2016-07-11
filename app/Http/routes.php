@@ -2,6 +2,8 @@
 Route::get('aaa', function () {
     dd(bcrypt('user'));
 });
+
+Route::get('bbb','OrderController@guestOrder');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -238,5 +240,10 @@ Route::get('bestellen', function () {
     return view('bestellen/index');
 });
 Route::get('search/caterers', 'SearchController@getCaterers');
+
+
+Route::group(['prefix' => 'order'],function (){
+    Route::post('/','OrderController@index');
+});
 
 
