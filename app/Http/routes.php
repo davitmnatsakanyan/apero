@@ -246,3 +246,4 @@ Route::get('search/caterers', 'SearchController@getCaterers');
 Route::post('order','OrderController@index');
 
 
+

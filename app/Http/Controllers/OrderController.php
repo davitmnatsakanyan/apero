@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
 use App\Models\Guest;
 use App\Models\Order;
 use App\Http\Controllers\PaypalController;
-use Auth, View;
+use Auth,View;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
