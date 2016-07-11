@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 use Paypalpayment;
 use Redirect;
 
-class PaypalController extends Controller{
-    
-private $_apiContext;
+class PaypalController extends Controller
+{
+
+    private $_apiContext;
 
     public function __construct()
     {
@@ -28,64 +29,64 @@ private $_apiContext;
         ));
 
     }
-    
-    
-  public function getCheckout()
-   {
-    $payer = Paypalpayment::Payer();
-    $payer->setPaymentMethod('paypal');
-    
-    $amount = Paypalpayment:: Amount();
-    $amount->setCurrency('EUR');
-    $amount->setTotal(42); // This is the simple way,
-    // you can alternatively describe everything in the order separately;
-    // Reference the PayPal PHP REST SDK for details.
 
-    $transaction = Paypalpayment::Transaction();
-    $transaction->setAmount($amount);
-    $transaction->setDescription('What are you bying?');
 
-    $redirectUrls = Paypalpayment:: RedirectUrls();
-    $redirectUrls->setReturnUrl(url('paypal/done'));
-    $redirectUrls->setCancelUrl(url('paypal/cancel'));
+    public function getCheckout()
+    {
+        $payer = Paypalpayment::Payer();
+        $payer->setPaymentMethod('paypal');
 
-    $payment = Paypalpayment::Payment();
-    $payment->setIntent('sale');
-    $payment->setPayer($payer);
-    $payment->setRedirectUrls($redirectUrls);
-    $payment->setTransactions(array($transaction));
+        $amount = Paypalpayment:: Amount();
+        $amount->setCurrency('EUR');
+        $amount->setTotal(42); // This is the simple way,
+        // you can alternatively describe everything in the order separately;
+        // Reference the PayPal PHP REST SDK for details.
 
-    $response = $payment->create($this->_apiContext);
-    $redirectUrl = $response->links[1]->href;
-    return Redirect::to( $redirectUrl );
-}
+        $transaction = Paypalpayment::Transaction();
+        $transaction->setAmount($amount);
+        $transaction->setDescription('What are you bying?');
 
-public function getDone(Request $request)
-{
-    $id = $request->paymentId;
-    $token = $request->token;
-    $payer_id = $request->PayerID;
+        $redirectUrls = Paypalpayment:: RedirectUrls();
+        $redirectUrls->setReturnUrl(url('paypal/done'));
+        $redirectUrls->setCancelUrl(url('paypal/cancel'));
 
-    dd($id,$token,$payer_id);
-    $payment = Paypalpayment::getById($id, $this->_apiContext);
+        $payment = Paypalpayment::Payment();
+        $payment->setIntent('sale');
+        $payment->setPayer($payer);
+        $payment->setRedirectUrls($redirectUrls);
+        $payment->setTransactions(array($transaction));
 
-    $paymentExecution = Paypalpayment::PaymentExecution();
+        $response = $payment->create($this->_apiContext);
+        $redirectUrl = $response->links[1]->href;
+        return Redirect::to($redirectUrl);
+    }
 
-    $paymentExecution->setPayerId($payer_id);
-    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+    public function getDone(Request $request)
+    {
+        $id = $request->paymentId;
+        $token = $request->token;
+        $payer_id = $request->PayerID;
 
-    // Clear the shopping cart, write to database, send notifications, etc.
-     dd('sucsess');
-    // Thank the user for the purchase
-    return view('checkout.done');
-}
+        dd($id, $token, $payer_id);
+        $payment = Paypalpayment::getById($id, $this->_apiContext);
 
-public function getCancel()
-{
-    dd('cancle');
-    // Curse and humiliate the user for cancelling this most sacred payment (yours)
-    return view('checkout.cancel');
-}
+        $paymentExecution = Paypalpayment::PaymentExecution();
+
+        $paymentExecution->setPayerId($payer_id);
+        $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+
+        // Clear the shopping cart, write to database, send notifications, etc.
+        dd('sucsess');
+        // Thank the user for the purchase
+        return view('checkout.done');
+    }
+
+    public function getCancel()
+    {
+        dd('cancle');
+        // Curse and humiliate the user for cancelling this most sacred payment (yours)
+        return view('checkout.cancel');
+    }
 
 }
 
