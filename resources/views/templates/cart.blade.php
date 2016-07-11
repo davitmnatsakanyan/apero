@@ -34,7 +34,7 @@
 										<span class="bestellung-produkt-number-price" >
 											<i class="fa fa-times-circle btn" aria-hidden="true"  ng-click="removeFromCart($index, total_price)"></i>
 										</span>
-										<span class="bestellung-produkt-number-price"><% order.price %></span>
+										<span class="bestellung-produkt-number-price"><% order.price %> &euro;</span>
 									</p>
 								</li>
 							</ul>
@@ -46,7 +46,7 @@
 						</div>
 
 						<div class="bestellung-bestellen">
-							<a ng-href="#/bestellen">Bestellen</a>
+							<a ng-href="#/order">Bestellen</a>
 						</div>
 
 					</div>

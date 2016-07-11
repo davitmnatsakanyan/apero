@@ -663,6 +663,16 @@ a{
 	background-color: #AF2626;
 	padding: 5px 28px;
 }
+
+.loging-login .bestellung-bestellen a{
+	display: inline-block;
+	font-size: 13px;
+	color: #fff;
+	text-decoration: none;
+	font-family: OpenSansBold;
+	background-color: #AF2626;
+	padding: 5px 28px;
+}
 .bestellung-bestellen a:hover{
 	background-color: #fff;
 	color: #AF2626;

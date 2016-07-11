@@ -24,25 +24,25 @@
 								</label>
 							</div>
 
-							<div class="carterer-product" ng-repeat="data in [1,2,3,4]">
+							<div class="carterer-product" ng-repeat="order in orders track by $index">
 								<ul>
 									<li>
-										<img src="../images/layer7.png" alt="">
+										<img src="../images/products/<% order.avatar %>" alt="">
 									</li>
 									<li>
 										<p>
-											2x Produkt 1
+											<% order.count %>x <% order.name %>
 											<span class="bestellung-produkt-number-price">
-												<i class="fa fa-times-circle btn" aria-hidden="true"></i>
+												<i class="fa fa-times-circle btn" ng-click="removeFromCart($index, total_price)" aria-hidden="true"></i>
 											</span>
-											<span class="bestellung-produkt-number-price">10.50</span>
+											<span class="bestellung-produkt-number-price"><% order.price %> &euro;</span>
 										</p>
 									</li>
 								</ul>
 							</div>
 
 							<div class="bestellung-produkts-total">
-								Total <span>21.70</span>
+								Total <span ng-bind="total_price"></span>
 							</div>
 
 							<div class="bestellung-bestellen">
@@ -61,15 +61,47 @@
 							<div class="adresse-col">
 
 								<form class="form-inline">
-									<div class="form-group" ng-repeat="data in datas">
-										<label for=""><% data.label %></label>
-										<input type="<% data.type %>" class="form-control" id="" placeholder="<% data.placeholder %>">
+									{{--<div class="form-group">--}}
+										{{--<label for="">Firma</label>--}}
+										{{--<input type="text"  class="form-control"  placeholder="Arnold" ng-model="data.firma">--}}
+									{{--</div>--}}
+									{{--<div class="form-group">--}}
+										{{--<label for="">Vorname</label>--}}
+										{{--<input type="text"  class="form-control"  placeholder="Tempees" ng-model="data.vorname">--}}
+									{{--</div>--}}
+									{{--<div class="form-group">--}}
+										{{--<label for="">Names</label>--}}
+										{{--<input type="text"  class="form-control"  placeholder="name" ng-model="data.names">--}}
+									{{--</div>--}}
+									<div class="form-group">
+										<label for="">address</label>
+										<input type="text"  class="form-control"  placeholder="" ng-model="address">
 									</div>
-									{{--<input-text class="form-group" label="<% data.label %>" placeholder="<% data.placeholder %>" type="<% data.type %>" ng-repeat="data in datas"></input-text>--}}
+									<div class="form-group">
+										<label for="">PLZ</label>
+										<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip">
+									</div>
+									<div class="form-group">
+										<label for="">ort</label>
+										<input type="text"  class="form-control"  placeholder="ort" ng-model="home">
+									</div>
+									<div class="form-group">
+										<label for="">email</label>
+										<input type="email"  class="form-control"  placeholder="email" ng-model="email">
+									</div>
+									<div class="form-group">
+										<label for="">mobile</label>
+										<input type="text"  class="form-control"  placeholder="mobile" ng-model="mobile">
+									</div>
+									<div class="form-group last">
+										<label for="">phone</label>
+										<input type="text"  class="form-control"  placeholder="phone" ng-model="phone">
+									</div>
+
 
 									<div class="loging">
 
-										<label class="checkbox-inline"><input type="checkbox" value="">Liferadrese Entspricht Recjungsadresse  </label>
+										<label class="checkbox-inline"><input type="checkbox" value="" ng-model="other_address" ng-change="change()" >Liferadrese Entspricht Recjungsadresse  </label>
 
 										<div class="loging-login">
 											<p>Login fur bestehande Kunden </p>
@@ -81,6 +113,9 @@
 											<div class="form-group">
 												<label for="exampleInputName9">Password</label>
 												<input type="password" class="form-control" id="exampleInputName9">
+											</div>
+											<div class="bestellung-bestellen">
+												<a ng-href="#/">Login</a>
 											</div>
 										</div>
 									</div>
@@ -104,7 +139,7 @@
 							  <form role="form">
 
 								   <label class="radio">
-									  <input type="radio" name="optradio" checked="">
+									  <input type="radio" name="optradio" checked=""  ng-model="payment.name" value="stripe">
 									  <img src="../images/visa.png">
 										<img src="../images/master.png">
 										<span>Kreditkarte(Stripe)</span>
@@ -112,7 +147,7 @@
 
 
 									 <label class="radio">
-										<input type="radio" name="optradio">
+										<input type="radio" name="optradio"  ng-model="payment.name" value="paypal">
 										<img src="../images/paypal.png">
 
 										<span>PayPal</span>
@@ -120,7 +155,7 @@
 
 
 									 <label class="radio">
-										<input type="radio" name="optradio">
+										<input type="radio" name="optradio"  ng-model="payment.name" value="cash"  >
 										<span>Barzahlung Bei Liferung</span>
 									</label>
 								</form>
@@ -145,10 +180,10 @@
 
 									<div class="form-group">
 									  <label for="comment">Bemerkungen</label>
-									  <textarea class="" rows="4" id="comment"></textarea>
+									  <textarea class="" rows="4" id="comment" ng-model="comment"></textarea>
 									</div>
-									<label class="checkbox-inline"><input type="checkbox" value="">Ich Akzeptiere die  AGB</label>
-									<a ng-href="#/">Bestellen</a>
+									<label class="checkbox-inline"><input type="checkbox" ng-init="is_accepted = false" ng-model="is_accepted" >Ich Akzeptiere die  AGB</label>
+									<a ng-click="submitOrder(payment)">Bestellen</a>
 								</div>
 							</div>
 

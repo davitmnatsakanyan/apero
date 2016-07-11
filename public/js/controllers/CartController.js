@@ -1,5 +1,5 @@
 app.controller('CartController',  ['$scope', 'sharedProperties', function($scope, sharedProperties){
-
+    $('#datetimepicker4').datetimepicker();
 
     $scope.orders = JSON.parse(localStorage.getItem('cart'));
     if(localStorage.getItem('total_price'))
