@@ -242,8 +242,8 @@ Route::get('bestellen', function () {
 Route::get('search/caterers', 'SearchController@getCaterers');
 
 
-Route::group(['prefix' => 'order'],function (){
-    Route::post('/','OrderController@index');
-});
+
+Route::post('order','OrderController@index');
+
 
 

@@ -74,6 +74,14 @@
 										{{--<input type="text"  class="form-control"  placeholder="name" ng-model="data.names">--}}
 									{{--</div>--}}
 									<div class="form-group">
+										<label for="">Country</label>
+										<input type="text"  class="form-control"  placeholder="country" ng-model="country">
+									</div>
+									<div class="form-group">
+										<label for="">City</label>
+										<input type="text"  class="form-control"  placeholder="city" ng-model="city">
+									</div>
+									<div class="form-group">
 										<label for="">address</label>
 										<input type="text"  class="form-control"  placeholder="" ng-model="address">
 									</div>
@@ -107,15 +115,15 @@
 											<p>Login fur bestehande Kunden </p>
 											<div class="form-group">
 												<label for="exampleInputName8">E-mail</label>
-												<input type="email" class="form-control" id="exampleInputName8">
+												<input type="email" class="form-control" id="exampleInputName8" ng-model="user.email">
 											</div>
 
 											<div class="form-group">
 												<label for="exampleInputName9">Password</label>
-												<input type="password" class="form-control" id="exampleInputName9">
+												<input type="password" class="form-control" id="exampleInputName9" ng-model="user.password">
 											</div>
 											<div class="bestellung-bestellen">
-												<a ng-href="#/">Login</a>
+												<a ng-click="submit_login()">Login</a>
 											</div>
 										</div>
 									</div>

@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
 use App\Models\Guest;
 use App\Http\Controllers\PaypalController;
 use Auth,View;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index(Requset $requset)
+    public function index(Request $requset)
     {
-        $this->validate($requset,[
-            
-        ]);
+
+//        $this->validate($requset,[
+//
+//        ]);
+
         if(auth()->user->check())
             $this->userOreder($requset);
         $this->guetsOrder($requset);
