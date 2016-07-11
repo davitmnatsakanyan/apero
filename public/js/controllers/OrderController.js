@@ -50,8 +50,6 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
         name: 'cash'
     }
     $scope.submitOrder = function(){
-        var country = $scope.country;
-        var city = $scope.city;
         var products = JSON.parse(localStorage.getItem('cart'));
         var delivery_address = $scope.address+' '+ $scope.home;
         var delivery_zip = $scope.delivery_zip;
@@ -61,9 +59,20 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
         var billing_address  =$scope.billing_address;
         var payment_type = $scope.payment.name;
         var comment = $scope.comment;
-        var is_accepted = $scope.is_accepted;
 
 
+        var data =  {
+            products : products,
+                delivery_address : delivery_address,
+                delivery_zip : delivery_zip,
+                email: email,
+                mobile : mobile,
+                phone: phone,
+                billing_address : billing_address,
+                payment_type : payment_type,
+                comment : comment
+        };
+        console.log(data);
         $http({
                 data: {
                     products : products,
@@ -74,10 +83,7 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
                     phone: phone,
                     billing_address : billing_address,
                     payment_type : payment_type,
-                    comment : comment,
-                    is_accepted : is_accepted,
-                    country: country,
-                    city : city
+                    comment : comment
                 },
                 method : "POST",
                 url : "order"
@@ -88,30 +94,6 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
                 }
             }).error( function (error) {
                 console.log(error);
-
-            });
-    }
-
-    $scope.submit_login = function(){
-        var email = $scope.user.email;
-        var password = $scope.user.password;
-        var role = 'user';
-
-        $http({
-                data: {
-                    email : email,
-                    password : password,
-                    role: role
-                },
-                method : "POST",
-                url : "auth/login"
-            }
-        ).success(function(response){
-                if(response.success == 1){
-                    alert('user logined')
-                }
-            })
-            .error(function(error){
 
             });
     }
