@@ -17,7 +17,7 @@
 
     {{--<!-- BEGIN GLOBAL MANDATORY STYLES -->--}}
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-    
+
     {{--<!-- END GLOBAL MANDATORY STYLES -->--}}
     {{--<!-- BEGIN PAGE LEVEL STYLES -->--}}
     <link rel="stylesheet" type="text/css" href="/administration/assets/plugins/select2/select2.css"/>
