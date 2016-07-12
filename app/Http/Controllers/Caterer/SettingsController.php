@@ -147,7 +147,7 @@ class SettingsController extends CatererBaseController
     public function uploadFile($image, $avatar, $old_image ="")
     {
         if ($old_image != "") {
-            $file = 'images/products/' . $old_image;
+            $file = 'images/caterers/' . $old_image;
             if(file_exists($file))
                 unlink($file);
         }

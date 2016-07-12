@@ -419,6 +419,7 @@ a{
 }
 .anbieter-img img{
 	width: 100%;
+	max-height: 240px;
 }
 .anbieter-adres{
 	color: #fff;
@@ -672,6 +673,7 @@ a{
 	font-family: OpenSansBold;
 	background-color: #AF2626;
 	padding: 5px 28px;
+	cursor: pointer;
 }
 .bestellung-bestellen a:hover{
 	background-color: #fff;
@@ -964,6 +966,7 @@ a{
 	padding: 5px 30px;
 	text-decoration: none;
 	float: right;
+	cursor: pointer;
 }
 .gutschein-einlosern a, .einlosern-bestellen a{
 	text-decoration: none;

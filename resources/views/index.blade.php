@@ -66,6 +66,7 @@
     <script src="/js/controllers/CatererController.js"></script>
     <script src="/js/controllers/OrderController.js"></script>
     <script src="/js/controllers/CartController.js"></script>
+    <script src="/js/controllers/ModalController.js"></script>
 
 
     <script src="/js/directives/inputText.js"></script>

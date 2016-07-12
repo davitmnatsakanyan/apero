@@ -49,6 +49,7 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         var payment_type = $scope.payment.name;
         var comment = $scope.comment;
         var is_logedin = $rootScope.is_logedin;
+        var is_accepted = $scope.is_accepted;
 
 
         var data =  {
@@ -65,7 +66,8 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                 billing_address :   billing_address,
                 payment_type :      payment_type,
                 comment :           comment,
-                is_logedin :        is_logedin
+                is_logedin :        is_logedin,
+                is_accepted:        is_accepted,
         };
         console.log(data);
         $http({
@@ -82,7 +84,8 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                     billing_address :   billing_address,
                     payment_type :      payment_type,
                     comment :           comment,
-                    is_logedin :        is_logedin
+                    is_logedin :        is_logedin,
+                    is_accepted:        is_accepted
                 },
                 method : "POST",
                 url : "order"

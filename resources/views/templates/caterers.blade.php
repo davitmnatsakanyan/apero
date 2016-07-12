@@ -52,7 +52,7 @@
 						<div  class="col-md-12 anbieter-item" ng-repeat="caterer in caterers | filter:kitchenFilter ">
 							<div class="col-md-6">
 								<div class="anbieter-img">
-									<img ng-if="caterer.avatar != '' " ng-src="../images/<% caterer.avatar %>" alt="">
+									<img ng-if="caterer.avatar != '' " ng-src="../images/caterers/<% caterer.avatar %>" alt="">
 									<img ng-if="caterer.avatar == '' " ng-src="../images/no_caterer.png" alt="">
 								</div>
 							</div>

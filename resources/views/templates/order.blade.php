@@ -45,10 +45,6 @@
 								Total <span ng-bind="total_price"></span>
 							</div>
 
-							<div class="bestellung-bestellen">
-								<a ng-href="#/">Bestellen</a>
-							</div>
-
 						</div>
 
 						<div class="col-sm-5 no-padding">

@@ -246,4 +246,6 @@ Route::get('search/caterers', 'SearchController@getCaterers');
 Route::post('order','OrderController@index');
 
 
-
+//Route::any('{catchall}', function () {
+//    return redirect('/');
+//})->where('catchall', '(.*)');

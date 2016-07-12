@@ -17,7 +17,7 @@
 							<div class="col-md-12 anbieter-item">
 								<div class="col-md-6">
 									<div class="anbieter-img">
-										<img src="../images/layer2.png" alt="">
+										<img src="../images/caterers/<% caterer.avatar %>" alt="">
 									</div>
 								</div>
 								<div class="col-md-6">

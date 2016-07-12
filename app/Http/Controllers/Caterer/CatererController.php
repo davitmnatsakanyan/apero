@@ -15,7 +15,7 @@ class CatererController extends Controller
     public function getCaterer($id){
 
          $menus = Menu::with(['products' => function($product) use ($id){
-            $product->where('caterer_id', $id);
+            $product->with(['subproducts'])->where('caterer_id', $id);
         }])->get();
 
         $menus = $menus->filter(function($menu){
