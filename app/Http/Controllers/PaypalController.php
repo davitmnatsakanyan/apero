@@ -31,14 +31,14 @@ class PaypalController extends Controller
     }
 
 
-    public function getCheckout($total_cost)
+    public function getCheckout()
     {
         $payer = Paypalpayment::Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = Paypalpayment:: Amount();
         $amount->setCurrency('EUR');
-        $amount->setTotal($total_cost); // This is the simple way,
+        $amount->setTotal(12); // This is the simple way,
         // you can alternatively describe everything in the order separately;
         // Reference the PayPal PHP REST SDK for details.
 
@@ -55,7 +55,7 @@ class PaypalController extends Controller
         $payment->setPayer($payer);
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions(array($transaction));
-
+        
         $response = $payment->create($this->_apiContext);
         $redirectUrl = $response->links[1]->href;
         return Redirect::to($redirectUrl);

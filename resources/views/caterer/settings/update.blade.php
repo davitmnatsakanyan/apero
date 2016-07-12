@@ -14,7 +14,7 @@
                         height: 120px;
                         background-position: center center;
                         background-size: cover;
-                        background-image: url( {{url('images/products/' . $caterer->avatar)}} );
+                        background-image: url( {{url('images/caterers/' . $caterer->avatar)}} );
                         -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
             </div>
         </div>
