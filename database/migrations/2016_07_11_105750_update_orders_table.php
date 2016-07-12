@@ -18,7 +18,7 @@ class UpdateOrdersTable extends Migration
             $table->dropColumn('deliter_id');
             $table->dropColumn('deleted_time');
             $table->dateTime('deleted_at')->nullable();
-            $table->string('billing_address');
+            $table->string('billing_address')->nullable();
         });
     }
 

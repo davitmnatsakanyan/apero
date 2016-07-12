@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Models\Guest;
+use App\Models\Order;
 use App\Http\Controllers\PaypalController;
 use Auth,View;
 use Illuminate\Http\Request;
@@ -21,6 +22,21 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
+        return $request->all();
+//        $this->validate($request,[
+//            'caterer_id' => 'required',
+//            'is_accepted' => 'required',
+//            'company' => 'required',
+//            'delivery_address' =>'required',
+//            'delivery_zip' => 'required',
+//            'delivery_city' => 'required',
+//            'delivery_country' => 'required',
+//            'phone' => 'required',
+//            'mobile' => 'required',
+//            'email' => 'required|email',
+//
+//        ]);
+
         if ($request->is_accepted)
             if ($this->user->check())
                 $this->userOreder($request);
@@ -34,9 +50,11 @@ class OrderController extends Controller
     {
         if ($request->payment_type == 'paypal') {
             //gnaci paypal het eka
+            
         }
 
         $data['user_id'] = $this->user->id();
+        $data['caterer'] = $request->caterer_id;
         $data['status'] = 0;  //status = Idle
         $data = $request;
         $order = Order::create($data);
@@ -65,9 +83,9 @@ class OrderController extends Controller
             //gnaci paypal het eka
         }
         $guest = $this->createGuestIfNotExists($request);
+        $data = $request->except('products');
         $data ['user_id'] = $guest->id;
         $data['status'] = 0;  //status = Idle
-        $data = $request;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->products);
         return response()->json(['success' => 1]);
@@ -78,7 +96,7 @@ class OrderController extends Controller
     {
         $guest = Guest::where('email', $request->email)->first();
         if (is_null($guest)) {
-            $data['company'] = $request->name;
+            $data['company'] = $request->company;
             $data['address'] = $request->delivery_address;
             $data['zip'] = $request->delivery_zip;
             $data['city'] = $request->delivery_city;

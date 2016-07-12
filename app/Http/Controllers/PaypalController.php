@@ -31,14 +31,14 @@ class PaypalController extends Controller
     }
 
 
-    public function getCheckout()
+    public function getCheckout($total_cost)
     {
         $payer = Paypalpayment::Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = Paypalpayment:: Amount();
         $amount->setCurrency('EUR');
-        $amount->setTotal(42); // This is the simple way,
+        $amount->setTotal($total_cost); // This is the simple way,
         // you can alternatively describe everything in the order separately;
         // Reference the PayPal PHP REST SDK for details.
 
@@ -75,17 +75,12 @@ class PaypalController extends Controller
         $paymentExecution->setPayerId($payer_id);
         $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-        // Clear the shopping cart, write to database, send notifications, etc.
         dd('sucsess');
-        // Thank the user for the purchase
-        return view('checkout.done');
     }
 
     public function getCancel()
     {
         dd('cancle');
-        // Curse and humiliate the user for cancelling this most sacred payment (yours)
-        return view('checkout.cancel');
     }
 
 }
