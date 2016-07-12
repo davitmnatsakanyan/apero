@@ -66,7 +66,6 @@ class SettingsController extends CatererBaseController
             $this->uploadFile($image,$optional['avatar'],$old_avatar);
         }
 
-
         Caterer::findOrFail($this->caterer->id())->update( $optional);
 
         $contact_person['title'] = request()->cp_title;
@@ -151,7 +150,7 @@ class SettingsController extends CatererBaseController
             if(file_exists($file))
                 unlink($file);
         }
-        $destinationPath = 'images/products/';
+        $destinationPath = 'images/caterers/';
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
         return $avatar;
     }

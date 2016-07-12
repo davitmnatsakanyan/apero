@@ -19,18 +19,20 @@ class SingleProductController extends CatererBaseController
     public function getIndex(ProductService $productService, CategoryService $categotyService)
     {
 
-        $kitchens = Kitchen::with(['menus' => function ($menu) {
-            $menu->with(['products' => function ($product) {
-                $product->where('caterer_id', $this->caterer->id());
-            }]);
-        }])->get()->filter(function ($kitchen) {
-            if (count($kitchen->menus) > 0)
-                foreach ($kitchen->menus as $menu)
-                    if (count($menu->products) > 0)
-                        return true;
+        $kitchens = Kitchen::with(['caterers' => function($caterers){
+            $caterers->where('caterer_id', $this->caterer->id());
+        }, 'menus' => function ($menu) {
+            $menu->with('products');
+        }])->has('menus', '>', 0)->get();
 
-             return false;
-        });
+        $kitchens = Caterer::with(['products', 'kitchens' => function($kitchens){
+            $kitchens->with(['menus' => function($menus){
+
+                $menus->with('products');
+            }]);
+        }])->findOrFail($this->caterer->id());
+
+        dd($kitchens);
 
         return view('caterer/product/single/index', compact('kitchens'));
     }

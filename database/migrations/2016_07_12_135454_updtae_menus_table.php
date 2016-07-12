@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCommentsColumnToOrdersTable extends Migration
+class UpdtaeMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddCommentsColumnToOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->text('comment')->nullable();
+        Schema::table('menus', function (Blueprint $table) {
+            $table->string('avatar')->nullable();
         });
     }
 
@@ -24,8 +24,8 @@ class AddCommentsColumnToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-        $table->dropColumn('comment');
-    });
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn('avatar');
+        });
     }
 }

@@ -24,6 +24,7 @@
                 ))!!}
                 {!! Form::close() !!}
             </h1>
+            <img src="{{url('images/menus/' . $menu->avatar)}}", alt="Mountain View" style="width:304px;height:228px;">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover">
                     <tbody>

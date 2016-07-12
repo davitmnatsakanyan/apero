@@ -70,4 +70,8 @@ class Caterer extends Authenticatable
     {
        return  $this->belongsToMany(ZipCode::class, 'caterer_delivery_areas');
     }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

@@ -41,4 +41,9 @@ class Product extends Model
         return $this->hasMany(Subproduct::class);
 
     }
+    
+    public function caterer()
+    {
+        return $this->belongsTo(Caterer::class);
+    }
 }

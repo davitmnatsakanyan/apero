@@ -28,7 +28,7 @@ class Menu extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'kitchen_id', 'deleted_at'];
+    protected $fillable = ['name', 'avatar', 'deleted_at'];
 
     /**
      * The attributes that should be mutated to dates.

@@ -3,7 +3,7 @@ Route::get('aaa', function () {
     dd(bcrypt('user'));
 });
 
-Route::get('bbb','OrderController@guestOrder');
+Route::get('bbb','PaypalController@getCheckout');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -12,7 +12,7 @@ use App\Models\KitchenMenu;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
-use Session;
+use Session,Image;
 
 class MenusController extends AdminBaseController
 {
@@ -46,18 +46,27 @@ class MenusController extends AdminBaseController
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required','kitchen'=> 'required']);
-        $menu = $request->except('kitchen');
+        $this->validate($request, ['name' => 'required','kitchen'=> 'required','avatar' => 'required']);
+        $menu = $request->except('kitchen','avatar');
         $menu['kitchen'] = $request->kitchen;
 
-        $menu = Menu::create($menu);
+        if(!is_null(request()->avatar))
+        {
+            $image = request()->file('avatar');
+            $extension = $image->getClientOriginalExtension();
+            $menu['avatar'] = time() . "." . $extension;
+            $this->uploadFile($image,$menu['avatar']);
+        }
 
-        if(!is_null($request->kitchen))
-        foreach ($request->kitchen as $kitchen_id) {
-            KitchenMenu::create([
-                'menu_id' => $menu->id,
-                'kitchen_id' => $kitchen_id
-            ]);
+        if( $menu = Menu::create($menu)) {
+
+            if (!is_null($request->kitchen))
+                foreach ($request->kitchen as $kitchen_id) {
+                    KitchenMenu::create([
+                        'menu_id' => $menu->id,
+                        'kitchen_id' => $kitchen_id
+                    ]);
+                }
         }
 
         return redirect('admin/menus')->with('success', 'Menu created successfully');
@@ -113,13 +122,12 @@ class MenusController extends AdminBaseController
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, ['name' => 'required']);
-
+        $this->validate($request, ['name' => 'required', 'avatar' => 'required']);
 
         $updated_menu = Menu::findOrFail($id);
-        $menu = $request->except('kitchen');
-        KitchenMenu::where('menu_id' , $id) ->delete();
 
+        $menu = $request->except('kitchen','avatar');
+        KitchenMenu::where('menu_id' , $id) ->delete();
         if(!is_null($request->kitchen))
         foreach ($request->kitchen as $kitchen_id)
             KitchenMenu::create([
@@ -127,6 +135,16 @@ class MenusController extends AdminBaseController
                 'kitchen_id' => $kitchen_id
             ]);
 
+
+        if(!is_null(request()->avatar))
+        {
+            $image = request()->file('avatar');
+            $extension = $image->getClientOriginalExtension();
+            $menu['avatar'] = time() . "." . $extension;
+            $old_avatar = Menu::findOrFail($id)->avatar;
+            $this->uploadFile($image,$menu['avatar'],$old_avatar);
+        }
+        
         $updated_menu->update($menu);
         return redirect('admin/menus')->with('success' , 'Menu successfully updated.');
     }
@@ -170,5 +188,17 @@ class MenusController extends AdminBaseController
     {
         Menu::withTrashed()->where('id', $id)->restore();
         return redirect('admin/menus')->with('success', 'Menu successfully activated.');
+    }
+
+    public function uploadFile($image, $avatar, $old_image ="")
+    {
+        if ($old_image != "") {
+            $file = 'images/menus/' . $old_image;
+            if(file_exists($file))
+                unlink($file);
+        }
+        $destinationPath = 'images/menus/';
+        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
+        return $avatar;
     }
 }
