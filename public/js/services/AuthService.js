@@ -1,4 +1,4 @@
-app.service('AuthService', ['$http', '$location',  function ($http, $location) {
+app.service('AuthService', ['$rootScope', '$http', '$location',  function ($rootScope, $http, $location) {
     this.auth = function (role) {
            $http({
                 method: "GET",
@@ -11,4 +11,22 @@ app.service('AuthService', ['$http', '$location',  function ($http, $location) {
             });
 
     }
+
+    this.auth_check = function(){
+
+        $http({
+            method: "GET",
+            url: "auth/check/user"
+        })
+            .success(function(response){
+
+                if(response.success == 1){
+                    $rootScope.is_logedin = 1;
+                }
+                else{
+                    $rootScope.is_logedin = 0
+                }
+            });
+    }
+
 }]);

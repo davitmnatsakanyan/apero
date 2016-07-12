@@ -1,5 +1,5 @@
-app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
-    
+app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthService', function ( $rootScope, $scope, $http, AuthService) {
+
     $('#datetimepicker4').datetimepicker();
 
     $scope.orders = JSON.parse(localStorage.getItem('cart'));
@@ -23,33 +23,22 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
         $scope.orders = $products;
 
     }
-    //$scope.datas = [
-    //    {type: 'text', class: 'form-group', label: 'Firma', placeholder: 'Arnold', test: 'firma'},
-    //    {type: 'text', class: 'form-group', label: 'Vorname', placeholder: 'Tempees', test: 'vorname'},
-    //    {type: 'text', class: 'form-group', label: 'Names', placeholder: 'Vorname', test: 'names'},
-    //    {type: 'text', class: 'form-group', label: 'Strasse', placeholder: 'Lorem Ipsum', test: 'strasse'},
-    //    {type: 'email', class: 'form-group', label: 'PLZ', placeholder: 'tempees@tempees.com', test: 'plz'},
-    //    {type: 'text', class: 'form-group', label: 'ort', placeholder: 'Fifth Avenue', test: 'ort'},
-    //];
 
     $scope.change = function(){
-        if($scope.other_address){
-            $('.last').after(
-                '<div class="form-group billing_address">'+
-                    '<label for="">address</label>'+
-                    '<input type="text"  class="form-control"  placeholder="address" ng-model="billing_address">'+
-                '</div>'
-            );
-        }
-        else{
-            $('.billing_address').html('');
-        }
+        if($scope.is_different)
+            $scope.is_different = false;
+        else
+            $scope.is_different = true;
+
     }
 
     $scope.payment = {
         name: 'cash'
     }
     $scope.submitOrder = function(){
+        var company = $scope.company;
+        var delivery_country = $scope.country;
+        var delivery_city = $scope.city;
         var products = JSON.parse(localStorage.getItem('cart'));
         var delivery_address = $scope.address+' '+ $scope.home;
         var delivery_zip = $scope.delivery_zip;
@@ -59,31 +48,41 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
         var billing_address  =$scope.billing_address;
         var payment_type = $scope.payment.name;
         var comment = $scope.comment;
+        var is_logedin = $rootScope.is_logedin;
 
 
         var data =  {
-            products : products,
-                delivery_address : delivery_address,
-                delivery_zip : delivery_zip,
-                email: email,
-                mobile : mobile,
-                phone: phone,
-                billing_address : billing_address,
-                payment_type : payment_type,
-                comment : comment
+                company :           company,
+                products :          products,
+                delivery_country :  delivery_country,
+                delivery_city :     delivery_city,
+                products :          products,
+                delivery_address :  delivery_address,
+                delivery_zip :      delivery_zip,
+                email:              email,
+                mobile :            mobile,
+                phone:              phone,
+                billing_address :   billing_address,
+                payment_type :      payment_type,
+                comment :           comment,
+                is_logedin :        is_logedin
         };
         console.log(data);
         $http({
                 data: {
-                    products : products,
-                    delivery_address : delivery_address,
-                    delivery_zip : delivery_zip,
-                    email: email,
-                    mobile : mobile,
-                    phone: phone,
-                    billing_address : billing_address,
-                    payment_type : payment_type,
-                    comment : comment
+                    company :           company,
+                    delivery_country :  delivery_country,
+                    delivery_city :     delivery_city,
+                    products :          products,
+                    delivery_address :  delivery_address,
+                    delivery_zip :      delivery_zip,
+                    email:              email,
+                    mobile :            mobile,
+                    phone:              phone,
+                    billing_address :   billing_address,
+                    payment_type :      payment_type,
+                    comment :           comment,
+                    is_logedin :        is_logedin
                 },
                 method : "POST",
                 url : "order"
@@ -96,6 +95,44 @@ app.controller('OrderController', ['$scope', '$http', function ($scope, $http) {
                 console.log(error);
 
             });
+    }
+
+    $scope.submit_login = function(){
+        var role = 'user';
+        var email = $scope.user.email;
+        var password = $scope.user.password;
+
+        //validation
+        if(email == ''){
+            $scope.error_msg = 1;
+            $scope.error_msg_text = 'Email field is required';
+            return false;
+        }
+        else if(password == ''){
+            $scope.error_msg = 1;
+            $scope.error_msg_text = 'Password field is required';
+            return false;
+        }
+        $http({
+            data: {
+                role: role,
+                email: email,
+                password: password
+            },
+            method : "POST",
+            url : "auth/login"
+        })
+        .success(function(response){
+            if(response.success == 1){
+                AuthService.auth_check();
+            }
+            else{
+                if(response.success == 0){
+                    $scope.error_msg = 1;
+                    $scope.error_msg_text = 'Incorrect Username/Password';
+                }
+            }
+        })
     }
 
 }]);

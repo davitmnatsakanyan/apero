@@ -24,10 +24,10 @@
                     <li><a ng-href="/#/">Hilfe</a></li>
 
 
-                    <li ng-show="is_logedin == 1"><a ng-href="/#/" ng-click="logout()">Logout</a></li>
+                    <li ng-show="$root.is_logedin == 1"><a ng-href="/#/" ng-click="logout()">Logout</a></li>
 
-                    <li ng-show="is_logedin == 0"><a ng-href="#/login">Login</a></li>
-                    <li ng-show="is_logedin == 0"><a ng-href="#/register">Registrieren</a></li>
+                    <li ng-show="$root.is_logedin == 0"><a ng-href="#/login">Login</a></li>
+                    <li ng-show="$root.is_logedin == 0"><a ng-href="#/register">Registrieren</a></li>
 
 
 

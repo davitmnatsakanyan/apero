@@ -45,7 +45,7 @@ class AuthController extends Controller
     /**
     * Logining user
     */
-   public function postLogin(LoginRequest $request)
+   public function postLogin(Request $request)
    {
        $role = $request->role;
        if(!$this->$role->check())

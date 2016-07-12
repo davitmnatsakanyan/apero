@@ -1,11 +1,11 @@
-app.controller('NavigationController', ['$scope', '$uibModal', '$log', '$http', '$location',  function ($scope, $uibModal, $log, $http, $location) {
+app.controller('NavigationController', ['$rootScope', '$scope', '$uibModal', '$log', '$http', '$location',  function ($rootScope, $scope, $uibModal, $log, $http, $location) {
 
 
      $http({
         method : "GET",
         url : "auth/logedin"
     }).success(function(response){
-         $scope.is_logedin = response.success;
+         $rootScope.is_logedin = response.success;
      });
 
     $scope.logout = function () {

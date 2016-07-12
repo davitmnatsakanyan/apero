@@ -74,36 +74,45 @@
 										{{--<input type="text"  class="form-control"  placeholder="name" ng-model="data.names">--}}
 									{{--</div>--}}
 									<div class="form-group">
+										<label for="">Company</label>
+										<input type="text"  class="form-control"  placeholder="company" ng-model="company" required>
+									</div>
+									<div class="form-group">
 										<label for="">Country</label>
-										<input type="text"  class="form-control"  placeholder="country" ng-model="country">
+										<input type="text"  class="form-control"  placeholder="country" ng-model="country" required>
 									</div>
 									<div class="form-group">
 										<label for="">City</label>
-										<input type="text"  class="form-control"  placeholder="city" ng-model="city">
+										<input type="text"  class="form-control"  placeholder="city" ng-model="city" required>
 									</div>
 									<div class="form-group">
 										<label for="">address</label>
-										<input type="text"  class="form-control"  placeholder="" ng-model="address">
+										<input type="text"  class="form-control"  placeholder="" ng-model="address" required>
 									</div>
 									<div class="form-group">
 										<label for="">PLZ</label>
-										<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip">
+										<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>
 									</div>
 									<div class="form-group">
 										<label for="">ort</label>
-										<input type="text"  class="form-control"  placeholder="ort" ng-model="home">
+										<input type="text"  class="form-control"  placeholder="ort" ng-model="home" required>
 									</div>
 									<div class="form-group">
 										<label for="">email</label>
-										<input type="email"  class="form-control"  placeholder="email" ng-model="email">
+										<input type="email"  class="form-control"  placeholder="email" ng-model="email" required>
 									</div>
 									<div class="form-group">
 										<label for="">mobile</label>
-										<input type="text"  class="form-control"  placeholder="mobile" ng-model="mobile">
+										<input type="text"  class="form-control"  placeholder="mobile" ng-model="mobile" required>
 									</div>
 									<div class="form-group last">
 										<label for="">phone</label>
-										<input type="text"  class="form-control"  placeholder="phone" ng-model="phone">
+										<input type="text"  class="form-control"  placeholder="phone" ng-model="phone" required>
+									</div>
+
+									<div ng-init="is_different = false" ng-show="is_different" class="form-group billing_address">
+										<label for="">address</label>
+										<input type="text"  class="form-control"  placeholder="address" ng-model="billing_address" required>
 									</div>
 
 
@@ -111,20 +120,26 @@
 
 										<label class="checkbox-inline"><input type="checkbox" value="" ng-model="other_address" ng-change="change()" >Liferadrese Entspricht Recjungsadresse  </label>
 
-										<div class="loging-login">
+										<div class="loging-login" ng-show="$root.is_logedin == 0">
+											<div ng-if="error_msg == 1" class="alert alert-danger"><button class="close" data-dismiss="alert"></button><% error_msg_text %></div>
+
 											<p>Login fur bestehande Kunden </p>
 											<div class="form-group">
 												<label for="exampleInputName8">E-mail</label>
-												<input type="email" class="form-control" id="exampleInputName8" ng-model="user.email">
+												<input type="email" class="form-control" id="exampleInputName8" ng-init="user.email = ''" ng-model="user.email">
 											</div>
 
 											<div class="form-group">
 												<label for="exampleInputName9">Password</label>
-												<input type="password" class="form-control" id="exampleInputName9" ng-model="user.password">
+												<input type="password" class="form-control" id="exampleInputName9" ng-init="user.password = ''" ng-model="user.password">
 											</div>
 											<div class="bestellung-bestellen">
 												<a ng-click="submit_login()">Login</a>
 											</div>
+										</div>
+										<div ng-model="$root.is_logedin"></div>
+										<div ng-show="$root.is_logedin == 1">
+											You are loged in
 										</div>
 									</div>
 

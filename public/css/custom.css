@@ -11,3 +11,8 @@
 .error {
     color: red;
 }
+
+.loging-login .alert{
+    max-height: 30px;
+    padding : 8px;
+}
