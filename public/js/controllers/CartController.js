@@ -1,4 +1,4 @@
-app.controller('CartController',  ['$scope', 'sharedProperties', function($scope, sharedProperties){
+app.controller('CartController',  ['$scope', function($scope){
     $('#datetimepicker4').datetimepicker();
 
     $scope.orders = JSON.parse(localStorage.getItem('cart'));

@@ -13,7 +13,7 @@
 					<div class="apero-carterer clearfix">
 
 						<h2 class="clearfix">Ihr Warenkorb bei Spitzen-Apero Caterer
-							<img src="../images/layer7.png" alt="">
+							<img src="../images/<% caterer.avatar %>" alt="">
 						</h2>
 
 						<div class="lieferdatum carterer-lieferdatum">

@@ -16,3 +16,35 @@
     max-height: 30px;
     padding : 8px;
 }
+
+.prod_list li{
+    border-bottom: 1px solid lightsteelblue;
+
+}
+
+.prod_list label{
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+}
+.sub_prod_modal .notes{
+    margin-top: 35px !important;
+}
+
+.sub_prod_modal .rigth_items li{
+    padding: 15px;
+}
+.prod_list .pull-right{
+    position: absolute;
+    right: 15px;
+}
+.sub_prod_modal .count{
+    font-size: medium;
+}
+
+.sub_prod_modal .total_price{
+    font-size: large;
+}
+.sub_prod_modal .price{
+    font-size: medium;
+}

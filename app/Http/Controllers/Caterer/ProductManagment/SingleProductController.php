@@ -32,7 +32,7 @@ class SingleProductController extends CatererBaseController
             }]);
         }])->findOrFail($this->caterer->id());
 
-        dd($kitchens);
+//        dd($kitchens);
 
         return view('caterer/product/single/index', compact('kitchens'));
     }

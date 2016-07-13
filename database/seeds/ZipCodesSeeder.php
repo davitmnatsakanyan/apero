@@ -11,7 +11,7 @@ class ZipCodesSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('zip_codes')->truncate();
+//       DB::table('zip_codes')->truncate();
         DB::table('zip_codes')->insert([
             ['ZIP' => '35005', 'city' => 'Adamsville'],
             ['ZIP' => '35006', 'city' => 'Adger'],

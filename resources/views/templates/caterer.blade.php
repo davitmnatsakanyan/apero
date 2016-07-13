@@ -80,7 +80,7 @@
 								</div>
 								<div class="col-md-5">
 									<div class="anbieter-img">
-										<img src="../images/layer3.png" alt="">
+										<img src="../images/menus/<% menu.avatar  %>" alt="">
 									</div>
 								</div>
 								<div class="col-md-7">
@@ -114,12 +114,12 @@
 										<input type="text" id="datetimepicker4">
 									</div>
 
-									<div class="bestellung-produkt-number" ng-repeat="order in orders track by $index">
+									<div class="bestellung-produkt-number" ng-repeat="order in $root.orders track by $index">
 										<p><% order.count %>x <% order.name %> <span class="bestellung-produkt-number-price"><% order.price %></span></p>
 									</div>
 
 									<div class="bestellung-produkts-total">
-										Total <span><% total_price %></span>
+										Total <span><% $root.total_price %></span>
 									</div>
 
 									<div class="bestellung-bestellen">

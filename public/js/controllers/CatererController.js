@@ -1,7 +1,7 @@
-app.controller('CatererController', ['$uibModal', '$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($uibModal, $scope, $routeParams, CatererModel, sharedProperties, $timeout) {
+app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($rootScope, $log, $uibModal, $scope, $routeParams, CatererModel, sharedProperties, $timeout) {
 
 
-console.log(JSON.parse(localStorage.getItem('cart')))
+    console.log(JSON.parse(localStorage.getItem('cart')))
     $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
     var caterer_id = $routeParams.caterer_id;
@@ -13,7 +13,6 @@ console.log(JSON.parse(localStorage.getItem('cart')))
     }
 
     var caterer = CatererModel.getCaterer(caterer_id).then(function(response){
-//console.log(response.data.menus);
 
         $scope.menus = response.data.menus;
         $scope.caterer  = response.data.caterer;
@@ -33,16 +32,16 @@ console.log(JSON.parse(localStorage.getItem('cart')))
         var total_price = 0;
     }
 
-    $scope.total_price = total_price;
-    $scope.orders = JSON.parse(localStorage.getItem('cart'));
+    $rootScope.total_price = total_price;
+    $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
 
 
     var i=0;
     $scope.addToCart = function(order, product_count){
 
         if(order.subproducts.length > 0){
-
-            $scope.items = ['item1', 'item2', 'item3'];
+            console.log(order.subproducts)
+            $scope.items = order.subproducts;
 
             $scope.animationsEnabled = true;
             var size = '';
@@ -54,16 +53,17 @@ console.log(JSON.parse(localStorage.getItem('cart')))
                 size: size,
                 resolve: {
                     items: function () {
-                        alert($scope.items)
-                        return $scope.items;
-                    }
-                }
-            });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                        return $scope.items;
+                    },
+                    product: function(){
+                        return order;
+                    },
+                    product_count : function(){
+                        return product_count;
+                    }
+                    
+                }
             });
 
 
@@ -97,8 +97,8 @@ console.log(JSON.parse(localStorage.getItem('cart')))
             localStorage.setItem('cart', JSON.stringify(orders));
             localStorage.setItem('total_price', total_price);
 
-            $scope.orders = JSON.parse(localStorage.getItem('cart'));
-            $scope.total_price = localStorage.getItem('total_price');
+            $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
+            $rootScope.total_price = localStorage.getItem('total_price');
         }
 
     }
