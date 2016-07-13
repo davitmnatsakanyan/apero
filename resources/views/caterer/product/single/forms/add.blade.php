@@ -7,7 +7,7 @@
     {!! Form::label('kitchen', 'Kitchen', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
         <div class="col-sm-6">
-            <select class="selectpicker form-control" id="kitchen" name="caterer">
+            <select class="selectpicker form-control" id="kitchen" name="kitchen">
                 <option value="">Select kitchen</option>
                 @foreach($kitchens as $kitchen)
                     <option value="{{ $kitchen->id }}">{{$kitchen->name}}</option>
@@ -91,5 +91,3 @@
 {!! Form::close() !!}
 
 
-</div>
-</div>

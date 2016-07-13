@@ -19,7 +19,19 @@
                 <div class="col-sm-6">
                     <select class="selectpicker form-control" id="caterer" name="caterer">
                         @foreach($caterers as $caterer)
-                            <option value="{{ $caterer['id'] }}" {{ $caterer['id'] == $product->caterer_id ? 'selected' :'' }}>{{$caterer['company']}}</option>
+                            <option value="{{ $caterer['id'] }}" {{ $caterer['id'] == $product->caterer->id ? 'selected' :'' }}>{{$caterer['company']}}</option>
+                        @endforeach
+                    </select>
+                    {!! $errors->first('caterer', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+            <div class="form-group {{ $errors->has('kitchen') ? 'has-error' : ''}}">
+                {!! Form::label('kitchen', 'Kitchen', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    <select class="selectpicker form-control" id="kitchen" name="kitchen">
+                        @foreach($kitchens as $kitchen)
+                            <option value="{{ $kitchen['id'] }}" {{ $kitchen['id'] == $product->kitchen->id ? 'selected' :'' }}>{{$kitchen['text']}}</option>
                         @endforeach
                     </select>
                     {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
@@ -31,7 +43,7 @@
                 <div class="col-sm-6">
                     <select class="selectpicker form-control" id="menu" name="menu">
                         @foreach($menus as $menu)
-                            <option value="{{ $menu['id'] }}" {{ $menu['id'] == $product->menu_id ? 'selected' :'' }}>{{$menu['text']}}</option>
+                            <option value="{{ $menu['id'] }}" {{ $menu['id'] == $product->menu->id ? 'selected' :'' }}>{{$menu['text']}}</option>
                         @endforeach
                     </select>
                     {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
@@ -113,19 +125,43 @@
         $('select').select2();
 
 
-        $( "#caterer " ).on( "change", function() {
+        $("#caterer ").on("change", function () {
             var caterer_id = $(this).val();
-            if(caterer_id != "")
+            if (caterer_id != "")
                 $.ajax({
                     type: "GET",
-                    url: BASE_URL+'/admin/products/create/'+caterer_id,
-                    success : function(data){
-                        $( "#menu" ).html('');
-                        $( "#menu" ).select2({
-                            data : data
+                    url: BASE_URL + '/admin/products/create/' + caterer_id,
+                    success: function (data) {
+                        $("#kitchen").html('');
+                        $("#kitchen").select2({
+                            data: data
                         })
                     },
-                    error: function(error){
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            else{
+                $("#kitchen").html('');
+                $("#menu").html('');
+            }
+        });
+
+
+        $("#kitchen ").on("change", function () {
+            var kitchen_id = $(this).val();
+            console.log(kitchen_id);
+            if (kitchen_id != "")
+                $.ajax({
+                    type: "GET",
+                    url: BASE_URL + '/admin/products/create/menu/' + kitchen_id,
+                    success: function (data) {
+                        $("#menu").html('');
+                        $("#menu").select2({
+                            data: data
+                        })
+                    },
+                    error: function (error) {
                         console.log(error);
                     }
                 });

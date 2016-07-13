@@ -16,6 +16,7 @@
 
         $("#kitchen ").on("change", function () {
             var kitchen_id = $(this).val();
+            console.log(kitchen_id);
             if (kitchen_id != "")
                 $.ajax({
                     type: "GET",

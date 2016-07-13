@@ -43,7 +43,11 @@
                 @endif
                 <tr>
                     <th> Menu</th>
-                    <td> <a href = "{{url('admin/menus' , $product->menu_id )}}">{{ $product->menu }} </a></td>
+                    <td>{{ $product->menu->name }}</td>
+                </tr>
+                <tr>
+                    <th> Kitchen</th>
+                    <td> <a href = "{{url('caterer/product/kitchens#' , $product->kitchen->id )}}">{{ $product->kitchen->name }} </a></td>
                 </tr>
                 </tbody>
             </table>

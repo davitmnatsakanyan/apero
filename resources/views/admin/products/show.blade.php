@@ -40,21 +40,42 @@
                         <th> Ingredinets</th>
                         <td> {{ $product->ingredinets }} </td>
                     </tr>
+                    @if(count($product->subproducts)==0)
                     <tr>
                         <th> Price</th>
                         <td> {{ $product->price }} </td>
                     </tr>
+                    @endif
                     <tr>
                         <th> Menu</th>
-                        <td> <a href = "{{url('admin/menus' , $product->menu_id )}}">{{ $product->menu }} </a></td>
+                        <td> <a href = "{{url('admin/menus' , $product->menu->id )}}">{{ $product->menu->name }} </a></td>
+                    </tr>
+                        <th> Kitchen</th>
+                        <td> <a href = "{{url('admin/kitchens' , $product->kitchen->id )}}">{{ $product->kitchen->name }} </a></td>
                     </tr>
                     <tr>
                         <th> Caterer</th>
-                        <td> <a href = "{{url('admin/caterers' , $product->caterer_id )}}">{{ $product->caterer }} </a></td>
+                        <td> <a href = "{{url('admin/caterers' , $product->caterer->id )}}">{{ $product->caterer->company }} </a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+
+            @if(count($product->subproducts)!=0)
+                <h2>Subproducts</h2>
+                <h3>Costum products</h3>
+                <table class="table table-bordered table-striped table-hover">
+                    <tbody>
+                    @foreach($product->subproducts as $subproduct)
+                        <tr>
+                            <th>{{$subproduct->name}}</th>
+                            <td>{{$subproduct->price}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endif
+
         </div>
     </div>
 @endsection

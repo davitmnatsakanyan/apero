@@ -97,7 +97,8 @@ Route::group([
     Route::get('products/{id}/block', 'ProductsController@block');
     Route::get('products/{id}/active', 'ProductsController@activate');
     Route::get('products/blocked', 'ProductsController@blockedProducts');
-    Route::get('products/create/{id}', 'ProductsController@getMenus');
+    Route::get('products/create/{id}', 'ProductsController@getKitchens');
+    Route::get('products/create/menu/{id}', 'ProductsController@getMenus');
     Route::resource('products', 'ProductsController');
 
 

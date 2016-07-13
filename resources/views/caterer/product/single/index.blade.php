@@ -5,12 +5,11 @@
         @include ('layouts/messages')
         <div><h2>Simple Products</h2></div>
         <div><h3><a href="{{url('caterer/product/single/add')}}">Add Single Product</a></h3></div>
-        @foreach($kitchens as $kitchen)
-            @if(count($kitchen->menus)>0)
-          <h2><a href = "{{ url('caterer/product/kitchens#kitchen_' . $kitchen->id ) }}">{{ $kitchen->name }}</a></h2>
-        @foreach($kitchen->menus as $key => $menu)
-                @if(count($menu->products)>0)
-        <h3>{{ $menu->name }}</h3>
+        @foreach($kitchens as $key =>$kitchen)
+          <h2><a href = "{{ url('caterer/product/kitchens#kitchen_' . $key ) }}">{{$kitchen['name'] }}</a></h2>
+        @foreach($kitchen as $key => $menu)
+            @if($key != 'name')
+        <h3>{{ $menu['name']}}</h3>
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
@@ -21,9 +20,10 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($menu->products as $key => $product)
-                   <tr>
-                       <td>{{ $key+1 }}</td>
+            @foreach($menu as $key1 => $product)
+                @if($key1 !== 'name')
+                    <tr>
+                       <td>{{ $key1+1 }}</td>
                        <td>{{ $product->name}}</td>
                        <td>{{ $product->ingredinets}}</td>
                        <td>
@@ -33,12 +33,12 @@
                        </td>
                        @include('caterer/product/single/modals/delete')
                    </tr>
+                   @endif
                 @endforeach
             </tbody>
         </table>
                 @endif
         @endforeach
-            @endif
             @endforeach
     </div>
 
