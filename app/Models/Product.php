@@ -27,11 +27,20 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','avatar', 'ingredinets', 'price', 'caterer_id', 'menu_id', 'deleted_at'];
+    protected $fillable = [
+        'name',
+        'avatar',
+        'ingredinets',
+        'price',
+        'caterer_id',
+        'menu_id',
+        'kitchen_id',
+        'deleted_at'
+    ];
 
     protected $dates = ['deleted_at'];
 
-    public function menus()
+    public function menu()
     {
         return $this->belongsTo(Menu::class);
     }
@@ -45,5 +54,10 @@ class Product extends Model
     public function caterer()
     {
         return $this->belongsTo(Caterer::class);
+    }
+
+    public function kitchen()
+    {
+        return $this->belongsTo(Kitchen::class);
     }
 }

@@ -11,10 +11,10 @@
             {!! Form::open(['url' => '/admin/products', 'class' => 'form-horizontal' ,'files' =>true]) !!}
 
             <div class="form-group {{ $errors->has('caterer') ? 'has-error' : ''}}">
-                {!! Form::label('caterer', 'Caterer', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('caterer', 'Caterer', ['class' => 'col-sm-3 control-label', ]) !!}
                 <div class="col-sm-6">
                     <div class="col-sm-6">
-                        <select class="selectpicker form-control" id="caterer" name="caterer">
+                        <select class="selectpicker form-control" id="caterer" name="caterer" >
                             <option value="">Select caterer</option>
                             @foreach($caterers as $caterer)
                                 <option value="{{ $caterer['id'] }}">{{$caterer['company']}}</option>
@@ -25,11 +25,22 @@
                 </div>
             </div>
 
+            <div class="form-group {{ $errors->has('kitchen') ? 'has-error' : ''}}">
+                {!! Form::label('kitchen', 'Kitchen', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <select class="selectpicker form-control" id="kitchen" name="kitcehn" data-placeholder="Select kitchen">
+                        </select>
+                        {!! $errors->first('caterer', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group {{ $errors->has('menu') ? 'has-error' : ''}}">
                 {!! Form::label('menu', 'Menu', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     <div class="col-sm-6">
-                        <select class="selectpicker form-control" id="menu" name="menu">
+                        <select class="selectpicker form-control" id="menu" name="menu" data-placeholder="Select menu">
                         </select>
                         {!! $errors->first('menu', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -107,6 +118,30 @@
                 $.ajax({
                     type: "GET",
                     url: BASE_URL + '/admin/products/create/' + caterer_id,
+                    success: function (data) {
+                        $("#kitchen").html('');
+                        $("#kitchen").select2({
+                            data: data
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            else{
+                $("#kitchen").html('');
+                $("#menu").html('');
+            }
+        });
+
+
+        $("#kitchen ").on("change", function () {
+            var kitchen_id = $(this).val();
+            console.log(kitchen_id);
+            if (kitchen_id != "")
+                $.ajax({
+                    type: "GET",
+                    url: BASE_URL + '/admin/products/create/menu/' + kitchen_id,
                     success: function (data) {
                         $("#menu").html('');
                         $("#menu").select2({

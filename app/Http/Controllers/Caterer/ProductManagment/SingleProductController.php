@@ -4,41 +4,42 @@ namespace App\Http\Controllers\Caterer\ProductManagment;
 use App\Http\Controllers\Caterer\CatererBaseController;
 use App\Http\Services\ProductService;
 use App\Http\Services\CategoryService;
-use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\CatererKitchen;
 use App\Models\Menu;
+use App\Models\KitchenMenu;
 use App\Models\Kitchen;
 use App\Models\Caterer;
 use App\Models\Product;
 use App\Models\Subproduct;
 use Auth, View, Validator, Image;
+use Illuminate\Support\Facades\Facade;
 
 
 class SingleProductController extends CatererBaseController
 {
 
-    public function getIndex(ProductService $productService, CategoryService $categotyService)
+    public function getIndex()
     {
+        $products = Product::with('subproducts')
+            ->where('caterer_id' , $this->caterer->id())
+            ->get();
 
-        $kitchens = Kitchen::with(['caterers' => function($caterers){
-            $caterers->where('caterer_id', $this->caterer->id());
-        }, 'menus' => function ($menu) {
-            $menu->with('products');
-        }])->has('menus', '>', 0)->get();
+        $kitchens = $products->groupBy('kitchen_id');
+        foreach ($kitchens as $key =>$kitchen) {
+            $kitchens [$key] = $kitchen->groupBy('menu_id');
 
-        $kitchens = Caterer::with(['products', 'kitchens' => function($kitchens){
-            $kitchens->with(['menus' => function($menus){
+            foreach($kitchens [$key]  as $key2 => $menu)
+                $kitchens [$key][$key2]['name'] = Menu::findOrFail($key2)->name;
 
-                $menus->with('products');
-            }]);
-        }])->findOrFail($this->caterer->id());
+            $kitchens [$key]['name'] = Kitchen::findOrFail($key)->name;
 
-//        dd($kitchens);
-
+        }
         return view('caterer/product/single/index', compact('kitchens'));
     }
 
 
-    public function getAdd(CategoryService $categoryService)
+    public function getAdd()
     {
 
         $kitchens = Caterer::with('kitchens')->find($this->caterer->id())->kitchens;
@@ -64,31 +65,32 @@ class SingleProductController extends CatererBaseController
         return $data;
     }
 
-    public function postAdd()
+    public function postAdd(Request $request)
     {
-
-        $this->validate(request(), [
+        $this->validate($request, [
             'name' => 'required',
             'avatar' => 'required|image',
             'ingredinets' => 'required',
             'price' => 'required_without_all:costumize|integer',
             'costumize.*.name' => 'required_without:price',
             'costumize.*.price' => 'required_without:price|integer',
-            'menu' => 'required'
+            'menu' => 'required',
+            'kitchen' => 'required',
         ]);
 
-        $product = request()->except('menu');
+        $product = $request->except('menu','kitchen');
         $product ['caterer_id'] = $this->caterer->id();
-        $product ['menu_id'] = request()->menu;
+        $product ['menu_id'] = $request->menu;
+        $product ['kitchen_id'] = $request->kitchen;
 
-        $image = request()->file('avatar');
+        $image = $request->file('avatar');
         $extension = $image->getClientOriginalExtension();
         $product['avatar'] = time() . "." . $extension;
 
         if ($product = Product::create($product)) {
             $this->uploadFile($image, $product['avatar']);
-            if (!is_null(request()->costumize))
-                foreach (request()->costumize as $costumize)
+            if (!is_null($request->costumize))
+                foreach ($request->costumize as $costumize)
                     Subproduct::create([
                         'product_id' => $product->id,
                         'price' => $costumize['price'],
@@ -103,8 +105,7 @@ class SingleProductController extends CatererBaseController
     public function getView(ProductService $service, $id)
     {
         if ($this->hasAccess($service, $id)) {
-            $product = Product::with('subproducts')->findOrFail($id);
-            $product['menu'] = Menu::findOrFail($product->menu_id)->name;
+            $product = Product::with('kitchen','menu','subproducts')->findOrFail($id);
             return view('caterer/product/single/view', compact('product'));
         } else {
             return redirect()->back()->withErrors('You have no access.');

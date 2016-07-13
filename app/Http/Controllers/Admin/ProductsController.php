@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Caterer;
 use App\Models\Kitchen;
 use App\Models\Menu;
+use App\Models\KitchenMenu;
 use App\Models\CatererKitchen;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -49,6 +50,7 @@ class ProductsController extends AdminBaseController
         $product = $request->except(['caterer', 'menu']);
         $product ['caterer_id'] = $request ['caterer'];
         $product ['menu_id'] = $request ['menu'];
+        $product ['kitchen_id'] = $request ['kitchen'];
 
         $image = $request->file('avatar');
         $extension = $image->getClientOriginalExtension();
@@ -71,9 +73,8 @@ class ProductsController extends AdminBaseController
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $product->menu = Menu::findOrFail($product->menu_id)->name;
-        $product->caterer = Caterer::findOrFail($product->caterer_id)->name;
+        $product = Product::with('caterer','menu','kitchen','subproducts')->findOrFail($id);
+        
 
         return view('admin.products.show', compact('product'));
     }
@@ -87,13 +88,11 @@ class ProductsController extends AdminBaseController
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-
-        $product->menu = Menu::findOrFail($product->menu_id)->name;
-        $product->caterer = Caterer::findOrFail($product->caterer_id)->name;
+        $product = Product::with('caterer','kitchen','menu')->findOrFail($id);
         $caterers = Caterer::all();
-        $menus = $this->getMenus($product->caterer_id);
-        return view('admin.products.edit', compact('product', 'caterers', 'menus'));
+        $kitchens = $this->getKitchens($product->caterer->id);
+        $menus = $this->getMenus($product->kitchen->id);
+        return view('admin.products.edit', compact('product', 'caterers','kitchens', 'menus'));
     }
 
     /**
@@ -109,6 +108,7 @@ class ProductsController extends AdminBaseController
         $data = $request->except(['caterer', 'menu']);
         $data ['caterer_id'] = $request ['caterer'];
         $data ['menu_id'] = $request ['menu'];
+        $data ['kitchen_id'] = $request ['kitchen'];
 
         if($request->avatar != NULL)
         {
@@ -175,22 +175,34 @@ class ProductsController extends AdminBaseController
         return back()->withErrors('product menu is blocked,please at first <a href = ' . url( 'admin/menus/' . $menu[0]['id'] . '/activate').'>activate menu</a>.' );
     }
 
+
+    public function getKitchens($id)
+    {
+        $kitchens = CatererKitchen::where('caterer_id',$id)->lists('kitchen_id');
+        $kitchens = Kitchen::whereIn('id', $kitchens)->lists('name','id');
+        $i = 0;
+        foreach ($kitchens as $key => $value)
+        {
+            $data[$i]['id'] = $key;
+            $data[$i]['text'] = $value;
+            $i++;
+        }
+
+        return $data;
+    }
+
     public function getMenus($id)
     {
-        $kitchens = CatererKitchen::where('caterer_id', $id)->get();
+        $menus = KitchenMenu::where('kitchen_id',$id)->lists('kitchen_id');
+        $menus = Menu::whereIn('id', $menus)->lists('name','id');
         $i = 0;
-        $data = [];
-        $menus = Menu::with('kitchens')->get();
-        foreach ($kitchens as $kitchen) {
-            foreach ($menus as $menu)
-                foreach ($menu->kitchens as $menu_kitchen)
-                    if ($menu_kitchen->id == $kitchen->kitchen_id) {
-                        $data[$i]['id'] = $menu->id;
-                        $data[$i]['text'] = $menu->name;
-                        $i++;
-                    }
+        foreach ($menus as $key => $value)
+        {
+            $data[$i]['id'] = $key;
+            $data[$i]['text'] = $value;
+            $i++;
         }
-        
+
         return $data;
     }
 
