@@ -7,12 +7,11 @@
             <form>
                 <div class="form-group">
                     <ul class="prod_list">
-                        <li ng-repeat="item in items"  ng-class="{'text-danger' : $first==true}">
-                            <label ng-init="i.sub_id = item.id" ng-model="i.id" for="<% item.id %>"><% item.name %> <% $index %>
-                                <input ng-value="item.price" ng-model="i.price" class="pull-right" type="radio" name="sub_product" id="<% item.id %>">
+                        <li ng-repeat="item in items" >
+                            <label ng-init="i.sub_id = item.id" ng-model="i.id" for="<% item.id %>"><% item.name %>
+                                <input value="<% item.price %>" ng-model="i.price" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">
                             </label>
                         </li>
-
                     </ul>
                 </div>
                 <div class="form-group notes">

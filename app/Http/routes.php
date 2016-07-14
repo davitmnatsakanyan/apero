@@ -250,3 +250,6 @@ Route::post('order','OrderController@index');
 //Route::any('{catchall}', function () {
 //    return redirect('/');
 //})->where('catchall', '(.*)');
+Route::get('distance/{from}/{to}', function($from, $to){
+    echo '<a href="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='.$from.'&destinations='.$to.'&key=AIzaSyAGarKqa_51bXdWy_ly_d8Znbnc36SqKfk">get distance </a>';
+});

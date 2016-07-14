@@ -17,9 +17,17 @@ app.controller('CartController',  ['$scope', function($scope){
         $scope.total_price = new_total_price;
 
         $products.splice(index, 1);
-
-        localStorage.setItem('cart', JSON.stringify( $products));
+        
+        if($products.length == 0){
+            localStorage.removeItem('cart');
+            localStorage.removeItem('total_price');
+        }
+        else {
+            localStorage.setItem('cart', JSON.stringify($products));
+        }
+        
         $scope.orders = $products;
+        
 
     }
 }]);

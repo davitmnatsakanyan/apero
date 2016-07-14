@@ -366,7 +366,7 @@ a{
 	color: #854647;
 	background-color: transparent;
 	border: 2px solid #DFDFDE;
-	outline: none;
+	outline: none !important;
 	transition: all 200ms;
 	font-family: OpenSansBold;
 	font-size: 16px;
@@ -374,7 +374,7 @@ a{
 	padding: 0;
 	width: 45px;
 	height: 45px;
-	border-radius: 10px;
+	border-radius: 10px !important;
 }
 .filter-content .btn:hover{
 	background-color: transparent;
@@ -419,7 +419,7 @@ a{
 }
 .anbieter-img img{
 	width: 100%;
-	max-height: 240px;
+	max-height: 200px;
 }
 .anbieter-adres{
 	color: #fff;
@@ -440,6 +440,9 @@ a{
 .anbiter-name{
 	font-size: 31px;
 	margin-bottom: 10px;
+}
+.anbiter-name a{
+	color: #ffffff;
 }
 .anbiter-place{
 	font-size: 22px;
@@ -503,9 +506,9 @@ a{
 
 .anbieter-filter .btn{
 	color: #854647;
-	background-color: #fff;
+	background-color: #fff !important;
 	border: 2px solid #DFDFDE;
-	outline: none;
+	outline: none !important;
 	transition: all 200ms;
 	font-family: OpenSansBold;
 	font-size: 16px;
@@ -513,7 +516,7 @@ a{
 	padding: 0;
 	width: 45px;
 	height: 45px;
-	border-radius: 10px;
+	border-radius: 10px !important;
 }
 .anbieter-filter .btn:hover{
 	background-color: #fff;
@@ -538,7 +541,7 @@ a{
 .anbieter-filter a{
 	color: #932020;
 	float: right;
-	border-radius: 5px;
+	border-radius: 5px !important;
 	margin-top: 15px;
 	padding: 7px 20px;
 	background-color: #fff;

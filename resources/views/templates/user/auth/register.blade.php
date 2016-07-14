@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-5">Pobox
                                 <span class="required">
-                                     *
+
                                 </span>
                                 </label>
                                 <div class="col-md-7">

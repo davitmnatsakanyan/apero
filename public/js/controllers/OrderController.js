@@ -19,8 +19,16 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
 
         $products.splice(index, 1);
 
-        localStorage.setItem('cart', JSON.stringify( $products));
+        if($products.length == 0){
+            localStorage.removeItem('cart');
+            localStorage.removeItem('total_price');
+        }
+        else {
+            localStorage.setItem('cart', JSON.stringify($products));
+        }
+
         $scope.orders = $products;
+
 
     }
 
@@ -57,7 +65,6 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                 products :          products,
                 delivery_country :  delivery_country,
                 delivery_city :     delivery_city,
-                products :          products,
                 delivery_address :  delivery_address,
                 delivery_zip :      delivery_zip,
                 email:              email,

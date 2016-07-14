@@ -8,8 +8,8 @@ app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', 
 
     $scope.items = items;
     $scope.i = {
-        sub_id: 0,
-        price: 0,
+        sub_id: $scope.items[0].id,
+        price: $scope.items[0].price,
         description: ""
     };
 
@@ -23,7 +23,7 @@ app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', 
         data.count = product_count;
         data.avatar = product.avatar;
         data.caterer_id = product.caterer_id;
-        data.parent_product = product.id;
+        data.product_id = product.id;
         data.ingredinets = product.ingredinets;
         data.menu_id = product.menu_id;
         data.name = product.name;

@@ -79,11 +79,10 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
             data.count = product_count;
             data.avatar = order.avatar;
             data.caterer_id = order.caterer_id;
-            data.id = order.id;
+            data.product_id = order.id;
             data.ingredinets = order.ingredinets;
             data.menu_id = order.menu_id;
             data.name = order.name;
-            data.price = order.price;
             data.price = order.price;
 
             orders.push(data);
