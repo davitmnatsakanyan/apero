@@ -88,12 +88,25 @@
                     {!! $errors->first('ingredinets', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-            <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
-                {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+            @if(count($product->subproducts)==0)
+                <div class="form-group price {{ $errors->has('price') ? 'has-error' : ''}}">
+                    {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
+                    <div class="col-sm-6">
+                        {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required','step'=>"any"]) !!}
+                        {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+                    </div>
                 </div>
+            @endif
+
+            <h3>Add subproduct</h3>
+            <div class="form-group">
+                {!! Form::label('subproduct', 'Customize', ['class' => 'col-sm-3 control-label']) !!}
+                <button type="button" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "customize_button"/>
+                </button>
+                <ul class="col-sm-6" id = "ul_customize" style="list-style-type: none">
+
+                </ul>
             </div>
 
             <div class="form-group">
@@ -103,15 +116,47 @@
             </div>
             {!! Form::close() !!}
 
-            @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            @if(count($product->subproducts)!=0)
+                <hr>
+                <h2>Subproducts</h2>
+                <hr>
+                <div style="width:600px;">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Subproduct_name</th>
+                            <th>Subproduct price</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($product->subproducts as $key => $subproduct)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $subproduct->name }}</td>
+                                <td>{{$subproduct->price }}</td>
+                                <td> <a class = "edit" href="#" data-toggle="modal"
+                                        data-target="#editSubproduct"
+                                        data-name="{{$subproduct->name}}"
+                                        data-price="{{$subproduct->price}}"
+                                        data-id="{{$subproduct->id}}">Edit
+                                    </a> |
+                                    <a  class = "delete" href="#"
+                                        data-toggle="modal"
+                                        data-target="#deleteSubproductModal"
+                                        data-id="{{$subproduct->id}}">Delete</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endif
         </div>
     </div>
+
+    @include('admin/products/modals/edit')
+    @include('admin/products/modals/deleteSubproduct')
 @endsection
 
 
@@ -188,6 +233,45 @@
         });
 
 
+
+
+        var i=0;
+        $("#customize_button").on("click", function () {
+            $('.price').addClass('hidden');
+            $('#ul_customize').append($('<li>' +
+                    '<label>Name</label><input type="text" name="customize['+i+']['+'name'+']" class = "form-control" >' +
+                    '<label>Price</label><input type="text" name="customize[' + i++ +']['+'price'+']" class = "form-control" >' +
+                    '<a  class="btn btn-danger btn-xs unselect_button">' +
+                    '<span class="glyphicon glyphicon-minus" aria-hidden="true" />' +
+                    '</a>' +
+                    '</li>'));
+        });
+
+
+        $(document ).on( "click", ".unselect_button" , function() {
+            console.log($('#ul_customize').find('li').length)
+            if(($('#ul_customize').find('li').length - 1) == 0) {
+                $('.price').removeClass('hidden');
+            }
+            $(this).closest('li').remove();
+        });
+
+
+
+
+        $(".edit").on("click",function(){
+            var name = $(this).data('name');
+            var price = $(this).data('price');
+            var id = $(this).data('id');
+
+            $('#updateSubproduct').find("input[name='name']").val(name);
+            $('#updateSubproduct').find("input[name='price']").val(price);
+            $('#updateSubproduct').find("input[name='id']").val(id);
+        });
+
+        $('.delete').on('click',function(){
+            $('#deleteSubproduct').find("input[name='id']").val($(this).data('id'));
+        });
 
 
     </script>

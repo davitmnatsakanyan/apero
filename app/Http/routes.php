@@ -99,6 +99,8 @@ Route::group([
     Route::get('products/blocked', 'ProductsController@blockedProducts');
     Route::get('products/create/{id}', 'ProductsController@getKitchens');
     Route::get('products/create/menu/{id}', 'ProductsController@getMenus');
+    Route::post('products/change_cutom','ProductsController@postUpdateSubproduct');
+    Route::post('products/deleteSubproduct', 'ProductsController@postDeleteSubproduct');
     Route::resource('products', 'ProductsController');
 
 
@@ -131,6 +133,7 @@ Route::group([
         Route::get('view', 'AccountController@getView');
     });
     Route::controller('settings', 'SettingsController');
+    Route::post('order','OrderController@index');
 
 });
 
@@ -244,7 +247,7 @@ Route::get('search/caterers', 'SearchController@getCaterers');
 
 
 
-Route::post('order','OrderController@index');
+
 
 
 //Route::any('{catchall}', function () {

@@ -88,7 +88,7 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                     is_accepted:        is_accepted
                 },
                 method : "POST",
-                url : "order"
+                url : "user/order"
             }
         ).success(function (response) {
                 if(response.success == 1){

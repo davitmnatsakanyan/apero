@@ -14,7 +14,6 @@
                         <th>S.No</th>
                         <th> Name</th>
                         <th> Ingredinets</th>
-                        <th> Price</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -26,7 +25,6 @@
                             <td>{{ $x }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->ingredinets }}</td>
-                            <td>{{ $item->price }}</td>
                             <td>
                                 <a href="{{ url('/admin/products/' . $item->id) }}" class="btn btn-success btn-xs"
                                    title="View Product"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>

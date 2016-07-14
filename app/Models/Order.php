@@ -22,4 +22,15 @@ class Order extends Model
        'remember_token',
        'billing_address'
    ];
+
+   public function caterer()
+   {
+      return $this->belongsTo(Caterer::class);
+   }
+   
+   public function products()
+   {
+      return  $this->belongsToMany(Product::class,'order_products')->withPivot('subproduct_id');
+   }
+
 }

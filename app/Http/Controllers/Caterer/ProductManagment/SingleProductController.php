@@ -71,9 +71,9 @@ class SingleProductController extends CatererBaseController
             'name' => 'required',
             'avatar' => 'required|image',
             'ingredinets' => 'required',
-            'price' => 'required_without_all:costumize|integer',
-            'costumize.*.name' => 'required_without:price',
-            'costumize.*.price' => 'required_without:price|integer',
+            'price' => 'required_without_all:customize|integer',
+            'customize.*.name' => 'required_without:price',
+            'customize.*.price' => 'required_without:price|integer',
             'menu' => 'required',
             'kitchen' => 'required',
         ]);
@@ -89,12 +89,12 @@ class SingleProductController extends CatererBaseController
 
         if ($product = Product::create($product)) {
             $this->uploadFile($image, $product['avatar']);
-            if (!is_null($request->costumize))
-                foreach ($request->costumize as $costumize)
+            if (!is_null($request->customize))
+                foreach ($request->customize as $customize)
                     Subproduct::create([
                         'product_id' => $product->id,
-                        'price' => $costumize['price'],
-                        'name' => $costumize['name'],
+                        'price' => $customize['price'],
+                        'name' => $customize['name'],
                     ]);
             return redirect('caterer/product/single')->with('success', 'Product successfully added.');
         } else {
@@ -185,23 +185,18 @@ class SingleProductController extends CatererBaseController
         }
     }
 
-    public function postUpdateSubproduct()
+    public function postUpdateSubproduct(Request $request)
     {
-        $request =  request();
         $subproduct = Subproduct::findOrFail( $request->id);
-        if(Product::findOrFail($subproduct->product_id)->caterer_id === $this->caterer->id())
-        {
             if($subproduct->update(['name' => $request->name,'price' => $request->price]) )
                 return back()->with('success','Subproduct updated successfully.');
             return back()->withErrors('Something went wrong.');
-        }
 
         return back();
     }
 
-    public function postDeleteSubproduct()
+    public function postDeleteSubproduct( Request $request)
     {
-        $request =  request();
         $subproduct = Subproduct::findOrFail( $request->id);
         if(Product::findOrFail($subproduct->product_id)->caterer_id === $this->caterer->id())
         {
