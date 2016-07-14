@@ -52,12 +52,12 @@
 
         var i=0;
 
-        $("#costumize_button ").on("click", function () {
+        $("#customize_button ").on("click", function () {
 //            alert('costumize');
             $('.price').addClass('hidden');
-            $('#ul_costumize').append($('<li>' +
-                    '<label>Name</label><input type="text" name="costumize['+i+']['+'name'+']" class = "form-control" >' +
-                    '<label>Price</label><input type="text" name="costumize[' + i++ +']['+'price'+']" class = "form-control" >' +
+            $('#ul_customize').append($('<li>' +
+                    '<label>Name</label><input type="text" name="customize['+i+']['+'name'+']" class = "form-control" >' +
+                    '<label>Price</label><input type="text" name="customize[' + i++ +']['+'price'+']" class = "form-control" >' +
                        '<a  class="btn btn-danger btn-xs unselect_button">' +
                           '<span class="glyphicon glyphicon-minus" aria-hidden="true" />' +
                        '</a>' +
@@ -66,8 +66,8 @@
 
 
         $(document ).on( "click", ".unselect_button" , function() {
-            console.log($('#ul_costumize').find('li').length)
-            if(($('#ul_costumize').find('li').length - 1) == 0) {
+            console.log($('#ul_customize').find('li').length)
+            if(($('#ul_customize').find('li').length - 1) == 0) {
                 $('.price').removeClass('hidden');
             }
           $(this).closest('li').remove();

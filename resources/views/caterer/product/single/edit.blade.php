@@ -33,8 +33,8 @@
 
 
         var i=0;
-        $("#customize_button ").on("click", function () {
-//           alert('costumize');
+        $("#customize_button").on("click", function () {
+            $('.price').addClass('hidden');
             $('#ul_customize').append($('<li>' +
                     '<label>Name</label><input type="text" name="customize['+i+']['+'name'+']" class = "form-control" >' +
                     '<label>Price</label><input type="text" name="customize[' + i++ +']['+'price'+']" class = "form-control" >' +
@@ -46,7 +46,11 @@
 
 
         $(document ).on( "click", ".unselect_button" , function() {
-            $(this).closest('li').html('');
+            console.log($('#ul_customize').find('li').length)
+            if(($('#ul_customize').find('li').length - 1) == 0) {
+                $('.price').removeClass('hidden');
+            }
+            $(this).closest('li').remove();
         });
 
 

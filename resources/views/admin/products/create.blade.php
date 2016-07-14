@@ -29,7 +29,7 @@
                 {!! Form::label('kitchen', 'Kitchen', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     <div class="col-sm-6">
-                        <select class="selectpicker form-control" id="kitchen" name="kitcehn" data-placeholder="Select kitchen">
+                        <select class="selectpicker form-control" id="kitchen" name="kitchen" data-placeholder="Select kitchen">
                         </select>
                         {!! $errors->first('caterer', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -82,19 +82,34 @@
                 </div>
             </div>
 
-            <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
+            <div class="form-group price {{ $errors->has('price') ? 'has-error' : ''}}">
                 {!! Form::label('price', 'Price (EUR)', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::number('price', null, ['class' => 'form-control']) !!}
                     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+
+
+
+            <div class="form-group">
+                {!! Form::label('subproduct', 'Customize', ['class' => 'col-sm-3 control-label']) !!}
+                <button type="button" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "customize_button"/>
+                </button>
+                <ul class="col-sm-6" id = "ul_customize" style="list-style-type: none">
+
+                </ul>
+            </div>
+
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-3">
                     {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
                 </div>
             </div>
+
+
             {!! Form::close() !!}
 
 
@@ -172,5 +187,27 @@
                 }
             });
         });
+
+        var i=0;
+        $("#customize_button").on("click", function () {
+            $('.price').addClass('hidden');
+            $('#ul_customize').append($('<li>' +
+                    '<label>Name</label><input type="text" name="customize['+i+']['+'name'+']" class = "form-control" >' +
+                    '<label>Price</label><input type="text" name="customize[' + i++ +']['+'price'+']" class = "form-control" >' +
+                    '<a  class="btn btn-danger btn-xs unselect_button">' +
+                    '<span class="glyphicon glyphicon-minus" aria-hidden="true" />' +
+                    '</a>' +
+                    '</li>'));
+        });
+
+
+        $(document ).on( "click", ".unselect_button" , function() {
+            console.log($('#ul_customize').find('li').length)
+            if(($('#ul_customize').find('li').length - 1) == 0) {
+                $('.price').removeClass('hidden');
+            }
+            $(this).closest('li').remove();
+        });
+
     </script>
 @endsection

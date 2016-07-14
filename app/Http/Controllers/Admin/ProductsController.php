@@ -11,6 +11,7 @@ use App\Models\Kitchen;
 use App\Models\Menu;
 use App\Models\KitchenMenu;
 use App\Models\CatererKitchen;
+use App\Models\Subproduct;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session, Image;
@@ -46,7 +47,19 @@ class ProductsController extends AdminBaseController
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'avatar' => 'required|image', 'ingredinets' => 'required', 'price' => 'required|integer', 'caterer' => 'required', 'menu' => 'required']);
+        $this->validate($request, [
+            'caterer' => 'required',
+            'kitchen' => 'required',
+            'menu' => 'required',
+            'name' => 'required',
+            'avatar' => 'required',
+            'ingredinets' => 'required',
+            'price' => 'required_without_all:customize|integer',
+            'customize.*.name' => 'required_without:price',
+            'customize.*.price' => 'required_without:price|integer',
+        ]);
+
+
         $product = $request->except(['caterer', 'menu']);
         $product ['caterer_id'] = $request ['caterer'];
         $product ['menu_id'] = $request ['menu'];
@@ -58,6 +71,13 @@ class ProductsController extends AdminBaseController
 
         if (Product::create($product)) {
             $this->uploadFile($image, $product['avatar']);
+            if (!is_null($request->costumize))
+                foreach ($request->costumize as $costumize)
+                    Subproduct::create([
+                        'product_id' => $product->id,
+                        'price' => $costumize['price'],
+                        'name' => $costumize['name'],
+                    ]);
             return redirect('admin/products')->with('success', 'Product successfully added.');
         } else {
             return back()->withErrors('Something went wrong.');
@@ -88,7 +108,7 @@ class ProductsController extends AdminBaseController
      */
     public function edit($id)
     {
-        $product = Product::with('caterer','kitchen','menu')->findOrFail($id);
+        $product = Product::with('caterer','kitchen','menu','subproducts')->findOrFail($id);
         $caterers = Caterer::all();
         $kitchens = $this->getKitchens($product->caterer->id);
         $menus = $this->getMenus($product->kitchen->id);
@@ -104,23 +124,41 @@ class ProductsController extends AdminBaseController
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'ingredinets' => 'required', 'price' => 'required|integer', 'caterer' => 'required', 'menu' => 'required']);
-        $data = $request->except(['caterer', 'menu']);
+        $this->validate($request, [
+            'caterer' => 'required',
+            'kitchen' => 'required',
+            'menu' => 'required',
+            'name' => 'required',
+            'ingredinets' => 'required',
+            'price' => 'required_without_all:customize|integer',
+            'customize.*.name' => 'required_without:price',
+            'customize.*.price' => 'required_without:price|integer',
+        ]);
+
+        $data = $request->except(['caterer', 'menu','kitchen' ,'customize']);
         $data ['caterer_id'] = $request ['caterer'];
         $data ['menu_id'] = $request ['menu'];
         $data ['kitchen_id'] = $request ['kitchen'];
+        $product = Product::findOrFail($id);
 
         if($request->avatar != NULL)
         {
             $image = $request->file('avatar');
             $extension = $image->getClientOriginalExtension();
             $data['avatar'] = time() . "." . $extension;
+            $old_image = $product['avatar'];
+            $this->uploadFile($image, $product['avatar'],$old_image);
         }
 
-        $product = Product::findOrFail($id);
-        $old_image = $product['avatar'];
+
         if ($product->update($data)) {
-            $this->uploadFile($image, $product['avatar'],$old_image);
+            if (!is_null($request->customize))
+                foreach ($request->customize as $customize)
+                    Subproduct::create([
+                        'product_id' => $product->id,
+                        'price' => $customize['price'],
+                        'name' => $customize['name'],
+                    ]);
             return redirect('admin/products')->with('success', 'Product updated successfully.');
         } else {
             return back()->withErrors('Something went wrong.');
@@ -217,5 +255,27 @@ class ProductsController extends AdminBaseController
         $destinationPath = 'images/products/';
         Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
         return $avatar;
+    }
+
+
+
+    public function postUpdateSubproduct(Request $request)
+    {
+        $subproduct = Subproduct::findOrFail( $request->id);
+            if($subproduct->update(['name' => $request->name,'price' => $request->price]) )
+                return back()->with('success','Subproduct updated successfully.');
+            return back()->withErrors('Something went wrong.');
+
+        return back();
+    }
+
+    public function postDeleteSubproduct( Request $request)
+    {
+        $subproduct = Subproduct::findOrFail( $request->id);
+            if($subproduct->delete() )
+                return back()->with('success','Subproduct deleted successfully.');
+            return back()->withErrors('Something went wrong.');
+
+        return back();
     }
 }

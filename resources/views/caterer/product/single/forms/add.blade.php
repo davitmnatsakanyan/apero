@@ -73,11 +73,11 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('subproduct', 'Costumize', ['class' => 'col-sm-3 control-label']) !!}
+    {!! Form::label('subproduct', 'Customize', ['class' => 'col-sm-3 control-label']) !!}
     <button type="button" class="btn btn-success btn-xs">
-     <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "costumize_button"/>
+     <span class="glyphicon glyphicon-plus" aria-hidden="true" id = "customize_button"/>
     </button>
-    <ul class="col-sm-6" id = "ul_costumize" style="list-style-type: none">
+    <ul class="col-sm-6" id = "ul_customize" style="list-style-type: none">
 
     </ul>
 </div>

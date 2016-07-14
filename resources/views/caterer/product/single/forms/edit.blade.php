@@ -47,7 +47,7 @@
 </div>
 
 @if(count($product->subproducts)==0)
-    <div class="form-group {{ $errors->has('price') ? 'has-error' : ''}}">
+    <div class="form-group price {{ $errors->has('price') ? 'has-error' : ''}}">
         {!! Form::label('price', 'Price', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
             {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required','step'=>"any"]) !!}
