@@ -2,7 +2,7 @@
 @section('content')
 <div style="width: 600px; margin-top: 70px">
 @include('layouts/messages')
-@if(!empty($orders))
+@if(!$orders->isEmpty())
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -33,6 +33,8 @@
         @endforeach
         </tbody>
     </table>
+    @else
+    No Orders to show
 @endif
 </div>
 @stop

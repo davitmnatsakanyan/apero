@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
-use App\Models\Guest;
+use App\User;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Http\Controllers\User\UserBaseController;
 use App\Models\Product;
 use App\Models\Subproduct;
 use Auth, View;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends UserBaseController
@@ -18,10 +20,11 @@ class OrderController extends UserBaseController
 
         if ($request->is_accepted) {
             if ($this->user->check())
-                $this->userOrder($request);
-            $this->guestOrder($request);
+              return   $this->userOrder($request);
+            else
+            return $this->guestOrder($request);
         }
-
+        else
         return response()->json(['success' => 0]);
     }
 
@@ -33,9 +36,10 @@ class OrderController extends UserBaseController
         $data['caterer_id'] = $request->products[0]['caterer_id'];
         $data['status'] = 0;  //status = Idle
         $data ['total_cost'] = $this->count_total_cost($request->products);
+        $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
+        $data ['is_user_order'] = 1;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->products);
-        dd(22);
         return response()->json(['success' => 1]);
     }
 
@@ -44,15 +48,15 @@ class OrderController extends UserBaseController
         foreach ($products as $product) {
             $data = [
                 'order_id' => $order_id,
-                'product_id' => $product ['id'],
+                'product_id' => $product ['product_id'],
                 'amount' => $product ['count'],
                 'price' => $product ['count'] * $product ['price'],
             ];
             if (isset($product['sub_id'])) {
                 $data ['subproduct_id'] = $product['sub_id'];
-                $data ['description'] = $products ['description'];
+                $data ['description'] = $product ['description'];
             } else {
-                $data ['sub_id'] = 0;
+                $data ['subproduct_id'] = 0;
             }
 
             OrderProduct::create($data);
@@ -68,6 +72,8 @@ class OrderController extends UserBaseController
         $data['status'] = 0;  //status = Idle
         $data['caterer_id'] = $request->products[0]['caterer_id'];
         $data ['total_cost'] = $this->count_total_cost($request->products);
+        $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
+        $data ['is_user_order'] = 0;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->products);
         return response()->json(['success' => 1]);
@@ -76,9 +82,9 @@ class OrderController extends UserBaseController
 
     public function createGuestIfNOtExists($request)
     {
-        $guest = Guest::where('email', $request->email)->first();
+        $guest = User::where('email', $request->email)->first();
         if (is_null($guest)) {
-            $data['company'] = $request->company;
+            $data['name'] = $request->company;
             $data['address'] = $request->delivery_address;
             $data['zip'] = $request->delivery_zip;
             $data['city'] = $request->delivery_city;
@@ -86,8 +92,9 @@ class OrderController extends UserBaseController
             $data['email'] = $request->email;
             $data['mobile'] = $request->mobile;
             $data['phone'] = $request->phone;
+            $data ['is_user'] = 0;
             $data['remember_token'] = $request->_token;
-            $guest = Guest::create($data);
+            $guest = User::create($data);
         }
 
         return $guest;
@@ -95,11 +102,10 @@ class OrderController extends UserBaseController
 
     public function count_total_cost($products)
     {
-        dd($products);
         $total = 0;
         foreach ($products as $product) {
             if (isset($product['sub_id']))
-                $price = Subproduct::findOrFail($product ['product_id'])->price;
+                $price = Subproduct::findOrFail($product ['sub_id'])->price;
             else
                 $price = Product::findOrFail($product ['product_id'])->price;
             $total += $price * $product ['count'];

@@ -32,7 +32,8 @@ class UserService
             'phone'     => $data['phone'],
             'mobile'    => $data['mobile'],
             'fax'       => $data['fax'],
-            'created_ip' => $data['created_ip']
+            'created_ip' => $data['created_ip'],
+            'is_user'   =>1,
         ]);
 
         return $model;

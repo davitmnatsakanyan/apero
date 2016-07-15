@@ -21,6 +21,7 @@
                           <li><a href="{{ url('caterer/product/single')}}">My Single Product</a></li>
                           <li><a href="{{ url('caterer/product/package')}}">My Packages</a></li>
                           <li><a href="{{ url('caterer/product/kitchens')}}">My kitchens</a></li>
+                          <li><a href="{{ url('caterer/order')}}">Orders</a></li>
                       </ul>
                   </div>
               </li>

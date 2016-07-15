@@ -66,6 +66,7 @@
 
         $('.delete').on('click',function(){
             $('#deleteSubproduct').find("input[name='id']").val($(this).data('id'));
+
         });
 
 

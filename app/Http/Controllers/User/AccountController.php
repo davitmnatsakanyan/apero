@@ -16,7 +16,7 @@ class AccountController extends UserBaseController
      */
     public function getIndex()
     {
-        $orders = Order::with('caterer','products')->where('user_id' ,$this->user->id())->get();
+        $orders = Order::with('caterer','products')->where(['user_id' => $this->user->id(),'is_user_order' => 1])->latest()->get();
         foreach ($orders as $key =>$order){
             switch ($order['status']){
                 case 0:$orders[$key]['status'] = 'Idle';
@@ -33,7 +33,7 @@ class AccountController extends UserBaseController
                     break;
             };
             foreach($order->products as $key2 =>$product)
-            if($product->pivot->subproduct_id != 0)
+            if($product->pivot->subproduct_id !== 0)
             {
                 $subprodcut = Subproduct::findOrFail($product->pivot->subproduct_id);
                 $orders [$key]->products[$key2]['name'] .= " " . $subprodcut['name'];
