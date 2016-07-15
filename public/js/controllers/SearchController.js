@@ -1,4 +1,4 @@
-app.controller('SearchController', ['$scope', 'SearchModel', '$timeout', function ($scope, SearchModel, $timeout) {
+app.controller('SearchController', ['sharedProperties', '$scope', 'SearchModel', '$timeout', function (sharedProperties, $scope, SearchModel, $timeout) {
 
     $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
@@ -39,10 +39,18 @@ app.controller('SearchController', ['$scope', 'SearchModel', '$timeout', functio
         }
     };
 
-    SearchModel.getIndex().then(function (response) {
-        $scope.caterers = response.data.caterers;
-        $scope.kitchens = response.data.kitchens;
+    if(sharedProperties.getProperty()){
+        var data = sharedProperties.getProperty();
+        
+        $scope.caterers = data.caterers;
+        $scope.kitchens = data.kitchens;
+    }
+    else {
+        SearchModel.getIndex().then(function (response) {
+            $scope.caterers = response.data.caterers;
+            $scope.kitchens = response.data.kitchens;
 
-    });
+        });
+    }
 
 }]);

@@ -11,7 +11,7 @@
 						<form class="clearfix">
 							<div class="col-sm-4">
 								<div class="search">
-									<input type="text" name="search" placeholder="PLZ  eingeben...">
+									<input type="text" ng-model="data.city" name="search" placeholder="PLZ  eingeben...">
 								</div>
 							</div>
 							<div class="col-sm-4">
@@ -31,7 +31,7 @@
 							</div>
 							<div class="col-xs-12">
 								<div class="finden">
-									<a ng-href="#/caterers" class="btn">Apero-Anbieter finden</a>
+									<a ng-click="search()" class="btn">Apero-Anbieter finden</a>
 								</div>
 							</div>
 						</form>

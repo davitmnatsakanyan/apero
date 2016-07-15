@@ -163,7 +163,9 @@ return [
         Skovmand\Mailchimp\MailchimpServiceProvider::class,
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        Ixudra\Curl\CurlServiceProvider::class
 
     ],
 
@@ -217,8 +219,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Image' => Intervention\Image\Facades\Image::class
-        
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Curl' => Ixudra\Curl\Facades\Curl::class
 
     ],
 

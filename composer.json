@@ -13,7 +13,9 @@
         "skovmand/mailchimp-laravel": "1.*",
         "appzcoder/crud-generator": "^1.1",
         "intervention/image": "^2.3",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "ixudra/curl": "6.*",
+        "guzzlehttp/guzzle": "^6.2"
         
     },
     "require-dev": {

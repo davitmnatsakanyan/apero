@@ -1,4 +1,6 @@
 <?php
+
+
 Route::get('aaa', function () {
     dd(bcrypt('user'));
 });
@@ -245,14 +247,40 @@ Route::get('bestellen', function () {
 });
 Route::get('search/caterers', 'SearchController@getCaterers');
 
-
-
-
-
-
 //Route::any('{catchall}', function () {
 //    return redirect('/');
 //})->where('catchall', '(.*)');
+//Route::get('distance/{from}/{to}', function($from, $to){
+//    echo '<a href="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='.$from.'&destinations='.$to.'&key=AIzaSyAGarKqa_51bXdWy_ly_d8Znbnc36SqKfk">get distance </a>';
+//});
+
 Route::get('distance/{from}/{to}', function($from, $to){
-    echo '<a href="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='.$from.'&destinations='.$to.'&key=AIzaSyAGarKqa_51bXdWy_ly_d8Znbnc36SqKfk">get distance </a>';
+    $data = [
+        'units' => 'imperial',
+        'origins' => $from,
+        'destinations' => $to,
+        'key' => env('GOOGLE_DISTACE_MATRIX_API_KEY')
+    ];
+
+//    $response = Curl::to('https://maps.googleapis.com/maps/api/distancematrix/json')
+//        ->withData($data)
+//        ->get();
+//    dd($response);
+
+    $client = new \GuzzleHttp\Client();
+    $res = $client->request('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json', [
+        'units' => 'imperial',
+        'origins' => $from,
+        'destinations' => $to,
+        'key' => env('GOOGLE_DISTACE_MATRIX_API_KEY')
+    ]);
+    echo $res->getStatusCode();
+// 200
+    echo $res->getHeaderLine('content-type');
+// 'application/json; charset=utf8'
+    echo $res->getBody();
+// {"type":"User"...'
+});
+Route::get('map', function(){
+    return view('welcome');
 });
