@@ -14,6 +14,7 @@ class UserBaseController extends Controller
     
     public function __construct() 
     {
+        
         $this->user = Auth::guard('user');
         View::share('user', $this->user->user());
     }

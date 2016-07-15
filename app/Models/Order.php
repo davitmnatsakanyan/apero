@@ -13,6 +13,7 @@ class Order extends Model
        'delivery_zip',
        'delivery_city',
        'delivery_country',
+       'delivery_time',
        'email',
        'phone',
        'mobile',
@@ -20,7 +21,8 @@ class Order extends Model
        'status',
        'total_cost',
        'remember_token',
-       'billing_address'
+       'billing_address',
+       'is_user_order',
    ];
 
    public function caterer()
@@ -30,7 +32,7 @@ class Order extends Model
    
    public function products()
    {
-      return  $this->belongsToMany(Product::class,'order_products')->withPivot('subproduct_id');
+      return  $this->belongsToMany(Product::class,'order_products')->withPivot('subproduct_id','amount' ,'description');
    }
 
 }

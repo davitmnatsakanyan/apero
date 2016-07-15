@@ -103,6 +103,16 @@
 						</li>
 					</ul>
 				</li>
+				<li>
+					<a href="{{url('admin/orders')}}">
+						<i class="fa fa-shopping-cart"></i>
+						<span class="title">
+							Orders
+						</span>
+						<span class="arrow ">
+						</span>
+					</a>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

@@ -79,6 +79,8 @@ Route::group([
     Route::controller('dashboard', 'DashboardController');
     Route::controller('user', 'UserManagmentController');
     Route::resource('members', 'MembersController');
+    
+    Route::get('orders', 'OrdersController@getIndex');
 
 
     Route::get('caterers/{id}/block', 'CaterersController@block');
@@ -135,9 +137,10 @@ Route::group([
         Route::get('view', 'AccountController@getView');
     });
     Route::controller('settings', 'SettingsController');
-    Route::post('order','OrderController@index');
 
 });
+
+Route::post('order','OrderController@index');
 
 /**
  * Caterer routes
@@ -153,6 +156,10 @@ Route::group([
     Route::get('/' ,'AccountController@getIndex');
     Route::controller('account', 'AccountController');
     Route::controller('settings', 'SettingsController');
+    
+    Route::get('order' ,'OrdersController@getIndex');
+    Route::post('order/change-status' , 'OrdersController@changeStatus');
+
     Route::group([
         'prefix' => 'product',
         'namespace' => 'ProductManagment',
@@ -176,6 +183,7 @@ Route::group([
 
             Route::post('change_cutom','SingleProductController@postUpdateSubproduct');
             Route::post('deleteSubproduct', 'SingleProductController@postDeleteSubproduct');
+
         });
 
 
