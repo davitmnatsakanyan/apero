@@ -40,12 +40,14 @@ app.controller('SearchController', ['sharedProperties', '$scope', 'SearchModel',
     };
 
     if(sharedProperties.getProperty()){
+
         var data = sharedProperties.getProperty();
-        
+       
         $scope.caterers = data.caterers;
         $scope.kitchens = data.kitchens;
     }
     else {
+        console.log(2);
         SearchModel.getIndex().then(function (response) {
             $scope.caterers = response.data.caterers;
             $scope.kitchens = response.data.kitchens;

@@ -13,7 +13,7 @@ class SearchController extends Controller
     public  function getCaterers(Request $request){
         if(count($request->all()) > 0){
 
-            $caterers = Caterer::with('kitchens', 'zips')->get();
+            $caterers = Caterer::with('kitchens', 'zips', 'cookingtime')->get();
             $filtered = $caterers->filter(function($item) use ($request){
                 foreach ($item->zips as $zip){
                     if($zip->city == $request->city){
@@ -24,9 +24,7 @@ class SearchController extends Controller
 
             $caterers =  $filtered->values()->all();
 
-            foreach ($caterers as $caterer){
-                
-            }
+           
         }
         else {
             $caterers = Caterer::with('kitchens')->get();

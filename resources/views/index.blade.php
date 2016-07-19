@@ -76,6 +76,9 @@
     <script src="/js/models/CatererAccountModel.js"></script>
     <script src="/js/models/CatererModel.js"></script>
     <script src="/js/models/SearchModel.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb-bWFpEeZ2AN5uAlZQG2iY8n5GhQOkE4">
+    </script>
 @yield('scrips')
 </body>
 </html>

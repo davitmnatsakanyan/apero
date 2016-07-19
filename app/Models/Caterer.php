@@ -74,4 +74,8 @@ class Caterer extends Authenticatable
     public function products(){
         return $this->hasMany(Product::class);
     }
+    
+    public function cookingtime(){
+        return $this->hasOne(CookingTime::class);
+    }
 }

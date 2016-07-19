@@ -16,19 +16,20 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="anlassgrosse">
-									<select name="anlassgrosse">
-										<option value="volvo">Anlassgrosse</option>
-										<option value="saab">1-5</option>
-										<option value="opel">6-10</option>
-										<option value="audi">11-X</option>
+									<select name="group" ng-model="group">
+										<option value="group1">Anlassgrosse</option>
+										<option value="group2">1-5</option>
+										<option value="group3">6-10</option>
+										<option value="group4">11-X</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="lieferdatum">
-									<input type='text' placeholder="Lieferdatum" id='datetimepicker4'>
+									<input type='text'  ng-model="date"  placeholder="Lieferdatum" id='datetimepicker4'>
 								</div>
 							</div>
+							<% date %>
 							<div class="col-xs-12">
 								<div class="finden">
 									<a ng-click="search()" class="btn">Apero-Anbieter finden</a>
