@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Models;
+use App\User;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+
+   use SoftDeletes;
+
    protected $fillable = [
        'user_id',
        'caterer_id',
@@ -23,7 +28,10 @@ class Order extends Model
        'remember_token',
        'billing_address',
        'is_user_order',
+       'admin_id',
    ];
+
+   protected $dates = ['deleted_at'];
 
    public function caterer()
    {
@@ -33,6 +41,16 @@ class Order extends Model
    public function products()
    {
       return  $this->belongsToMany(Product::class,'order_products')->withPivot('subproduct_id','amount' ,'description');
+   }
+
+   public function user()
+   {
+      return $this->belongsTo(User::class);
+   }
+
+   public  function admin()
+   {
+      return $this->belongsTo(Admin::class);
    }
 
 }

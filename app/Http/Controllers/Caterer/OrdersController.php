@@ -50,8 +50,13 @@ class OrdersController extends CatererBaseController
     
     public function changeStatus(Request $request)
     {
-        Order::findOrFail($request->order_id)->update(['status' =>$request->status]);
-        return back()->with('success' , 'Product status changed succrssfully');
+        $order = Order::findOrFail($request->order_id);
+        if( $order->caterer_id == $this->caterer->id() ) {
+            $order->update(['status' => $request->status]);
+            return back()->with('success', 'Order status changed succrssfully');
+        }
+
+        return back();
     }
 
 

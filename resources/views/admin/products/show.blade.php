@@ -62,7 +62,6 @@
             </div>
 
             @if(count($product->subproducts)!=0)
-                <h2>Subproducts</h2>
                 <h3>Costum products</h3>
                 <table class="table table-bordered table-striped table-hover">
                     <tbody>
