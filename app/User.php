@@ -45,4 +45,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->orders()->withTrashed()->forceDelete();
+        });
+    }
 }

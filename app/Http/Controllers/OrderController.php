@@ -17,7 +17,6 @@ class OrderController extends UserBaseController
 
     public function index(Request $request)
     {
-
         if ($request->is_accepted) {
             if ($this->user->check())
               return   $this->userOrder($request);

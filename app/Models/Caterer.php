@@ -74,6 +74,17 @@ class Caterer extends Authenticatable
     public function products(){
         return $this->hasMany(Product::class);
     }
+
+
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($caterer) {
+            //stex kjnjem sax
+            $caterer->orders()->withTrashed()->forceDelete();
+        });
+    }
     
     public function cookingtime(){
         return $this->hasOne(CookingTime::class);

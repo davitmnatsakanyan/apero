@@ -23,6 +23,7 @@ class HomeController extends Controller
             View::share('caterer',$this->caterer);
          }
     }
+    
     public function getIndex()
     {
         return view('index');

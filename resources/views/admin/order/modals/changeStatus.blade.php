@@ -7,30 +7,29 @@
                 <h4 class="modal-title" id="myModalLabel">Change status</h4>
             </div>
             <div class="modal-body">
-                <form id="changeStatus" action="{{ url('caterer/order/change-status'  )}}" method="POST">
+                <form id="changeStatus" action="{{ url('admin/orders/changeStatus'  )}}" method="POST">
                     {{ csrf_field() }}
                     <div class="form_group">
                         <label>Status</label><br/>
                             <label class="radio-inline">
-                                <input name="status" id="Idle" value="0" type="radio" > Idle
+                                <input type="radio" name="status" id="Idle" value="0"  > Idle
                             </label>
                             <label class="radio-inline">
-                                <input name="status" id="Processing" value="1"  type="radio" > Processing
+                                <input  type="radio"  name="status" id="Processing" value="1"  > Processing
                             </label>
                             <label class="radio-inline">
-                                <input name="status" id="Shipping" value="2" type="radio"> Shipping
+                                <input  type="radio" name="status" id="Shipping" value="2" > Shipping
                             </label>
                             <label class="radio-inline">
-                                <input name="status" id="Complete" value="3" type="radio"> Complete
+                                <input  type="radio" name="status" id="Complete" value="3" > Complete
                             </label>
                             <label class="radio-inline">
-                                <input name="status" id="Deleted" value="4" type="radio"> Deleted
+                                <input type="radio" name="status" id="Denied" value="4" > Denied
                             </label>
-                            <label class="radio-inline">
-                                <input name="status" id="Denied" value="5" type="radio"> Denied
-                            </label>
-
+                    </div>
+                    <div class="form_group">
                         <input type="hidden" name="order_id">
+                        <input type="hidden" name="status1">
                     </div>
                 </form>
             </div>
