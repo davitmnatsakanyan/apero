@@ -76,6 +76,10 @@ class Caterer extends Authenticatable
     }
 
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     protected static function boot() {
         parent::boot();
@@ -88,5 +92,10 @@ class Caterer extends Authenticatable
     
     public function cookingtime(){
         return $this->hasOne(CookingTime::class);
+    }
+
+    public function contact_person()
+    {
+        return $this->hasOne(ContactPerson::class);
     }
 }

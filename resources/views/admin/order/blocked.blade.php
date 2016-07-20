@@ -4,7 +4,7 @@
     <div class="page-content-wrapper">
         <div class="page-content">
             @include ('layouts/messages')
-            <div><h2>Orders</h2></div>
+            <div><h2>Blocked Orders</h2></div>
             @if(!$orders->isEmpty())
                 <table class="table table-striped table-bordered">
                     <thead>

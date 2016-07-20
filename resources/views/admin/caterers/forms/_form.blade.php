@@ -1,15 +1,25 @@
+{!! Form::model($caterer, [
+               'method' => 'PATCH',
+               'url' => ['/admin/caterers', $caterer->id],
+               'class' => 'form-horizontal',
+               'files' => true
+           ]) !!}
+
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-6">
+        <div id="imagePreview" style="width: 120px;
+                height: 120px;
+                background-position: center center;
+                background-size: cover;
+                background-image: url( {{url('images/caterers/' . $caterer->avatar)}} );
+                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
+    </div>
+</div>
 <div class="form-group {{ $errors->has('category') ? 'has-error' : ''}}">
     {!! Form::label('company', 'Company', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
         {!! Form::text('company', null, ['class' => 'form-control', 'required' => 'required']) !!}
         {!! $errors->first('company', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-    {!! Form::label('name', 'Name', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('addres') ? 'has-error' : ''}}">
@@ -26,14 +36,17 @@
         {!! $errors->first('pobox', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('zip') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('caterer') ? 'has-error' : ''}}">
     {!! Form::label('zip', 'Zip', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::text('zip', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('zip', '<p class="help-block">:message</p>') !!}
+        <select class="selectpicker form-control" id="zip" name="zip">
+            @foreach($zips as $zip)
+                <option value="{{ $zip->id }}" {{ $zip->id == $caterer->zip ? 'selected' :'' }}>{{$zip['ZIP'] ."  ". $zip['city']}}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
     </div>
-</div>
-<div class="form-group {{ $errors->has('city') ? 'has-error' : ''}}">
+</div><div class="form-group {{ $errors->has('city') ? 'has-error' : ''}}">
     {!! Form::label('city', 'City', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
         {!! Form::text('city', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -54,13 +67,6 @@
         {!! $errors->first('phone', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('mobile') ? 'has-error' : ''}}">
-    {!! Form::label('mobile', 'Mobile', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('mobile', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        {!! $errors->first('mobile', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
 <div class="form-group {{ $errors->has('contry') ? 'has-error' : ''}}">
     {!! Form::label('country', 'Country', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
@@ -71,7 +77,7 @@
 <div class="form-group {{ $errors->has('descripthion') ? 'has-error' : ''}}">
     {!! Form::label('description', 'Descripthion', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::text('description', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::textarea('description', null, ['class' => 'form-control', 'required' => 'required']) !!}
         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -90,16 +96,11 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('avatar') ? 'has-error' : ''}}">
-    {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        {!! Form::file('avatar',null, ['class' => 'form-control']) !!}
-        {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-3">
+        {{--{!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}--}}
+        <button type="submit" name="edit"  value="ci_edit" class="btn btn-primary form-control">Updtae</button>
     </div>
 </div>
 
-<div class="form-group">
-    <div class="col-sm-offset-3 col-sm-3">
-        {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
-    </div>
-</div>
+{!! Form::close() !!}

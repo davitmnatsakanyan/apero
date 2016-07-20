@@ -92,9 +92,14 @@ Route::group([
     Route::get('orders/{id}/block', 'OrdersController@getBlock');
 
 
+
+    Route::get('caterers/blocked', 'CaterersController@blockedCaterers');
+    Route::post('caterers/delivery-area','CaterersController@addDeliveyArea');
     Route::get('caterers/{id}/block', 'CaterersController@block');
     Route::get('caterers/{id}/active', 'CaterersController@activate');
-    Route::get('caterers/blocked', 'CaterersController@blockedCaterers');
+    Route::post('caterers/kitchens/add' , 'CaterersController@addKitchen');
+    Route::get('caterers/{caterer_id}/remove/{zip_id}' , 'CaterersController@removeZipFromDeliveryArea');
+    Route::delete('caterers/{caterer_id}/kitchen/{kitchen_id}' , 'CaterersController@removeKitchen');
     Route::resource('caterers', 'CaterersController');
 
     Route::get('kitchens/{id}/block', 'KitchensController@block');

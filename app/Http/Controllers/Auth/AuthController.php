@@ -97,6 +97,7 @@ class AuthController extends Controller
         $password = $data['password'];
         $data['password'] = bcrypt($data['password']);
         $data['created_ip'] = $request->ip();
+        $data['is_user'] = 1;
         $model = $service->create($data);
 
         if($model)
