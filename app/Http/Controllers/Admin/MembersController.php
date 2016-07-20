@@ -21,7 +21,7 @@ class MembersController extends AdminBaseController
      */
     public function index()
     {
-        $members = User::paginate(15);
+        $members = User::where('is_user',1)->paginate(15);
 
         return view('admin.members.index', compact('members'));
     }
@@ -45,7 +45,6 @@ class MembersController extends AdminBaseController
     {
         $this->validate($request, [
             'name' => 'required',
-            'company' => 'required',
             'address' => 'required',
             'pobox' => 'required',
             'zip' => 'required',
@@ -55,18 +54,9 @@ class MembersController extends AdminBaseController
             'phone' => 'required',
             'mobile' => 'required',
             'password' => 'required',
-            'avatar' => 'image'
         ]);
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $avatar =  $this->uploadFile($file);
-
-        }
-
         User::create([
-            'company' => $request->company,
             'name' => $request->name,
-            'avatar' => isset($avatar) ? $avatar : null,
             'address' => $request->address,
             'pobox' => $request->pobox,
             'zip' => $request->zip,
@@ -77,6 +67,7 @@ class MembersController extends AdminBaseController
             'mobile' => $request->mobile,
             'password' => bcrypt($request->password),
             'created_ip' => $request->ip(),
+            'is_user' => 1,
             'remember_token' => $request->_token
         ]);
 
@@ -108,7 +99,7 @@ class MembersController extends AdminBaseController
      */
     public function edit($id)
     {
-        $member = User::findOrFail($id);
+        $member = User::where('is_user' ,1 )->findOrFail($id);
 
         return view('admin.members.edit', compact('member'));
     }
@@ -161,7 +152,7 @@ class MembersController extends AdminBaseController
             $member->update(['avatar' => $avatar]);
         }
 
-        Session::flash('flash_message', 'Member updated!');
+        Session::flash('success', 'Member updated!');
 
         return redirect('admin/members');
     }
@@ -178,7 +169,7 @@ class MembersController extends AdminBaseController
         unlink('images/users/'.User::find($id)->avatar);
         User::destroy($id);
 
-        Session::flash('flash_message', 'Member deleted!');
+        Session::flash('success', 'Member deleted!');
 
         return redirect('admin/members');
     }
@@ -188,23 +179,13 @@ class MembersController extends AdminBaseController
      * @param null $oldImage
      * @return string
      */
-    public  function uploadFile($image, $oldImage = null){
-        if(!is_null($oldImage)){
-            unlink('images/users/'.$oldImage);
-        }
-        $destinationPath = 'images/users';
-        $extension = $image->getClientOriginalExtension();
-        $avatar = time() . '.' . $extension;
-        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath.'/'.$avatar);
-        return $avatar;
-    }
 
     /**
      * @param $user_id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function getBlock($user_id){
-        User::destroy($user_id);
+        User::where('is_user' ,1)->destroy($user_id);
         return redirect()->back();
     }
 }

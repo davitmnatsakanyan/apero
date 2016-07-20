@@ -23,13 +23,6 @@
                     {!! $errors->first('address', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-            <div class="form-group {{ $errors->has('company') ? 'has-error' : ''}}">
-                {!! Form::label('company', 'Company', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::text('company', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('company', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
             <div class="form-group {{ $errors->has('pobox') ? 'has-error' : ''}}">
                 {!! Form::label('pobox', 'Pobox', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
@@ -86,25 +79,6 @@
                     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-
-            <div class="form-group {{ $errors->has('avatar') ? 'has-error' : ''}}">
-
-                {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::file('avatar', ['class' => 'form-control', 'id' => "uploadFile"]) !!}
-                    {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
-                <div id="imagePreview" style="width: 120px;
-                                                height: 120px;
-                                                background-position: center center;
-                                                background-size: cover;
-                                                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)"></div>
-            </div>
-        </div>
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
             {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
@@ -114,23 +88,3 @@
 </div>
 </div>
 @endsection
-@section('js')
-    <script>
-        $(function() {
-            $("#uploadFile").on("change", function()
-            {
-                var files = !!this.files ? this.files : [];
-                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-
-                if (/^image/.test( files[0].type)){ // only image file
-                    var reader = new FileReader(); // instance of the FileReader
-                    reader.readAsDataURL(files[0]); // read the local file
-
-                    reader.onloadend = function(){ // set image data as background of div
-                        $("#imagePreview").css("background-image", "url("+this.result+")");
-                    }
-                }
-            });
-        });
-    </script>
-    @endsection

@@ -39,10 +39,6 @@
                     <td> {{ $member->pobox }} </td>
                 </tr>
                 <tr>
-                    <th> Company </th>
-                    <td> {{ $member->company }} </td>
-                </tr>
-                <tr>
                     <th> Zip </th>
                     <td> {{ $member->zip }} </td>
                 </tr>
@@ -65,10 +61,6 @@
                 <tr>
                     <th> Mobile </th>
                     <td> {{ $member->mobile }} </td>
-                </tr>
-                <tr>
-                    <th> Created at</th>
-                    <td> {{ $member->created_at }} </td>
                 </tr>
             </tbody>
         </table>

@@ -85,7 +85,7 @@ class SettingsController extends CatererBaseController
     public function getDeliveryArea()
     {
 
-        $delivery_areas = Caterer::with('deliveryAreas')->find($this->caterer->id())->deliveryAreas;
+        $delivery_areas = Caterer::with('zips')->find($this->caterer->id())->zips;
         $zip_codes = ZipCode::with('caterers')->get();
         $zip_codes=  $zip_codes->filter(function($zip_code,$key){
             foreach($zip_code->caterers as $caterer)
