@@ -56,6 +56,8 @@
     <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
 
     <script src="/js/app.js"></script>
+
+    <!-- start controllers -->
     <script src="/js/services/AuthService.js"></script>
     <script src="/js/services/sharedProperties.js"></script>
     <script src="/js/controllers/NavigationController.js"></script>
@@ -67,6 +69,10 @@
     <script src="/js/controllers/OrderController.js"></script>
     <script src="/js/controllers/CartController.js"></script>
     <script src="/js/controllers/ModalController.js"></script>
+    <script src="/js/controllers/UserProfileController.js"></script>
+    <script src="/js/controllers/UserOrdersController.js"></script>
+
+    <!-- end controllers -->
 
 
     <script src="/js/directives/inputText.js"></script>
@@ -76,6 +82,7 @@
     <script src="/js/models/CatererAccountModel.js"></script>
     <script src="/js/models/CatererModel.js"></script>
     <script src="/js/models/SearchModel.js"></script>
+    <script src="/js/models/UserModel.js"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb-bWFpEeZ2AN5uAlZQG2iY8n5GhQOkE4">
     </script>

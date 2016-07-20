@@ -44,12 +44,15 @@ Route::group(array('prefix' => '/templates/user/auth'), function () {
         return view('templates/user/auth.' . $template);
     }));
 });
-Route::group(array('prefix' => '/templates/user/account'), function () {
+Route::group(array('prefix' => '/templates/user'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
-        return view('templates/user/account.' . $template);
+        return view('templates/user.' . $template);
     }));
 });
+
+Route::get('get/caterer/{id}', 'Caterer\CatererController@getCaterer');
+
 
 /**
  * Main routes
@@ -254,7 +257,7 @@ Route::get('caterer', function () {
     return view('caterer/index');
 });
 
-Route::get('get/caterer/{id}', 'Caterer\CatererController@getCaterer');
+
 
 Route::get('bestellen', function () {
     return view('bestellen/index');

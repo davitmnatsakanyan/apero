@@ -19,11 +19,15 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/caterer/account', {
             templateUrl: 'templates/caterer/account/index.blade.php',
-            controller: 'CatererAccountController',
+            controller: 'CatererAccountController'
         })
-        .when('/user/account', {
-            templateUrl: 'templates/user/account/index.blade.php',
-            controller: 'UserController',
+        .when('/user/profile', {
+            templateUrl: 'templates/user/profile.blade.php',
+            controller: 'UserProfileController'
+        })
+        .when('/user/orders', {
+            templateUrl: 'templates/user/orders.blade.php',
+            controller: 'UserOrdersController'
         })
         .when('/caterers', {
             templateUrl: 'templates/caterers.blade.php',

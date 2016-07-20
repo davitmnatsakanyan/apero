@@ -1,7 +1,5 @@
 app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($rootScope, $log, $uibModal, $scope, $routeParams, CatererModel, sharedProperties, $timeout) {
-
-
-    console.log(JSON.parse(localStorage.getItem('cart')));
+    
     $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
     var caterer_id = $routeParams.caterer_id;
@@ -75,7 +73,12 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
 
         }
         else {
-            var orders = JSON.parse(localStorage.getItem('cart'));
+            if(localStorage.getItem('cart')) {
+                var orders = JSON.parse(localStorage.getItem('cart'));
+            }
+            else{
+                var orders = [];
+            }
             var data = {};
 
             data.count = product_count;

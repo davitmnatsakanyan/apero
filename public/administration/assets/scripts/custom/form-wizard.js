@@ -33,7 +33,45 @@ var FormWizard = function () {
                 errorClass: 'help-block', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
+                    //contact person
+                    'kitchen[]': {
+                        required: true
+                    },
+                    'delivery_area[]': {
+                        required: true
+                    },
+                    product_origin: {
+                        required: true
+                    },
+                    person_email: {
+                        required: true,
+                        email: true
+                    },
+                    person_title: {
+                        required: true
+                    },
+                    person_prename: {
+                        required: true
+                    },
+                    person_name: {
+                        required: true
+                    },
+                    person_mobile: {
+                        required: true
+                    },
+                    person_phone: {
+                        required: true
+                    },
                     //account
+                    company: {
+                        required: true
+                    },
+                    'zip': {
+                        required: true
+                    },
+                    fax: {
+                        required: true
+                    },
                     username: {
                         minlength: 5,
                         required: true

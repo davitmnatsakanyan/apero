@@ -59,10 +59,10 @@
 							<div class="col-md-6">
 								<div class="anbieter-adres">
 									<div class="anbiter-name">
-										<a ng-href="/#/caterer/show/<% caterer.id %>"><% caterer.company %> - Apero Caterer </a>
+										<% caterer.company %> - Apero Caterer
 									</div>
 									<div class="anbiter-place">
-										Bahnhofstrasse 18, 9000 St. Gallen
+										<% caterer.city %>,  <% caterer.address %>
 									</div>
 								</div>
 								<div class="ratings">
@@ -90,7 +90,7 @@
 										<button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>6-10</button>
 										<button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>11-X</button>
 									</div>
-									<a ng-href="#/caterer">Bestellen</a>
+									<a ng-href="/#/caterer/show/<% caterer.id %>">Bestellen</a>
 								</div>
 							</div>
 						</div>

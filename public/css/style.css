@@ -1089,6 +1089,11 @@ a{
 	font-size: 29px;
 	border: 3px solid;
 	border-radius: 50%;
+	width: 50px;
+	line-height: inherit;
+}
+.social-links ul li a .fa, .social-links ul li a .fa{
+	font-size: inherit;
 }
 .social-links ul li a .fa-twitter{
     padding: 4px 6px;

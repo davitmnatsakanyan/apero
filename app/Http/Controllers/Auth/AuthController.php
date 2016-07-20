@@ -75,7 +75,7 @@ class AuthController extends Controller
        if($request->role == 'user'){
            $this->validate($request, [
                'address'            => 'required|max:250',
-               'pobox'              => 'max:100',
+               'pobox'              => 'required|max:100',
                'zip'                => 'required|max:5',
                'city'               => 'required|max:250',
                'country'            => 'required|max:250',

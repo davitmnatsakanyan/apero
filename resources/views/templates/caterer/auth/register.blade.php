@@ -115,8 +115,8 @@
                                                         </span>
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <select class="zip form-control">
-                                                                <option ng-repeat="item in zip_codes" ng-selected="item.selected" ng-init="data.zip=item.zip" ng-model="data.zip" ><% item.zip %></option>
+                                                            <select name="zip" class="zip form-control"  ng-model="data.zip" >
+                                                                <option ng-repeat="item in zip_codes"><% item.zip %></option>
                                                             </select>
                                                                 <span class="help-block">
                                                                  Provide your zip
@@ -137,7 +137,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-5">Country</label>
+                                                        <label class="control-label col-md-5">Country
+                                                        <span class="required">
+                                                             *
+                                                        </span>
+                                                        </label>
                                                         <div class="col-md-7">
                                                             <select name="country" id="country_list"  class="form-control" ng-model="data.country" >
                                                                 <option value=""></option>
@@ -447,7 +451,7 @@
                                                     <div class="form-group">
                                                     <label class="control-label col-md-5">Description
 													<span class="required">
-														 *
+
 													</span>
                                                     </label>
                                                     <div class="col-md-7">
