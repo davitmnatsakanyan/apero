@@ -10,13 +10,23 @@ use App\Models\Package;
 use App\Models\Category;
 use App\Models\PackageProduct;
 use App\Models\Product;
+use App\Models\Subproduct;
 use Illuminate\Http\Request;
 use Image;
 
 class PackageController extends CatererBaseController{
 
     public function index(){
-        $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id())->toArray();
+        $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id());//->toArray();
+//        return $packages;
+
+        foreach ($packages as $key => $package) {
+            foreach($package->products as $key2 => $product)
+            if($product->pivot->subproduct_id !== 0)
+            $packages[$key]->products[$key2]['name'] = $packages[$key]->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
+        }
+//        return $packages;
+
         return view('caterer/product/package/index',compact('packages'));
     }
 
@@ -31,7 +41,15 @@ class PackageController extends CatererBaseController{
      * @return void
      */
     public function store(Request $request){
-        $this->validate($request, ['name' => 'required', 'caterer' => 'required', 'price' => 'required|integer', 'product_count.*' => 'required|integer']);
+        $this->validate($request, [
+            'name' => 'required',
+            'caterer' => 'required',
+            'price' => 'required|integer',
+            'product_count.*' => 'required|integer'
+        ]);
+
+
+
 
         $package['caterer_id'] = $request->caterer;
         $package['name'] = $request->name;
@@ -51,6 +69,25 @@ class PackageController extends CatererBaseController{
                 PackageProduct::create($data);
             }
 
+// es kashxati angulyari havaqeluc heto
+
+
+//            foreach ($request->products as $product) {
+//                $data = [
+//                    'package_id' => $package ['id'],
+//                    'product_id' => $product ['product_id'],
+//                    'product_count' = $request->$product_count;
+//                ];
+//                if (isset($product['sub_id'])) {
+//                    $data ['subproduct_id'] = $product['sub_id'];
+//                } else {
+//                    $data ['subproduct_id'] = 0;
+//                }
+//
+//                PackageProduct::create($data);
+//            }
+
+
             return redirect('caterer/product/package')->with('success', 'Package created sucessfully.');
         }
     }
@@ -59,6 +96,11 @@ class PackageController extends CatererBaseController{
     public function edit($id)
     {
         $package = Package::with('products')->findOrFail($id);
+            foreach($package->products as $key2 => $product)
+                if($product->pivot->subproduct_id !== 0)
+                    $package->products[$key2]['name'] = $package->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
+
+
         $products = Product::all();
         foreach ($products  as $product) {
             $flag = false;
@@ -106,6 +148,24 @@ class PackageController extends CatererBaseController{
                         $data['product_count'] = $request->$product_count;
                         PackageProduct::create($data);
                     }
+
+
+//es ksarqenq angulyari patrast lineluc heto
+                    
+//                    foreach ($request->products as $product) {
+//                $data = [
+//                    'package_id' => $package ['id'],
+//                    'product_id' => $product ['product_id'],
+//                    'product_count' = $request->$product_count;
+//                ];
+//                if (isset($product['sub_id'])) {
+//                    $data ['subproduct_id'] = $product['sub_id'];
+//                } else {
+//                    $data ['subproduct_id'] = 0;
+//                }
+//
+//                PackageProduct::create($data);
+//            }
                 }
 
                 return redirect()->back()->with('success', 'Package updated sucessfully.');

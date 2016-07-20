@@ -49,8 +49,14 @@ class AuthController extends Controller
    {
        $role = $request->role;
        if(!$this->$role->check())
-        { 
-           if( $this->$role->attempt(['email' => $request->email, 'password' => $request->password]))
+        {
+            if($role == 'user')
+                $attempt = $this->$role->attempt(['email' => $request->email, 'password' => $request->password, 'is_user' => 1]);
+
+            if($role == 'caterer')
+                $attempt = $this->$role->attempt(['email' => $request->email, 'password' => $request->password]);
+
+           if( $attempt )
             {
                 session(['role' => $role]);
                return response()->json(['success' => 1]);
@@ -89,7 +95,6 @@ class AuthController extends Controller
                'mobile'             => 'required'
            ]);
        }
-
         $role = strtolower($request->role);
         $roleService = ucfirst($role). "Service";
         $service = \App::make('App\Http\Services\\'.$roleService);
@@ -102,7 +107,14 @@ class AuthController extends Controller
 
         if($model)
         {
-           if($this->$role->attempt(['email' => $model->email, 'password' => $password])) {
+            if($role == 'user') {
+                $attempt = $this->$role->attempt(['email' => $model->email, 'password' => $password, 'is_user' => 1]);
+            }
+
+            if($role == 'caterer')
+                $attempt = $this->$role->attempt(['email' => $model->email, 'password' => $password]);
+
+            if($attempt) {
                session(['role' => $role]);
                return response()->json(['success' => 1]);
            }

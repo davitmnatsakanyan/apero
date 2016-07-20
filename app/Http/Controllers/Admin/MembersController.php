@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\ZipCode;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -33,7 +34,8 @@ class MembersController extends AdminBaseController
      */
     public function create()
     {
-        return view('admin.members.create');
+        $zips = ZipCode::all();
+        return view('admin.members.create', compact('zips'));
     }
 
     /**
@@ -85,7 +87,7 @@ class MembersController extends AdminBaseController
      */
     public function show($id)
     {
-        $member = User::findOrFail($id);
+        $member = User::where('is_user' ,1 )->findOrFail($id);
 
         return view('admin.members.show', compact('member'));
     }
@@ -99,9 +101,10 @@ class MembersController extends AdminBaseController
      */
     public function edit($id)
     {
-        $member = User::where('is_user' ,1 )->findOrFail($id);
+        $member = User::where('is_user',1 )->findOrFail($id);
+        $zips = ZipCode::all();
 
-        return view('admin.members.edit', compact('member'));
+        return view('admin.members.edit', compact('member', 'zips'));
     }
 
     /**
@@ -116,7 +119,6 @@ class MembersController extends AdminBaseController
         $member = User::findOrFail($id);
         $this->validate($request, [
             'name' => 'required',
-            'company' => 'required',
             'address' => 'required',
             'pobox' => 'required',
             'zip' => 'required',
@@ -125,13 +127,10 @@ class MembersController extends AdminBaseController
             'email' => 'required|unique:users,email,'.$member->id,
             'phone' => 'required',
             'mobile' => 'required',
-            'avatar' => 'image'
         ]);
-
 
         $member->update([
             'name' => $request->name,
-            'company' => $request->company,
             'address' => $request->address,
             'pobox' => $request->pobox,
             'zip' => $request->zip,
@@ -142,17 +141,9 @@ class MembersController extends AdminBaseController
             'mobile' => $request->mobile,
         ]);
         if(!is_null($request->password)){
-            $member->update(['password' => $request->password]);
+            $member->update(['password' => bcrypt($request->password)]);
         }
-        if(!is_null($request->file('avatar'))){
-
-            $oldImage = $member->avatar;
-            $avatar = $this->uploadFile($request->file('avatar'), $oldImage);
-
-            $member->update(['avatar' => $avatar]);
-        }
-
-        Session::flash('success', 'Member updated!');
+        Session::flash('success', 'User updated!');
 
         return redirect('admin/members');
     }
@@ -166,10 +157,9 @@ class MembersController extends AdminBaseController
      */
     public function destroy($id)
     {
-        unlink('images/users/'.User::find($id)->avatar);
-        User::destroy($id);
+        User::withTrashed()->where(['is_user'=>1 ,'id' => $id])->forceDelete();
 
-        Session::flash('success', 'Member deleted!');
+        Session::flash('success', 'User deleted!');
 
         return redirect('admin/members');
     }
@@ -184,8 +174,25 @@ class MembersController extends AdminBaseController
      * @param $user_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getBlock($user_id){
-        User::where('is_user' ,1)->destroy($user_id);
-        return redirect()->back();
+    public function block($id)
+    {
+        if(User::where(['is_user'=>1 , 'id' => $id])->delete())
+          return redirect('admin/members')->with('success' , 'User successfully blocked.');
+        return redirect()->back()->with('error' , 'Something went wrong');
+
+    }
+
+
+    public function getBlocked()
+    {
+        $members = User::onlyTrashed()->paginate(15);
+        return view('admin/members/blocked' , compact('members'));
+    }
+
+    public function activate($id)
+    {
+        if(User::withTrashed()->where('is_user' ,1)->findOrFail($id)->restore())
+            return redirect('admin/members') -> with('success' , 'User successfully activated.');
+        return back()->with('error' ,'Somethong went wrong');
     }
 }

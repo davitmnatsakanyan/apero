@@ -3,7 +3,7 @@
 @section('content')
 <div class="page-content-wrapper">
     <div class="page-content">
-
+@include ('layouts.messages')
     <h1>Members <a href="{{ url('/admin/members/create') }}" class="btn btn-primary btn-xs" title="Add New Member"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
@@ -48,6 +48,8 @@
             </tbody>
         </table>
         <div class="pagination-wrapper"> {!! $members->render() !!} </div>
+        <a href="{{ url('/admin/members/blocked') }}" class="btn btn-success btn-xs" title="View Product">
+            Blocked Users <span class="glyphicon  glyphicon-list-alt" aria-hidden="true"/></a>
     </div>
 </div>
 </div>

@@ -39,8 +39,9 @@ class AccountController extends UserBaseController
                 $orders [$key]->products[$key2]['name'] .= " " . $subprodcut['name'];
             }
 
+
         }
-//dd($orders);
+dd($orders);
         return view('user/account/index', compact('orders'));
     }
     

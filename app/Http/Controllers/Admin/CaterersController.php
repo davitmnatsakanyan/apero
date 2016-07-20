@@ -37,7 +37,8 @@ class CaterersController extends AdminBaseController
      */
     public function create()
     {
-        return view('admin.caterers.create');
+        $zips = ZipCode::all();
+        return view('admin.caterers.create' , compact('zips') );
     }
 
     /**
