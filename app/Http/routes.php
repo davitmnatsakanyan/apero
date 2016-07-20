@@ -24,6 +24,13 @@ Route::group(array('prefix' => '/templates/'), function () {
     }));
 });
 
+Route::group(array('prefix' => '/templates/modals'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('templates/modals.' . $template);
+    }));
+});
+
 Route::group(array('prefix' => '/templates/caterer/account'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
@@ -44,14 +51,14 @@ Route::group(array('prefix' => '/templates/user/auth'), function () {
         return view('templates/user/auth.' . $template);
     }));
 });
-Route::group(array('prefix' => '/templates/user'), function () {
+Route::group(array('prefix' => '/templates/user/account'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
-        return view('templates/user.' . $template);
+        return view('templates/user/account.' . $template);
     }));
 });
 
-Route::get('get/caterer/{id}', 'Caterer\CatererController@getCaterer');
+
 
 
 /**
@@ -160,6 +167,7 @@ Route::post('order','OrderController@index');
  * Caterer routes
  */
 
+Route::get('get/caterer/{id}', 'Caterer\CatererController@getCaterer');
 
 Route::group([
     'prefix' => 'caterer',

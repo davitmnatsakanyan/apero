@@ -1,23 +1,16 @@
-app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', '$uibModal', 'items', 'product', 'product_count', function ($rootScope, $uibModalInstance, $scope, $uibModal, items, product, product_count) {
+app.controller('CustomPrdModalController', ['$rootScope', '$uibModalInstance', '$scope', '$uibModal',  'product', 'product_count', function ($rootScope, $uibModalInstance, $scope, $uibModal, product, product_count) {
 
     if(localStorage.getItem('cart'))
         var orders = JSON.parse(localStorage.getItem('cart'));
     else
         var orders = [];
 
-
-    $scope.items = items;
-    $scope.i = {
-        sub_id: $scope.items[0].id,
-        price: $scope.items[0].price,
-        description: ""
-    };
-
     $scope.product = product;
     $scope.product_count = product_count;
+    $scope.price = product.price;
 
     $scope.add = function () {
-        
+
         var data = {};
 
         data.count = product_count;
@@ -27,9 +20,8 @@ app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', 
         data.ingredinets = product.ingredinets;
         data.menu_id = product.menu_id;
         data.name = product.name;
-        data.price = $scope.i.price;
-        data.description = $scope.i.description;
-        data.sub_id = $scope.i.sub_id;
+        data.price = product.price;
+        data.description = $scope.description;
 
         orders.push(data);
 
@@ -37,15 +29,14 @@ app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', 
         $.each(orders, function (index, value) {
             total_price = total_price + (value.price * value.count);
         });
-
-
+        
         localStorage.setItem('cart', JSON.stringify(orders));
         localStorage.setItem('total_price', total_price);
 
         $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
         $rootScope.total_price = localStorage.getItem('total_price');
-        
-        
+
+
         $uibModalInstance.close();
     };
 
@@ -55,3 +46,4 @@ app.controller('ModalController', ['$rootScope', '$uibModalInstance', '$scope', 
 
 
 }]);
+

@@ -40,8 +40,9 @@ class AccountController extends UserBaseController
             }
 
         }
-//dd($orders);
-        return view('user/account/index', compact('orders'));
+//dd($orders->toArray());
+        return response()->json(['success' => 1, 'orders' =>  $orders->toArray()]);
+//        return view('user/account/index', compact('orders'));
     }
     
     public function getView()

@@ -64,11 +64,14 @@
     <script src="/js/controllers/AuthController.js"></script>
     <script src="/js/controllers/HomeController.js"></script>
     <script src="/js/controllers/SearchController.js"></script>
-    <script src="/js/controllers/CatererAccountController.js"></script>
+    <script src="/js/controllers/CatererProfileController.js"></script>
+    <script src="/js/controllers/CatererOrdersController.js"></script>
+    <script src="/js/controllers/CatererProductsController.js"></script>
     <script src="/js/controllers/CatererController.js"></script>
     <script src="/js/controllers/OrderController.js"></script>
     <script src="/js/controllers/CartController.js"></script>
-    <script src="/js/controllers/ModalController.js"></script>
+    <script src="/js/controllers/SubPrdModalController.js"></script>
+    <script src="/js/controllers/CustomPrdModalController.js"></script>
     <script src="/js/controllers/UserProfileController.js"></script>
     <script src="/js/controllers/UserOrdersController.js"></script>
 

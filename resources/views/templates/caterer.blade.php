@@ -70,34 +70,67 @@
 					<div class="col-md-9 col-sm-8">
 
 						<div class="apero-kat clearfix">
+							<uib-tabset active="activeForm" id="caterer_page">
+								<uib-tab index="0" heading="Products">
+									<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
 
-							<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
+										<div class="col-md-12">
+											<div class="kategori-name">
+												<% menu.name %>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="anbieter-img">
+												<img src="../images/menus/<% menu.avatar  %>" alt="">
+											</div>
+										</div>
+										<div class="col-md-7">
 
-								<div class="col-md-12">
-									<div class="kategori-name">
-										<% menu.name %>
+											<div class="kategori-item">
+												<form name="myForm" >
+												  <label ng-repeat="product in menu.products track by $index">
+													<span ><a id="product_name" ng-click="show_modal(product, product_count)"><% product.name %></a></span>
+													<input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
+													<i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count)" aria-hidden="true"></i>
+												  </label>
+												 </form>
+											</div>
+
+										</div>
+
 									</div>
-								</div>
-								<div class="col-md-5">
-									<div class="anbieter-img">
-										<img src="../images/menus/<% menu.avatar  %>" alt="">
-									</div>
-								</div>
-								<div class="col-md-7">
+								</uib-tab>
+								<uib-tab index="1" heading="Packages">
+									<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
 
-									<div class="kategori-item">
-										<form name="myForm" >
-										  <label ng-repeat="product in menu.products track by $index">
-										  	<span><% product.name %></span>
-										    <input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
-										    <i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count)" aria-hidden="true"></i>
-										  </label>
-										 </form>
-									</div>
+										<div class="col-md-12">
+											<div class="kategori-name">
+												<% package.name %>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="anbieter-img">
+												<img src="../images/menus/<% package.avatar  %>" alt="">
+											</div>
+										</div>
+										<div class="col-md-7">
 
-								</div>
-								
-							</div>
+											<div class="kategori-item">
+												<form name="myForm" >
+													<label ng-repeat="product in package.products track by $index">
+														<span ><% product.name %></span>
+													</label>
+													<input type="number" ng-model="package_count" name="input"  min="0" max="99" required>
+													<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart(package, package_count)" aria-hidden="true"></i>
+
+												</form>
+											</div>
+
+										</div>
+
+									</div>
+								</uib-tab>
+							</uib-tabset>
 
 						</div>
 

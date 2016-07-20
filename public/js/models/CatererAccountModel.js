@@ -12,6 +12,22 @@ app.factory('CatererAccountModel', ['$http', function($http) {
                 method : "get",
                 url : "auth/register"
             });
-        }
+        },
+        
+        getOrders: function(){
+            return $http({
+                method : "get",
+                url : "caterer/order"
+            });
+        },
+
+        getProducts: function(){
+        return $http({
+            method : "get",
+            url : ""
+        });
+    },
+        
+        
     };
 }]);

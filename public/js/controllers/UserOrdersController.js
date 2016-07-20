@@ -3,7 +3,9 @@ app.controller('UserOrdersController',  ['$scope', 'AuthService', 'UserModel', f
 
     UserModel.getOrders().then(
         function(response){
-            console.log(response)
+            if(response.data.success) {
+                $scope.orders = response.data.orders;
+            }
         },
         
         function(error){

@@ -44,7 +44,8 @@ class OrdersController extends CatererBaseController
                    $orders[$key]->products[$key2]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
         }
 
-        return view('caterer/order/index' ,compact('orders'));
+        return response()->json(['success' => 1, 'orders' => $orders->toArray()]);
+       // return view('caterer/order/index' ,compact('orders'));
     }
     
     

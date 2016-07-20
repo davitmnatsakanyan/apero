@@ -741,8 +741,26 @@ a{
 }
 
 /* Caterer Page */
+#product_name{
+	cursor: pointer;
+}
+
+#caterer_page ul li{
+	width: 50%;
+}
+
+#caterer_page .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	font-weight: bolder;
+	color: #B72228;
+}
+
+#caterer_page .nav-tabs>li>a{
+	font-size: 18px;
+	color: #A1383F;
+}
 .caterer-content{
 	background-image: url('images/pic2.png');
+
 }
 .apero-carterer{
 	background-color: #fff;

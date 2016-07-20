@@ -17,21 +17,33 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/register.blade.php',
             controller: 'AuthController'
         })
-        .when('/caterer/account', {
-            templateUrl: 'templates/caterer/account/index.blade.php',
-            controller: 'CatererAccountController'
-        })
         .when('/user/profile', {
-            templateUrl: 'templates/user/profile.blade.php',
+            templateUrl: 'templates/user/account/profile.blade.php',
             controller: 'UserProfileController'
         })
         .when('/user/orders', {
-            templateUrl: 'templates/user/orders.blade.php',
+            templateUrl: 'templates/user/account/orders.blade.php',
             controller: 'UserOrdersController'
         })
         .when('/caterers', {
             templateUrl: 'templates/caterers.blade.php',
             controller: 'SearchController'
+        })
+        .when('/caterer', {
+            templateUrl: 'templates/caterer/account/profile.blade.php',
+            controller: 'CatererOrdersController'
+        })
+        .when('/caterer/profile', {
+            templateUrl: 'templates/caterer/account/profile.blade.php',
+            controller: 'CatererOrdersController'
+        })
+        .when('/caterer/products', {
+            templateUrl: 'templates/caterer/account/products.blade.php',
+            controller: 'CatererProductsController'
+        })
+        .when('/caterer/orders', {
+            templateUrl: 'templates/caterer/account/orders.blade.php',
+            controller: 'CatererOrdersController'
         })
         .when('/caterer/show/:caterer_id', {
             templateUrl: 'templates/caterer.blade.php',
