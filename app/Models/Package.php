@@ -21,7 +21,7 @@ class Package extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('product_count');
+        return $this->belongsToMany(Product::class)->withPivot(['product_count', 'subproduct_id']);
     }
     
     public function caterer()

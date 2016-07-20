@@ -1,6 +1,5 @@
 <?php
 
-
 Route::get('aaa', function () {
     dd(bcrypt('user'));
 });
@@ -88,8 +87,12 @@ Route::group([
 ], function () {
     Route::controller('dashboard', 'DashboardController');
     Route::controller('user', 'UserManagmentController');
+
+    Route::get('members/blocked' , 'MembersController@getBlocked' );
+    Route::get('members/active/{id}' ,'MembersController@activate' );
+    Route::get('members/block/{id}','MembersController@block');
     Route::resource('members', 'MembersController');
-    
+
     Route::get('orders', 'OrdersController@getIndex');
     Route::get('orders/blocked', 'OrdersController@getBlockedOrders');
     Route::post('orders/changeStatus', 'OrdersController@postChangeStatus');

@@ -30,6 +30,8 @@ class OrderController extends UserBaseController
 
     public function userOrder($request)
     {
+        return $request->all();
+
         $data = $request->all();
         $data['user_id'] = $this->user->id();
         $data['caterer_id'] = $request->products[0]['caterer_id'];
@@ -50,10 +52,10 @@ class OrderController extends UserBaseController
                 'product_id' => $product ['product_id'],
                 'amount' => $product ['count'],
                 'price' => $product ['count'] * $product ['price'],
+                'description' => $product ['description'] ? $product ['description'] :"" ,
             ];
             if (isset($product['sub_id'])) {
                 $data ['subproduct_id'] = $product['sub_id'];
-                $data ['description'] = $product ['description'];
             } else {
                 $data ['subproduct_id'] = 0;
             }
@@ -65,6 +67,8 @@ class OrderController extends UserBaseController
 
     public function guestOrder($request)
     {
+        return $request->all();
+        
         $guest = $this->createGuestIfNotExists($request);
         $data = $request->except('products');
         $data ['user_id'] = $guest->id;

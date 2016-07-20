@@ -30,13 +30,17 @@
                     {!! $errors->first('pobox', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-            <div class="form-group {{ $errors->has('zip') ? 'has-error' : ''}}">
-                {!! Form::label('zip', 'Zip', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::text('zip', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('zip', '<p class="help-block">:message</p>') !!}
-                </div>
+        <div class="form-group {{ $errors->has('caterer') ? 'has-error' : ''}}">
+            {!! Form::label('zip', 'Zip', ['class' => 'col-sm-3 control-label']) !!}
+            <div class="col-sm-6">
+                <select class="selectpicker form-control" id="zip" name="zip">
+                    @foreach($zips as $zip)
+                        <option value="{{ $zip->id }}"}}>{{$zip['ZIP'] ."  ". $zip['city']}}</option>
+                    @endforeach
+                </select>
+                {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
             </div>
+        </div>
             <div class="form-group {{ $errors->has('city') ? 'has-error' : ''}}">
                 {!! Form::label('city', 'City', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">

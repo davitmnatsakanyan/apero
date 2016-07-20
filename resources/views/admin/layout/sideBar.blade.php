@@ -46,19 +46,19 @@
 						<li>
 							<a href="{{ url('admin/members/create') }}">
 								<i class="fa fa-bullhorn"></i>
-								New Member
+								New User
 							</a>
 						</li>
 						<li>
 							<a href="{{ url('admin/members') }}">
 								<i class="fa fa-shopping-cart"></i>
-								All Members
+								All Users
 							</a>
 						</li>
 						<li>
 							<a href="{{ url('admin/caterers') }}">
 								<i class="fa fa-shopping-cart"></i>
-								Caterers
+								All Caterers
 							</a>
 						</li>
 					</ul>

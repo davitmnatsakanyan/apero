@@ -17,11 +17,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'avatar',
-        'company',
         'address',
         'pobox',
         'zip',
         'city',
+        'country',
         'title',
         'email',
         'phone',
@@ -34,7 +34,8 @@ class User extends Authenticatable
         'remember_token',
         'created_at',
         'updated_at',
-        'created_ip'
+        'created_ip',
+        'is_user'
     ];
 
     /**
