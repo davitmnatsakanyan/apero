@@ -17,7 +17,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/register.blade.php',
             controller: 'AuthController'
         })
-        .when('/user/profile', {
+        .when('/user/account', {
             templateUrl: 'templates/user/account/profile.blade.php',
             controller: 'UserProfileController'
         })

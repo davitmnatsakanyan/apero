@@ -8,18 +8,22 @@
                 <div class="form-group">
                     <ul class="prod_list">
                         <li ng-repeat="item in items" >
-                            <label ng-init="i.sub_id = item.id" ng-model="i.id" for="<% item.id %>"><% item.name %>
-                                <input value="<% item.price %>" ng-model="i.price" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">
+                            <label  for="<% item.id %>"><% item.name  %>
+                                <input ng-value="{ price: item.price, sub_id: item.id }" ng-model="i.product" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">
                             </label>
+
                         </li>
+
                     </ul>
                 </div>
                 <div class="form-group notes">
                     <p>Your notes about order</p>
-                    <textarea class="form-control " name="notes" ng-model="i.description"></textarea>
+                    <textarea class="form-control " name="notes" ng-model="description"></textarea>
                 </div>
+
             </form>
         </div>
+
         <div class="col-md-5">
             <ul class="rigth_items">
                 <li>
@@ -29,11 +33,11 @@
                     <div class="count">Count: <strong><% product_count %></strong></div>
                 </li>
                 <li>
-                    <div class="price">Price: &euro; <strong><% i.price %></strong></div>
+                    <div class="price">Price: &euro; <strong><% i.product.price %></strong></div>
                 </li>
                 <li>
                     <div class="total_price">Total price: &euro;
-                        <strong> <% product_count * i.price %></strong>
+                        <strong> <% product_count * i.product.price %></strong>
                     </div>
                 </li>
             </ul>

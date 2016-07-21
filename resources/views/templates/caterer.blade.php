@@ -101,7 +101,7 @@
 									</div>
 								</uib-tab>
 								<uib-tab index="1" heading="Packages">
-									<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
+									<div class="col-md-12 anbieter-kat-item" ng-repeat="package in packages">
 
 										<div class="col-md-12">
 											<div class="kategori-name">
@@ -110,7 +110,7 @@
 										</div>
 										<div class="col-md-5">
 											<div class="anbieter-img">
-												<img src="../images/menus/<% package.avatar  %>" alt="">
+												<img src="../images/packages/<% package.avatar  %>" alt="">
 											</div>
 										</div>
 										<div class="col-md-7">
@@ -118,15 +118,18 @@
 											<div class="kategori-item">
 												<form name="myForm" >
 													<label ng-repeat="product in package.products track by $index">
-														<span ><% product.name %></span>
+														<span ><% product.name %> </span><% product.pivot.product_count %>
 													</label>
-													<input type="number" ng-model="package_count" name="input"  min="0" max="99" required>
-													<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart(package, package_count)" aria-hidden="true"></i>
-
 												</form>
 											</div>
 
 										</div>
+										<div class="row">
+											<div class="pull-right add_cart ">
+												<input type="number" ng-model="package_count" name="input"  min="0" max="99" required>
+												<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart()" aria-hidden="true"></i>
+											</div>
+											</div>
 
 									</div>
 								</uib-tab>

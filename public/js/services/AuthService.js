@@ -10,23 +10,12 @@ app.service('AuthService', ['$rootScope', '$http', '$location',  function ($root
                 }
             });
 
-    }
+    };
 
-    this.auth_check = function(){
-
-        $http({
+    this.auth_check = function(role){
+       return  $http({
             method: "GET",
-            url: "auth/check/user"
-        })
-            .success(function(response){
-
-                if(response.success == 1){
-                    $rootScope.is_logedin = 1;
-                }
-                else{
-                    $rootScope.is_logedin = 0
-                }
-            });
+            url: "auth/check/"+role
+        });
     }
-
 }]);

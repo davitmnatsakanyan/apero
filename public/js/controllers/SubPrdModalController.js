@@ -5,12 +5,14 @@ app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$sc
     else
         var orders = [];
 
-
     $scope.items = items;
+    
+    $scope.description = "";
     $scope.i = {
-        sub_id: $scope.items[0].id,
-        price: $scope.items[0].price,
-        description: ""
+        product : {
+            sub_id : $scope.items[0].id,
+            price : $scope.items[0].price
+        }
     };
 
     $scope.product = product;
@@ -27,9 +29,9 @@ app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$sc
         data.ingredinets = product.ingredinets;
         data.menu_id = product.menu_id;
         data.name = product.name;
-        data.price = $scope.i.price;
-        data.description = $scope.i.description;
-        data.sub_id = $scope.i.sub_id;
+        data.price = $scope.i.product.price;
+        data.description = $scope.description;
+        data.sub_id = $scope.i.product.sub_id;
 
         orders.push(data);
 
@@ -38,20 +40,16 @@ app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$sc
             total_price = total_price + (value.price * value.count);
         });
 
-
         localStorage.setItem('cart', JSON.stringify(orders));
         localStorage.setItem('total_price', total_price);
 
         $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
         $rootScope.total_price = localStorage.getItem('total_price');
-        
-        
+
         $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
-
 }]);

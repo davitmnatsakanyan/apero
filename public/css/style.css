@@ -754,6 +754,20 @@ a{
 	color: #B72228;
 }
 
+#caterer_page .add_cart{
+	margin: 31px 21px 0px 10px;
+}
+
+#caterer_page .add_cart input{
+	 outline: none;
+	 font-size: 16px;
+	 border-radius: 10px;
+	 box-shadow: none;
+	 border: 1px solid #C3C3C4;
+	text-align: center;
+}
+
+
 #caterer_page .nav-tabs>li>a{
 	font-size: 18px;
 	color: #A1383F;

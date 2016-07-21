@@ -11,6 +11,8 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
     }
 
     var caterer = CatererModel.getCaterer(caterer_id).then(function(response){
+        $scope.packages = response.data.packages;
+        console.log(response.data.packages);
 
         $scope.menus = response.data.menus;
         $scope.caterer  = response.data.caterer;

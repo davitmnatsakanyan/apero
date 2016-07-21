@@ -78,34 +78,35 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         };
         console.log(data);
         $http({
-                data: {
-                    company :           company,
-                    delivery_country :  delivery_country,
-                    delivery_city :     delivery_city,
-                    products :          products,
-                    delivery_address :  delivery_address,
-                    delivery_zip :      delivery_zip,
-                    email:              email,
-                    mobile :            mobile,
-                    phone:              phone,
-                    billing_address :   billing_address,
-                    payment_type :      payment_type,
-                    comment :           comment,
-                    is_logedin :        is_logedin,
-                    is_accepted:        is_accepted
-                },
-                method : "POST",
-                url : "order"
+            data: {
+                company :           company,
+                delivery_country :  delivery_country,
+                delivery_city :     delivery_city,
+                products :          products,
+                delivery_address :  delivery_address,
+                delivery_zip :      delivery_zip,
+                email:              email,
+                mobile :            mobile,
+                phone:              phone,
+                billing_address :   billing_address,
+                payment_type :      payment_type,
+                comment :           comment,
+                is_logedin :        is_logedin,
+                is_accepted:        is_accepted
+            },
+            method : "POST",
+            url : "order"
+        })
+        .success(function (response) {
+            if(response.success == 1){
+                alert('order submitted')
             }
-        ).success(function (response) {
-                if(response.success == 1){
-                    alert('order submitted')
-                }
-            }).error( function (error) {
-                console.log(error);
+        })
+        .error( function (error) {
+            console.log(error);
 
-            });
-    }
+        });
+    };
 
     $scope.submit_login = function(){
         var role = 'user';
@@ -134,7 +135,16 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         })
         .success(function(response){
             if(response.success == 1){
-                AuthService.auth_check();
+                AuthService.auth_check('user').then(
+                    function(response){
+                        if(response.data.success == 1){
+                            $rootScope.is_logedin = 1;
+                        }
+                        else{
+                            $rootScope.is_logedin = 0
+                        }
+                    }
+                );
             }
             else{
                 if(response.success == 0){

@@ -88,8 +88,7 @@
                                 </span>
                                 </label>
                                 <div class="col-md-7">
-                                    <select class="zip form-control">
-                                        <option ng-repeat="item in zip_codes" ng-selected="item.selected" ng-init="data.zip=item.zip" ng-model="data.zip" ><% item.zip %></option>
+                                    <select class="zip form-control" ng-options="item.zip for  item in zip_codes"  ng-model="data.zip" >
                                     </select>
                                         <span class="help-block">
                                          Provide your zip
