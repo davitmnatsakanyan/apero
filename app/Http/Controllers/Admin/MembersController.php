@@ -87,7 +87,9 @@ class MembersController extends AdminBaseController
      */
     public function show($id)
     {
-        $member = User::where('is_user' ,1 )->findOrFail($id);
+        $member = User::with('user_zip')->where('is_user' ,1 )->findOrFail($id);
+
+        return $member;
 
         return view('admin.members.show', compact('member'));
     }

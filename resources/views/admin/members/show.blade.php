@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th> Zip </th>
-                    <td> {{ $member->zip }} </td>
+                    <td> {{ $member->zip->ZIP . " " .  $member->zip->city }} </td>
                 </tr>
                 <tr>
                     <th> City </th>

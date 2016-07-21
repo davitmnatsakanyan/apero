@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ZipCode;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -54,5 +55,11 @@ class User extends Authenticatable
         static::deleting(function($user) {
             $user->orders()->withTrashed()->forceDelete();
         });
+    }
+    
+    
+    public function user_zip()
+    {
+        return $this->belongsTo(ZipCode::class);
     }
 }

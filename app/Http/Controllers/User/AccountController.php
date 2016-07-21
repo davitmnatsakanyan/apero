@@ -17,6 +17,7 @@ class AccountController extends UserBaseController
     public function getIndex()
     {
         $orders = Order::with('caterer','products')->where(['user_id' => $this->user->id(),'is_user_order' => 1])->latest()->get();
+
         foreach ($orders as $key =>$order){
             switch ($order['status']){
                 case 0:$orders[$key]['status'] = 'Idle';
@@ -32,6 +33,7 @@ class AccountController extends UserBaseController
                 case 4:$orders[$key]['status'] = 'Denied';
                     break;
             };
+
             foreach($order->products as $key2 =>$product)
             if($product->pivot->subproduct_id !== 0)
             {
@@ -40,9 +42,8 @@ class AccountController extends UserBaseController
             }
 
         }
-//dd($orders->toArray());
-        return response()->json(['success' => 1, 'orders' =>  $orders->toArray()]);
-//        return view('user/account/index', compact('orders'));
+//        return response()->json(['success' => 1, 'orders' =>  $orders->toArray()]);
+        return view('user/account/index', compact('orders'));
     }
     
     public function getView()

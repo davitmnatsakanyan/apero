@@ -66,19 +66,6 @@ class OrdersController extends AdminBaseController
                     $order['status'] = 'Denied';
                     break;
             };
-
-        switch ($order['payment_type']) {
-            case 0:
-                $order['payment_type'] = 'Creditcard/Strip';
-                break;
-            case 1:
-                $order['payment_type'] = 'Paypal';
-                break;
-            case 2:
-                $order['payment_type'] = 'Cash';
-                break;
-        };
-
             foreach($order->products as $key => $product)
                 if($product->pivot->subproduct_id !== 0)
                     $order->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);

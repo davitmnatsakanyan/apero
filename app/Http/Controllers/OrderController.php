@@ -30,8 +30,6 @@ class OrderController extends UserBaseController
 
     public function userOrder($request)
     {
-        return $request->all();
-
         $data = $request->all();
         $data['user_id'] = $this->user->id();
         $data['caterer_id'] = $request->products[0]['caterer_id'];
@@ -52,13 +50,11 @@ class OrderController extends UserBaseController
                 'product_id' => $product ['product_id'],
                 'amount' => $product ['count'],
                 'price' => $product ['count'] * $product ['price'],
-                'description' => $product ['description'] ? $product ['description'] :"" ,
             ];
-            if (isset($product['sub_id'])) {
-                $data ['subproduct_id'] = $product['sub_id'];
-            } else {
-                $data ['subproduct_id'] = 0;
-            }
+
+            $data['description'] =  isset($product['description']) ? $product['description'] : "";
+
+            $data['subproduct_id'] =  isset($product['sub_id']) ? $product['sub_id'] : 0;
 
             OrderProduct::create($data);
         }
@@ -67,7 +63,6 @@ class OrderController extends UserBaseController
 
     public function guestOrder($request)
     {
-        return $request->all();
         
         $guest = $this->createGuestIfNotExists($request);
         $data = $request->except('products');
@@ -106,11 +101,9 @@ class OrderController extends UserBaseController
     public function count_total_cost($products)
     {
         $total = 0;
-        foreach ($products as $product) {
-            if (isset($product['sub_id']))
-                $price = Subproduct::findOrFail($product ['sub_id'])->price;
-            else
-                $price = Product::findOrFail($product ['product_id'])->price;
+
+        foreach ($products as $key => $product) {
+            $price = isset($product['sub_id']) ? Subproduct::findOrFail($product ['sub_id'])->price : Product::findOrFail($product ['product_id'])->price;
             $total += $price * $product ['count'];
         }
 

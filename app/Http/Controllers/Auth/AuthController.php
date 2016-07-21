@@ -77,13 +77,13 @@ class AuthController extends Controller
     */
    public function postRegister(Request $request)
    {
-       
-dd($request->all());
+
+//       dd($request->zip);
        if($request->role == 'user'){
            $this->validate($request, [
                'address'            => 'required|max:250',
                'pobox'              => 'required|max:100',
-               'zip'                => 'required',
+               'zip'                => 'required|max:5',
                'city'               => 'required|max:250',
                'country'            => 'required|max:250',
                'email'              => 'required|email|max:100|unique:users',
