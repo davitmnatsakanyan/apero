@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class ZipCode extends Model
@@ -12,5 +13,9 @@ class ZipCode extends Model
     public function caterers(){
         return $this->belongsToMany(Caterer::class,'caterer_delivery_areas');
     }
-
+    
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

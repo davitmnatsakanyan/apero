@@ -28,7 +28,7 @@
                     <td>
                         {{ $order->status }}
                     </td>
-                    @include('caterer/product/single/modals/delete')
+                    {{--@include('caterer/product/single/modals/delete')--}}
                 </tr>
         @endforeach
         </tbody>

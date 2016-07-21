@@ -78,6 +78,7 @@ class AuthController extends Controller
    public function postRegister(Request $request)
    {
 
+//       dd($request->zip);
        if($request->role == 'user'){
            $this->validate($request, [
                'address'            => 'required|max:250',
