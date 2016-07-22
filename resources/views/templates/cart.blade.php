@@ -23,18 +23,35 @@
 							</label>
 						</div>
 
-						<div class="carterer-product" ng-repeat="order in orders track by $index">
+						<div class="carterer-product" ng-repeat="product in products track by $index">
 							<ul>
 								<li>
-									<img ng-src="../images/products/<% order.avatar %>" alt="">
+									<img ng-src="../images/products/<% product.avatar %>" alt="">
 								</li>
 								<li>
 									<p>
-										<% order.count %>x <% order.name %>
+										<% product.count %>x <% product.name %>
 										<span class="bestellung-produkt-number-price" >
-											<i class="fa fa-times-circle btn" aria-hidden="true"  ng-click="removeFromCart($index, total_price)"></i>
+											<i class="fa fa-times-circle btn" aria-hidden="true"  ng-click="removeFromCart($index, total_price, 'product')"></i>
 										</span>
-										<span class="bestellung-produkt-number-price"><% order.price %> &euro;</span>
+										<span class="bestellung-produkt-number-price"><% product.price %> &euro;</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+
+						<div class="carterer-product" ng-repeat="package in packages track by $index">
+							<ul>
+								<li>
+									<img ng-src="../images/products/<% package.avatar %>" alt="">
+								</li>
+								<li>
+									<p>
+										<% package.count %>x <% package.name %>
+										<span class="bestellung-produkt-number-price" >
+											<i class="fa fa-times-circle btn" aria-hidden="true"  ng-click="removeFromCart($index, total_price, 'package')"></i>
+										</span>
+										<span class="bestellung-produkt-number-price"><% package.price %> &euro;</span>
 									</p>
 								</li>
 							</ul>

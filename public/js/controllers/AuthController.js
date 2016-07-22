@@ -28,7 +28,12 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
         event.preventDefault();
 
         var role = $scope.data.role;
-        $scope.data.zip = $scope.data.zip.id;
+        if($scope.data.zip) {
+            $scope.data.zip = $scope.data.zip.id;
+        }
+        else{
+            $scope.data.zip = ''
+        }
         
         $http({
             data: $scope.data,

@@ -1,10 +1,10 @@
 app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($rootScope, $log, $uibModal, $scope, $routeParams, CatererModel, sharedProperties, $timeout) {
-    
+    console.log(localStorage.getItem('cart'));
     $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
     var caterer_id = $routeParams.caterer_id;
     if(localStorage.getItem('cart')) {
-        if (JSON.parse(localStorage.getItem('cart'))[0].caterer_id != caterer_id) {
+        if (JSON.parse(localStorage.getItem('cart'))[0].products[0].caterer_id != caterer_id) {
             localStorage.removeItem('cart');
             localStorage.removeItem('total_price');
         }
@@ -18,11 +18,19 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
         $scope.caterer  = response.data.caterer;
 
     });
-    if(localStorage.getItem('cart')) {
-        var orders = JSON.parse(localStorage.getItem('cart'));
+    if (localStorage.getItem('cart')) {
+
+        var orders = [{
+            'products': JSON.parse(localStorage.getItem('cart'))[0].products,
+            'packages': JSON.parse(localStorage.getItem('cart'))[0].packages
+        }]
     }
     else {
-        var orders = [];
+
+        var orders = [{
+            'products': [],
+            'packages': []
+        }];
     }
 
 
@@ -35,77 +43,143 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
     }
 
     $rootScope.total_price = total_price;
-    $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
+    $rootScope.products = orders[0].products;
+    $rootScope.packages = orders[0].packages;
 
 
     var i=0;
-    $scope.addToCart = function(order, product_count){
+    $scope.addToCart = function(order, count, type){
+        console.log(order);
+        console.log(count);
+        console.log(type);
 
-        if(order.subproducts.length > 0 && product_count > 0){
-           
-            $scope.items = order.subproducts;
+        if(type == 'product') {
+            if (order.subproducts.length > 0 && count > 0) {
 
-            $scope.animationsEnabled = true;
-            var size = '';
+                $scope.items = order.subproducts;
 
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'templates/modals/subproducts_modal.blade.php',
-                controller: 'SubPrdModalController',
-                size: size,
-                resolve: {
-                    items: function () {
+                $scope.animationsEnabled = true;
+                var size = '';
 
-                        return $scope.items;
-                    },
-                    product: function(){
-                        return order;
-                    },
-                    product_count : function(){
-                        return product_count;
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'templates/modals/subproducts_modal.blade.php',
+                    controller: 'SubPrdModalController',
+                    size: size,
+                    resolve: {
+                        items: function () {
+
+                            return $scope.items;
+                        },
+                        product: function () {
+                            return order;
+                        },
+                        product_count: function () {
+                            return count;
+                        }
+
                     }
-                    
-                }
-            });
-
-
-            $scope.toggleAnimation = function () {
-                $scope.animationsEnabled = !$scope.animationsEnabled;
-            };
-
-        }
-        else {
-            if(product_count > 0) {
-                if (localStorage.getItem('cart')) {
-                    var orders = JSON.parse(localStorage.getItem('cart'));
-                }
-                else {
-                    var orders = [];
-                }
-                var data = {};
-
-                data.count = product_count;
-                data.avatar = order.avatar;
-                data.caterer_id = order.caterer_id;
-                data.product_id = order.id;
-                data.ingredinets = order.ingredinets;
-                data.menu_id = order.menu_id;
-                data.name = order.name;
-                data.price = order.price;
-
-                orders.push(data);
-
-                var total_price = 0;
-                $.each(orders, function (index, value) {
-                    total_price = total_price + (value.price * value.count);
                 });
 
 
-                localStorage.setItem('cart', JSON.stringify(orders));
-                localStorage.setItem('total_price', total_price);
+                $scope.toggleAnimation = function () {
+                    $scope.animationsEnabled = !$scope.animationsEnabled;
+                };
 
-                $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
-                $rootScope.total_price = localStorage.getItem('total_price');
+            }
+            else {
+                if (count > 0) {
+                    if (localStorage.getItem('cart')) {
+                        var orders = [{
+                            'products': JSON.parse(localStorage.getItem('cart'))[0].products,
+                            'packages': JSON.parse(localStorage.getItem('cart'))[0].packages
+                        }]
+                    }
+                    else {
+                        var orders = [{
+                            'products': [],
+                            'packages': []
+                        }];
+                    }
+
+                    var data = {};
+
+                    data.count = count;
+                    data.avatar = order.avatar;
+                    data.caterer_id = order.caterer_id;
+                    data.id = order.id;
+                    data.ingredinets = order.ingredinets;
+                    data.menu_id = order.menu_id;
+                    data.name = order.name;
+                    data.price = order.price;
+
+                    orders[0].products.push(data);
+
+                    var total_price = 0;
+                    $.each(orders[0].products, function (index, value) {
+                        total_price = total_price + (value.price * value.count);
+                    });
+                    $.each(orders[0].packages, function (index, value) {
+                        total_price = total_price + (value.price * value.count);
+                    });
+
+
+                    localStorage.setItem('cart', JSON.stringify(orders));
+                    localStorage.setItem('total_price', total_price);
+
+
+
+                    $rootScope.products = JSON.parse(localStorage.getItem('cart'))[0].products;
+
+                    $rootScope.total_price = localStorage.getItem('total_price');
+                }
+            }
+        }
+        else{
+            if(type == 'package'){
+                if(count > 0) {
+                    if (localStorage.getItem('cart')) {
+                        var orders = [{
+                            'products': JSON.parse(localStorage.getItem('cart'))[0].products,
+                            'packages': JSON.parse(localStorage.getItem('cart'))[0].packages
+                        }]
+                    }
+                    else {
+                        var orders = [{
+                            'products': [],
+                            'packages': []
+                        }];
+                    }
+
+                    var data = {};
+
+                    data.count = count;
+                    data.avatar = order.avatar;
+                    data.caterer_id = order.caterer_id;
+                    data.id = order.id;
+                    data.name = order.name;
+                    data.price = order.price;
+
+                    orders[0].packages.push(data);
+
+                    var total_price = 0;
+                    $.each(orders[0].products, function (index, value) {
+                        total_price = total_price + (value.price * value.count);
+                    });
+                    $.each(orders[0].packages, function (index, value) {
+                        total_price = total_price + (value.price * value.count);
+                    });
+
+
+                    localStorage.setItem('cart', JSON.stringify(orders));
+                    localStorage.setItem('total_price', total_price);
+
+
+
+                    $rootScope.packages = JSON.parse(localStorage.getItem('cart'))[0].packages;
+
+                    $rootScope.total_price = localStorage.getItem('total_price');
+                }
             }
         }
 

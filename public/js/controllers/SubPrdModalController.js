@@ -1,9 +1,17 @@
 app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$scope', '$uibModal', 'items', 'product', 'product_count', function ($rootScope, $uibModalInstance, $scope, $uibModal, items, product, product_count) {
 
-    if(localStorage.getItem('cart'))
-        var orders = JSON.parse(localStorage.getItem('cart'));
-    else
-        var orders = [];
+    if (localStorage.getItem('cart')) {
+        var orders = [{
+            'products': JSON.parse(localStorage.getItem('cart'))[0].products,
+            'packages': JSON.parse(localStorage.getItem('cart'))[0].packages
+        }]
+    }
+    else {
+        var orders = [{
+            'products': [],
+            'packages': []
+        }];
+    }
 
     $scope.items = items;
     
@@ -25,7 +33,7 @@ app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$sc
         data.count = product_count;
         data.avatar = product.avatar;
         data.caterer_id = product.caterer_id;
-        data.product_id = product.id;
+        data.id = product.id;
         data.ingredinets = product.ingredinets;
         data.menu_id = product.menu_id;
         data.name = product.name;
@@ -33,17 +41,20 @@ app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$sc
         data.description = $scope.description;
         data.sub_id = $scope.i.product.sub_id;
 
-        orders.push(data);
+        orders[0].products.push(data);
 
         var total_price = 0;
-        $.each(orders, function (index, value) {
+        $.each(orders[0].products, function (index, value) {
+            total_price = total_price + (value.price * value.count);
+        });
+        $.each(orders[0].packages, function (index, value) {
             total_price = total_price + (value.price * value.count);
         });
 
         localStorage.setItem('cart', JSON.stringify(orders));
         localStorage.setItem('total_price', total_price);
 
-        $rootScope.orders = JSON.parse(localStorage.getItem('cart'));
+        $rootScope.products = JSON.parse(localStorage.getItem('cart'))[0].products;
         $rootScope.total_price = localStorage.getItem('total_price');
 
         $uibModalInstance.close();

@@ -91,7 +91,7 @@
 												  <label ng-repeat="product in menu.products track by $index">
 													<span ><a id="product_name" ng-click="show_modal(product, product_count)"><% product.name %></a></span>
 													<input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
-													<i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count)" aria-hidden="true"></i>
+													<i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count, 'product')" aria-hidden="true"></i>
 												  </label>
 												 </form>
 											</div>
@@ -127,7 +127,7 @@
 										<div class="row">
 											<div class="pull-right add_cart ">
 												<input type="number" ng-model="package_count" name="input"  min="0" max="99" required>
-												<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart()" aria-hidden="true"></i>
+												<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart(package, package_count, 'package')" aria-hidden="true"></i>
 											</div>
 											</div>
 
@@ -149,9 +149,13 @@
 									<div class="lieferdatum">
 										<input type="text" id="datetimepicker4">
 									</div>
-
-									<div class="bestellung-produkt-number" ng-repeat="order in $root.orders track by $index">
-										<p><% order.count %>x <% order.name %> <span class="bestellung-produkt-number-price"><% order.price %></span></p>
+									<p>products</p>
+									<div class="bestellung-produkt-number" ng-repeat="product in $root.products track by $index">
+										<p><% product.count %>x <% product.name %> <span class="bestellung-produkt-number-price"><% product.price %></span></p>
+									</div>
+									<p>packages</p>
+									<div class="bestellung-produkt-number" ng-repeat="package in $root.packages track by $index">
+										<p><% package.count %>x <% package.name %> <span class="bestellung-produkt-number-price"><% package.price %></span></p>
 									</div>
 
 									<div class="bestellung-produkts-total">

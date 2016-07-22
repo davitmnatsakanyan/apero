@@ -19,7 +19,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ng-href="/#/">Apero bestellen</a></li>
+                    <li><a ng-href="/#/caterers">All caterers</a></li>
                     {{--<li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/">Hilfe</a></li>--}}
                     <li><a ng-href="/#/">Hilfe</a></li>
 
