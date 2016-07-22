@@ -22,7 +22,7 @@ class MembersController extends AdminBaseController
      */
     public function index()
     {
-        $members = User::where('is_user',1)->paginate(15);
+        $members = User::where('is_user', 1)->paginate(15);
 
         return view('admin.members.index', compact('members'));
     }
@@ -81,15 +81,13 @@ class MembersController extends AdminBaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      *
      * @return void
      */
     public function show($id)
     {
-        $member = User::with('user_zip')->where('is_user' ,1 )->findOrFail($id);
-
-        return $member;
+        $member = User::with('user_zip')->where('is_user', 1)->findOrFail($id);
 
         return view('admin.members.show', compact('member'));
     }
@@ -97,13 +95,13 @@ class MembersController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      *
      * @return void
      */
     public function edit($id)
     {
-        $member = User::where('is_user',1 )->findOrFail($id);
+        $member = User::where('is_user', 1)->findOrFail($id);
         $zips = ZipCode::all();
 
         return view('admin.members.edit', compact('member', 'zips'));
@@ -112,7 +110,7 @@ class MembersController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      *
      * @return void
      */
@@ -126,7 +124,7 @@ class MembersController extends AdminBaseController
             'zip' => 'required',
             'city' => 'required',
             'country' => 'required',
-            'email' => 'required|unique:users,email,'.$member->id,
+            'email' => 'required|unique:users,email,' . $member->id,
             'phone' => 'required',
             'mobile' => 'required',
         ]);
@@ -138,11 +136,11 @@ class MembersController extends AdminBaseController
             'zip' => $request->zip,
             'city' => $request->city,
             'country' => $request->country,
-            'email' =>$request->email,
+            'email' => $request->email,
             'phone' => $request->phone,
             'mobile' => $request->mobile,
         ]);
-        if(!is_null($request->password)){
+        if (!is_null($request->password)) {
             $member->update(['password' => bcrypt($request->password)]);
         }
         Session::flash('success', 'User updated!');
@@ -153,13 +151,13 @@ class MembersController extends AdminBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      *
      * @return void
      */
     public function destroy($id)
     {
-        User::withTrashed()->where(['is_user'=>1 ,'id' => $id])->forceDelete();
+        User::withTrashed()->where(['is_user' => 1, 'id' => $id])->forceDelete();
 
         Session::flash('success', 'User deleted!');
 
@@ -178,23 +176,23 @@ class MembersController extends AdminBaseController
      */
     public function block($id)
     {
-        if(User::where(['is_user'=>1 , 'id' => $id])->delete())
-          return redirect('admin/members')->with('success' , 'User successfully blocked.');
-        return redirect()->back()->with('error' , 'Something went wrong');
-
+        if (User::find($id)->is_user)
+            if (User::destroy($id))
+                return redirect('admin/members')->with('success', 'User successfully blocked.');
+        return redirect()->back()->with('error', 'Something went wrong');
     }
 
 
     public function getBlocked()
     {
         $members = User::onlyTrashed()->paginate(15);
-        return view('admin/members/blocked' , compact('members'));
+        return view('admin/members/blocked', compact('members'));
     }
 
     public function activate($id)
     {
-        if(User::withTrashed()->where('is_user' ,1)->findOrFail($id)->restore())
-            return redirect('admin/members') -> with('success' , 'User successfully activated.');
-        return back()->with('error' ,'Somethong went wrong');
+        if (User::withTrashed()->where('is_user', 1)->findOrFail($id)->restore())
+            return redirect('admin/members')->with('success', 'User successfully activated.');
+        return back()->with('error', 'Somethong went wrong');
     }
 }

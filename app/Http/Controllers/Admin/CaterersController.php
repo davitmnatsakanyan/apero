@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Admin\AdminBaseController;
+use App\Models\CookingTime;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\ContactPerson;
 use App\Models\Caterer;
@@ -106,8 +107,10 @@ class CaterersController extends AdminBaseController
     public function edit($id)
     {
 
-        $caterer = Caterer::with('contact_person', 'zips', 'kitchens')->findOrFail($id);
+        $caterer = Caterer::with('contact_person', 'zips', 'kitchens' ,'cookingtime')->findOrFail($id);
 
+//        return $caterer->cookingtime;
+        
         $kitchens = CatererKitchen::where('caterer_id', $id)->lists('kitchen_id');
 
         $adding_kitchens = Kitchen::whereNotIn('id', $kitchens)->get();
@@ -305,5 +308,13 @@ class CaterersController extends AdminBaseController
 
         return back()->withErrors('Something went wrong.');
 
+    }
+
+
+    public function editCookingTime(Request $request)
+    {
+//        return $request->all();
+        CookingTime::where(['caterer_id' => $request->caterer_id ])->update([ $request->group => $request->time ]);
+        return back()->with('success', 'Cooking time changes successfully.');
     }
 }

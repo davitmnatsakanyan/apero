@@ -108,6 +108,7 @@ Route::group([
     Route::get('caterers/{id}/block', 'CaterersController@block');
     Route::get('caterers/{id}/active', 'CaterersController@activate');
     Route::post('caterers/kitchens/add' , 'CaterersController@addKitchen');
+    Route::post('caterers/edit-cooking-time', 'CaterersController@editCookingTime');
     Route::get('caterers/{caterer_id}/remove/{zip_id}' , 'CaterersController@removeZipFromDeliveryArea');
     Route::delete('caterers/{caterer_id}/kitchen/{kitchen_id}' , 'CaterersController@removeKitchen');
     Route::resource('caterers', 'CaterersController');
