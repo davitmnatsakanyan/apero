@@ -78,15 +78,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="assets/plugins/respond.min.js"></script>
-<script src="assets/plugins/excanvas.min.js"></script> 
+<script src="assets/plugins/excanvas.min.js"></script>
 <![endif]-->
-
-
-
-
-
-
-
 {!! Html::script('administration/assets/plugins/jquery-1.10.2.min.js') !!}
 {!! Html::script('administration/assets/plugins/jquery-migrate-1.2.1.min.js') !!}
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->

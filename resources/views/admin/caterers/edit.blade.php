@@ -9,19 +9,24 @@
 
             <ul class="nav nav-tabs" id="myTabs">
                 <li role="presentation" class="active">
-                    <a href="#common_information" aria-controls="common_information" role="tab" data-toggle="tab">Common information</a>
+                    <a href="#common_information" aria-controls="common_information" role="tab" data-toggle="tab">Common
+                        information</a>
                 </li>
                 <li role="presentation">
-                    <a href="#contact_person" aria-controls="contact_person" role="tab" data-toggle="tab">Contact person</a>
+                    <a href="#contact_person" aria-controls="contact_person" role="tab" data-toggle="tab">Contact
+                        person</a>
                 </li>
                 <li role="presentation">
-                    <a href="#delivery_area" aria-controls="delivery_area" role="tab" data-toggle="tab">Delivery area</a>
+                    <a href="#delivery_area" aria-controls="delivery_area" role="tab" data-toggle="tab">Delivery
+                        area</a>
                 </li>
                 <li role="presentation">
                     <a href="#kitchens" aria-controls="kitchens" role="tab" data-toggle="tab">Kitchens</a>
                 </li>
+                <li role="presentation">
+                    <a href="#cooking_time" aria-controls="cooking_time" role="tab" data-toggle="tab">Cooking Time</a>
+                </li>
             </ul>
-
 
 
             <div class="tab-content">
@@ -38,6 +43,9 @@
                 <div role="tabpanel" class="tab-pane" id="kitchens">
                     @include('admin.caterers.items.kitchens')
                 </div>
+                <div role="tabpanel" class="tab-pane" id="cooking_time">
+                    @include('admin.caterers.items.cookingTime')
+                </div>
             </div>
         </div>
     </div>
@@ -45,35 +53,41 @@
 
 
 @section('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 @endsection
 
 
 @section('js')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script type="text/javascript">
+    <script>
+
+        document.write("hello");
         $('select').select2();
 
-
-
-        $(function() {
-            $("#avatar").on("change", function()
-            {
+        $(function () {
+            $("#avatar").on("change", function () {
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
-                if (/^image/.test( files[0].type)){ // only image file
+                if (/^image/.test(files[0].type)) { // only image file
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[0]); // read the local file
 
-                    reader.onloadend = function(){ // set image data as background of div
-                        $("#imagePreview").css("background-image", "url("+this.result+")");
+                    reader.onloadend = function () { // set image data as background of div
+                        $("#imagePreview").css("background-image", "url(" + this.result + ")");
                     }
                 }
             });
         });
 
+        $('.edit_cooking_time').on('click', function () {
+            var group = $(this).data('group');
+            var time = $(this).data('time');
+            console.log(group);
 
+            $('input[name="group"]').val(group);
+            $('input[name="time"]').val(time);
+        })
     </script>
-@stop
+@endsection

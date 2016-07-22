@@ -18,14 +18,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($orders as $key =>$order)
+                    @foreach($orders as  $order)
                         <tr>
                             <td><a href="{{ url('admin/orders', $order->id) }}">{{ $order->id }}</a></td>
                             <td>{{ $order->delivery_address . ", " .
                                            $order->delivery_zip . ", ".
                                            $order->delivery_city . ", ".
                                            $order->delivery_country . ", "
-                                     }}</td>
+                                     }}
+                            </td>
                             <td>{{ $order->delivery_time }}</td>
                             <td> {{ $order->status}}</td>
                             <td> {{ $order->admin->name }} </td>

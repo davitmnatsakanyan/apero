@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Models\Order;
 use App\Models\ZipCode;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,17 +51,26 @@ class User extends Authenticatable
     ];
 
 
-    protected static function boot() {
+    protected static function boot(){
         parent::boot();
 
-        static::deleting(function($user) {
-            $user->orders()->withTrashed()->forceDelete();
+        static::deleting(function($user)  {
+            $user->orders()->update(['admin_id' => auth()->guard('admin')->id()]);
+            $user->orders()->delete();
+        });
+
+        static::restoring(function($user) {
+            $user->orders()->withTrashed()->restore();
         });
     }
     
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     
     public function user_zip()
     {
-        return $this->belongsTo(ZipCode::class);
+        return $this->belongsTo(ZipCode::class,'zip');
     }
 }
