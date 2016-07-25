@@ -13,7 +13,7 @@ class AddIsGuestOrder extends Migration
     public function up()
     {
        Schema::table('orders', function (Blueprint $table){
-           $table->dropForeign('orders_ibfk_1');
+//           $table->dropForeign('orders_ibfk_1');
            $table->dropUnique('orders_email_unique');
            $table->dateTime('delivery_time');
            $table->integer('is_user_order');

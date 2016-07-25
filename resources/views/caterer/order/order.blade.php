@@ -1,17 +1,10 @@
-@extends('admin/layout/index')
+@extends ('caterer/layout/index')
 
 @section('content')
-    <div class="page-content-wrapper">
+    <div style="margin-top: 70px;margin-left:50px; width: 800px">
         <div class="page-content">
             @include ('layouts/messages')
-            <h1> {{ $order->id }}
-                <a href="{{ url('/admin/orders/' . $order->id . '/block') }}"
-                   class="btn btn-warning btn-xs" title="Block Order"><span
-                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"/></a>
-                <a href="{{ url('/admin/orders/delete' , $order->id ) }}"
-                   class="btn btn-danger btn-xs" title="Delete Order"><span
-                            class="glyphicon glyphicon-trash" aria-hidden="true"/></a>
-            </h1>
+            <h1> {{ $order->id }}</h1>
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover">
@@ -19,11 +12,6 @@
                     <tr>
                         <th>ID</th>
                         <td>{{ $order->id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Caterer</th>
-                        <td><a href="{{url('admin/caterers',  $order->caterer->id)}}">{{ $order->caterer->company }}</a>
-                        </td>
                     </tr>
                     <tr>
                         <th>User</th>
@@ -77,33 +65,31 @@
                     </tbody>
                 </table>
             </div>
-<h2>Products</h2>
+            <h2>Products</h2>
             <hr/>
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th> Product name</th>
+                    <th> Amount</th>
+                    <th> Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{-- */$x=0;/* --}}
+                @foreach($order->products as $item)
+                    {{-- */$x++;/* --}}
                     <tr>
-                        <th>S.No</th>
-                        <th> Product name</th>
-                        <th> Amount </th>
-                        <th> Comment </th>
+                        <td>{{ $x }}</td>
+                        <td>{{ isset($item->subproduct)?$item->name ." " . $item->subproduct->name: $item->name }}</td>
+
+                        <td>{{ $item->pivot->amount }}</td>
+                        <td>{{ $item->pivot->description ?  $item->pivot->description : 'No Comment' }} </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {{-- */$x=0;/* --}}
-                    @foreach($order->products as $item)
-                        {{-- */$x++;/* --}}
-                        <tr>
-                            <td>{{ $x }}</td>
-                            <td><a href="{{url('admin/products', $item->id)}}">{{ isset($item->subproduct)?$item->name ." " . $item->subproduct->name: $item->name }}</a></td>
-
-                            <td>{{ $item->pivot->amount }}</td>
-                            <td>{{ $item->pivot->description ?  $item->pivot->description : 'No Comment' }} </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-
-
+                @endforeach
+                </tbody>
+            </table>
 
             @if(count($order->packages)!=0)
                 <h2>Packages</h2>
@@ -123,7 +109,7 @@
                         {{-- */$x++;/* --}}
                         <tr>
                             <td>{{ $x }}</td>
-                            <td><a href = "{{ url('admin/packages', $item->id) }}">{{ $item->name }}</a></td>
+                            <td>{{ $item->name }}</td>
 
                             <td>{{ $item->pivot->amount }}</td>
                             <td>{{ $item->pivot->description ?  $item->pivot->description : 'No Comment' }} </td>
@@ -132,7 +118,6 @@
                     </tbody>
                 </table>
             @endif
-
         </div>
     </div>
 @endsection

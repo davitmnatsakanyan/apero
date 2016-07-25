@@ -18,7 +18,7 @@
                 <tbody>
                 @foreach($orders as $key =>$order)
                     <tr>
-                        <td>{{ $order->id }}</td>
+                        <td><a href = "{{ url('caterer/order/show', $order->id) }}">{{ $order->id }} </a></td>
                         <td>{{ $order->delivery_address . ", " .
                                            $order->delivery_zip . ", ".
                                            $order->delivery_city . ", ".

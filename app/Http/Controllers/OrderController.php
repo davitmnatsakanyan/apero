@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\User;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Http\Controllers\User\UserBaseController;
 use App\Models\Product;
+use App\Models\OrderPackage;
 use App\Models\Subproduct;
 use Auth, View;
 use Carbon\Carbon;
@@ -17,7 +19,7 @@ class OrderController extends UserBaseController
 
     public function index(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         if ($request->is_accepted) {
             if ($this->user->check())
               return   $this->userOrder($request);
@@ -33,22 +35,24 @@ class OrderController extends UserBaseController
     {
         $data = $request->all();
         $data['user_id'] = $this->user->id();
-        $data['caterer_id'] = $request->products[0]['caterer_id'];
+        $data['caterer_id'] = $request->orders['products'][0]['caterer_id'];
         $data['status'] = 0;  //status = Idle
-        $data ['total_cost'] = $this->count_total_cost($request->products);
+        $data ['total_cost'] = $this->count_total_cost($request->orders);
         $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
         $data ['is_user_order'] = 1;
         $order = Order::create($data);
-        $this->store_order_products($order->id, $request->products);
+        $this->store_order_products($order->id, $request->orders);
         return response()->json(['success' => 1]);
     }
 
-    public function store_order_products($order_id, $products)
+    public function store_order_products($order_id, $orders )
     {
+        $products = $orders['products'];
+        $packages = $orders['packages'];
         foreach ($products as $product) {
             $data = [
                 'order_id' => $order_id,
-                'product_id' => $product ['product_id'],
+                'product_id' => $product ['id'],
                 'amount' => $product ['count'],
                 'price' => $product ['count'] * $product ['price'],
             ];
@@ -58,6 +62,18 @@ class OrderController extends UserBaseController
             $data['subproduct_id'] =  isset($product['sub_id']) ? $product['sub_id'] : 0;
 
             OrderProduct::create($data);
+        }
+        
+        foreach($packages as $package)
+        {
+            $data = [
+                'order_id' => $order_id,
+                'package_id' => $package ['id'],
+                'amount' => $package ['count'],
+                'price' => $package ['count'] * $package ['price'],
+            ];
+
+            OrderPackage::create($data);
         }
     }
 
@@ -70,11 +86,11 @@ class OrderController extends UserBaseController
         $data ['user_id'] = $guest->id;
         $data['status'] = 0;  //status = Idle
         $data['caterer_id'] = $request->products[0]['caterer_id'];
-        $data ['total_cost'] = $this->count_total_cost($request->products);
+        $data ['total_cost'] = $this->count_total_cost($request->orders);
         $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
         $data ['is_user_order'] = 0;
         $order = Order::create($data);
-        $this->store_order_products($order->id, $request->products);
+        $this->store_order_products($order->id, $request->orders);
         return response()->json(['success' => 1]);
     }
 
@@ -99,13 +115,21 @@ class OrderController extends UserBaseController
         return $guest;
     }
 
-    public function count_total_cost($products)
+    public function count_total_cost($orders)
     {
         $total = 0;
-
-        foreach ($products as $key => $product) {
-            $price = isset($product['sub_id']) ? Subproduct::findOrFail($product ['sub_id'])->price : Product::findOrFail($product ['product_id'])->price;
+        $products = $orders['products'];
+        $packages = $orders['packages'];
+        foreach ($products as $key => $product) 
+        {
+            $price = isset($product['sub_id']) ? Subproduct::findOrFail($product ['sub_id'])->price : Product::findOrFail($product ['id'])->price;
             $total += $price * $product ['count'];
+        }
+
+        foreach($packages as $package)
+        {
+            $price = Package::findOrFail($package['id'])->price;
+            $total+=$price * $package ['count'];
         }
 
         return $total;

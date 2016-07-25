@@ -44,6 +44,11 @@ class Order extends Model
       return  $this->belongsToMany(Product::class,'order_products')->withPivot('subproduct_id','amount' ,'description');
    }
 
+   public function packages()
+   {
+      return  $this->belongsToMany(Package::class,'order_package')->withPivot('amount' ,'description');
+   }
+
    public function user()
    {
       return $this->belongsTo(User::class);

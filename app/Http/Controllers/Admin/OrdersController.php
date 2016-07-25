@@ -45,7 +45,7 @@ class OrdersController extends AdminBaseController
 
     public function getShow($id)
     {
-        $order = Order::with('products','caterer','user')->findOrFail($id);
+        $order = Order::with('products','packages','caterer','user')->findOrFail($id);
             switch ($order['status']) {
                 case 0:
                     $order['status'] = 'Idle';

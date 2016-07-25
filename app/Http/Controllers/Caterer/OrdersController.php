@@ -44,8 +44,8 @@ class OrdersController extends CatererBaseController
                    $orders[$key]->products[$key2]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
         }
 
-        return response()->json(['success' => 1, 'orders' => $orders->toArray()]);
-       // return view('caterer/order/index' ,compact('orders'));
+//        return response()->json(['success' => 1, 'orders' => $orders->toArray()]);
+        return view('caterer/order/index' ,compact('orders'));
     }
     
     
@@ -58,6 +58,46 @@ class OrdersController extends CatererBaseController
         }
 
         return back();
+    }
+    
+    public function getShow($id)
+    {
+        if($this->hasAccess($id)) {
+            $order = Order::with('products','packages', 'user')->findOrFail($id);
+//            return $order;
+            switch ($order['status']) {
+                case 0:
+                    $order['status'] = 'Idle';
+                    break;
+                case 1:
+                    $order['status'] = 'Processing';
+                    break;
+                case 2:
+                    $order['status'] = 'Shipping';
+                    break;
+                case 3:
+                    $order['status'] = 'Complete';
+                    break;
+                case 4:
+                    $order['status'] = 'Deleted';
+                    break;
+                case 4:
+                    $order['status'] = 'Denied';
+                    break;
+            };
+            foreach ($order->products as $key => $product)
+                if ($product->pivot->subproduct_id !== 0)
+                    $order->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
+
+//        return $order;
+            return view('caterer/order/order', compact('order'));
+        }
+        return back();
+    }
+
+    public function hasAccess($id)
+    {
+        return Order::findOrFail($id)->caterer_id == $this->caterer->id();
     }
 
 

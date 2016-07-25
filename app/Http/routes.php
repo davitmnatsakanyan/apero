@@ -184,6 +184,7 @@ Route::group([
     Route::controller('settings', 'SettingsController');
     
     Route::get('order' ,'OrdersController@getIndex');
+    Route::get('order/show/{id}' , 'OrdersController@getShow');
     Route::post('order/change-status' , 'OrdersController@changeStatus');
 
     Route::group([
