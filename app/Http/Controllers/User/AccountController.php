@@ -20,17 +20,17 @@ class AccountController extends UserBaseController
 
         foreach ($orders as $key =>$order){
             switch ($order['status']){
-                case 0:$orders[$key]['status'] = 'Idle';
+                case 0:$orders[$key]['status'] = json_decode(json_encode(['name' => 'Idle', 'value' => 'Idle' ]));
                         break;
-                case 1:$orders[$key]['status'] = 'Processing';
+                case 1:$orders[$key]['status'] = json_decode(['name' => 'Processing', 'value' => 'Processing' ]);
                     break;
-                case 2:$orders[$key]['status'] = 'Shipping';
+                case 2:$orders[$key]['status'] = json_decode(['name' => 'Shipping', 'value' => 'Shipping' ]);
                     break;
-                case 3:$orders[$key]['status'] = 'Complete';
+                case 3:$orders[$key]['status'] = json_decode(['name' => 'Complete', 'value' => 'Complete' ]);
                     break;
-                case 4:$orders[$key]['status'] = 'Deleted';
+                case 4:$orders[$key]['status'] = json_decode(['name' => 'Deleted', 'value' => 'Deleted' ]);
                     break;
-                case 4:$orders[$key]['status'] = 'Denied';
+                case 4:$orders[$key]['status'] = json_decode(['name' => 'Denied', 'value' => 'Denied' ]);
                     break;
             };
 
@@ -42,8 +42,8 @@ class AccountController extends UserBaseController
             }
 
         }
-//        return response()->json(['success' => 1, 'orders' =>  $orders->toArray()]);
-        return view('user/account/index', compact('orders'));
+        return response()->json(['success' => 1, 'orders' =>  $orders->toArray()]);
+//        return view('user/account/index', compact('orders'));
     }
     
     public function getView()

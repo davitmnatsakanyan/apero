@@ -1,10 +1,15 @@
 var app = angular.module('app', [
-    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap'
+    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr'
 ]);
 
-app.config(function($interpolateProvider) {
+app.config(function($interpolateProvider, toastrConfig) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
+
+    angular.extend(toastrConfig, {
+        closeButton: true,
+        allowHtml: true,
+    });
 });
 
 app.config(['$routeProvider', function ($routeProvider) {

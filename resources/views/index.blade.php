@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" media="screen">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen">
     <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/custom.css">
 
@@ -54,8 +55,10 @@
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/angular-touch/angular-touch.js"></script>
     <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+    <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
 
     <script src="/js/app.js"></script>
+
 
     <!-- start controllers -->
     <script src="/js/services/AuthService.js"></script>

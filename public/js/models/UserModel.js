@@ -20,6 +20,7 @@ app.factory('UserModel', ['$http', function($http) {
                 method : "get",
                 url : "user"
             });
+
         }
     };
 }]);

@@ -1,4 +1,5 @@
-app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$scope', '$uibModal', 'items', 'product', 'product_count', function ($rootScope, $uibModalInstance, $scope, $uibModal, items, product, product_count) {
+app.controller('SubPrdModalController', ['$rootScope', '$uibModalInstance', '$scope', '$uibModal', 'items', 'product', 'product_count',
+    function ($rootScope, $uibModalInstance, $scope, $uibModal, items, product, product_count) {
 
     if (localStorage.getItem('cart')) {
         var orders = [{

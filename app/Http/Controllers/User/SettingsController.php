@@ -12,15 +12,15 @@ class SettingsController extends UserBaseController
 
     public function getUpdate()
     {
-        $user = $this->user->user()->toArray();
+        $user = $this->user->user()->with('user_zip')->first()->toArray();
         $zips = ZipCode::all();
-        return view('user.settings.update', compact('zips'));
-
-//        return response()->json(['data' => $user, 'success' => 1]);
+       return response(['user' => $user, 'zips'=>$zips, 'success' => 1]);
     }
 
     public function postUpdate(Request $request)
     {
+//        return  response()->json(['user' => $request->all() , 'success' => 1]);
+
         $this->validate($request, [
             'title' => 'required',
             'name' => 'required',
@@ -36,8 +36,8 @@ class SettingsController extends UserBaseController
         ]);
 
         if (User::findOrFail($this->user->id())->update($request->all()))
-            return redirect('user/account/view')->with('sucsess', 'Your account updated successfully.');
-        return back()->withErrors("Something went wrong can not update datas.");
+            return response()->json(['user' => $this->user->user()->toArray(), 'success' => 1]);
+        return response()->json(['user' => $this->user->user()->toArray(), 'success' => 0]);
 
     }
 

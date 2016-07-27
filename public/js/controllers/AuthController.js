@@ -42,7 +42,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
         }
         ).success(function (response) {
             if(response.success == 1){
-                $location.path(role+'/account');
+                $location.path(role+'/orders');
             }
         }).error( function (error) {
             if(role == 'user'){
@@ -68,7 +68,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
             }
         ).success(function (response) {
             if(response.success == 1){
-                $location.path(role+'/account');
+                $location.path(role+'/orders');
             }
             else{
                 if(response.success == 0){
