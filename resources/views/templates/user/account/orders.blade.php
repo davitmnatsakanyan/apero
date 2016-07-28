@@ -28,80 +28,64 @@
                                 <div class="company-title">
                                     <p class="fz28 fmlreg cg1 db">Meine Bestellungen</p>
                                 </div>
-                                <div ng-repeat="order in orders track by order.id">
-                                <div class="adress fl" >
-                                    <div class="numb1"><span class="cg4 fz28 fmlbold"><% $index+1 %></span></div>
-                                    <div class="numb1-txt">
-                                        <p class="fmlreg fz20 cg2"><% order.delivery_zip + " "
-                                                                      + order.delivery_address + ", "
-                                                                      + order.delivery_city + ", "
-                                                                      + order.delivery_country
-                                                                    %></p>
-                                        <small class="cg3 fmlreg fz14"><% order.delivery_time %></small>
-                                    </div>
-                                </div>
-
-                                <div class="pricessing fl">
-                                    <select ng-options="status.name for status in statuses track by status.name" ng-model="order.status"></select>
-                                </div>
-                                <div class="clear-both"></div>
-                                <div class="border-bottom">
-                                </div><!--end-->
-                                </div>
-
-                                {{--<div class="adress fl">--}}
-                                    {{--<div class="numb1"><span class="cg4 fz28 fmlbold">2</span></div>--}}
+                                {{--<div ng-repeat="order in orders track by order.id">--}}
+                                {{--<div class="adress fl" >--}}
+                                    {{--<div class="numb1"><span class="cg4 fz28 fmlbold"><% $index+1 %></span></div>--}}
                                     {{--<div class="numb1-txt">--}}
-                                        {{--<p class="fmlreg fz20 cg2">Client Address</p>--}}
-                                        {{--<small class="cg3 fmlreg fz14">1 hours</small>--}}
+                                        {{--<p class="fmlreg fz20 cg2"><% order.delivery_zip + " "--}}
+                                                                      {{--+ order.delivery_address + ", "--}}
+                                                                      {{--+ order.delivery_city + ", "--}}
+                                                                      {{--+ order.delivery_country--}}
+                                                                    {{--%></p>--}}
+                                        {{--<small class="cg3 fmlreg fz14"><% order.delivery_time %></small>--}}
                                     {{--</div>--}}
                                 {{--</div>--}}
-                                {{--<div class="order order-company fl">--}}
-                                    {{--<input type="submit" value="Accept order"/>--}}
-                                {{--</div>--}}
-                                {{--<div class="clear-both"></div>--}}
-                                {{--<div class="border-bottom">--}}
-                                {{--</div><!--end-->--}}
 
-                                {{--<div class="adress fl">--}}
-                                    {{--<div class="numb1"><span class="cg4 fz28 fmlbold">3</span></div>--}}
-                                    {{--<div class="numb1-txt">--}}
-                                        {{--<p class="fmlreg fz20 cg2">Client Address</p>--}}
-                                        {{--<small class="cg3 fmlreg fz14">1 hours</small>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="order fl">--}}
-                                    {{--<input type="submit" value="Accept order"/>--}}
-                                {{--</div>--}}
-                                {{--<div class="clear-both"></div>--}}
-                                {{--<div class="border-bottom">--}}
-                                {{--</div><!--end-->--}}
-
-                                {{--<div class="adress fl">--}}
-                                    {{--<div class="numb1"><span class="cg4 fz28 fmlbold">4</span></div>--}}
-                                    {{--<div class="numb1-txt">--}}
-                                        {{--<p class="fmlreg fz20 cg2">Client Address</p>--}}
-                                        {{--<small class="cg3 fmlreg fz14">1 hours</small>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                                 {{--<div class="pricessing fl">--}}
-                                    {{--<select>--}}
-                                        {{--<option value="1">--}}
-                                            {{--Pricessing--}}
-                                        {{--</option>--}}
-                                    {{--</select>--}}
+                                    {{--<select ng-options="status.name for status in statuses track by status.name" ng-model="order.status"></select>--}}
                                 {{--</div>--}}
                                 {{--<div class="clear-both"></div>--}}
                                 {{--<div class="border-bottom">--}}
                                 {{--</div><!--end-->--}}
+                                {{--</div>--}}
 
-                                <div class="circles">
-                                    <ul class="clear-fix fr">
-                                        <li class="fl"><a href="#" class="dib active"></a></li>
-                                        <li class="fl"><a href="#" class="dib"></a></li>
-                                        <li class="fl"><a href="#" class="dib"></a></li>
+
+
+                                <div>
+                                    <h4>Default</h4>
+
+                                    <ul>
+                                        <li ng-repeat="todo in filteredTodos"><% todo.text %></li>
                                     </ul>
+
+                                    <ul uib-pagination ng-model="currentPage"
+                                        total-items="todos.length"
+                                        max-size="maxSize"
+                                        boundary-links="true"> ></ul>
+
                                 </div>
+
+                                {{--<div class="circles">--}}
+                                    {{--<ul class="clear-fix fr">--}}
+                                        {{--<li class="fl"><a href="#" class="dib active"></a></li>--}}
+                                        {{--<li class="fl"><a href="#" class="dib"></a></li>--}}
+                                        {{--<li class="fl"><a href="#" class="dib"></a></li>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+
+
+                                <h1>Todos</h1>
+                                {{--<h4>{{todos.length}} total</h4>--}}
+                                {{--<ul>--}}
+                                    {{--<li ng-repeat="todo in filteredTodos">{{todo.text}}</li>--}}
+                                {{--</ul>--}}
+                                <% todos.length %>
+                                <pagination
+                                        ng-model="currentPage"
+                                        total-items="todos.length"
+                                        max-size="maxSize"
+                                        boundary-links="true">
+                                </pagination>
                             </div>
                         </div>
                     </div>

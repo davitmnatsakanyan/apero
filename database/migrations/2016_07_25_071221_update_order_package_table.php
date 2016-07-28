@@ -27,7 +27,7 @@ class UpdateOrderPackageTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
                 
-//            $table->timestamps();
+            $table->timestamps();
         });
     }
 
