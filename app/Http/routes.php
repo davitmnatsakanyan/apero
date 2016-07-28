@@ -16,6 +16,7 @@ Route::get('bbb','PaypalController@getCheckout');
 |
 */
 // Angular Templates
+
 Route::group(array('prefix' => '/templates/'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
@@ -50,6 +51,7 @@ Route::group(array('prefix' => '/templates/user/auth'), function () {
         return view('templates/user/auth.' . $template);
     }));
 });
+
 Route::group(array('prefix' => '/templates/user/account'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
@@ -157,6 +159,7 @@ Route::group([
 
 ], function () {
     Route::get('/' ,'AccountController@getIndex');
+    Route::get('order/show/{order_id}', 'AccountController@getOrder' );
     Route::group(['prefix' => 'account'],function(){
         Route::get('/', 'AccountController@getIndex');
         Route::get('view', 'AccountController@getView');

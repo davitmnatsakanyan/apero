@@ -30,6 +30,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/user/account/orders.blade.php',
             controller: 'UserOrdersController'
         })
+        .when('/user/orders/:order_id', {
+            templateUrl: 'templates/user/account/show_order.blade.php',
+            controller: 'UserOrdersController'
+        })
         .when('/caterers', {
             templateUrl: 'templates/caterers.blade.php',
             controller: 'SearchController'

@@ -1625,7 +1625,12 @@ a {
     border: 1px solid #e1e1e0;
     margin-right: 55px;
 }
+.numb1-txt{
 
+    width: 185px !important;
+    height: 45px;
+    overflow: hidden;
+}
 .numb1-txt p {
     line-height: 24px;
 }
@@ -1979,6 +1984,7 @@ a {
 .username-btn .shipping {
     background-color: #f0eeee;
     border-radius: 5px;
+    margin-top: -13px; ;
 }
 
 .username-btn .complete {
@@ -2667,6 +2673,7 @@ a {
 
     .numb1-txt p {
         font-size: 18px;
+
     }
 
     .main-product {
@@ -2790,6 +2797,8 @@ a {
     .numb1-txt p {
         font-size: 14px;
     }
+
+
 
     .profil-title {
         text-align: center;

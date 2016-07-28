@@ -21,6 +21,16 @@ app.factory('UserModel', ['$http', function($http) {
                 url : "user"
             });
 
+        },
+        
+        getOrder: function(order_id){
+            // var url = data.url;
+            // console.log(url);
+            return $http({
+                // data: data,
+                method :"get",
+                url : "user/order/show/" + order_id
+            });
         }
     };
 }]);
