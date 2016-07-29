@@ -313,7 +313,6 @@ class CaterersController extends AdminBaseController
 
     public function editCookingTime(Request $request)
     {
-//        return $request->all();
         CookingTime::where(['caterer_id' => $request->caterer_id ])->update([ $request->group => $request->time ]);
         return back()->with('success', 'Cooking time changes successfully.');
     }

@@ -68,22 +68,22 @@ class AccountController extends UserBaseController
         if($order) {
             switch ($order['status']) {
                 case 0:
-                    $orders['status'] = json_decode(json_encode(['name' => 'Idle', 'value' => 'Idle']));
+                    $order['status'] = json_decode(json_encode(['name' => 'Idle', 'value' => 'Idle']));
                     break;
                 case 1:
-                    $orders['status'] = json_decode(['name' => 'Processing', 'value' => 'Processing']);
+                    $order['status'] = json_decode(['name' => 'Processing', 'value' => 'Processing']);
                     break;
                 case 2:
-                    $orders['status'] = json_decode(['name' => 'Shipping', 'value' => 'Shipping']);
+                    $order['status'] = json_decode(['name' => 'Shipping', 'value' => 'Shipping']);
                     break;
                 case 3:
-                    $orders['status'] = json_decode(['name' => 'Complete', 'value' => 'Complete']);
+                    $order['status'] = json_decode(['name' => 'Complete', 'value' => 'Complete']);
                     break;
                 case 4:
-                    $orders['status'] = json_decode(['name' => 'Deleted', 'value' => 'Deleted']);
+                    $order['status'] = json_decode(['name' => 'Deleted', 'value' => 'Deleted']);
                     break;
                 case 4:
-                    $orders['status'] = json_decode(['name' => 'Denied', 'value' => 'Denied']);
+                    $order['status'] = json_decode(['name' => 'Denied', 'value' => 'Denied']);
                     break;
             };
 

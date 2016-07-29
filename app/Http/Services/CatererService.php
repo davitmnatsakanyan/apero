@@ -4,6 +4,7 @@ use App\Models\ContactPerson;
 use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\CatererKitchen;
+use App\Models\CookingTime;
 use App\Models\Kitchen;
 use App\Models\ZipCode;
 
@@ -66,6 +67,8 @@ class CatererService
             ]);
         }
 
+        CookingTime::create(['group1'=>0,'group2'=>0,'group3'=>0,'group4'=>0,'caterer_id'=>$caterer->id ]);
+        
         return $caterer;
     }
 

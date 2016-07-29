@@ -3,7 +3,7 @@
         <img ng-src="../images/restaurant-pic.png" alt=""/>
     </div>
     <div class="cater-btn ctbtn1">
-        <a ng-href="#/caterer/orders" class="pencil-icon active">
+        <a ng-href="#/caterer/orders" class="pencil-icon" ng-class="{ active: isActive('/caterer/orders')}">
             <span class="cater-btn-txt">
                  Meine Bestellungen
             </span>
@@ -11,7 +11,7 @@
     </div><!--end-->
 
     <div class="cater-btn ctbtn2">
-        <a ng-href="#/caterer/products" class="card-icon">
+        <a ng-href="#/caterer/products" class="card-icon" ng-class="{ active: isActive('/caterer/products')}">
             <span class="cater-btn-txt">
                  Meine Produkte
             </span>
@@ -19,8 +19,7 @@
     </div><!--end-->
 
     <div class="cater-btn ctbtn3">
-        <a ng-href="#/caterer/profile">
-            <span class="man-icon"></span>
+        <a ng-href="#/caterer/profile" class="man-icon" ng-class="{ active: isActive('/caterer/profile')}">
             <span class="cater-btn-txt">
                  Meine Profil
             </span>

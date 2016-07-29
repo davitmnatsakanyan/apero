@@ -1,4 +1,4 @@
-app.controller('CatererProductsController', ['$scope', 'CatererAccountModel', 'AuthService',  function ($scope, CatererAccountModel,  AuthService) {
+app.controller('CatererProductsController', ['$scope', 'CatererAccountModel', 'AuthService','$location',  function ($scope, CatererAccountModel,  AuthService ,$location) {
 
     AuthService.auth('caterer');
 
@@ -11,5 +11,10 @@ app.controller('CatererProductsController', ['$scope', 'CatererAccountModel', 'A
             
         }
     );
+
+    $scope.isActive = function (viewLocation) {
+        // return $location.path().indexOf(viewLocation) == 0;
+        return viewLocation === $location.path();
+    };
 }]);
 

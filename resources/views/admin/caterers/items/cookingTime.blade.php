@@ -1,3 +1,4 @@
+{{--{{dd($caterer->cookingtime)}}--}}
 <div style="width: 400px">
     <table class="table table-bordered table-striped table-hover">
         <tbody>
@@ -23,12 +24,12 @@
         </tr>
         <tr>
                 <td> 1-5 </td>
-                <td> {{ $caterer->cookingtime->group2 }}</td>
+                <td> {{ $caterer->cookingtime->group1 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"
                             data-group="group2"
-                            data-time="{{  $caterer->cookingtime->group2 }}"
+                            data-time="{{  $caterer->cookingtime->group2  }}"
                             data-toggle="modal"
                             data-target="#edit_cooking_time"
                             href="#edit_cooking_time">
@@ -38,12 +39,12 @@
             </tr>
             <tr>
                 <td> 6-10 </td>
-                <td> {{ $caterer->cookingtime->group3 }}</td>
+                <td> {{ $caterer->cookingtime->group1 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"
                             data-group="group3"
-                            data-time="{{  $caterer->cookingtime->group3 }}"
+                            data-time="{{  $caterer->cookingtime->group1 }}"
                             data-toggle="modal"
                             data-target="#edit_cooking_time"
                             href="#edit_cooking_time">
@@ -53,12 +54,12 @@
             </tr>
             <tr>
                 <td> 11-x </td>
-                <td> {{ $caterer->cookingtime->group4 }}</td>
+                <td> {{ $caterer->cookingtime->group1 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"
                             data-group="group3"
-                            data-time="{{  $caterer->cookingtime->group3 }}"
+                            data-time="{{  $caterer->cookingtime->group4 }}"
                             data-toggle="modal"
                             data-target="#edit_cooking_time"
                             href="#edit_cooking_time">

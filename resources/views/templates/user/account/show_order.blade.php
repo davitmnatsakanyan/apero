@@ -18,19 +18,30 @@
                             <div ng-include='"templates/user/account/_navbar.blade.php"'></div>
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company" ng-if="order">
-                            <div class="company-title-username">
-                                <p class="fz28 fmlreg cg1 db">Order id: <% order.id %></p>
+                                <div class="company-title-username">
+                                    <p class="fz28 fmlreg cg1 db">Status: <% order.status.name %></p>
+                                </div>
+
+                                <div class="company-title-username">
+                                    <p class="fz20 fmlreg cg1 db">
+                                        <span class="show-order">Caterer: <% order.caterer.company %></span>
+                                        <span class="show-order">Cost: <% order.total_cost %></span>
+                                        <span class="show-order">Ordering time: <% order.created_at %></span>
+                                        <span class="show-order">Products:
+                                            <span ng-repeat="product in order.products"> <% product.name %>,</span>
+                                            <span ng-repeat="package in order.packages"> <% package.name %>,</span>
+                                        </span>
+                                    </p>
+                                </div>
+
+
                             </div>
-
-
-
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
 
     </div>

@@ -48,7 +48,7 @@ app.controller('UserOrdersController',  ['$scope', 'AuthService', 'UserModel', '
     $scope.makeTodos = function() {
         $scope.filteredTodos = [];
         $scope.currentPage = 1;
-        $scope.numPerPage = 2;
+        $scope.numPerPage = 3;
         $scope.maxSize = 5;
         $scope.todos = [];
 

@@ -1,10 +1,10 @@
 <?php
 
-Route::get('aaa', function () {
-    dd(bcrypt('user'));
-});
+Route::get('aaa', 'User\SettingsController@getUpdate');
 
-Route::get('bbb','PaypalController@getCheckout');
+Route::get('bbb',function(){
+    dd(auth('user')->user()->toArray());
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes

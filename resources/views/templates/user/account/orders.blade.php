@@ -32,10 +32,10 @@
                                 <div data-ng-controller="UserOrdersController">
                                     <div ng-repeat="todo in filteredTodos">
                                         <div class="adress fl">
-                                            <a href="<% '#/user/orders/' + todo.num %>"  >
-                                            <div class="numb1">
-                                                <span class="cg4 fz20 fmlbold"><% todo.num %></span>
-                                            </div>
+                                            <a href="<% '#/user/orders/' + todo.order_id %>">
+                                                <div class="numb1">
+                                                    <span class="cg4 fz20 fmlbold"><% todo.num %></span>
+                                                </div>
                                             </a>
                                             <div class="numb1-txt">
                                                 <p class="fmlreg fz20 cg2"><% todo.address %></p>
@@ -47,7 +47,7 @@
                                             </div>
                                         </div>
                                         <div class="username-btn fl">
-                                            <p  class="cg5 fmlreg fz16 shipping dib"><% todo.status.name %></p>
+                                            <p class="cg5 fmlreg fz16 shipping dib"><% todo.status.name %></p>
                                         </div>
                                         <div class="clear-both"></div>
                                         <div class="border-bottom">

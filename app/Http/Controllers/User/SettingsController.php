@@ -12,9 +12,9 @@ class SettingsController extends UserBaseController
 
     public function getUpdate()
     {
-        $user = $this->user->user()->with('user_zip')->first()->toArray();
+        $user = User::with('user_zip')->findOrFail($this->user->id())->toArray();
         $zips = ZipCode::all();
-       return response(['user' => $user, 'zips'=>$zips, 'success' => 1]);
+        return response(['user' => $user, 'zips'=>$zips, 'success' => 1]);
     }
 
     public function postUpdate(Request $request)

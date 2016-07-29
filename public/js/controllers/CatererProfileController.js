@@ -1,4 +1,4 @@
-app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$window', 'AuthService',  function ($scope, CatererAccountModel, $window, AuthService) {
+app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$window', 'AuthService', '$location', function ($scope, CatererAccountModel, $window, AuthService, $location) {
 
     AuthService.auth('caterer');
 
@@ -7,5 +7,11 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
     }, function (error) {
         console.log(error);
     });
+
+
+    $scope.isActive = function (viewLocation) {
+        // return $location.path().indexOf(viewLocation) == 0;
+        return viewLocation === $location.path();
+    };
 
 }]);

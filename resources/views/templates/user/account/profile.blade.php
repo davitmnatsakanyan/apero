@@ -19,7 +19,7 @@
                             <div class="col-sm-7 col-md-8">
 
                                 <div class="company-title-username">
-                                    <p class="fz28 fmlreg cg1 db">Meine Bestellungen</p>
+                                    <p class="fz28 fmlreg cg1 db">Meine Profile</p>
                                 </div>
 
                                 <form method="post" id="update_user">
