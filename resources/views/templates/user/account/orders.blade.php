@@ -47,7 +47,7 @@
                                             </div>
                                         </div>
                                         <div class="username-btn fl">
-                                            <p class="cg5 fmlreg fz16 shipping dib"><% todo.status.name %></p>
+                                            <p class="cg5 fmlreg fz16 shipping dib"><% todo.status %></p>
                                         </div>
                                         <div class="clear-both"></div>
                                         <div class="border-bottom">

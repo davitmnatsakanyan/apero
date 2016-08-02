@@ -188,6 +188,7 @@ Route::group([
     
     Route::get('order' ,'OrdersController@getIndex');
     Route::get('order/show/{id}' , 'OrdersController@getShow');
+    Route::get('order/accept/{id}' , 'OrdersController@getAccept');
     Route::post('order/change-status' , 'OrdersController@changeStatus');
 
     Route::group([

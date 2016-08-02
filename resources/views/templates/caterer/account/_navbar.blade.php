@@ -29,12 +29,14 @@
 
         <ul class="list-inline pull-right no-padding">
             <li>
+                <a ng-href="/#/" ng-controller="NavigationController" ng-click="logout()">
                 <button class="logout">
                     <span>
                         <i class="fa fa-sign-out ff" aria-hidden="true"></i>
                     </span>
                     Logout
                 </button>
+                    </a>
             </li>
             <li>
                 <button class="hilife">

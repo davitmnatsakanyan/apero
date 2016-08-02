@@ -210,6 +210,11 @@ a {
     outline: none;
 }
 
+.show-order{
+    display: block;
+    margin-top: -30px;
+}
+
 .search input::-webkit-input-placeholder {
     color: #c6c3c4;
 }
@@ -1405,7 +1410,7 @@ img {
 }
 
 .hilife {
-    padding: 0 27px;
+    padding: 0 29px;
     border-radius: 4px;
     background-color: #edebeb;
     border: 0;
@@ -1530,7 +1535,7 @@ form {
 }
 
 .fz20 {
-    font-size: 20px;
+    font-size: 20px !important;
 }
 
 .fz28 {
@@ -1818,8 +1823,13 @@ a {
     text-align: center;
 }
 
-.profil-form form {
-    margin: 45px 0 0 45px;
+form .profil-form  {
+    margin: 45px 0px 0px 45px;
+}
+
+
+.order-padding {
+    padding-top: 20px;
 }
 
 .info-box label {
@@ -1971,7 +1981,7 @@ a {
 }
 
 .numb1-txt .numb2 {
-    width: 52px;
+    width: auto;
     height: 14px;
     background: #e8e7e7;
     color: #777778;

@@ -23,9 +23,9 @@ app.controller('UserOrdersController',  ['$scope', 'AuthService', 'UserModel', '
     
     UserModel.getOrders().then(
         function(response){
-            // console.log(response);
             if(response.data.success) {
                 $scope.orders = response.data.orders;
+                console.log($scope.orders);
                 $scope.user = response.data.user;
                 $scope.makeTodos();
             }

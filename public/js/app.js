@@ -53,6 +53,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/orders', {
             templateUrl: 'templates/caterer/account/orders.blade.php',
             controller: 'CatererOrdersController'
+        }) 
+        .when('/caterer/orders/:order_id', {
+            templateUrl: 'templates/caterer/account/show_order.blade.php',
+            controller: 'CatererOrdersController'
         })
         .when('/caterer/show/:caterer_id', {
             templateUrl: 'templates/caterer.blade.php',

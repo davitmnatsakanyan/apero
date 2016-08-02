@@ -36,7 +36,7 @@ class OrderController extends UserBaseController
         $data = $request->all();
         $data['user_id'] = $this->user->id();
         $data['caterer_id'] = $request->orders['products'][0]['caterer_id'];
-        $data['status'] = 0;  //status = Idle
+        $data['status'] = 'Not Accepted';
         $data ['total_cost'] = $this->count_total_cost($request->orders);
         $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
         $data ['is_user_order'] = 1;

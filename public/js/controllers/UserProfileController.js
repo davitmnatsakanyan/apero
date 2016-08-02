@@ -9,8 +9,9 @@ app.controller('UserProfileController', ['$scope', 'UserModel', 'AuthService', '
                 if (response.data.success) {
                     $scope.user = response.data.user;
                     $scope.zips = response.data.zips;
+                    console.log($scope.user);
                     // $scope.selected = $scope.user.user_zip;
-                    console.log($scope.selected);
+                    // console.log($scope.selected);
                 }
             },
 
@@ -20,6 +21,8 @@ app.controller('UserProfileController', ['$scope', 'UserModel', 'AuthService', '
         );
 
         $scope.update = function () {
+            console.log($scope.user);
+            // $scope.user.zip = $scope.user.user_zip.id;
             UserModel.update($scope.user).then(
                 function (response) {
                     console.log(response);
@@ -36,11 +39,6 @@ app.controller('UserProfileController', ['$scope', 'UserModel', 'AuthService', '
             // return $location.path().indexOf(viewLocation) == 0;
             return viewLocation === $location.path();
         };
-
-        $scope.updateSelect = function () {
-            console.log("kmk");
-        }
-        
 
         $scope.errorMessages = function (errors) {
             var data = "";

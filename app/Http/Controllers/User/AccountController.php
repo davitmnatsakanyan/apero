@@ -21,27 +21,6 @@ class AccountController extends UserBaseController
         $orders = Order::with('caterer', 'products')->where(['user_id' => $this->user->id(), 'is_user_order' => 1])->latest()->get();
 
         foreach ($orders as $key => $order) {
-            switch ($order['status']) {
-                case 0:
-                    $orders[$key]['status'] = json_decode(json_encode(['name' => 'Idle', 'value' => 'Idle']));
-                    break;
-                case 1:
-                    $orders[$key]['status'] = json_decode(['name' => 'Processing', 'value' => 'Processing']);
-                    break;
-                case 2:
-                    $orders[$key]['status'] = json_decode(['name' => 'Shipping', 'value' => 'Shipping']);
-                    break;
-                case 3:
-                    $orders[$key]['status'] = json_decode(['name' => 'Complete', 'value' => 'Complete']);
-                    break;
-                case 4:
-                    $orders[$key]['status'] = json_decode(['name' => 'Deleted', 'value' => 'Deleted']);
-                    break;
-                case 4:
-                    $orders[$key]['status'] = json_decode(['name' => 'Denied', 'value' => 'Denied']);
-                    break;
-            };
-
             foreach ($order->products as $key2 => $product)
                 if ($product->pivot->subproduct_id !== 0) {
                     $subprodcut = Subproduct::findOrFail($product->pivot->subproduct_id);
@@ -66,27 +45,6 @@ class AccountController extends UserBaseController
     {
         $order = Order::with('caterer', 'products', 'packages')->where(['user_id' => $this->user->id(), 'is_user_order' => 1, 'id' => $order_id])->first();
         if($order) {
-            switch ($order['status']) {
-                case 0:
-                    $order['status'] = json_decode(json_encode(['name' => 'Idle', 'value' => 'Idle']));
-                    break;
-                case 1:
-                    $order['status'] = json_decode(['name' => 'Processing', 'value' => 'Processing']);
-                    break;
-                case 2:
-                    $order['status'] = json_decode(['name' => 'Shipping', 'value' => 'Shipping']);
-                    break;
-                case 3:
-                    $order['status'] = json_decode(['name' => 'Complete', 'value' => 'Complete']);
-                    break;
-                case 4:
-                    $order['status'] = json_decode(['name' => 'Deleted', 'value' => 'Deleted']);
-                    break;
-                case 4:
-                    $order['status'] = json_decode(['name' => 'Denied', 'value' => 'Denied']);
-                    break;
-            };
-
             if (isset($order->products))
                 foreach ($order->products as $key => $product)
                     if ($product->pivot->subproduct_id !== 0) {

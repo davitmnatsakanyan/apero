@@ -75,7 +75,7 @@
                                             <select class="text fmlreg fz13 "
                                                     ng-options="item as zip.ZIP + ' ' + zip.city for zip in zips track by zip.id"
                                                     ng-model="user.user_zip"
-                                                    id="zip" name="zip">
+                                                    id="zip" name="zip"
                                             </select>
                                         </div><!--end-->
 

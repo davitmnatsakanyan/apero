@@ -19,6 +19,7 @@ class SettingsController extends UserBaseController
 
     public function postUpdate(Request $request)
     {
+//        dd($request->all());
 //        return  response()->json(['user' => $request->all() , 'success' => 1]);
 
         $this->validate($request, [
