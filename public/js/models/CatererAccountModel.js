@@ -47,6 +47,21 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 method :"get",
                 url : "caterer/order/accept/" + order_id
             });
+        },
+        
+        updateContactPerson: function(contact_person){
+            return $http({
+                data: contact_person,
+                method :"post",
+                url : "caterer/settings/updateContactPerson"
+            });
+        },
+
+        removeDeliveryArea: function (zip_id){
+            return $http({
+                method :"get",
+                url : "caterer/settings/removeDeliveryArea/" + zip_id
+            });
         }
     };
 }]);

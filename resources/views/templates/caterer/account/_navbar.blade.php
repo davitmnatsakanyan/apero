@@ -1,7 +1,37 @@
 <div class="col-sm-5 col-md-4 cater-left-box">
-    <div class="cater-pic">
-        <img ng-src="../images/restaurant-pic.png" alt=""/>
+
+    <div flow-init
+         flow-files-submitted="$flow.upload()"
+         flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+         flow-file-success="$file.msg = $message">
+
+        <input type="file" flow-btn name="avatar"/>
+
+        <style>
+            .ithumbnail {
+                max-width: 240px;
+                max-height: 164px;
+            }
+        </style>
+
+        <div class="cater-pic" ng-hide="$flow.files.length">
+            <img class="ithumbnail"  src="../images/restaurant-pic.png" />
+        </div>
+        <div class="cater-pic" ng-show="$flow.files.length">
+            <img class="ithumbnail" flow-img="$flow.files[0]" />
+        </div>
+
+        {{--<div class="thumbnail" ng-show="$flow.files.length">--}}
+            {{--<img flow-img="$flow.files[0]" />--}}
+        {{--</div>--}}
+
+        {{--<div class="cater-pic">--}}
+            {{--<img ng-src="../images/restaurant-pic.png" ng-flow-img="$flow.files[0]" alt=""/>--}}
+        {{--</div>--}}
+
     </div>
+
+
     <div class="cater-btn ctbtn1">
         <a ng-href="#/caterer/orders" class="pencil-icon" ng-class="{ active: isActive('/caterer/orders')}">
             <span class="cater-btn-txt">

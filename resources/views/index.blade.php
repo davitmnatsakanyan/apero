@@ -56,6 +56,7 @@
     <script src="/bower_components/angular-touch/angular-touch.js"></script>
     <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="/js/ng-flow-standalone.min.js"></script>
 
     <script src="/js/app.js"></script>
 

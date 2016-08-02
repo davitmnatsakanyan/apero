@@ -143,12 +143,12 @@ app.controller('CatererOrdersController', ['$scope', 'CatererAccountModel', 'Aut
         
         $scope.acceptOrder= function(order_id){
             CatererAccountModel.acceptOrder(order_id).then(function(responce){
-                if(responce.data.success){
+                if(response.data.success){
                     $scope.getOrders();
                     toastr.success(responce.data.message);
                 }
                 else {
-                    toastr.error(responce.data.error, 'Error');
+                    toastr.error(response.data.error, 'Error');
                 }
             });
         };

@@ -36,7 +36,6 @@ class SettingsController extends CatererBaseController
     public function postUpdate(CatererService $catererService)
     {
         $this->validate(request(),[
-            'avatar' =>'image',
             'company' => 'required',
             'zip' => 'required',
             'city' => 'required',
@@ -54,17 +53,9 @@ class SettingsController extends CatererBaseController
             'cp_email' => 'required|email',
         ]);
 
-        $optional = request()->except(['cp_title', 'cp_name', 'cp_prename', 'cp_mobile','cp_phone', 'cp_email','_token','avatar']);
+        $optional = request()->except(['cp_title', 'cp_name', 'cp_prename', 'cp_mobile','cp_phone', 'cp_email','_token']);
         $optional['rememberd_token'] = request()->_token;
 
-        if(!is_null(request()->avatar))
-        {
-            $image = request()->file('avatar');
-            $extension = $image->getClientOriginalExtension();
-            $optional['avatar'] = time() . "." . $extension;
-            $old_avatar = $this->caterer->user()->avatar;
-            $this->uploadFile($image,$optional['avatar'],$old_avatar);
-        }
 
         Caterer::findOrFail($this->caterer->id())->update( $optional);
 
@@ -79,6 +70,26 @@ class SettingsController extends CatererBaseController
 
         return redirect('caterer/account')->with('success' , 'Your information updated.');
             
+    }
+    
+    
+    public function updateContactPerson(Request $request)
+    {
+        $this->validate($request,[
+            'title' => 'required',
+            'name' => 'required',
+            'prename' =>'required',
+            'mobile' =>'required',
+            'phone' =>'required',
+            'email' => 'required|email',
+        ]);
+
+
+        if(ContactPerson::where('caterer_id', $this->caterer->id())->update($request->all()))
+            return response()->json(['success' => 1, 'message' => 'Your contact person information updated.']);
+        
+        return response()->json(['success' => 0, 'error' => 'Somethnig went wrong.']);
+
     }
 
 
@@ -135,24 +146,49 @@ class SettingsController extends CatererBaseController
     }
 
 
-    public function getRemove($id)
+    public function removeDeliveryArea($id)
     {
         if(CatererDeliveryArea::where(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $id])->delete())
-            return back()->with('success','Delivery area successfully deleted.');
-        return back()->withErrors('Something went wrong.');
+        {
+            $zips = Caterer::with('zips')->findOrFail($this->caterer->id())->zips;
+            return response()->json(['success' => 1, 'message' => 'Delivery area successfully deleted.', 'zips' => $zips]);
+        }
+        return response()->json(['success' => 0, 'message' => 'Something went wrong.']);
     }
 
 
-    public function uploadFile($image, $avatar, $old_image ="")
+    public function updateAvatar(Request $request)
     {
+        $tempDir = __DIR__ . DIRECTORY_SEPARATOR . 'temp';
+        return $request->all();
+        if (!file_exists($tempDir)) {
+            mkdir($tempDir);
+        }
+            $chunkDir = $tempDir . DIRECTORY_SEPARATOR . $request->flowIdentifier;
+            $chunkFile = $chunkDir.'/chunk.part'.$request->flowChunkNumber;
+            if (file_exists($chunkFile)) {
+                dd(12);
+                header("HTTP/1.0 200 Ok");
+            } else {
+                dd(22);
+                header("HTTP/1.0 404 Not Found");
+            }
+
+        $image = $request->file('avatar');
+        $extension = $image->getClientOriginalExtension();
+        $new_avatar = time() . "." . $extension;
+        $old_image = $this->caterer->user()->avatar;
+
         if ($old_image != "") {
             $file = 'images/caterers/' . $old_image;
             if(file_exists($file))
                 unlink($file);
         }
         $destinationPath = 'images/caterers/';
-        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $avatar);
-        return $avatar;
+        Image::make($image->getRealPath())->resize(500, 500)->save($destinationPath . '/' . $new_avatar);
+
+        return response()->json(['success' => 1, 'message' => 'Avatar successfully updated.']);
+
     }
     
 }

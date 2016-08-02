@@ -38,6 +38,13 @@ Route::group(array('prefix' => '/templates/caterer/account'), function () {
     }));
 });
 
+Route::group(array('prefix' => '/templates/caterer/account/items'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('templates/caterer/account/items.' . $template);
+    }));
+});
+
 Route::group(array('prefix' => '/templates/caterer/auth'), function () {
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
@@ -183,6 +190,11 @@ Route::group([
 
 ], function () {
     Route::get('/' ,'AccountController@getIndex');
+    Route::get('settings/updateAvatar','SettingsController@updateAvatar');
+
+    Route::post('settings/updateContactPerson','SettingsController@updateContactPerson');
+    Route::get('settings/removeDeliveryArea/{id}','SettingsController@removeDeliveryArea');
+
     Route::controller('account', 'AccountController');
     Route::controller('settings', 'SettingsController');
     

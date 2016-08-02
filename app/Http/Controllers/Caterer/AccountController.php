@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Caterer;
 use App\Http\Controllers\Caterer\CatererBaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use App\Models\Caterer;
 
 class AccountController extends CatererBaseController
 {
@@ -17,9 +18,9 @@ class AccountController extends CatererBaseController
 
     public function getIndex()
     {
-
-//        return response()->json($this->caterer->user());
-        return view('caterer/layout/index');
+        $caterer = Caterer::with(['kitchens' ,'zips' ,'cookingtime','contact_person'])->findOrFail($this->caterer->id());
+        return response()->json(['success' => 1,'caterer' => $caterer]);
+//        return view('caterer/layout/index');
     }
 
 

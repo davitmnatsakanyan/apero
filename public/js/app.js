@@ -1,16 +1,30 @@
 var app = angular.module('app', [
-    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr'
+    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow'
 ]);
 
-app.config(function($interpolateProvider, toastrConfig) {
-    $interpolateProvider.startSymbol('<%');
-    $interpolateProvider.endSymbol('%>');
+app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider',
+    function ($interpolateProvider, toastrConfig, flowFactoryProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
 
-    angular.extend(toastrConfig, {
-        closeButton: true,
-        allowHtml: true,
-    });
-});
+        flowFactoryProvider.defaults = {
+            target: 'caterer/settings/updateAvatar',
+            permanentErrors: [404, 500, 501],
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 4,
+            singleFile: true
+        };
+
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('catchAll', arguments);
+        });
+
+        angular.extend(toastrConfig, {
+            closeButton: true,
+            allowHtml: true,
+        });
+    }]);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -40,11 +54,11 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/caterer', {
             templateUrl: 'templates/caterer/account/profile.blade.php',
-            controller: 'CatererOrdersController'
+            controller: 'CatererProfileController'
         })
         .when('/caterer/profile', {
             templateUrl: 'templates/caterer/account/profile.blade.php',
-            controller: 'CatererOrdersController'
+            controller: 'CatererProfileController'
         })
         .when('/caterer/products', {
             templateUrl: 'templates/caterer/account/products.blade.php',
@@ -53,7 +67,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/orders', {
             templateUrl: 'templates/caterer/account/orders.blade.php',
             controller: 'CatererOrdersController'
-        }) 
+        })
         .when('/caterer/orders/:order_id', {
             templateUrl: 'templates/caterer/account/show_order.blade.php',
             controller: 'CatererOrdersController'

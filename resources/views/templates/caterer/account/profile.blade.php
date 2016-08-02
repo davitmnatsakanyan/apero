@@ -15,82 +15,136 @@
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 
                         <div class="col-sm-7 col-md-8">
-                            <div class="profil-title">
-                                <h2 class="fz28 fmlreg cg1">Meine Profil</h2>
-                            </div>
+
 
                             <div>
 
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-tabs profil-box-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-                                            Catering - Company
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-                                            Catering - Company Manager
-                                        </a>
-                                    </li>
-                                </ul>
+                                <uib-tabset active="activeJustified" justified="true">
+                                    <uib-tab index="0" heading="Common information">
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="home profile-tabs">
+                                                <form action="#" method="post">
+                                                <div class="profil-form fl">
+                                                        <div class="info-box">
+                                                            <label for="company" class="title fmlbold fz17">Company</label>
+                                                            <input type="text" class="text fmlreg fz13" id="company" ng-model="caterer.company"/>
+                                                        </div><!--end-->
 
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="home profile-tabs">
+                                                        <div class="info-box">
+                                                            <label for="address" class="title fmlbold fz17">Address</label>
+                                                            <input type="text"  class="text fmlreg fz13" id="address" ng-model="caterer.address"/>
+                                                        </div><!--end-->
 
-                                        <div class="profil-form fl">
-                                            <form action="#" method="post">
+                                                        <div class="info-box">
+                                                            <label for="pobox" class="title fmlbold fz17">Pobox</label>
+                                                            <input type="text" class="text fmlreg fz13" id="pobox" ng-model="caterer.pobox"/>
+                                                        </div><!--end-->
+
+                                                    <div class="info-box">
+                                                        <label for="zip" class="title fmlbold fz17">Zip</label>
+                                                        <input type="text" class="text fmlreg fz13" id="zip" ng-model="caterer.zip"/>
+                                                    </div><!--end-->
+
+                                                    <div class="info-box">
+                                                        <label for="products_origin" class="title fmlbold fz17">Products Origin</label>
+                                                        <input type="text" class="text fmlreg fz13" id="zip" ng-model="caterer.products_origin"/>
+                                                    </div><!--end-->
+
+
+                                                </div><!--end-->
+
+                                                <div class="profil-form fl">
+                                                        <div class="info-box">
+                                                            <label for="city" class="title fmlbold fz17">City</label>
+                                                            <input type="text" class="text fmlreg fz13" id="city" ng-model="caterer.city"/>
+                                                        </div><!--end-->
+
+                                                        <div class="info-box">
+                                                            <label for="phone" class="title fmlbold fz17">Phone</label>
+                                                            <input type="text" class="text fmlreg fz13" id="phone" ng-model="caterer.phone"/>
+                                                        </div><!--end-->
+
+                                                        <div class="info-box">
+                                                            <label for="email" class="title fmlbold fz17">E-mail</label>
+                                                            <input type="email" class="text fmlreg fz13" id="email" ng-model="caterer.email"/>
+                                                        </div><!--end-->
+
+                                                    <div class="info-box">
+                                                        <label for="country" class="title fmlbold fz17">Country</label>
+                                                        <input type="text"  class="text fmlreg fz13" id="country" ng-model="caterer.country"/>
+                                                    </div><!--end-->
+
+                                                    <div class="info-box">
+                                                        <label for="description" class="title fmlbold fz17">Description</label>
+                                                        <input type="textarea"  class="text fmlreg fz13" id="description" ng-model="caterer.description"/>
+                                                    </div><!--end-->
+
+
+                                                </div><!--end-->
+                                                </form>
+                                                <div class="clear-both"></div>
+                                                <div class="profile-border-box">
+                                                    <div class="profil-border"></div>
+                                                </div>
+                                                <div class="save-btn">
+                                                    <input type="submit" value="Save" class="fmlreg fz25"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </uib-tab>
+                                    <uib-tab index="1" heading="Contact person">
+                                        <form action="#" method="post">
+                                            <div class="profil-form fl">
                                                 <div class="info-box">
-                                                    <label for="title" class="title fmlbold fz17">Title</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="title"/>
+                                                    <label for="cp_title" class="title fmlbold fz17">Title</label>
+                                                    <input type="text" class="text fmlreg fz13" id="cp_title" ng-model="contact_person.title"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="prename" class="title fmlbold fz17">Prename</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="prename"/>
+                                                    <label for="cp_prename" class="title fmlbold fz17">Prename</label>
+                                                    <input type="text" class="text fmlreg fz13" id="cp_prename" ng-model="contact_person.prename"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="name" class="title fmlbold fz17">Name</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="name"/>
+                                                    <label for="cp_name" class="title fmlbold fz17">Name</label>
+                                                    <input type="text"  class="text fmlreg fz13" id="cp_name" ng-model="contact_person.name"/>
                                                 </div><!--end-->
 
-                                            </form>
-                                        </div><!--end-->
+                                            </div><!--end-->
 
-                                        <div class="profil-form fl">
-                                            <form action="#" method="post">
+                                            <div class="profil-form fl">
                                                 <div class="info-box">
-                                                    <label for="mobil" class="title fmlbold fz17">Mobil</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="mobil"/>
+                                                    <label for="cp_mobile" class="title fmlbold fz17">Mobil</label>
+                                                    <input type="text" class="text fmlreg fz13" id="cp_mobile" ng-model="contact_person.mobile"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="phone" class="title fmlbold fz17">Phone</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="phone"/>
+                                                    <label for="cp_phone" class="title fmlbold fz17">Phone</label>
+                                                    <input type="text" class="text fmlreg fz13" id="cp_phone" ng-model="contact_person.phone"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="email" class="title fmlbold fz17">E-mail</label>
-                                                    <input type="text" placeholder="Arnold" class="text fmlreg fz13" id="email"/>
+                                                    <label for="cp_email" class="title fmlbold fz17">E-mail</label>
+                                                    <input type="email" class="text fmlreg fz13" id="cp_email"  ng-model="contact_person.email"/>
                                                 </div><!--end-->
 
-                                            </form>
-                                        </div><!--end-->
+                                            </div><!--end-->
+                                        </form>
                                         <div class="clear-both"></div>
                                         <div class="profile-border-box">
                                             <div class="profil-border"></div>
                                         </div>
                                         <div class="save-btn">
-                                            <input type="submit" value="Save" class="fmlreg fz25"/>
+                                            <input type="submit" value="Save" class="fmlreg fz25" ng-click="updateContactPerson()"/>
                                         </div>
-
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="profile">
-                                        ...
-                                    </div>
-                                </div>
+                                    </uib-tab>
+                                    <uib-tab index="2" heading="Delivery Area">
+                                        <div ng-include='"templates/caterer/account/items/deliveryArea.blade.php"'></div>
+                                    </uib-tab>
+                                    <uib-tab index="3" heading="Long Justified">Long Labeled Justified content</uib-tab>
+                                    <uib-tab index="4" heading="Long Justified">Long Labeled Justified content</uib-tab>
+                                </uib-tabset>
 
                             </div>
 
