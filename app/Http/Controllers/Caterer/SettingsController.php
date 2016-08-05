@@ -9,17 +9,18 @@ use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\ContactPerson;
 use App\Models\DeliveryArea;
+use App\Models\CookingTime;
 use App\Models\ZipCode;
-use Validator,Image , Hash;
+use Validator, Image, Hash;
 
 
 class SettingsController extends CatererBaseController
 {
-    
+
     public function getUpdate()
     {
         $my_caterer = $this->caterer->user();
-        $contact_person = ContactPerson::where('caterer_id' ,$this->caterer->id())->first();
+        $contact_person = ContactPerson::where('caterer_id', $this->caterer->id())->first();
         $zips = ZipCode::all();
 
         $my_caterer ['cp_name'] = $contact_person['name'];
@@ -29,17 +30,17 @@ class SettingsController extends CatererBaseController
         $my_caterer ['cp_mobile'] = $contact_person ['mobile'];
         $my_caterer ['cp_email'] = $contact_person ['email'];
 
-        return view('caterer/settings/update', compact('my_caterer','zips'));
+        return view('caterer/settings/update', compact('my_caterer', 'zips'));
     }
 
-    
+
     public function postUpdate(CatererService $catererService)
     {
-        $this->validate(request(),[
+        $this->validate(request(), [
             'company' => 'required',
             'zip' => 'required',
             'city' => 'required',
-            'country' =>'required',
+            'country' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
             'fax' => 'required',
@@ -47,17 +48,17 @@ class SettingsController extends CatererBaseController
 
             'cp_title' => 'required',
             'cp_name' => 'required',
-            'cp_prename' =>'required',
-            'cp_mobile' =>'required',
-            'cp_phone' =>'required',
+            'cp_prename' => 'required',
+            'cp_mobile' => 'required',
+            'cp_phone' => 'required',
             'cp_email' => 'required|email',
         ]);
 
-        $optional = request()->except(['cp_title', 'cp_name', 'cp_prename', 'cp_mobile','cp_phone', 'cp_email','_token']);
+        $optional = request()->except(['cp_title', 'cp_name', 'cp_prename', 'cp_mobile', 'cp_phone', 'cp_email', '_token']);
         $optional['rememberd_token'] = request()->_token;
 
 
-        Caterer::findOrFail($this->caterer->id())->update( $optional);
+        Caterer::findOrFail($this->caterer->id())->update($optional);
 
         $contact_person['title'] = request()->cp_title;
         $contact_person['name'] = request()->cp_name;
@@ -66,28 +67,28 @@ class SettingsController extends CatererBaseController
         $contact_person['mobile'] = request()->mobile;
         $contact_person['email'] = request()->email;
 
-        ContactPerson::where('caterer_id', $this->caterer->id())->update( $contact_person);
+        ContactPerson::where('caterer_id', $this->caterer->id())->update($contact_person);
 
-        return redirect('caterer/account')->with('success' , 'Your information updated.');
-            
+        return redirect('caterer/account')->with('success', 'Your information updated.');
+
     }
-    
-    
+
+
     public function updateContactPerson(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
             'name' => 'required',
-            'prename' =>'required',
-            'mobile' =>'required',
-            'phone' =>'required',
+            'prename' => 'required',
+            'mobile' => 'required',
+            'phone' => 'required',
             'email' => 'required|email',
         ]);
 
 
-        if(ContactPerson::where('caterer_id', $this->caterer->id())->update($request->all()))
+        if (ContactPerson::where('caterer_id', $this->caterer->id())->update($request->all()))
             return response()->json(['success' => 1, 'message' => 'Your contact person information updated.']);
-        
+
         return response()->json(['success' => 0, 'error' => 'Somethnig went wrong.']);
 
     }
@@ -98,36 +99,35 @@ class SettingsController extends CatererBaseController
 
         $delivery_areas = Caterer::with('zips')->find($this->caterer->id())->zips;
         $zip_codes = ZipCode::with('caterers')->get();
-        $zip_codes=  $zip_codes->filter(function($zip_code,$key){
-            foreach($zip_code->caterers as $caterer)
-                if($caterer->id ==$this->caterer->id() )
+        $zip_codes = $zip_codes->filter(function ($zip_code, $key) {
+            foreach ($zip_code->caterers as $caterer)
+                if ($caterer->id == $this->caterer->id())
                     return false;
             return true;
         });
 
-        return view('caterer/settings/deliveryArea',compact('delivery_areas','zip_codes'));
-    }
-    
-    
-    public function getChangePassword()
-    {
-        return view('caterer/settings/changePassword',['role' => 'caterer']);
+        return view('caterer/settings/deliveryArea', compact('delivery_areas', 'zip_codes'));
     }
 
-    
+
+    public function getChangePassword()
+    {
+        return view('caterer/settings/changePassword', ['role' => 'caterer']);
+    }
+
+
     public function postChangePassword(Request $request)
     {
-        $this->validate($request ,[
+        $this->validate($request, [
             'old_password' => 'required',
             'password' => 'required|confirmed',
-            'password_confirmation' =>'required',
+            'password_confirmation' => 'required',
         ]);
 
 
-        if(Hash::check($request->old_password, $this->caterer->user()->password))
-        {
-            Caterer::findOrFail($this->caterer->id())->update( ['password' => bcrypt($request->password)]);
-            return back()->with('success' , 'Password changed successfully.');
+        if (Hash::check($request->old_password, $this->caterer->user()->password)) {
+            Caterer::findOrFail($this->caterer->id())->update(['password' => bcrypt($request->password)]);
+            return back()->with('success', 'Password changed successfully.');
         }
 
         return back()->withErrors('Enter correct old password');
@@ -135,21 +135,21 @@ class SettingsController extends CatererBaseController
     }
 
 
-    public function postAdd()
+    public function addDeliveryArea(Request $request)
     {
-        $this->validate(request(),['zip_codes' => 'required']);
+        if (empty($request->all()))
+            return response()->json(['success' => 0, 'error' => 'Please select zip code.']);
 
-        foreach(request()->zip_codes as $zip_code)
-            CatererDeliveryArea::create(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $zip_code]);
+        foreach ($request->all() as $zip_code)
+            CatererDeliveryArea::create(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $zip_code['id']]);
 
-        return back()->with('success' , 'Zip code added successfully');
+        return response()->json(['success' => 1, 'message' => 'Zip codes added successfully.']);
     }
 
 
     public function removeDeliveryArea($id)
     {
-        if(CatererDeliveryArea::where(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $id])->delete())
-        {
+        if (CatererDeliveryArea::where(['caterer_id' => $this->caterer->id(), 'zip_code_id' => $id])->delete()) {
             $zips = Caterer::with('zips')->findOrFail($this->caterer->id())->zips;
             return response()->json(['success' => 1, 'message' => 'Delivery area successfully deleted.', 'zips' => $zips]);
         }
@@ -164,15 +164,15 @@ class SettingsController extends CatererBaseController
         if (!file_exists($tempDir)) {
             mkdir($tempDir);
         }
-            $chunkDir = $tempDir . DIRECTORY_SEPARATOR . $request->flowIdentifier;
-            $chunkFile = $chunkDir.'/chunk.part'.$request->flowChunkNumber;
-            if (file_exists($chunkFile)) {
-                dd(12);
-                header("HTTP/1.0 200 Ok");
-            } else {
-                dd(22);
-                header("HTTP/1.0 404 Not Found");
-            }
+        $chunkDir = $tempDir . DIRECTORY_SEPARATOR . $request->flowIdentifier;
+        $chunkFile = $chunkDir . '/chunk.part' . $request->flowChunkNumber;
+        if (file_exists($chunkFile)) {
+            dd(12);
+            header("HTTP/1.0 200 Ok");
+        } else {
+            dd(22);
+            header("HTTP/1.0 404 Not Found");
+        }
 
         $image = $request->file('avatar');
         $extension = $image->getClientOriginalExtension();
@@ -181,7 +181,7 @@ class SettingsController extends CatererBaseController
 
         if ($old_image != "") {
             $file = 'images/caterers/' . $old_image;
-            if(file_exists($file))
+            if (file_exists($file))
                 unlink($file);
         }
         $destinationPath = 'images/caterers/';
@@ -190,5 +190,18 @@ class SettingsController extends CatererBaseController
         return response()->json(['success' => 1, 'message' => 'Avatar successfully updated.']);
 
     }
-    
+
+    public function editCookingTime(Request $request)
+    {
+        $this->validate($request, [
+            'group' => 'required',
+            'time' => 'required'
+        ]);
+
+        if (CookingTime::where(['caterer_id' => $this->caterer->id()])->update([$request->group => $request->time]))
+            return response()->json(['success' => 1, 'message' => 'Cooking time successfully updated.']);
+        return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
+
+    }
+
 }

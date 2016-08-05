@@ -24,7 +24,7 @@
         </tr>
         <tr>
                 <td> 1-5 </td>
-                <td> {{ $caterer->cookingtime->group1 }}</td>
+                <td> {{ $caterer->cookingtime->group2 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"
@@ -39,12 +39,12 @@
             </tr>
             <tr>
                 <td> 6-10 </td>
-                <td> {{ $caterer->cookingtime->group1 }}</td>
+                <td> {{ $caterer->cookingtime->group3 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"
                             data-group="group3"
-                            data-time="{{  $caterer->cookingtime->group1 }}"
+                            data-time="{{  $caterer->cookingtime->group3 }}"
                             data-toggle="modal"
                             data-target="#edit_cooking_time"
                             href="#edit_cooking_time">
@@ -54,7 +54,7 @@
             </tr>
             <tr>
                 <td> 11-x </td>
-                <td> {{ $caterer->cookingtime->group1 }}</td>
+                <td> {{ $caterer->cookingtime->group4 }}</td>
                 <td>
                     <a
                             class="btn btn-primary btn-xs edit_cooking_time"

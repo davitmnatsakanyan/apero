@@ -1,41 +1,44 @@
 <h2>Add delivery area</h2>
-<form href="#" method="post">
+<div ng-controller="CatererProfileController">
+    <form href="#" method="post" class='form-horizontal' id="updateDeliveryArea">
+        <label for="zip_codes" class="title fmlbold fz17">Zip Codes</label>
 
-</form>
-{{--{!! Form::open(['url' => 'admin/caterers/delivery-area','method'=>'post','class' => 'form-horizontal']) !!}--}}
+        <ui-select multiple ng-model="selectedZipCodes" class="selectpicker form-control"
+                   id="zip_codes" name="zip_codes"
+                   on-remove="removeZipFromSelect($item, $model)" on-select="addZipToSelect($item, $model)">
+            <ui-select-match placeholder="Select zip codes"><% $item.name %></ui-select-match>
+            <ui-select-choices repeat="zip in zip_codes track by zip.id">
+                <% zip.name %>
+            </ui-select-choices>
+        </ui-select>
+        <div class="save-btn">
+            <input type="submit" class="fmlreg fz25" ng-click="addDeliveryArea()" value="Add"/>
+        </div>
+    </form>
 
-{{--<div class="form-group {{ $errors->has('zip_codes') ? 'has-error' : ''}}">--}}
-    {{--{!! Form::label('zip_codes', 'Zip Codes', ['class' => 'col-sm-3 control-label']) !!}--}}
-    {{--<div class="col-sm-6">--}}
-        {{--<select class="selectpicker form-control" id="zip_codes" name="zip_codes[]" multiple="multiple" data-placeholder="select zip code">--}}
-            {{--@foreach($zip_codes as $zip_code)--}}
-                {{--<option value="{{ $zip_code->id }}">{{$zip_code->ZIP . "  " . $zip_code->city}}</option>--}}
-            {{--@endforeach--}}
-        {{--</select>--}}
-        {{--{!! $errors->first('caterer', '<p class="help-block">:message</p>') !!}--}}
-    {{--</div>--}}
-{{--</div>--}}
-{{--<input type="hidden" , name="caterer_id" , value= {{ $caterer->id }}>--}}
-{{--<div class="form-group">--}}
-    {{--<div class="col-sm-offset-3 col-sm-3">--}}
-        {{--{!! Form::submit('Add', ['class' => 'btn btn-primary form-control']) !!}--}}
-    {{--</div>--}}
-{{--</div>--}}
-{{--{!! Form::close() !!}--}}
-{{--<hr>--}}
-<h2>Delivery areas</h2>
-    <table class="table table-bordered table-striped table-hover" >
+    <h2>Delivery areas</h2>
+    <table class="table table-bordered table-striped table-hover">
         <tbody>
-            <tr ng-repeat="zip in caterer_zips">
-                <th ng-model="zip"><% zip.ZIP + "  " + zip.city %></th>
-                <td>
-                    <button class="btn btn-danger btn-xs" title="Remove from delivery areas" ng-click="removeDeliveryArea(zip.id)">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"/>
-                    </button>
-                </td>
-            </tr>
+        <tr ng-repeat="zip in filteredZips">
+            <th><% (currentZipsPage-1)*numPerPageForZips+$index+1 %></th>
+            <th ng-model="zip"><% zip.name %></th>
+            <td>
+                <button class="btn btn-danger btn-xs" title="Remove from delivery areas"
+                        ng-click="removeDeliveryArea(zip.id)">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"/>
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
+    <ul uib-pagination ng-model="currentZipsPage"
+        total-items="caterer_zips.length"
+        max-size="zipsMaxSize"
+        boundary-links="true"
+        items-per-page="numPerPageForZips"
+        ng-show="currentZipsPage">
+    </ul>
+</div>
 
 
 

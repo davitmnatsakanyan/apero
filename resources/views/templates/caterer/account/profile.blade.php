@@ -142,8 +142,10 @@
                                     <uib-tab index="2" heading="Delivery Area">
                                         <div ng-include='"templates/caterer/account/items/deliveryArea.blade.php"'></div>
                                     </uib-tab>
-                                    <uib-tab index="3" heading="Long Justified">Long Labeled Justified content</uib-tab>
-                                    <uib-tab index="4" heading="Long Justified">Long Labeled Justified content</uib-tab>
+                                    <uib-tab index="3" heading="Kitchens">Long Labeled Justified content</uib-tab>
+                                    <uib-tab index="4" heading="Cooking Time">
+                                        <div ng-include='"templates/caterer/account/items/cookingTime.blade.php"'></div>
+                                    </uib-tab>
                                 </uib-tabset>
 
                             </div>

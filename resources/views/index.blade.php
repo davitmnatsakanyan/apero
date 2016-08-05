@@ -34,6 +34,9 @@
     <link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/select.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
     <script>
         var BASE_URL = '{{ url('/') }}';
     </script>
@@ -55,8 +58,14 @@
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/angular-touch/angular-touch.js"></script>
     <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+    <script src="/js/angular-modal-service.min.js"></script>
     <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="/js/ng-flow-standalone.min.js"></script>
+    <script src="/js/select.js"></script>
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
     <script src="/js/app.js"></script>
 
@@ -78,6 +87,7 @@
     <script src="/js/controllers/CustomPrdModalController.js"></script>
     <script src="/js/controllers/UserProfileController.js"></script>
     <script src="/js/controllers/UserOrdersController.js"></script>
+    <script src="/js/controllers/CatererPackageController.js"></script>
 
     <!-- end controllers -->
 
@@ -92,6 +102,10 @@
     <script src="/js/models/UserModel.js"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb-bWFpEeZ2AN5uAlZQG2iY8n5GhQOkE4">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('select').select2();
     </script>
 @yield('scrips')
 </body>

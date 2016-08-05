@@ -7,13 +7,6 @@
 
         <input type="file" flow-btn name="avatar"/>
 
-        <style>
-            .ithumbnail {
-                max-width: 240px;
-                max-height: 164px;
-            }
-        </style>
-
         <div class="cater-pic" ng-hide="$flow.files.length">
             <img class="ithumbnail"  src="../images/restaurant-pic.png" />
         </div>
@@ -44,6 +37,14 @@
         <a ng-href="#/caterer/products" class="card-icon" ng-class="{ active: isActive('/caterer/products')}">
             <span class="cater-btn-txt">
                  Meine Produkte
+            </span>
+        </a>
+    </div><!--end-->
+
+    <div class="cater-btn ctbtn2">
+        <a ng-href="#/caterer/packages" class="card-icon" ng-class="{ active: isActive('/caterer/packages')}">
+            <span class="cater-btn-txt">
+                 Meine Package
             </span>
         </a>
     </div><!--end-->

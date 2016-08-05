@@ -66,6 +66,27 @@ Route::group(array('prefix' => '/templates/user/account'), function () {
     }));
 });
 
+Route::group(array('prefix' => '/templates/caterer/account/modals'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('templates/caterer/account/modals.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/package'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/package.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/package/items/'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/package/items/.' . $template);
+    }));
+});
+
 
 
 
@@ -193,7 +214,9 @@ Route::group([
     Route::get('settings/updateAvatar','SettingsController@updateAvatar');
 
     Route::post('settings/updateContactPerson','SettingsController@updateContactPerson');
+    Route::post('settings/addDeliveryArea','SettingsController@addDeliveryArea');
     Route::get('settings/removeDeliveryArea/{id}','SettingsController@removeDeliveryArea');
+    Route::post('settings/editCookingTime','SettingsController@editCookingTime');
 
     Route::controller('account', 'AccountController');
     Route::controller('settings', 'SettingsController');
@@ -229,18 +252,19 @@ Route::group([
 
         });
 
+//
+//        Route::group([
+//            'prefix' => 'package',
+//        ], function () {
 
-        Route::group([
-            'prefix' => 'package',
-        ], function () {
-
-            Route::post('edit/{id}','PackageController@update');
+//            Route::post('edit/{id}','PackageController@update');
+//            Route::post('editcount', 'PackageController@editProductCount');
+//            Route::delete('product/{id}', 'PackageController@deleteProduct');
+//            Route::get('{id}/edit' , 'PackageController@edit');
             Route::post('editcount', 'PackageController@editProductCount');
-            Route::delete('product/{id}', 'PackagesController@deleteProduct');
-            Route::get('{id}/edit' , 'PackageController@edit');
-            Route::resource('/', 'PackageController');
+            Route::resource('package', 'PackageController');
 
-        });
+//        });
 
         Route::group([
             'prefix' => 'kitchens'

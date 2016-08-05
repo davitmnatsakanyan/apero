@@ -46,7 +46,11 @@ class PackagesController extends AdminBaseController
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'caterer' => 'required', 'price' => 'required|integer', 'product_count.*' => 'required|integer']);
+        $this->validate($request, [
+            'name' => 'required', 
+            'caterer' => 'required', 
+            'price' => 'required|integer', 
+            'product_count.*' => 'required|integer']);
 
         $package['caterer_id'] = $request->caterer;
         $package['name'] = $request->name;

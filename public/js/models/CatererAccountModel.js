@@ -34,11 +34,41 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
             });
         },
 
+        getPackages: function () {
+            return $http({
+                method: "get",
+                url: "caterer/product/package"
+            });
+        },
+
+        getPackage: function (package_id) {
+            return $http({
+                method: "get",
+                url: "caterer/product/package/" + package_id
+            });
+        },
+
         changeStatus: function (order) {
             return $http({
                 data: order,
                 method: "post",
                 url: "caterer/order/change-status"
+            });
+        },
+
+        updatePackgeCommonInf: function (data,package_id) {
+            return $http({
+                data: data,
+                method: "put",
+                url: "caterer/product/package/" + package_id
+            });
+        },
+
+        updateProductCount: function () {
+            return $http({
+                data: data,
+                method: "post",
+                url: "caterer/product/package/editcount"
             });
         },
 
@@ -57,11 +87,30 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
             });
         },
 
+
+        addDeliveryArea: function(zip_codes){
+            return $http({
+                data: zip_codes,
+                method :"post",
+                url : "caterer/settings/addDeliveryArea"
+            });
+        },
+
         removeDeliveryArea: function (zip_id){
             return $http({
                 method :"get",
                 url : "caterer/settings/removeDeliveryArea/" + zip_id
             });
+        },
+
+        editCookingTime: function (data) {
+            return $http({
+                data: data,
+                method :"post",
+                url : "caterer/settings/editCookingTime"
+            });
         }
+        
+        
     };
 }]);

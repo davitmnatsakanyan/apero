@@ -101,14 +101,6 @@
                                 </div>
                                 <div class="clear-both"></div>
                             </div><!--end-->
-
-                            <!--<div class="circles">
-                                <ul class="clear-fix fr">
-                                    <li class="fl"><a href="#" class="dib active"></a></li>
-                                    <li class="fl"><a href="#" class="dib"></a></li>
-                                    <li class="fl"><a href="#" class="dib"></a></li>
-                                </ul>
-                            </div>-->
                         </div>
                     </div>
                 </div>

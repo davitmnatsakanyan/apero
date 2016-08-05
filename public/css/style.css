@@ -1314,6 +1314,14 @@ img {
     margin-bottom: 2px;
 }
 
+.caterer-pic-width{
+    width:228px;
+}
+
+.cater-pic-width{
+    width:212px;
+}
+
 .inner-cater-txt p {
     padding: 15px 0 10px 26px;
     font-family: OpenSans;
@@ -1321,8 +1329,13 @@ img {
     color: #fff;
 }
 
+.ithumbnail {
+    max-width: 240px;
+    max-height: 164px;
+}
+
 .inner-cater {
-    height: 520px;
+    height: 570px;
     background-color: #fff;
 }
 

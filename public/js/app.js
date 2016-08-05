@@ -1,11 +1,13 @@
 var app = angular.module('app', [
-    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow'
+    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select','angularModalService'
 ]);
 
-app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider',
-    function ($interpolateProvider, toastrConfig, flowFactoryProvider) {
+app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSelectConfig',
+    function ($interpolateProvider, toastrConfig, flowFactoryProvider,uiSelectConfig) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
+
+        uiSelectConfig.theme = 'select2';
 
         flowFactoryProvider.defaults = {
             target: 'caterer/settings/updateAvatar',
@@ -55,6 +57,18 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer', {
             templateUrl: 'templates/caterer/account/profile.blade.php',
             controller: 'CatererProfileController'
+        })
+        .when('/caterer/packages', {
+            templateUrl: 'templates/caterer/product/package/package.blade.php',
+            controller: 'CatererPackageController'
+        }) 
+        .when('/caterer/packages/show/:package_id', {
+            templateUrl: 'templates/caterer/product/package/show.blade.php',
+            controller: 'CatererPackageController'
+        })
+        .when('/caterer/packages/edit/:package_id', {
+            templateUrl: 'templates/caterer/product/package/edit.blade.php',
+            controller: 'CatererPackageController'
         })
         .when('/caterer/profile', {
             templateUrl: 'templates/caterer/account/profile.blade.php',

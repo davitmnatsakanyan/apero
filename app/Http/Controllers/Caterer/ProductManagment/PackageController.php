@@ -17,17 +17,33 @@ use Image;
 class PackageController extends CatererBaseController{
 
     public function index(){
-        $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id());//->toArray();
-//        return $packages;
+//        $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id());//->toArray();
+////        return $packages;
+//
+//        foreach ($packages as $key => $package) {
+//            foreach($package->products as $key2 => $product)
+//            if($product->pivot->subproduct_id !== 0)
+//            $packages[$key]->products[$key2]['name'] = $packages[$key]->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
+//        }
+////        return $packages;
+//
+//        return view('caterer/product/package/index',compact('packages'));
 
-        foreach ($packages as $key => $package) {
-            foreach($package->products as $key2 => $product)
-            if($product->pivot->subproduct_id !== 0)
-            $packages[$key]->products[$key2]['name'] = $packages[$key]->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
+          $caterer = Caterer::with('packages')->findOrFail($this->caterer->id());
+          return response()->json(['success' => 1, 'caterer' => $caterer]);
+    }
+
+    public function show($package_id)
+    {
+        if(!$this->hasAccess($package_id))
+            return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
+
+        $package = Package::with('products')->findOrFail($package_id);
+        foreach ($package->products as $key => $product) {
+                if ($product->pivot->subproduct_id !== 0)
+                    $package->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
         }
-//        return $packages;
-
-        return view('caterer/product/package/index',compact('packages'));
+        return response()->json(['success' => 1, 'package' =>$package]);
     }
 
     public function create(){
@@ -121,60 +137,59 @@ class PackageController extends CatererBaseController{
 
     public function update($id, Request $request)
     {
-        if($this->hasAccess($id)) {
+        if(!$this->hasAccess($id))
+            return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
+
             $this->validate($request, [
                 'name' => 'required',
                 'price' => 'required|integer',
-                'product_count.*' => 'required|integer']);
+//                'avatar' => 'required|image'
+            ]);
 
             $package['name'] = $request->name;
             $package['price'] = $request->price;
 
 
-            $image = $request->file('avatar');
-
-            if (!is_null($image)) {
-                $extension = $image->getClientOriginalExtension();
-                $package['avatar'] = time() . "." . $extension;
-                $old_image = Package::findOrFail($id)->avatar;
-                $this->uploadFile($image, $package['avatar'],$old_image);
-            }
-            if ( Package::where('id', $id)->update($package)) {
-                if (!is_null($request->product)) {
-                    foreach ($request->product as $product_id) {
-                        $product_count = 'product_count_' . $product_id;
-                        $data['package_id'] = $id;
-                        $data['product_id'] = $product_id;
-                        $data['product_count'] = $request->$product_count;
-                        PackageProduct::create($data);
-                    }
-
-
-//es ksarqenq angulyari patrast lineluc heto
-                    
-//                    foreach ($request->products as $product) {
-//                $data = [
-//                    'package_id' => $package ['id'],
-//                    'product_id' => $product ['product_id'],
-//                    'product_count' = $request->$product_count;
-//                ];
-//                if (isset($product['sub_id'])) {
-//                    $data ['subproduct_id'] = $product['sub_id'];
-//                } else {
-//                    $data ['subproduct_id'] = 0;
-//                }
+//            $image = $request->file('avatar');
 //
-//                PackageProduct::create($data);
+//            if (!is_null($image)) {
+//                $extension = $image->getClientOriginalExtension();
+//                $package['avatar'] = time() . "." . $extension;
+//                $old_image = Package::findOrFail($id)->avatar;
+//                $this->uploadFile($image, $package['avatar'],$old_image);
 //            }
-                }
 
-                return redirect()->back()->with('success', 'Package updated sucessfully.');
+            if ( Package::where('id', $id)->update($package)) {
+//                if (!is_null($request->product)) {
+//                    foreach ($request->product as $product_id) {
+//                        $product_count = 'product_count_' . $product_id;
+//                        $data['package_id'] = $id;
+//                        $data['product_id'] = $product_id;
+//                        $data['product_count'] = $request->$product_count;
+//                        PackageProduct::create($data);
+//                    }
+//
+//
+////es ksarqenq angulyari patrast lineluc heto
+//
+////                    foreach ($request->products as $product) {
+////                $data = [
+////                    'package_id' => $package ['id'],
+////                    'product_id' => $product ['product_id'],
+////                    'product_count' = $request->$product_count;
+////                ];
+////                if (isset($product['sub_id'])) {
+////                    $data ['subproduct_id'] = $product['sub_id'];
+////                } else {
+////                    $data ['subproduct_id'] = 0;
+////                }
+////
+////                PackageProduct::create($data);
+////            }
+//                }
+                return response()->json(['success' => 1, 'message' => 'Package updated sucessfully.']);
             }
-
-            return back()->withErrors('Sonmething went wrong.');
-        }
-
-        return back();
+        return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
     }
 
 
@@ -210,6 +225,7 @@ class PackageController extends CatererBaseController{
 
 
     public  function editProductCount(Request $request){
+        dd($request->all());
         $product = PackageProduct::where('package_id', $request->package)
             ->where('product_id', $request->product)
             ->update(['product_count' => $request->count]);
