@@ -61,6 +61,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/packages', {
             templateUrl: 'templates/caterer/product/package/package.blade.php',
             controller: 'CatererPackageController'
+        })
+        .when('/caterer/packages/add', {
+            templateUrl: 'templates/caterer/product/package/add.blade.php',
+            controller: 'CatererPackageController'
         }) 
         .when('/caterer/packages/show/:package_id', {
             templateUrl: 'templates/caterer/product/package/show.blade.php',
@@ -74,8 +78,16 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/caterer/account/profile.blade.php',
             controller: 'CatererProfileController'
         })
+        // .when('/caterer/products', {
+        //     templateUrl: 'templates/caterer/account/products.blade.php',
+        //     controller: 'CatererProductsController'
+        // })
         .when('/caterer/products', {
-            templateUrl: 'templates/caterer/account/products.blade.php',
+            templateUrl: 'templates/caterer/product/single/kitchens.blade.php',
+            controller: 'CatererProductsController'
+        })
+        .when('/caterer/kitchens/:kitchen_id', {
+            templateUrl: 'templates/caterer/product/single/menus.blade.php',
             controller: 'CatererProductsController'
         })
         .when('/caterer/orders', {

@@ -12,5 +12,6 @@ class PackageProduct extends Model
         'product_id',
         'package_id',
         'product_count',
+        'subproduct_id',
     ];
 }

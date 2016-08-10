@@ -88,6 +88,8 @@
     <script src="/js/controllers/UserProfileController.js"></script>
     <script src="/js/controllers/UserOrdersController.js"></script>
     <script src="/js/controllers/CatererPackageController.js"></script>
+    <script src="/js/controllers/ModalInstanceController.js"></script>
+
 
     <!-- end controllers -->
 
@@ -97,6 +99,7 @@
     <script src="/js/filters/homeFilter.js"></script>
 
     <script src="/js/models/CatererAccountModel.js"></script>
+    <script src="/js/models/CatererProductModel.js"></script>
     <script src="/js/models/CatererModel.js"></script>
     <script src="/js/models/SearchModel.js"></script>
     <script src="/js/models/UserModel.js"></script>

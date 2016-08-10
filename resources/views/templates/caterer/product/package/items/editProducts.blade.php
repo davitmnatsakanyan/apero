@@ -15,11 +15,12 @@
                 <td><% product.name +(product.subroduct ? " " + product.subroduct.name : "" ) %></td>
                 <td>
                     <form href="#" id="editCount" method="post">
-                        <input type="number" name="product" ng-model="product.pivot.product_count">
+                        <input type="number" name="product_count" ng-model="product.pivot.product_count"/>
                     </form>
                 </td>
                 <td>
-                    <input form="editCount" type="submit" value="Edit" ng-click="updateProductCount(product.id)"/>
+                    <input form="editCount" type="submit" value="Edit" ng-click="updateProductCount(product.pivot.product_id,product.pivot.subproduct_id)"/>
+                    <button type="submit"  ng-click="removeProductFromPackage(product.pivot.product_id,product.pivot.subproduct_id)">Remove</button>
                 </td>
             </tr>
             </tbody>
@@ -33,5 +34,3 @@
         ng-show="currentPackageProductsPage">
     </ul>
 </div>
-
-{{--product.subproduct ? " " + product.subproduct.name:""--}}

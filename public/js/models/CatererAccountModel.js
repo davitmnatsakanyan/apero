@@ -56,6 +56,14 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
             });
         },
 
+        create: function (data) {
+            return $http({
+                data: data,
+                method :"post",
+                url : "caterer/product/package"
+            });
+        },
+
         updatePackgeCommonInf: function (data,package_id) {
             return $http({
                 data: data,
@@ -64,11 +72,42 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
             });
         },
 
-        updateProductCount: function () {
+        getAddingProducts: function(package_id){
+            return $http({
+                method: "get",
+                url: "caterer/product/package/"+ package_id +"/edit"
+            });
+        },
+
+        updateProductCount: function (data) {
             return $http({
                 data: data,
                 method: "post",
                 url: "caterer/product/package/editcount"
+            });
+        },
+
+        addProdcuts: function (package_id,data) {
+            return $http({
+                data: data,
+                method: "post",
+                url: "caterer/product/package/addProduct/" + package_id
+            });
+        },
+
+        removeProductFromPackage: function (data) {
+            return $http({
+                data: data,
+                method: "post",
+                url: "caterer/product/package/removeProduct"
+            });
+        },
+
+
+        getAllProducts: function (){
+            return $http({
+                method :"post",
+                url : "caterer/product/package/getAllProducts"
             });
         },
 
@@ -110,6 +149,7 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 url : "caterer/settings/editCookingTime"
             });
         }
+
         
         
     };

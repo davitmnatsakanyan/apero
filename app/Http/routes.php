@@ -5,6 +5,14 @@ Route::get('aaa', 'User\SettingsController@getUpdate');
 Route::get('bbb',function(){
     dd(auth('user')->user()->toArray());
 });
+
+Route::get('ccc','PaypalController@getCheckout');
+
+Route::get('stripe','StripeController@getindex');
+Route::post('registerOrder','StripeController@registerOrder');
+Route::get('stripe/success', 'StripeController@success');
+Route::get('stripe/register','StripeController@register');
+Route::get('stripe/accounts','StripeController@listAccounts');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -84,6 +92,20 @@ Route::group(array('prefix' => '/templates/caterer/product/package/items/'), fun
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
         return view('/templates/caterer/product/package/items/.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/package/modals/'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/package/modals.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/single'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/single.' . $template);
     }));
 });
 
@@ -230,12 +252,12 @@ Route::group([
         'prefix' => 'product',
         'namespace' => 'ProductManagment',
     ], function () {
-
         Route::group([
             'prefix' => 'single'
         ], function () {
+            Route::get('kitchens' , 'SingleProductController@getKitchens');
             Route::get('/', 'SingleProductController@getIndex');
-            Route::get('getMenus/{id}', 'SingleProductController@getMenus');
+            Route::get('menus/{id}', 'SingleProductController@getMenus');
 
             Route::get('add', 'SingleProductController@getAdd');
             Route::post('add', 'SingleProductController@postAdd');
@@ -261,7 +283,10 @@ Route::group([
 //            Route::post('editcount', 'PackageController@editProductCount');
 //            Route::delete('product/{id}', 'PackageController@deleteProduct');
 //            Route::get('{id}/edit' , 'PackageController@edit');
-            Route::post('editcount', 'PackageController@editProductCount');
+            Route::post('package/getAllProducts','PackageController@getAllProducts');
+            Route::post('package/addProduct/{id}','PackageController@addProducts');
+            Route::post('package/removeProduct', 'PackageController@deleteProduct');
+            Route::post('package/editcount','PackageController@editProductCount');
             Route::resource('package', 'PackageController');
 
 //        });

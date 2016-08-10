@@ -17,20 +17,8 @@ use Image;
 class PackageController extends CatererBaseController{
 
     public function index(){
-//        $packages = Package::with('products')->get()->where('caterer_id',$this->caterer->id());//->toArray();
-////        return $packages;
-//
-//        foreach ($packages as $key => $package) {
-//            foreach($package->products as $key2 => $product)
-//            if($product->pivot->subproduct_id !== 0)
-//            $packages[$key]->products[$key2]['name'] = $packages[$key]->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
-//        }
-////        return $packages;
-//
-//        return view('caterer/product/package/index',compact('packages'));
-
-          $caterer = Caterer::with('packages')->findOrFail($this->caterer->id());
-          return response()->json(['success' => 1, 'caterer' => $caterer]);
+        $caterer = Caterer::with('packages')->findOrFail($this->caterer->id());
+        return response()->json(['success' => 1, 'caterer' => $caterer]);
     }
 
     public function show($package_id)
@@ -39,11 +27,17 @@ class PackageController extends CatererBaseController{
             return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
 
         $package = Package::with('products')->findOrFail($package_id);
-        foreach ($package->products as $key => $product) {
-                if ($product->pivot->subproduct_id !== 0)
-                    $package->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
-        }
+        $package->products = $this->getSubproducts($package->products);
         return response()->json(['success' => 1, 'package' =>$package]);
+    }
+
+    public function getSubproducts($products)
+    {
+        foreach ($products as $key => $product) {
+            if ($product->pivot->subproduct_id !== 0)
+                $products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
+        }
+        return $products;
     }
 
     public function create(){
@@ -57,6 +51,8 @@ class PackageController extends CatererBaseController{
      * @return void
      */
     public function store(Request $request){
+        dd($request->all());
+        
         $this->validate($request, [
             'name' => 'required',
             'caterer' => 'required',
@@ -85,25 +81,6 @@ class PackageController extends CatererBaseController{
                 PackageProduct::create($data);
             }
 
-// es kashxati angulyari havaqeluc heto
-
-
-//            foreach ($request->products as $product) {
-//                $data = [
-//                    'package_id' => $package ['id'],
-//                    'product_id' => $product ['product_id'],
-//                    'product_count' = $request->$product_count;
-//                ];
-//                if (isset($product['sub_id'])) {
-//                    $data ['subproduct_id'] = $product['sub_id'];
-//                } else {
-//                    $data ['subproduct_id'] = 0;
-//                }
-//
-//                PackageProduct::create($data);
-//            }
-
-
             return redirect('caterer/product/package')->with('success', 'Package created sucessfully.');
         }
     }
@@ -111,27 +88,25 @@ class PackageController extends CatererBaseController{
 
     public function edit($id)
     {
-        $package = Package::with('products')->findOrFail($id);
-            foreach($package->products as $key2 => $product)
-                if($product->pivot->subproduct_id !== 0)
-                    $package->products[$key2]['name'] = $package->products[$key2]['name'] . "  " . Subproduct::findOrFail($product->pivot->subproduct_id)->name;
+        $package  = Package::with('products')->findOrFail($id);
 
-
-        $products = Product::all();
-        foreach ($products  as $product) {
-            $flag = false;
-            foreach ($package->products as $package_product)
-                if ($product->id == $package_product->id) {
-                    $product['belong'] = true;
-                    $flag = true;
-                }
-
-            if(!$flag)
-                $product['belong'] = false;
+        foreach ($package->products as $key => $product) {
+            if ($product->pivot->subproduct_id !== 0)
+                $package->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
         }
 
+        $package_products = $package->products;
+        $products = Product::with('subproducts') ->get();
 
-        return view('caterer.product.package.edit', compact('package','products'));
+        $filtered = $products -> filter(function($product)  use ($package_products){
+            foreach($package_products as $package_product) {;
+                if ($package_product->id == $product->id)
+                    return false;
+            }
+            return true;
+        } );
+
+        return response()->json([ 'addingProducts' =>  $filtered->toArray()]);
     }
 
 
@@ -140,14 +115,15 @@ class PackageController extends CatererBaseController{
         if(!$this->hasAccess($id))
             return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
 
-            $this->validate($request, [
-                'name' => 'required',
-                'price' => 'required|integer',
-//                'avatar' => 'required|image'
-            ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required|integer',
+//            'avatar' => 'required|image'
+        ]);
 
-            $package['name'] = $request->name;
-            $package['price'] = $request->price;
+
+        $package['name'] = $request->name;
+        $package['price'] = $request->price;
 
 
 //            $image = $request->file('avatar');
@@ -159,36 +135,9 @@ class PackageController extends CatererBaseController{
 //                $this->uploadFile($image, $package['avatar'],$old_image);
 //            }
 
-            if ( Package::where('id', $id)->update($package)) {
-//                if (!is_null($request->product)) {
-//                    foreach ($request->product as $product_id) {
-//                        $product_count = 'product_count_' . $product_id;
-//                        $data['package_id'] = $id;
-//                        $data['product_id'] = $product_id;
-//                        $data['product_count'] = $request->$product_count;
-//                        PackageProduct::create($data);
-//                    }
-//
-//
-////es ksarqenq angulyari patrast lineluc heto
-//
-////                    foreach ($request->products as $product) {
-////                $data = [
-////                    'package_id' => $package ['id'],
-////                    'product_id' => $product ['product_id'],
-////                    'product_count' = $request->$product_count;
-////                ];
-////                if (isset($product['sub_id'])) {
-////                    $data ['subproduct_id'] = $product['sub_id'];
-////                } else {
-////                    $data ['subproduct_id'] = 0;
-////                }
-////
-////                PackageProduct::create($data);
-////            }
-//                }
-                return response()->json(['success' => 1, 'message' => 'Package updated sucessfully.']);
-            }
+        if ( Package::where('id', $id)->update($package)) {
+            return response()->json(['success' => 1, 'message' => 'Package updated sucessfully.']);
+        }
         return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
     }
 
@@ -214,7 +163,7 @@ class PackageController extends CatererBaseController{
                 unlink('images/packages/' . $avatar);
             if(Package::withTrashed()->where('id', $id)->forceDelete())
                 return redirect('caterer/product/package')->with('sucess' , 'Package sucessfully deleted.');
-             return back()->withErrors('Something went wrong');
+            return back()->withErrors('Something went wrong');
 
         }
         else{
@@ -225,32 +174,56 @@ class PackageController extends CatererBaseController{
 
 
     public  function editProductCount(Request $request){
-        dd($request->all());
-        $product = PackageProduct::where('package_id', $request->package)
-            ->where('product_id', $request->product)
-            ->update(['product_count' => $request->count]);
+        $product = PackageProduct::where([
+            'package_id'=> $request->package_id ,
+            'product_id' => $request->product_id,
+            'subproduct_id' => $request->subproduct_id
+        ])->update(['product_count' => $request->product_count]);
         if($product) {
-            return response()->json(['success' => 1, 'product' => $request->product, 'count' => $request->count]);
+            return response()->json(['success' => 1, 'message' => 'Product count updated successfully']);
         }
     }
 
-    public function deleteProduct($id, Request $request){
-        dd(11);
-        $delete =  PackageProduct::where('package_id', $request->package)
-            ->where('product_id', $id)
-            ->delete();
+    public function deleteProduct( Request $request){
+        $delete = $product = PackageProduct::where([
+            'package_id'=> $request->package_id ,
+            'product_id' => $request->product_id,
+            'subproduct_id' => $request->subproduct_id
+        ])->delete();
 
         if($delete){
-            return response()->json(['success' => 1, 'product' => $id]);
+            return response()->json(['success' => 1, 'message' => 'Product successfully removed from package.']);
         }
     }
 
+    public function addProducts($id,Request $request)
+    {
+        foreach($request->all() as $product)
+            PackageProduct::create([
+                'package_id' => $id,
+                'product_id' => $product['product_id'],
+                'product_count' => $product['product_count'],
+                'subproduct_id' => $product['subproduct_id']
+            ]);
 
+        $package = Package::with('products')->findOrFail($id);
+        $products = $this->getSubproducts($package->products);
+        return response()->json(['success' => 1, 'products' => $products ,'message' => 'Products added successfully.']);
+
+    }
+
+
+    public function getAllProducts()
+    {
+        $products = Product::with('subproducts') -> where('caterer_id', $this->caterer->id())->get();
+//        dd($products);
+        return response()->json(['products' => $products ]);
+    }
 
     public function hasAccess($id){
         return $this->caterer->id() == Package::findOrFail($id)->caterer_id;
     }
-    
+
     public  function getProducts($category_id){
         $data = [];
         foreach( Category::find($category_id)->products as $key => $product){

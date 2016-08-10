@@ -1,5 +1,5 @@
 
-<form action="#" method="post" id="editCommon">
+<form id="editCommon">
 
     <div flow-init
          {{--flow-files-submitted="$flow.upload()"--}}
@@ -9,7 +9,7 @@
         <input type="file" flow-btn name="avatar"/>
 
         <div class="cater-pic caterer-pic-width" ng-hide="$flow.files.length">
-            <img class="ithumbnail cater-pic-width"  src="../images/restaurant-pic.png" />
+            <img class="ithumbnail cater-pic-width"  src="../images/<% package.avatar %>" alt="no picture"/>
         </div>
         <div class="cater-pic caterer-pic-width" ng-show="$flow.files.length">
             <img class="ithumbnail cater-pic-width" flow-img="$flow.files[0]" />
@@ -34,6 +34,10 @@
 <div class="profile-border-box">
     <div class="profil-border"></div>
 </div>
-<div class="save-btn">
+<div class="save-btn" ng-if="location!=='add'">
     <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="updateCommmon()"/>
+</div>
+
+<div class="save-btn" ng-if="location==='add'">
+    <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="createPackage()"/>
 </div>

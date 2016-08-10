@@ -55,7 +55,7 @@ class PaypalController extends Controller
         $payment->setPayer($payer);
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions(array($transaction));
-        
+
         $response = $payment->create($this->_apiContext);
         $redirectUrl = $response->links[1]->href;
         return Redirect::to($redirectUrl);
@@ -63,6 +63,7 @@ class PaypalController extends Controller
 
     public function getDone(Request $request)
     {
+        dd($request->all());
         $id = $request->paymentId;
         $token = $request->token;
         $payer_id = $request->PayerID;
@@ -84,4 +85,6 @@ class PaypalController extends Controller
     }
 
 }
+
+
 

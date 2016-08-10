@@ -14,6 +14,7 @@
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererPackageController">
                             <div class="col-sm-7 col-md-8">
+                                <a href="#/caterer/packages/add">Add package</a>
                                 <div class="main-product-box" data-ng-repeat="package in filteredPackages">
                                     <div class="main-product fl"></div>
                                     <div class="product-txt fl">

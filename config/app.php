@@ -165,7 +165,8 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
-        Ixudra\Curl\CurlServiceProvider::class
+        Ixudra\Curl\CurlServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class
 
     ],
 

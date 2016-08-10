@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use SoftDeletes;
+    use Billable;
+    
     protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
@@ -38,7 +40,8 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'created_ip',
-        'is_user'
+        'is_user',
+        'stripe_id'
     ];
 
     /**

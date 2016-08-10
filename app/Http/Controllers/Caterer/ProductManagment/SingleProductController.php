@@ -38,6 +38,12 @@ class SingleProductController extends CatererBaseController
         return view('caterer/product/single/index', compact('kitchens'));
     }
 
+    public function getKitchens()
+    {
+        $caterer = Caterer::with('kitchens')->findOrFail($this->caterer->id());
+        return response()->json(['caterer' => $caterer, 'success' => 1 ]);
+    }
+
 
     public function getAdd()
     {
@@ -48,21 +54,24 @@ class SingleProductController extends CatererBaseController
 
     public function getMenus($id)
     {
-        $menus = Menu::with(['kitchens' => function ($kitchen) {
-            $kitchen->where('kitchens.id', request()->id);
-        }])->get()->filter(function ($item) {
-            return count($item->kitchens) > 0;
-        })->all();
+//        $menus = Menu::with(['kitchens' => function ($kitchen) use($id) {
+//            $kitchen->where('kitchens.id', $id);
+//        }])->get()->filter(function ($item) {
+//            return count($item->kitchens) > 0;
+//        })->all();
 
+        $kitchen = Kitchen::with(['menus' => function($menu){
+            $menu->with(['products' => function($product){
+                $product->where('caterer_id',$this->caterer->id());
+            }]);
+        }])->findOrFail($id);
+        $menus = $kitchen->menus;
 
-        $data = [];
-        $i = 0;
-        foreach ($menus as $menu) {
-            $data[$i]['id'] = $menu->id;
-            $data[$i++]['text'] = $menu->name;
-        }
-
-        return $data;
+        $filtered = $menus ->filter(function($menu){
+            return count($menu->products) >0;
+        });
+//        dd($filtered);
+        return response()->json(['success' => 1, 'menus' => $filtered ]);
     }
 
     public function postAdd(Request $request)
