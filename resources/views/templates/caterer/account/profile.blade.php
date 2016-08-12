@@ -86,6 +86,8 @@
                                                 <div class="profile-border-box">
                                                     <div class="profil-border"></div>
                                                 </div>
+
+                                                {{--<button ng-click="registerInStripe()">Button</button>--}}
                                                 <div class="save-btn">
                                                     <input type="submit" value="Save" class="fmlreg fz25"/>
                                                 </div>

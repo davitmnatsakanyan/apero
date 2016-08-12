@@ -20,7 +20,9 @@ class OrderController extends UserBaseController
 
     public function index(Request $request)
     {
-//        dd($request->all());
+        $this->validate($request->all());
+        if(count($request['orders']['products'])==0 && count($request['orders']['packages'])==0)
+            return response()->json(['success' => 0 , 'error' => 'Nothing added to cart.']);
         if ($request->is_accepted) {
             if ($this->user->check())
               return   $this->userOrder($request);
@@ -28,7 +30,7 @@ class OrderController extends UserBaseController
             return $this->guestOrder($request);
         }
         else
-        return response()->json(['success' => 0]);
+        return response()->json(['success' => 0 ,'error' => "Please accept."]);
     }
     
 
@@ -40,10 +42,12 @@ class OrderController extends UserBaseController
         $data['caterer_id'] = $request->orders['products'][0]['caterer_id'];
         $data['status'] = 'Not Accepted';
         $data ['total_cost'] = $this->count_total_cost($request->orders);
-        $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
+        $data ['delivery_time'] = $request->delivery_time;
         $data ['is_user_order'] = 1;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->orders);
+        if($data->payment_type == 'stripe')
+            $this->execStripePayment($data->stripeToken,$data ['total_cost']);
         return response()->json(['success' => 1]);
     }
 
@@ -84,7 +88,6 @@ class OrderController extends UserBaseController
     {
         $guest = $this->createGuestIfNotExists($request);
         $data = $request->except('products');
-        dd($request->all());
         $data ['user_id'] = $guest->id;
         $data['status'] = 'Not Accepted';  //status = Idle
         if(count($request->orders['products'])>0)
@@ -96,6 +99,10 @@ class OrderController extends UserBaseController
         $data ['is_user_order'] = 0;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->orders);
+
+        if($data['payment_type'] == 'stripe')
+            $this->execStripePayment($data['stripeToken'],$data ['total_cost']);
+
         return response()->json(['success' => 1]);
     }
 
@@ -144,8 +151,40 @@ class OrderController extends UserBaseController
     public function getAllZips()
     {
         $zips = ZipCode::All();
-//        dd($zips);
         return response()->json(['zips' =>$zips ]);
+    }
+
+    public function execStripePayment($token,$cash)
+    {
+        \Stripe\Stripe::setApiKey("sk_test_nW4igLL1UY1We0a3zzFBHCs0");
+
+        $charge = \Stripe\Charge::create(array(
+            "amount" => $cash*100, // amount in cents, again
+            "currency" => "eur",
+            "source" => $token,
+            "description" => "Example charge"
+        ),array('stripe_account' => 'acct_18gv53GtK97GMZ4G'));
+
+    }
+
+
+    public function validateRequest($data)
+    {
+        return $this->validate($data,[
+            'company' => 'required',
+            'delivery_country' => 'required',
+            'delivery_city' => 'required',
+            "delivery_address" => 'required',
+            "delivery_zip" => 'required|number',
+            "delivery_time" => 'required',
+            "email" => 'required|email',
+            "mobile" => 'required',
+            "phone" =>  'required',
+            "payment_type" => 'required',
+            "is_logedin" => 'required',
+            "is_accepted" => 'required',
+            "stripeToken" => 'required_if:payment_type,stripe',
+        ]);
     }
 }
 

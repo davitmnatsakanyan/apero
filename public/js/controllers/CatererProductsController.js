@@ -1,25 +1,25 @@
-app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'AuthService','$location', '$routeParams','toastr', 
+app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'AuthService','$location', '$routeParams','toastr',
     function ($scope, CatererProductModel,  AuthService ,$location,$routeParams,toastr) {
 
-    AuthService.auth('caterer');
+        AuthService.auth('caterer');
 
 
-    CatererProductModel.getKitchens().then(
-        function(response){
-            if(response.data.success) {
-                $scope.caterer = response.data.caterer;
-                $scope.kitchens =$scope.caterer.kitchens;
-                $scope.currentKitchensPage = 1;
-                $scope.numPerPageForKitchens = 1;
-                $scope.kitchensMaxSize = 5;
-                $scope.filteredKitchens = $scope.kitchens.slice(0, $scope.numPerPageForKitchens);
+        CatererProductModel.getKitchens().then(
+            function(response){
+                if(response.data.success) {
+                    $scope.caterer = response.data.caterer;
+                    $scope.kitchens =$scope.caterer.kitchens;
+                    $scope.currentKitchensPage = 1;
+                    $scope.numPerPageForKitchens = 1;
+                    $scope.kitchensMaxSize = 5;
+                    $scope.filteredKitchens = $scope.kitchens.slice(0, $scope.numPerPageForKitchens);
+                }
+            },
+            function(error){
             }
-        },
-        function(error){
-         }
-    );
-        
-        
+        );
+
+
         if($routeParams.kitchen_id){
 
             $scope.kitchen_id = $routeParams.kitchen_id;
@@ -76,9 +76,9 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                 {
                     $scope.allKitchens = response.data.kitchens;
                 },
-                
+
                 function(error){
-                    
+
                 }
             );
         }
@@ -102,7 +102,7 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
         {
             $scope.addingProduct.menu= $model.id;
         }
-        
+
         $scope.customize = function()
         {
             $scope.add();
@@ -111,9 +111,9 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
             $scope.numPerPageForCustomize = 1;
             $scope.customizeMaxSize = 5;
             $scope.filteredCustomize = $scope.addingProduct.customize.slice(0, $scope.numPerPageForProducts);
-            
+
         }
-        
+
         $scope.add = function()
         {
             $scope.addingProduct.customize.push({
@@ -126,25 +126,25 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
             $scope.addingProduct.customize.splice(index, 1);
         },
 
-        $scope.createProduct = function()
-        {
-            console.log(12345);
+            $scope.createProduct = function()
+            {
+                console.log(12345);
 
-            console.log($scope.addingProduct.customize.length);
-            CatererProductModel.createProduct($scope.addingProduct).then(
-                function(response){
+                console.log($scope.addingProduct.customize.length);
+                CatererProductModel.createProduct($scope.addingProduct).then(
+                    function(response){
 
-                    if(response.data.success)
-                    {
-                        toastr.success(response.data.message);
+                        if(response.data.success)
+                        {
+                            toastr.success(response.data.message);
+                        }
+                        toastr.error(response.data.message,'Error')
+                    },
+                    function(error){
+                        $scope.errorMessages(error.data);
                     }
-                    toastr.error(response.data.message,'Error')
-                },
-                function(error){
-                    $scope.errorMessages(error.data);
-                }
-            );
-        }
+                );
+            }
 
 
         if($routeParams.product_id)
@@ -202,56 +202,56 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
 
         }
 
-    $scope.$watchGroup(['currentKitchensPage', 'currentMenusPage','currentProductsPage','products.length',
-        'currentSubproductsPage','subproducts.length','currentCustomizePage','addingProduct.customize.length'],
-        function (newValues, oldValues, scope) {
-            
-        var last_changed;
-        if (newValues[0] != oldValues[0])
-            last_changed = 'currentKitchens';
-        if (newValues[1] != oldValues[1])
-            last_changed = 'currentMenus';
-        if (newValues[2] != oldValues[2] || newValues[3] != oldValues[3])
-            last_changed = 'currentProducts';
-        if (newValues[4] != oldValues[4] || newValues[5] != oldValues[5])
-            last_changed = 'currentSubproducts';
-        if (newValues[6] != oldValues[6] || newValues[7] != oldValues[7])
-            last_changed = 'customize';
+        $scope.$watchGroup(['currentKitchensPage', 'currentMenusPage','currentProductsPage','products.length',
+                'currentSubproductsPage','subproducts.length','currentCustomizePage','addingProduct.customize.length'],
+            function (newValues, oldValues, scope) {
 
-        if (angular.isDefined(last_changed)) {
-            if (last_changed == 'currentKitchens') {
-                var begin = (($scope.currentKitchensPage - 1) * $scope.numPerPageForKitchens), end = begin + $scope.numPerPageForKitchens;
-                $scope.filteredKitchens =  $scope.kitchens.slice(begin, end);
-            }
+                var last_changed;
+                if (newValues[0] != oldValues[0])
+                    last_changed = 'currentKitchens';
+                if (newValues[1] != oldValues[1])
+                    last_changed = 'currentMenus';
+                if (newValues[2] != oldValues[2] || newValues[3] != oldValues[3])
+                    last_changed = 'currentProducts';
+                if (newValues[4] != oldValues[4] || newValues[5] != oldValues[5])
+                    last_changed = 'currentSubproducts';
+                if (newValues[6] != oldValues[6] || newValues[7] != oldValues[7])
+                    last_changed = 'customize';
 
-            if (last_changed == 'currentMenus') {
-                var begin = (($scope.currentMenusPage - 1) * $scope.numPerPageForMenus), end = begin + $scope.numPerPageForMenus;
-                $scope.filteredMenus =  $scope.menus.slice(begin, end);
-            }
+                if (angular.isDefined(last_changed)) {
+                    if (last_changed == 'currentKitchens') {
+                        var begin = (($scope.currentKitchensPage - 1) * $scope.numPerPageForKitchens), end = begin + $scope.numPerPageForKitchens;
+                        $scope.filteredKitchens =  $scope.kitchens.slice(begin, end);
+                    }
 
-            if (last_changed == 'currentProducts') {
-                var begin = (($scope.currentProductsPage - 1) * $scope.numPerPageForProducts), end = begin + $scope.numPerPageForProducts;
-                $scope.filteredProducts =  $scope.products.slice(begin, end);
-            }
+                    if (last_changed == 'currentMenus') {
+                        var begin = (($scope.currentMenusPage - 1) * $scope.numPerPageForMenus), end = begin + $scope.numPerPageForMenus;
+                        $scope.filteredMenus =  $scope.menus.slice(begin, end);
+                    }
 
-            if (last_changed == 'currentSubproducts') {
-                var begin = (($scope.currentSubproductsPage - 1) * $scope.numPerPageForSubproducts), end = begin + $scope.numPerPageForSubproducts;
-                $scope.filteredSubproducts =  $scope.subproducts.slice(begin, end);
-            }
+                    if (last_changed == 'currentProducts') {
+                        var begin = (($scope.currentProductsPage - 1) * $scope.numPerPageForProducts), end = begin + $scope.numPerPageForProducts;
+                        $scope.filteredProducts =  $scope.products.slice(begin, end);
+                    }
 
-            if (last_changed == 'customize') {
-                var begin = (($scope.currentCustomizePage - 1) * $scope.numPerPageForCustomize), end = begin + $scope.numPerPageForCustomize;
-                $scope.filteredCustomize =  $scope.addingProduct.customize.slice(begin, end);
-            }
-        }
+                    if (last_changed == 'currentSubproducts') {
+                        var begin = (($scope.currentSubproductsPage - 1) * $scope.numPerPageForSubproducts), end = begin + $scope.numPerPageForSubproducts;
+                        $scope.filteredSubproducts =  $scope.subproducts.slice(begin, end);
+                    }
+
+                    if (last_changed == 'customize') {
+                        var begin = (($scope.currentCustomizePage - 1) * $scope.numPerPageForCustomize), end = begin + $scope.numPerPageForCustomize;
+                        $scope.filteredCustomize =  $scope.addingProduct.customize.slice(begin, end);
+                    }
+                }
 
 
-    });
+            });
 
-    $scope.isActive = function (viewLocation) {
-        // return $location.path().indexOf(viewLocation) == 0;
-        return viewLocation === $location.path();
-    };
+        $scope.isActive = function (viewLocation) {
+            // return $location.path().indexOf(viewLocation) == 0;
+            return viewLocation === $location.path();
+        };
 
         $scope.errorMessages = function (errors) {
             if(angular.isArray(errors)) {
@@ -265,4 +265,3 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
         }
 
     }]);
-

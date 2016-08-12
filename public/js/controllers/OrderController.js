@@ -1,5 +1,6 @@
 app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthService','$uibModal','$document','CatererAccountModel',
-    function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel) {
+    'toastr',
+    function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel,toastr) {
 
     $('#datetimepicker4').datetimepicker();
 
@@ -21,7 +22,7 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         if(localStorage.getItem('delivery_time'))
             $scope.delivery_time = localStorage.getItem('delivery_time');
         else
-            $scope.delivery_time = "";
+            $scope.delivery_time = new Date();
 
     var new_total_price;
     $scope.removeFromCart = function(index, total_price, type){
@@ -100,11 +101,11 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         name: 'cash'
     }
     $scope.submitOrder = function(payment){
-        console.log(payment);
         if(payment.name === 'stripe')
         {
-            console.log(123);
-            $scope.open();
+             $scope.open();
+             // $scope.registerOrder();
+
         }
 
         if(payment.name === 'paypal')
@@ -116,75 +117,13 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             });
         }
         if(payment.name == 'cash'){
-            console.log(1234)
             $scope.registerOrder();
         }
-        // var company = $scope.company;
-        // var delivery_country = $scope.country;
-        // var delivery_city = $scope.city;
-        // var orders = JSON.parse(localStorage.getItem('cart'))[0];
-        // var delivery_address = $scope.address+' '+ $scope.home;
-        // var delivery_zip = $scope.delivery_zip;
-        // var email = $scope.email;
-        // var mobile = $scope.mobile;
-        // var phone = $scope.phone;
-        // var billing_address  =$scope.billing_address;
-        // var payment_type = $scope.payment.name;
-        // var comment = $scope.comment;
-        // var is_logedin = $rootScope.is_logedin;
-        // var is_accepted = $scope.is_accepted;
-        //
-        //
-        // var data =  {
-        //         company :           company,
-        //         orders :            orders,
-        //         delivery_country :  delivery_country,
-        //         delivery_city :     delivery_city,
-        //         delivery_address :  delivery_address,
-        //         delivery_zip :      delivery_zip,
-        //         email:              email,
-        //         mobile :            mobile,
-        //         phone:              phone,
-        //         billing_address :   billing_address,
-        //         payment_type :      payment_type,
-        //         comment :           comment,
-        //         is_logedin :        is_logedin,
-        //         is_accepted:        is_accepted,
-        // };
-        // console.log(data);
-        // $http({
-        //     data: {
-        //         company :           company,
-        //         delivery_country :  delivery_country,
-        //         delivery_city :     delivery_city,
-        //         orders :            orders,
-        //         delivery_address :  delivery_address,
-        //         delivery_zip :      delivery_zip,
-        //         email:              email,
-        //         mobile :            mobile,
-        //         phone:              phone,
-        //         billing_address :   billing_address,
-        //         payment_type :      payment_type,
-        //         comment :           comment,
-        //         is_logedin :        is_logedin,
-        //         is_accepted:        is_accepted
-        //     },
-        //     method : "POST",
-        //     url : "order"
-        // })
-        // .success(function (response) {
-        //     if(response.success == 1){
-        //         alert('order submitted')
-        //     }
-        // })
-        // .error( function (error) {
-        //     console.log(error);
-        //
-        // });
     };
 
     $scope.registerOrder = function()
     {
+        console.log(12);
         var company = $scope.company;
         var delivery_country = $scope.country;
         var delivery_city = $scope.city;
@@ -200,7 +139,12 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         var is_logedin = $rootScope.is_logedin;
         var is_accepted = $scope.is_accepted;
         var delivery_time = $scope.delivery_time;
+         if($scope.stripeToken)
+             var stripeToken = $scope.stripeToken;
+        else
+             var stripeToken = "";
 
+        console.log($scope.stripeToken);
         var data =  {
             company :           company,
             orders :            orders,
@@ -217,8 +161,9 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             is_logedin :        is_logedin,
             is_accepted:        is_accepted,
             delivery_time:      delivery_time,
+            stripeToken:        stripeToken
         };
-        
+        console.log('es em');
         $http({
             data: {
                 company :           company,
@@ -234,18 +179,24 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                 payment_type :      payment_type,
                 comment :           comment,
                 is_logedin :        is_logedin,
-                is_accepted:        is_accepted
+                is_accepted:        is_accepted,
+                delivery_time:      delivery_time,
+                stripeToken:        stripeToken
             },
             method : "POST",
             url : "order"
         })
             .success(function (response) {
-                if(response.success == 1){
-                    alert('order submitted')
+                if(response.data.success){
+                    toastr.success(response.data.message);
+                }
+
+                else{
+                    toastr.error(responce.data.error, 'Error');
                 }
             })
             .error( function (error) {
-                console.log(error);
+                $scope.errorMessages(error);
 
             });
     }
@@ -297,39 +248,32 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         })
     }
 
+        $scope.errorMessages = function (errors) {
+            var data = "";
+            angular.forEach(errors, function (value, key) {
+                data += value + "<br/>";
+            }, data);
+            toastr.error(data, 'Error');
+        }
+
 
     $scope.animationsEnabled = true;
     $scope.open = function (size) {
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: 'myModalContent.html',
-            // controller: 'ModalInstanceCtrl',
             controller: 'StripeModalInstanceCtrl',
             size: size,
-            // resolve: {
-            //     product: function () {
-            //         return $scope.product;
-            //     }
-            // }
         });
 
         modalInstance.result.then(function (selectedItem) {
-            console.log(132);
-            console.log(selectedItem);
-            // console.log($scope.selected);
+            console.log('stripe');
+            $scope.stripeToken = selectedItem;
+            $scope.registerOrder();
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
-    $scope.stripeCallback = function (code, result) {
-        console.log(123);
-        return false;
-        if (result.error) {
-            window.alert('it failed! error: ' + result.error.message);
-        } else {
-            window.alert('success! token: ' + result.id);
-        }
-    };
-
 }]);
+//4242424242424242
