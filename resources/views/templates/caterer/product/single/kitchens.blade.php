@@ -18,12 +18,12 @@
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company">
                                 <div data-ng-controller="CatererProductsController">
-                                    <a>Add product</a>
+                                    <a href="#/caterer/product/add">Add product</a>
                                     <div ng-repeat="kitchen in filteredKitchens">
                                         <div class="adress fl">
                                             <div class="numb1">
                                             <span class="cg4 fz28 fmlbold">
-                                                <a ng-href="#/caterer/kitchens/<% kitchen.id %>">
+                                                <a ng-href="#/caterer/<% kitchen.id %>/menus">
                                                     <% (currentKitchensPage-1)*numPerPageForKitchens+$index+1 %>
                                                 </a>
                                             </span>

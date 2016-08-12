@@ -9,7 +9,7 @@ Route::get('bbb',function(){
 Route::get('ccc','PaypalController@getCheckout');
 
 Route::get('stripe','StripeController@getindex');
-Route::post('registerOrder','StripeController@registerOrder');
+Route::get('registerOrder','StripeController@registerOrder');
 Route::get('stripe/success', 'StripeController@success');
 Route::get('stripe/register','StripeController@register');
 Route::get('stripe/accounts','StripeController@listAccounts');
@@ -106,6 +106,13 @@ Route::group(array('prefix' => '/templates/caterer/product/single'), function ()
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
         return view('/templates/caterer/product/single.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/single/items'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/single/items.' . $template);
     }));
 });
 
@@ -219,6 +226,7 @@ Route::group([
 });
 
 Route::post('order','OrderController@index');
+Route::get('order/getAllZips','OrderController@getAllZips');
 
 /**
  * Caterer routes
@@ -258,6 +266,10 @@ Route::group([
             Route::get('kitchens' , 'SingleProductController@getKitchens');
             Route::get('/', 'SingleProductController@getIndex');
             Route::get('menus/{id}', 'SingleProductController@getMenus');
+            Route::get('products/{kitchen_id}/{menu_id}/','SingleProductController@getProducts');
+            
+            Route::get('getAllKitchens','SingleProductController@getAllKitchens');
+            Route::get('getAllMenus/{id}','SingleProductController@getAllMenus');
 
             Route::get('add', 'SingleProductController@getAdd');
             Route::post('add', 'SingleProductController@postAdd');

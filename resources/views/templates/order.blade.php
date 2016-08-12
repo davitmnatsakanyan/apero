@@ -20,7 +20,7 @@
 								<span class="bestellen-etap">1</span>
 								<label>
 									<span>Apero-Bestelliste</span>
-									<input type="text" id="datetimepicker4">
+									<input type="datetime" id="datetimepicker4" ng-model="delivery_time">
 								</label>
 							</div>
 
@@ -74,18 +74,6 @@
 							<div class="adresse-col">
 
 								<form class="form-inline">
-									{{--<div class="form-group">--}}
-										{{--<label for="">Firma</label>--}}
-										{{--<input type="text"  class="form-control"  placeholder="Arnold" ng-model="data.firma">--}}
-									{{--</div>--}}
-									{{--<div class="form-group">--}}
-										{{--<label for="">Vorname</label>--}}
-										{{--<input type="text"  class="form-control"  placeholder="Tempees" ng-model="data.vorname">--}}
-									{{--</div>--}}
-									{{--<div class="form-group">--}}
-										{{--<label for="">Names</label>--}}
-										{{--<input type="text"  class="form-control"  placeholder="name" ng-model="data.names">--}}
-									{{--</div>--}}
 									<div class="form-group">
 										<label for="">Company</label>
 										<input type="text"  class="form-control"  placeholder="company" ng-model="company" required>
@@ -104,7 +92,13 @@
 									</div>
 									<div class="form-group">
 										<label for="">PLZ</label>
-										<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>
+										{{--<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>--}}
+										<ui-select ng-model="delivery_zip" class="selectpicker form-control" on-select = "selectZip($item, $model)">
+											<ui-select-match placeholder="Select zip codes"><% $item.name %></ui-select-match>
+											<ui-select-choices repeat="zip in zips track by zip.id">
+												<% zip.name %>
+											</ui-select-choices>
+										</ui-select>
 									</div>
 									<div class="form-group">
 										<label for="">ort</label>
@@ -233,6 +227,7 @@
 
 		</div>
 	</div>
+	<div ng-include='"templates/stripe.blade.php"'></div>
 
 </section>
 <!-- End Content -->

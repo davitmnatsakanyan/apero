@@ -22,9 +22,9 @@ app.controller('CartController',  ['$scope', function($scope){
         $packages = JSON.parse(localStorage.getItem('cart'))[0].packages;
 
         if(type == 'product')
-        new_total_price = total_price -  ($products[index].price * $products[index].count);
+            new_total_price = total_price -  ($products[index].price * $products[index].count);
         else
-        new_total_price = total_price -  ($packages[index].price * $packages[index].count);
+            new_total_price = total_price -  ($packages[index].price * $packages[index].count);
 
         localStorage.setItem('total_price', new_total_price);
         $scope.total_price = new_total_price;

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Caterer\ProductManagment;
 
+use App\Events\restore;
 use App\Http\Controllers\Caterer\CatererBaseController;
 use App\Http\Services\ProductService;
 use App\Http\Services\CategoryService;
@@ -19,47 +20,45 @@ use Illuminate\Support\Facades\Facade;
 class SingleProductController extends CatererBaseController
 {
 
-    public function getIndex()
+    public function getProducts($kitchen_id,$menu_id)
     {
-        $products = Product::with('subproducts')
-            ->where('caterer_id' , $this->caterer->id())
-            ->get();
-
-        $kitchens = $products->groupBy('kitchen_id');
-        foreach ($kitchens as $key =>$kitchen) {
-            $kitchens [$key] = $kitchen->groupBy('menu_id');
-
-            foreach($kitchens [$key]  as $key2 => $menu)
-                $kitchens [$key][$key2]['name'] = Menu::findOrFail($key2)->name;
-
-            $kitchens [$key]['name'] = Kitchen::findOrFail($key)->name;
-
-        }
-        return view('caterer/product/single/index', compact('kitchens'));
+        $products = Product::where(['caterer_id' => $this->caterer->id(),'kitchen_id' => $kitchen_id,'menu_id' => $menu_id ])->get();
+//        dd($products);
+        return response()->json(['success' => 1, 'products' => $products]);
     }
 
     public function getKitchens()
     {
-        $caterer = Caterer::with('kitchens')->findOrFail($this->caterer->id());
+        $caterer = Caterer::with(['kitchens'=>function($kitchen){
+            $kitchen->with(['products'=> function($product){
+                $product->where('caterer_id',$this->caterer->id());
+            }]);
+        }])->findOrFail($this->caterer->id());
+
+        $filtered = $caterer->kitchens->filter(function($kitchen){
+        return count($kitchen->products) >0;
+    });
+        $caterer->kitchens = $filtered;
         return response()->json(['caterer' => $caterer, 'success' => 1 ]);
     }
 
 
-    public function getAdd()
+    public function getAllKitchens()
     {
 
         $kitchens = Caterer::with('kitchens')->find($this->caterer->id())->kitchens;
-        return view('caterer/product/single/add', compact('kitchens'));
+        return response()->json(['kitchens' => $kitchens]);
+    }
+
+    public function getAllMenus($id)
+    {
+
+        $menus = Kitchen::with('menus')->findOrFail($id)->menus;
+        return response()->json(['menus' => $menus]);
     }
 
     public function getMenus($id)
     {
-//        $menus = Menu::with(['kitchens' => function ($kitchen) use($id) {
-//            $kitchen->where('kitchens.id', $id);
-//        }])->get()->filter(function ($item) {
-//            return count($item->kitchens) > 0;
-//        })->all();
-
         $kitchen = Kitchen::with(['menus' => function($menu){
             $menu->with(['products' => function($product){
                 $product->where('caterer_id',$this->caterer->id());
@@ -70,15 +69,16 @@ class SingleProductController extends CatererBaseController
         $filtered = $menus ->filter(function($menu){
             return count($menu->products) >0;
         });
-//        dd($filtered);
+
         return response()->json(['success' => 1, 'menus' => $filtered ]);
     }
 
     public function postAdd(Request $request)
     {
+//        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
-            'avatar' => 'required|image',
+//            'avatar' => 'required|image',
             'ingredinets' => 'required',
             'price' => 'required_without_all:customize|integer',
             'customize.*.name' => 'required_without:price',
@@ -92,12 +92,12 @@ class SingleProductController extends CatererBaseController
         $product ['menu_id'] = $request->menu;
         $product ['kitchen_id'] = $request->kitchen;
 
-        $image = $request->file('avatar');
-        $extension = $image->getClientOriginalExtension();
-        $product['avatar'] = time() . "." . $extension;
+//        $image = $request->file('avatar');
+//        $extension = $image->getClientOriginalExtension();
+//        $product['avatar'] = time() . "." . $extension;
 
         if ($product = Product::create($product)) {
-            $this->uploadFile($image, $product['avatar']);
+//            $this->uploadFile($image, $product['avatar']);
             if (!is_null($request->customize))
                 foreach ($request->customize as $customize)
                     Subproduct::create([
@@ -105,20 +105,20 @@ class SingleProductController extends CatererBaseController
                         'price' => $customize['price'],
                         'name' => $customize['name'],
                     ]);
-            return redirect('caterer/product/single')->with('success', 'Product successfully added.');
+            return responce()->json(['success' => 1, 'message' => 'Product successfully added.']);
         } else {
-            return back()->withErrors('Something went wrong.');
+            return responce()->json(['success' => 0, 'error' => 'Something went wrong.']);
         }
     }
 
-    public function getView(ProductService $service, $id)
+    public function getView( $id)
     {
-        if ($this->hasAccess($service, $id)) {
-            $product = Product::with('kitchen','menu','subproducts')->findOrFail($id);
-            return view('caterer/product/single/view', compact('product'));
-        } else {
-            return redirect()->back()->withErrors('You have no access.');
-        }
+        if (!$this->hasAccess($id))
+            return response()->json(['success' => 0 , 'error' => 'Something went wrong.']);
+            
+        $product = Product::with('kitchen','menu','subproducts')->findOrFail($id);
+        return response()->json(['success' => 1 , 'product' => $product]);
+       
     }
 
 
@@ -237,11 +237,9 @@ class SingleProductController extends CatererBaseController
     }
 
 
-    public function hasAccess(ProductService $service, $id)
+    public function hasAccess( $id)
     {
-        return $this->caterer->id() == $service
-            ->getById($id)
-            ->getOriginal()['caterer_id'];
+        return $this->caterer->id() == Product::findOrFail($id)->caterer_id;
     }
 
     public function uploadFile($image, $avatar, $old_image = null)

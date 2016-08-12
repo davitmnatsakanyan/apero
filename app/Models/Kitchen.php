@@ -48,6 +48,11 @@ class Kitchen extends Model
     {
         return $this->belongsToMany(Caterer::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     
 
     

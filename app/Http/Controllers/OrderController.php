@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\ZipCode;
 use App\User;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -29,6 +30,7 @@ class OrderController extends UserBaseController
         else
         return response()->json(['success' => 0]);
     }
+    
 
 
     public function userOrder($request)
@@ -80,12 +82,15 @@ class OrderController extends UserBaseController
 
     public function guestOrder($request)
     {
-        
         $guest = $this->createGuestIfNotExists($request);
         $data = $request->except('products');
+        dd($request->all());
         $data ['user_id'] = $guest->id;
-        $data['status'] = 0;  //status = Idle
-        $data['caterer_id'] = $request->products[0]['caterer_id'];
+        $data['status'] = 'Not Accepted';  //status = Idle
+        if(count($request->orders['products'])>0)
+            $data['caterer_id'] = $request->orders['products'][0]['caterer_id'];
+        if(count($request->orders['packages'])>0)
+            $data['caterer_id'] = $request->orders['products'][0]['caterer_id'];
         $data ['total_cost'] = $this->count_total_cost($request->orders);
         $data ['delivery_time'] = Carbon::now(); //$request->delivery_time;
         $data ['is_user_order'] = 0;
@@ -97,7 +102,7 @@ class OrderController extends UserBaseController
 
     public function createGuestIfNOtExists($request)
     {
-        $guest = User::where('email', $request->email)->first();
+        $guest = User::where(['email'=> $request->email,'is_user' => 0])->first();
         if (is_null($guest)) {
             $data['name'] = $request->company;
             $data['address'] = $request->delivery_address;
@@ -133,6 +138,14 @@ class OrderController extends UserBaseController
         }
 
         return $total;
+    }
+    
+    
+    public function getAllZips()
+    {
+        $zips = ZipCode::All();
+//        dd($zips);
+        return response()->json(['zips' =>$zips ]);
     }
 }
 

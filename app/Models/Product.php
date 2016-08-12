@@ -30,7 +30,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'avatar',
-        'ingredinets',
+        'ingredients',
         'price',
         'caterer_id',
         'menu_id',

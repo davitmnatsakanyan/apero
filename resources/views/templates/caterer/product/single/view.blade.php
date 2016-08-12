@@ -1,10 +1,38 @@
-@extends ('templates/caterer/layout/index')
-@section ('content')
-    <div style="width:300px; margin-top: 50px; margin-left: 20px;">
-        <div>Name  : {{$product['name']}}</div>
-        <div>Ingredients : {{$product['ingredients']}}</div>
-        <div>Price : {{$product['price']}}</div>
-        <div>Created Date: {{$product['created_at']}}</div>
-        <div>Updated Date : {{$product['updated_at']}}</div>
+<div ng-include='"templates/nav.blade.php"'></div>
+<main>
+    <div class="top-banner3">
+        <div class="container-fluid wrapper920 caret-inner-box">
+            <div class="row">
+                <div class="col-sm-12 hh">
+                    <div class="inner-cater-txt">
+                        <p>Hello <% caterer.company %></p>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="inner-cater">
+
+                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        <div data-ng-controller="CatererProductsController">
+                            <div class="col-sm-7 col-md-8">
+                                <div ng-if="product.subproducts.length">
+                                <uib-tabset active="activeJustified" justified="true">
+                                    <uib-tab index="0" heading="Common information">
+                                        <div ng-include='"templates/caterer/product/single/items/showCommonInformation.blade.php"'></div>
+                                    </uib-tab>
+                                    <uib-tab index="1" heading="Subroducts">
+                                        <div ng-include='"templates/caterer/product/single/items/showSubproducts.blade.php"'></div>
+                                    </uib-tab>
+                                </uib-tabset>
+                                </div>
+                                <div ng-if="!product.subproducts.length">
+                                    <div ng-include='"templates/caterer/product/single/items/showCommonInformation.blade.php"'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-@stop
+</main>
+<div ng-include='"templates/footer.blade.php"'></div>

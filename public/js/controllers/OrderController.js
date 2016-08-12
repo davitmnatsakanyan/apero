@@ -1,6 +1,9 @@
-app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthService', function ( $rootScope, $scope, $http, AuthService) {
+app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthService','$uibModal','$document','CatererAccountModel',
+    function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel) {
 
     $('#datetimepicker4').datetimepicker();
+
+    $scope.number="";$scope.expiry="";$scope.cvc="";
 
     if(JSON.parse(localStorage.getItem('cart'))){
         $scope.products = JSON.parse(localStorage.getItem('cart'))[0].products;
@@ -14,6 +17,11 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         $scope.total_price = localStorage.getItem('total_price');
     else
         $scope.total_price = 0;
+
+        if(localStorage.getItem('delivery_time'))
+            $scope.delivery_time = localStorage.getItem('delivery_time');
+        else
+            $scope.delivery_time = "";
 
     var new_total_price;
     $scope.removeFromCart = function(index, total_price, type){
@@ -63,6 +71,22 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
 
 
     }
+        CatererAccountModel.getAllZips().then(
+            function(response){
+                $scope.zips = [];
+                var zips = response.data.zips;
+                for(zip in zips){
+                    $scope.zips.push({
+                        id:zips[zip].id,
+                        name:zips[zip].ZIP + " " +zips[zip].city,
+                    });
+                }
+            }
+        );
+
+        $scope.selectZip =function ($item, $model){
+            $scope.delivery_zip =  $model.id;
+        }
 
     $scope.change = function(){
         if($scope.is_different)
@@ -75,7 +99,92 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
     $scope.payment = {
         name: 'cash'
     }
-    $scope.submitOrder = function(){
+    $scope.submitOrder = function(payment){
+        console.log(payment);
+        if(payment.name === 'stripe')
+        {
+            console.log(123);
+            $scope.open();
+        }
+
+        if(payment.name === 'paypal')
+        {
+            console.log('paypal');
+            $http({
+                method : "get",
+                url : "ccc"
+            });
+        }
+        if(payment.name == 'cash'){
+            console.log(1234)
+            $scope.registerOrder();
+        }
+        // var company = $scope.company;
+        // var delivery_country = $scope.country;
+        // var delivery_city = $scope.city;
+        // var orders = JSON.parse(localStorage.getItem('cart'))[0];
+        // var delivery_address = $scope.address+' '+ $scope.home;
+        // var delivery_zip = $scope.delivery_zip;
+        // var email = $scope.email;
+        // var mobile = $scope.mobile;
+        // var phone = $scope.phone;
+        // var billing_address  =$scope.billing_address;
+        // var payment_type = $scope.payment.name;
+        // var comment = $scope.comment;
+        // var is_logedin = $rootScope.is_logedin;
+        // var is_accepted = $scope.is_accepted;
+        //
+        //
+        // var data =  {
+        //         company :           company,
+        //         orders :            orders,
+        //         delivery_country :  delivery_country,
+        //         delivery_city :     delivery_city,
+        //         delivery_address :  delivery_address,
+        //         delivery_zip :      delivery_zip,
+        //         email:              email,
+        //         mobile :            mobile,
+        //         phone:              phone,
+        //         billing_address :   billing_address,
+        //         payment_type :      payment_type,
+        //         comment :           comment,
+        //         is_logedin :        is_logedin,
+        //         is_accepted:        is_accepted,
+        // };
+        // console.log(data);
+        // $http({
+        //     data: {
+        //         company :           company,
+        //         delivery_country :  delivery_country,
+        //         delivery_city :     delivery_city,
+        //         orders :            orders,
+        //         delivery_address :  delivery_address,
+        //         delivery_zip :      delivery_zip,
+        //         email:              email,
+        //         mobile :            mobile,
+        //         phone:              phone,
+        //         billing_address :   billing_address,
+        //         payment_type :      payment_type,
+        //         comment :           comment,
+        //         is_logedin :        is_logedin,
+        //         is_accepted:        is_accepted
+        //     },
+        //     method : "POST",
+        //     url : "order"
+        // })
+        // .success(function (response) {
+        //     if(response.success == 1){
+        //         alert('order submitted')
+        //     }
+        // })
+        // .error( function (error) {
+        //     console.log(error);
+        //
+        // });
+    };
+
+    $scope.registerOrder = function()
+    {
         var company = $scope.company;
         var delivery_country = $scope.country;
         var delivery_city = $scope.city;
@@ -90,25 +199,26 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
         var comment = $scope.comment;
         var is_logedin = $rootScope.is_logedin;
         var is_accepted = $scope.is_accepted;
-
+        var delivery_time = $scope.delivery_time;
 
         var data =  {
-                company :           company,
-                orders :            orders,
-                delivery_country :  delivery_country,
-                delivery_city :     delivery_city,
-                delivery_address :  delivery_address,
-                delivery_zip :      delivery_zip,
-                email:              email,
-                mobile :            mobile,
-                phone:              phone,
-                billing_address :   billing_address,
-                payment_type :      payment_type,
-                comment :           comment,
-                is_logedin :        is_logedin,
-                is_accepted:        is_accepted,
+            company :           company,
+            orders :            orders,
+            delivery_country :  delivery_country,
+            delivery_city :     delivery_city,
+            delivery_address :  delivery_address,
+            delivery_zip :      delivery_zip,
+            email:              email,
+            mobile :            mobile,
+            phone:              phone,
+            billing_address :   billing_address,
+            payment_type :      payment_type,
+            comment :           comment,
+            is_logedin :        is_logedin,
+            is_accepted:        is_accepted,
+            delivery_time:      delivery_time,
         };
-        console.log(data);
+        
         $http({
             data: {
                 company :           company,
@@ -129,16 +239,16 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             method : "POST",
             url : "order"
         })
-        .success(function (response) {
-            if(response.success == 1){
-                alert('order submitted')
-            }
-        })
-        .error( function (error) {
-            console.log(error);
+            .success(function (response) {
+                if(response.success == 1){
+                    alert('order submitted')
+                }
+            })
+            .error( function (error) {
+                console.log(error);
 
-        });
-    };
+            });
+    }
 
     $scope.submit_login = function(){
         var role = 'user';
@@ -186,5 +296,40 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             }
         })
     }
+
+
+    $scope.animationsEnabled = true;
+    $scope.open = function (size) {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            // controller: 'ModalInstanceCtrl',
+            controller: 'StripeModalInstanceCtrl',
+            size: size,
+            // resolve: {
+            //     product: function () {
+            //         return $scope.product;
+            //     }
+            // }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            console.log(132);
+            console.log(selectedItem);
+            // console.log($scope.selected);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.stripeCallback = function (code, result) {
+        console.log(123);
+        return false;
+        if (result.error) {
+            window.alert('it failed! error: ' + result.error.message);
+        } else {
+            window.alert('success! token: ' + result.id);
+        }
+    };
 
 }]);

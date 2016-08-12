@@ -24,7 +24,7 @@
                                         <div class="adress fl">
                                             <div class="numb1">
                                             <span class="cg4 fz28 fmlbold">
-                                                <a ng-href="#/caterer/menu/<% menu.id %>">
+                                                <a ng-href="#/caterer/<% kitchen_id %>/<% menu.id %>/products">
                                                     <% (currentMenusPage-1)*numPerPageForMenus+$index+1 %>
                                                 </a>
                                             </span>

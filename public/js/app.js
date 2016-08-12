@@ -1,13 +1,18 @@
 var app = angular.module('app', [
-    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select','angularModalService'
+    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select',
+    'angularModalService','angularPayments'
 ]);
 
-app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSelectConfig',
-    function ($interpolateProvider, toastrConfig, flowFactoryProvider,uiSelectConfig) {
+app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSelectConfig','$windowProvider',
+    function ($interpolateProvider, toastrConfig, flowFactoryProvider,uiSelectConfig,$windowProvider ) {
+        var $window = $windowProvider.$get();
+        // console.log($window);
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
 
         uiSelectConfig.theme = 'select2';
+
+        $window.Stripe.setPublishableKey('pk_test_RRDcRey63aipkR9UbaPDPRTo');
 
         flowFactoryProvider.defaults = {
             target: 'caterer/settings/updateAvatar',
@@ -78,16 +83,24 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/caterer/account/profile.blade.php',
             controller: 'CatererProfileController'
         })
-        // .when('/caterer/products', {
-        //     templateUrl: 'templates/caterer/account/products.blade.php',
-        //     controller: 'CatererProductsController'
-        // })
         .when('/caterer/products', {
             templateUrl: 'templates/caterer/product/single/kitchens.blade.php',
             controller: 'CatererProductsController'
         })
-        .when('/caterer/kitchens/:kitchen_id', {
+        .when('/caterer/:kitchen_id/menus', {
             templateUrl: 'templates/caterer/product/single/menus.blade.php',
+            controller: 'CatererProductsController'
+        })
+        .when('/caterer/:k_id/:menu_id/products',{
+            templateUrl: 'templates/caterer/product/single/products.blade.php',
+            controller: 'CatererProductsController'
+        })
+        .when('/caterer/product/add',{
+            templateUrl: 'templates/caterer/product/single/add.blade.php',
+            controller: 'CatererProductsController'
+        })
+        .when('/caterer/product/show/:product_id',{
+            templateUrl: 'templates/caterer/product/single/view.blade.php',
             controller: 'CatererProductsController'
         })
         .when('/caterer/orders', {

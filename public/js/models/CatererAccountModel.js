@@ -148,8 +148,17 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 method :"post",
                 url : "caterer/settings/editCookingTime"
             });
+        },
+        
+        getAllZips: function ()
+        {
+            return $http({
+                method : "get",
+                url : "order/getAllZips"
+            })
         }
 
+        
         
         
     };
