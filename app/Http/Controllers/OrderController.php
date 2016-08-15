@@ -20,7 +20,7 @@ class OrderController extends UserBaseController
 
     public function index(Request $request)
     {
-        $this->validate($request->all());
+        $this->validateRequest($request);
         if(count($request['orders']['products'])==0 && count($request['orders']['packages'])==0)
             return response()->json(['success' => 0 , 'error' => 'Nothing added to cart.']);
         if ($request->is_accepted) {
@@ -46,8 +46,8 @@ class OrderController extends UserBaseController
         $data ['is_user_order'] = 1;
         $order = Order::create($data);
         $this->store_order_products($order->id, $request->orders);
-        if($data->payment_type == 'stripe')
-            $this->execStripePayment($data->stripeToken,$data ['total_cost']);
+        if($data['payment_type'] == 'stripe')
+            $this->execStripePayment($data['stripeToken'],$data ['total_cost']);
         return response()->json(['success' => 1]);
     }
 
@@ -170,12 +170,12 @@ class OrderController extends UserBaseController
 
     public function validateRequest($data)
     {
-        return $this->validate($data,[
+       $this->validate($data,[
             'company' => 'required',
             'delivery_country' => 'required',
             'delivery_city' => 'required',
             "delivery_address" => 'required',
-            "delivery_zip" => 'required|number',
+            "delivery_zip" => 'required',
             "delivery_time" => 'required',
             "email" => 'required|email',
             "mobile" => 'required',

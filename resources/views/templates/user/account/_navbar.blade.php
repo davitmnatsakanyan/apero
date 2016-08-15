@@ -35,26 +35,17 @@
                 </a>
             </li>
             <li>
+                <a ng-href="#/">
                 <button class="hilife">
                     <span>
                         <i class="fa fa-exclamation-circle nn" aria-hidden="true"></i>
                     </span>
                     Hilife
                 </button>
+                    </a>
             </li>
         </ul>
     </div>
-    <!--<form action="#" method="post">
-        <div class="df-a" >
-        <div class="logout">
-            <input type="submit" value="Logout"/>
-            <i class="fa fa-sign-out ff" aria-hidden="true"></i>
-        </div>
-        <div class="hilife">
-            <input type="submit" value="Hilife"/>
-            <i class="fa fa-exclamation-circle nn" aria-hidden="true"></i>
-        </div>
-        </div>
-    </form>-->
+
 
 </div>

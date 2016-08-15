@@ -9,6 +9,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Services\UserService;
 use App\Http\Services\CatererService;
 use App\Models\Caterer;
+use App\Models\Country;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,9 +29,9 @@ class AuthController extends Controller
     }
 
     public  function getRegister(){
-        $zipCode = array();
-        $data=array();
-        $data['zip_codes'] = array();
+        $zipCode = [];
+        $data=[];
+        $data['zip_codes'] = [];
         $zip_codes = $this->catererService->zipCodes();
             foreach($zip_codes as $zip_code){
                 $zipCode['id'] = $zip_code['id'];
@@ -39,6 +40,7 @@ class AuthController extends Controller
                 array_push($data['zip_codes'], $zipCode );
             }
         $data['categories'] = $this->catererService->foodCategories();
+        $data['countries'] = Country::all();
         return $data;
     }
 
@@ -85,7 +87,7 @@ class AuthController extends Controller
                'pobox'              => 'required|max:100',
                'zip'                => 'required|max:5',
                'city'               => 'required|max:250',
-               'country'            => 'required|max:250',
+               'country'            => 'required|max:3',
                'email'              => 'required|email|max:100|unique:users',
                'phone'              => 'required|max:50',
                'password'           => 'required|confirmed',

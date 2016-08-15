@@ -14,7 +14,7 @@
                         <div class="inner-cater">
                             <div class="row">
 
-                                <div class="col-sm-5 col-md-4 cater-left-box">
+                                <div class="col-sm-5 col-md-4 cater-left-box">
                                     <div class="apero-pic">
                                         <img src="images/apero-pic.png" alt=""/>
                                     </div>

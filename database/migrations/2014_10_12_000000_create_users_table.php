@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('pobox',100);
             $table->string('zip',4);
             $table->string('city',250);
-            $table->string('country',250);
+            $table->integer('country');
             $table->string('email',250)->unique();
             $table->string('phone',50);
             $table->string('mobile',50);

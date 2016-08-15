@@ -1,21 +1,27 @@
+<div flow-init="{
+            singleFile: true, testChunks: true,
+            query: { '_token':  '{{ csrf_token() }}', 'path': 'images\\packages'}
+             }"
+     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+     flow-files-submitted="$flow.update( $files, $event, $flow )"
+     flow-file-success="setFileName($flow.files)">
 
 <form id="editCommon">
 
-    <div flow-init
-         {{--flow-files-submitted="$flow.upload()"--}}
-         flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-         flow-file-success="$file.msg = $message">
-
-        <input type="file" flow-btn name="avatar"/>
+    <label for="packageImage">
+        <div class="inputfile-label wdth228">Upload Image</div>
+    </label>
+    <input type="file" flow-btn name="avatar" class="inputfile" id="packageImage"/>
+        {{--<input type="file" flow-btn name="avatar"/>--}}
 
         <div class="cater-pic caterer-pic-width" ng-hide="$flow.files.length">
-            <img class="ithumbnail cater-pic-width"  src="../images/<% package.avatar %>" alt="no picture"/>
-        </div>
-        <div class="cater-pic caterer-pic-width" ng-show="$flow.files.length">
-            <img class="ithumbnail cater-pic-width" flow-img="$flow.files[0]" />
+            <img class="cater-pic-width image-size"  src="../images/packages/<% package.avatar %>" alt="no picture"/>
         </div>
 
-    </div>
+        <div class="cater-pic caterer-pic-width" ng-show="$flow.files.length">
+            <img class="cater-pic-width image-size" flow-img="$flow.files[0]" />
+        </div>
+
     <div class="profil-form fl">
         <div class="info-box">
             <label for="company" class="title fmlbold fz17">Name</label>
@@ -35,9 +41,10 @@
     <div class="profil-border"></div>
 </div>
 <div class="save-btn" ng-if="location!=='add'">
-    <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="updateCommmon()"/>
-</div>
+    <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="update('edit',$files, $event, $flow)"/>
+</div>'
 
 <div class="save-btn" ng-if="location==='add'">
-    <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="createPackage()"/>
+    <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="update('add',$files, $event, $flow)"/>
+</div>
 </div>

@@ -13,28 +13,41 @@
                 <div class="col-xs-12  ">
 
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row no-margin">
 
                             <div ng-include='"templates/user/account/_navbar.blade.php"'></div>
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company" ng-if="order">
                                 <div class="company-title-username">
-                                    <p class="fz28 fmlreg cg1 db">Status: <% order.status.name %></p>
+                                    <p class="fz28 fmlreg cg1 db">Status: <% order.status %></p>
                                 </div>
 
-                                <div class="company-title-username">
-                                    <p class="fz20 fmlreg cg1 db">
-                                        <span class="show-order">Caterer: <% order.caterer.company %></span>
-                                        <span class="show-order">Cost: <% order.total_cost %></span>
-                                        <span class="show-order">Ordering time: <% order.created_at %></span>
-                                        <span class="show-order">Products:
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th>Caterer</th>
+                                        <td><% order.caterer.company %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Delivery address</th>
+                                        <td><% order.delivery_address + ","  + order.delivery_city %></td>
+                                    </tr>
+                                    <tr>
+                                        <th> Cost</th>
+                                        <td><% order.total_cost %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ordering time</th>
+                                        <td><% order.created_at %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Products</th>
+                                        <td>
                                             <span ng-repeat="product in order.products"> <% product.name %>,</span>
-                                            <span ng-repeat="package in order.packages"> <% package.name %>,</span>
-                                        </span>
-                                    </p>
-                                </div>
-
-
+                                            <span ng-repeat="package in order.packages"> <% package.name %>,</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

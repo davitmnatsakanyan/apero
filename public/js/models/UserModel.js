@@ -15,6 +15,14 @@ app.factory('UserModel', ['$http', function($http) {
             });
         },
         
+        changePassword:function(data){
+            return  $http({
+                data: data,
+                method : "post",
+                url : "user/settings/changePassword"
+            });
+        },
+        
         getOrders: function(){
             return  $http({
                 method : "get",

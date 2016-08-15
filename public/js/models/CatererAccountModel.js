@@ -33,6 +33,14 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 url: ""
             });
         },
+        
+        updateCaterer:function(data){
+            return $http({
+                data:data,
+                method: "post",
+                url: "caterer/settings/update"
+            });
+        },
 
         getPackages: function () {
             return $http({
@@ -156,10 +164,37 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 method : "get",
                 url : "order/getAllZips"
             })
+        },
+
+        addKitchen: function(data){
+            return $http({
+                data:data,
+                method :"post",
+                url : "caterer/settings/addKitchen"
+            });
+        },
+
+        removeKitchen: function (kitchen_id){
+            return $http({
+                method :"get",
+                url : "caterer/settings/removeKitchen/" + kitchen_id
+            });
+        },
+
+        changePassword:function(data){
+            return  $http({
+                data: data,
+                method : "post",
+                url : "caterer/settings/changePassword"
+            });
+        },
+
+        deletePackage: function (package_id) {
+            return $http({
+                method :"get",
+                url : "caterer/product/package/delete/" + package_id
+            });
         }
 
-        
-        
-        
     };
 }]);

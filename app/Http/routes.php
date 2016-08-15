@@ -3,10 +3,13 @@
 Route::get('aaa', 'User\SettingsController@getUpdate');
 
 Route::get('bbb',function(){
-    dd(auth('user')->user()->toArray());
+    $avatar = App\Models\Product::select('avatar')->where('id',10)->get();
+    dd($avatar);
 });
 
 Route::get('ccc','PaypalController@getCheckout');
+
+Route::any('upload', 'ImageController@uploadFile');
 
 Route::get('stripe','StripeController@getindex');
 Route::get('registerOrder','StripeController@registerOrder');
@@ -99,6 +102,13 @@ Route::group(array('prefix' => '/templates/caterer/product/package/modals/'), fu
     Route::get('{template}', array(function ($template) {
         $template = str_replace(".blade.php", "", $template);
         return view('/templates/caterer/product/package/modals.' . $template);
+    }));
+});
+
+Route::group(array('prefix' => '/templates/caterer/product/single/modals/'), function () {
+    Route::get('{template}', array(function ($template) {
+        $template = str_replace(".blade.php", "", $template);
+        return view('/templates/caterer/product/single/modals.' . $template);
     }));
 });
 
@@ -221,7 +231,12 @@ Route::group([
         Route::get('/', 'AccountController@getIndex');
         Route::get('view', 'AccountController@getView');
     });
-    Route::controller('settings', 'SettingsController');
+
+    Route::get('settings/update', 'SettingsController@getUpdate');
+    Route::post('settings/update','SettingsController@postUpdate');
+    Route::post('settings/changePassword','SettingsController@postChangePassword');
+
+//    Route::controller('settings', 'SettingsController');
 
 });
 
@@ -247,9 +262,16 @@ Route::group([
     Route::post('settings/addDeliveryArea','SettingsController@addDeliveryArea');
     Route::get('settings/removeDeliveryArea/{id}','SettingsController@removeDeliveryArea');
     Route::post('settings/editCookingTime','SettingsController@editCookingTime');
+    Route::post('settings/update','SettingsController@postUpdate');
+    Route::get('settings/removeKitchen/{kitchen_id}','SettingsController@removeKitchen');
+    Route::post('settings/addKitchen','SettingsController@addKitchen');
+    Route::post('settings/changePassword','SettingsController@changePassword');
+    Route::any('settings/uploadFile', 'SettingsController@uploadFile');
+    
+    Route::get('account','AccountController@getIndex');
 
     Route::controller('account', 'AccountController');
-    Route::controller('settings', 'SettingsController');
+//    Route::controller('settings', 'SettingsController');
     
     Route::get('order' ,'OrdersController@getIndex');
     Route::get('order/show/{id}' , 'OrdersController@getShow');
@@ -267,6 +289,8 @@ Route::group([
             Route::get('/', 'SingleProductController@getIndex');
             Route::get('menus/{id}', 'SingleProductController@getMenus');
             Route::get('products/{kitchen_id}/{menu_id}/','SingleProductController@getProducts');
+            Route::any('image/{id}','SingleProductController@chnageAvatar');
+            Route::post('addSubproducts','SingleProductController@addSubproducts');
             
             Route::get('getAllKitchens','SingleProductController@getAllKitchens');
             Route::get('getAllMenus/{id}','SingleProductController@getAllMenus');
@@ -276,13 +300,12 @@ Route::group([
 
             Route::get('view/{id}', 'SingleProductController@getView');
 
-            Route::get('edit/{id}', 'SingleProductController@getEdit');
-            Route::post('edit/{id}', 'SingleProductController@postEdit');
+            Route::post('update', 'SingleProductController@update');
 
             Route::get('delete/{id}', 'SingleProductController@getDelete');
 
-            Route::post('change_cutom','SingleProductController@postUpdateSubproduct');
-            Route::post('deleteSubproduct', 'SingleProductController@postDeleteSubproduct');
+            Route::post('updateSubproduct','SingleProductController@updateSubproduct');
+            Route::get('deleteSubproduct/{id}', 'SingleProductController@deleteSubproduct');
 
         });
 
@@ -299,6 +322,8 @@ Route::group([
             Route::post('package/addProduct/{id}','PackageController@addProducts');
             Route::post('package/removeProduct', 'PackageController@deleteProduct');
             Route::post('package/editcount','PackageController@editProductCount');
+            Route::any('package/image/{id}','PackageController@chnageAvatar');
+            Route::get('package/delete/{id}','PackageController@removePackage');
             Route::resource('package', 'PackageController');
 
 //        });

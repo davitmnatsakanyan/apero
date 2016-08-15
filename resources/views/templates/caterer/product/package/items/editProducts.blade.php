@@ -19,8 +19,13 @@
                     </form>
                 </td>
                 <td>
-                    <input form="editCount" type="submit" value="Edit" ng-click="updateProductCount(product.pivot.product_id,product.pivot.subproduct_id)"/>
-                    <button type="submit"  ng-click="removeProductFromPackage(product.pivot.product_id,product.pivot.subproduct_id)">Remove</button>
+                    <button class="btn btn-primary btn-xs" title="Edit product count"
+                            ng-click="updateProductCount(product.pivot.product_id,product.pivot.subproduct_id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                    </button>
+                    {{--<input form="editCount" type="submit" value="Edit" ng-click="updateProductCount(product.pivot.product_id,product.pivot.subproduct_id)"/>--}}
+                    <button type="submit" class="btn btn-danger btn-xs"  ng-click="removeProductFromPackage(product.pivot.product_id,product.pivot.subproduct_id)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove product" /></button>
                 </td>
             </tr>
             </tbody>

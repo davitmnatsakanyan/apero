@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Order;
 use App\Models\ZipCode;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -75,5 +76,10 @@ class User extends Authenticatable
     public function user_zip()
     {
         return $this->belongsTo(ZipCode::class,'zip');
+    }
+    
+    public function user_country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

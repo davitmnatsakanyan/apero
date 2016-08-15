@@ -101,7 +101,7 @@ class StripeController extends Controller
                 "currency" => "eur",
                 "source" => $token,
                 "description" => "Example charge"
-            ),array('stripe_account' => 'acct_18gw68GugONEpyVB'));
+            ));
         } catch(\Stripe\Error\Card $e) {
 
         }

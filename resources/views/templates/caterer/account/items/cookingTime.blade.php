@@ -10,30 +10,41 @@
             <td> Anlassgrosse </td>
             <td> <% cooking_time.group1 %></td>
             <td>
-                <p><a href class="btn btn-default btn-lg " ng-click="showEditCookingTime('group1', cooking_time.group1)">Edit</a></p>
+                <button class="btn btn-primary btn-xs" title="Edit" ng-click="open('sm','group1', cooking_time.group1)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                </button>
             </td>
         </tr>
         <tr>
             <td> 1-5 </td>
             <td> <% cooking_time.group2 %></td>
             <td>
-                <p><a href class="btn btn-default btn-lg " ng-click="showEditCookingTime('group2', cooking_time.group2)">Edit</a></p>
+                <button class="btn btn-primary btn-xs" title="Edit" ng-click="open('sm','group2', cooking_time.group2)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                </button>
             </td>
         </tr>
         <tr>
             <td> 6-10 </td>
             <td> <% cooking_time.group3 %></td>
             <td>
-                <p><a href class="btn btn-default btn-lg " ng-click="showEditCookingTime('group3', cooking_time.group3)">Edit</a></p>
+                <button class="btn btn-primary btn-xs" title="Edit" ng-click="open('sm','group3', cooking_time.group3)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                </button>
             </td>
         </tr>
         <tr>
             <td> 11-x </td>
             <td> <% cooking_time.group4 %></td>
             <td>
-                <p><a href class="btn btn-default btn-lg " ng-click="showEditCookingTime('group4', cooking_time.group4)">Edit</a></p>
+                <button class="btn btn-primary btn-xs" title="Edit" ng-click="open('sm','group4', cooking_time.group4)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
+
 </div>
+
+<div ng-include='"templates/caterer/account/modals/cooking_time.blade.php"'></div>

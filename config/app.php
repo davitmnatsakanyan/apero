@@ -166,7 +166,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Ixudra\Curl\CurlServiceProvider::class,
-        Laravel\Cashier\CashierServiceProvider::class
+        Laravel\Cashier\CashierServiceProvider::class,
+        Webpatser\Countries\CountriesServiceProvider::class
 
     ],
 
@@ -221,7 +222,8 @@ return [
         'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Curl' => Ixudra\Curl\Facades\Curl::class
+        'Curl' => Ixudra\Curl\Facades\Curl::class,
+        'Countries' => Webpatser\Countries\CountriesFacade::class
 
     ],
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\User\UserBaseController;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\ZipCode;
 use App\User;
@@ -13,14 +14,14 @@ class SettingsController extends UserBaseController
     public function getUpdate()
     {
         $user = User::with('user_zip')->findOrFail($this->user->id())->toArray();
+        $user['user_country'] = Country::findOrFail($user['country']);
         $zips = ZipCode::all();
-        return response(['user' => $user, 'zips'=>$zips, 'success' => 1]);
+        $countries = Country::all();
+        return response(['user' => $user, 'zips'=>$zips, 'countries' => $countries,'success' => 1]);
     }
 
     public function postUpdate(Request $request)
     {
-//        dd($request->all());
-//        return  response()->json(['user' => $request->all() , 'success' => 1]);
 
         $this->validate($request, [
             'title' => 'required',
@@ -37,15 +38,9 @@ class SettingsController extends UserBaseController
         ]);
 
         if (User::findOrFail($this->user->id())->update($request->all()))
-            return response()->json(['user' => $this->user->user()->toArray(), 'success' => 1]);
-        return response()->json(['user' => $this->user->user()->toArray(), 'success' => 0]);
+            return response()->json(['message' => "Your information successfully updated.", 'success' => 1]);
+        return response()->json(['error' => "Something went wrong", 'success'=> 0]);
 
-    }
-
-
-    public function getChangePassword()
-    {
-        return view('user/settings/changePassword', ['role' => 'user']);
     }
 
     public function postChangePassword(Request $request)
@@ -58,10 +53,10 @@ class SettingsController extends UserBaseController
 
         if (Hash::check($request->old_password, $this->user->user()->password)) {
             User::findOrFail($this->user->id())->update(['password' => bcrypt($request->password)]);
-            return back()->with('success', 'Password changed successfully.');
+            return response()->json(['message' => "Your password successfully changed.", 'success' => 1]);
         }
 
-        return back()->withErrors('Enter correct old password');
+        return response()->json(['error' => "Something went wrong", 'success'=> 0]);
     }
 
 }

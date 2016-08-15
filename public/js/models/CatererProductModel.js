@@ -57,7 +57,40 @@ app.factory('CatererProductModel', ['$http', function ($http) {
                 method:'post',
                 url:'caterer/product/single/add'
             })
+        },
+
+        addSubproducts: function(data){
+            return $http({
+                data:data,
+                method:'post',
+                url:'caterer/product/single/addSubproducts'
+            })
+        },
+
+        removeSubproduct: function (subrpoduct_id){
+            return $http({
+                method:'get',
+                url:'caterer/product/single/deleteSubproduct/' + subrpoduct_id
+            })
+        },
+
+        updateSubproduct:function (data){
+            return $http({
+                data:data,
+                method:'post',
+                url:'caterer/product/single/updateSubproduct'
+            })
+        },
+        
+        updateProduct:function(data){
+            return $http({
+                data:data,
+                method:'post',
+                url:'caterer/product/single/update'
+            })
         }
+        
+        
 
     };
 }]);

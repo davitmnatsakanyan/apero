@@ -46,7 +46,7 @@ class CreateKitchensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('kitchens');
         Schema::drop('caterer_kitchen');
+        Schema::drop('kitchens');
     }
 }

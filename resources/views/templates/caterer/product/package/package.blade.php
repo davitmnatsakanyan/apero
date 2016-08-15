@@ -14,11 +14,11 @@
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererPackageController">
                             <div class="col-sm-7 col-md-8">
-                                <a href="#/caterer/packages/add">Add package</a>
+                                <a href="#/caterer/packages/add" class="add-button">Add package</a>
                                 <div class="main-product-box" data-ng-repeat="package in filteredPackages">
                                     <div class="main-product fl"></div>
-                                    <div class="product-txt fl">
-                                        <p class="fmlreg fz20 cg1 title">
+                                    <div class="product-txt fl no-margin-top">
+                                        <p class="fmlreg fz20 cg1 title no-margin-bottom">
                                             <% package.name %>
                                             <span><%(currentPackagePage-1)*numPerPageForPackages +$index+1 %></span>
                                         </p>
@@ -30,7 +30,7 @@
                                         <ul class="product-icons dib clear-fix">
                                             <li class="fl"><a href="#/caterer/packages/show/<% package.id %>" class="eye-icon"></a></li>
                                             <li class="fl"><a href="#/caterer/packages/edit/<% package.id %>" class="pencil-red-icon"></a></li>
-                                            <li class="fl"><a href="#/caterer/packages/delete/<% package.id %>" class="red-times-icon"></a></li>
+                                            <li class="fl"><a  class="red-times-icon" ng-click="deletePackage(package.id)"></a></li>
                                         </ul>
                                     </div>
                                     <div class="clear-both"></div>

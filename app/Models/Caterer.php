@@ -98,4 +98,14 @@ class Caterer extends Authenticatable
     {
         return $this->hasOne(ContactPerson::class);
     }
+    
+    public function caterer_country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+    
+    public function caterer_zip()
+    {
+        return $this->belongsTo(ZipCode::class);
+    }
 }

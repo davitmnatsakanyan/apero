@@ -1,27 +1,22 @@
 <div class="col-sm-5 col-md-4 cater-left-box">
 
-    <div flow-init
-         flow-files-submitted="$flow.upload()"
-         flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-         flow-file-success="$file.msg = $message">
-
-        <input type="file" flow-btn name="avatar"/>
-
-        <div class="cater-pic" ng-hide="$flow.files.length">
-            <img class="ithumbnail"  src="../images/restaurant-pic.png" />
-        </div>
-        <div class="cater-pic" ng-show="$flow.files.length">
-            <img class="ithumbnail" flow-img="$flow.files[0]" />
-        </div>
-
-        {{--<div class="thumbnail" ng-show="$flow.files.length">--}}
-            {{--<img flow-img="$flow.files[0]" />--}}
-        {{--</div>--}}
-
-        {{--<div class="cater-pic">--}}
-            {{--<img ng-src="../images/restaurant-pic.png" ng-flow-img="$flow.files[0]" alt=""/>--}}
-        {{--</div>--}}
-
+        <div flow-init="{
+        target: 'caterer/settings/uploadFile', singleFile: true, testChunks: true,
+        query: { '_token':  '{{ csrf_token() }}', 'path': 'images\\caterers'}
+        }"
+        flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+        flow-files-submitted="$flow.upload( $files, $event, $flow )"
+        flow-file-success="setFileName($flow.files)">
+            <input type="file" flow-btn name="avatar" class="inputfile" id="catererImage"/>
+            <label for="catererImage" ng-if="isActive('/caterer/profile')">
+                <div class="inputfile-label">Change Avatar</div>
+            </label>
+            <div class="cater-pic" ng-hide="$flow.files.length">
+                <img class="ithumbnail"  src="../images/caterers/<% caterer.avatar %>"  />
+            </div>
+            <div class="cater-pic" ng-show="$flow.files.length">
+                <img class="ithumbnail" flow-img="$flow.files[0]" />
+            </div>
     </div>
 
 

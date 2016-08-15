@@ -6,20 +6,22 @@
             <div class="row">
                 <div class="col-xs-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello <% user.name %></p>
+                        <p class="mb10">Hello <% user.name %></p>
                     </div>
                 </div>
                 <div class="col-xs-12  ">
 
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row no-margin">
 
-                            <div ng-include='"templates/user/account/_navbar.blade.php"'></div>
+                            <div  ng-include='"templates/user/account/_navbar.blade.php"'></div>
 
                             <div class="col-sm-7 col-md-8">
 
                                 <div class="company-title-username">
-                                    <p class="fz28 fmlreg cg1 db">Meine Profile</p>
+                                    <p class="fz28 fmlreg cg1 db">Meine Profile
+                                        <a href="#/user/account/changePassword" class = "btn change-password">Change password</a>
+                                    </p>
                                 </div>
 
                                 <form method="post" id="update_user">
@@ -72,11 +74,12 @@
 
                                         <div class="info-box">
                                             <label for="zip" class="title fmlbold fz17">Zip</label>
-                                            <select class="text fmlreg fz13 "
-                                                    ng-options="item as zip.ZIP + ' ' + zip.city for zip in zips track by zip.id"
-                                                    ng-model="user.user_zip"
-                                                    id="zip" name="zip">
-                                            </select>
+                                            <ui-select ng-model="selectedZipCode"  class="text fmlreg fz13" on-select="selectZip($select.selected, $model)">
+                                                <ui-select-match ><% $select.selected.name %></ui-select-match>
+                                                <ui-select-choices repeat="zip in zip_codes track by zip.id">
+                                                    <% zip.name %>
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </div><!--end-->
 
                                         <div class="info-box">
@@ -86,8 +89,12 @@
 
                                         <div class="info-box">
                                             <label for="country" class="title fmlbold fz17">Country</label>
-                                            <input type="text" class="text fmlreg fz13" id="country"
-                                                   ng-model="user.country"/>
+                                            <ui-select ng-model="selectedCountry"  class="text fmlreg fz13" on-select="selectCountry($select.selected, $model)">
+                                                <ui-select-match ><% $select.selected.name %></ui-select-match>
+                                                <ui-select-choices repeat="country in countries track by country.id">
+                                                    <% country.name %>
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </div><!--end-->
 
                                     </div><!--end-->

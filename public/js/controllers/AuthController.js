@@ -19,7 +19,14 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
         CatererAccountModel.getRegister().then(function (response) {
             $scope.zip_codes = response.data.zip_codes;
             $scope.categories = response.data.categories;
+            $scope.countries = response.data.countries;
+            console.log( $scope.countries );
         });
+    }
+
+    $scope.selectCountry = function($select, $model)
+    {
+        $scope.selectedCountry = $model.id;
     }
 
     // submit registration form
@@ -33,6 +40,13 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
         }
         else{
             $scope.data.zip = ''
+        }
+
+        if($scope.selectedCountry) {
+            $scope.data.country = $scope.selectedCountry;
+        }
+        else{
+            $scope.data.country = ''
         }
         
         $http({

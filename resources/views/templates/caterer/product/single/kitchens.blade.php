@@ -12,13 +12,13 @@
                 <div class="col-xs-12  ">
 
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row no-margin">
 
                             <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company">
                                 <div data-ng-controller="CatererProductsController">
-                                    <a href="#/caterer/product/add">Add product</a>
+                                    <a  class="add-button" href="#/caterer/product/add">Add product</a>
                                     <div ng-repeat="kitchen in filteredKitchens">
                                         <div class="adress fl">
                                             <div class="numb1">

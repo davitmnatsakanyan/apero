@@ -12,7 +12,7 @@
                 <div class="col-xs-12  ">
 
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row no-margin">
 
                             <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 

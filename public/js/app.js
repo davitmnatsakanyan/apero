@@ -1,5 +1,5 @@
 var app = angular.module('app', [
-    'ngRoute', 'ngAnimate', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select',
+    'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select','ngSanitize',
     'angularModalService','angularPayments'
 ]);
 
@@ -47,6 +47,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/user/account/profile.blade.php',
             controller: 'UserProfileController'
         })
+        .when('/user/account/changePassword', {
+            templateUrl: 'templates/user/account/changePassword.blade.php',
+            controller: 'UserProfileController'
+        })
         .when('/user/orders', {
             templateUrl: 'templates/user/account/orders.blade.php',
             controller: 'UserOrdersController'
@@ -78,6 +82,10 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/packages/edit/:package_id', {
             templateUrl: 'templates/caterer/product/package/edit.blade.php',
             controller: 'CatererPackageController'
+        })
+        .when('/caterer/product/edit/:product_id', {
+            templateUrl: 'templates/caterer/product/single/edit.blade.php',
+            controller: 'EditProductController'
         })
         .when('/caterer/profile', {
             templateUrl: 'templates/caterer/account/profile.blade.php',

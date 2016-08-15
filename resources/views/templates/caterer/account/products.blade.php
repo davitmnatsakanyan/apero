@@ -6,12 +6,11 @@
             <div class="row">
                 <div class="col-sm-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello  “Catering - Company”</p>
+                        <p>Hello  <% caterer.company %></p>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="inner-cater">
-
+                    <div class="inner-cater pl10">
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 
                         <div class="col-sm-7 col-md-8">

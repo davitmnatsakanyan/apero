@@ -92,7 +92,11 @@
 <script src="/js/controllers/UserProfileController.js"></script>
 <script src="/js/controllers/UserOrdersController.js"></script>
 <script src="/js/controllers/CatererPackageController.js"></script>
-<script src="/js/controllers/ModalInstanceController.js"></script>
+<script src="/js/controllers/EditProductController.js"></script>
+<script src="/js/controllers/ModalInstanceController.js">
+</script><script src="/js/controllers/CookingTimeModalInstanceController.js"></script>
+</script><script src="/js/controllers/UploadImageModalInstanceController.js"></script>
+</script><script src="/js/controllers/SubproductModalInstanceController.js"></script>
 
 
 <!-- end controllers -->

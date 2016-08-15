@@ -29,7 +29,7 @@ class UpdatePackageProductTable extends Migration
     public function down()
     {
         Schema::table('package_product', function (Blueprint $table) {
-            $table->dropForeign('product_id');
+            $table->dropForeign('package_product_product_id_foreign');
         });
     }
 }

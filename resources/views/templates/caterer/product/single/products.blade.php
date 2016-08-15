@@ -10,11 +10,11 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="inner-cater">
-
+                        <div class="row">
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererProductsController">
                             <div class="col-sm-7 col-md-8">
-                                <a href="#/caterer/product/add">Add product</a>
+                                <a  class="add-button" href="#/caterer/product/add">Add product</a>
                                 <div class="main-product-box" data-ng-repeat="product in filteredProducts">
                                     <div class="main-product fl"></div>
                                     <div class="product-txt fl">
@@ -46,6 +46,7 @@
 
                             </div>
                         </div>
+                            </div>
                     </div>
                 </div>
             </div>

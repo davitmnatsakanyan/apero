@@ -1,6 +1,6 @@
-app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$window', 'AuthService', '$location',
-    'toastr', 'ModalService',
-    function ($scope, CatererAccountModel, $window, AuthService, $location, toastr, ModalService) {
+app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$window', 'AuthService', '$location',
+    'toastr',
+    function ($scope, CatererAccountModel, $window, AuthService,$location,$uibModal, toastr) {
 
         AuthService.auth('caterer');
 
@@ -8,6 +8,11 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
             if (response.data.success) {
                 $scope.caterer = response.data.caterer;
                 $scope.contact_person = response.data.caterer.contact_person;
+                $scope.countries = response.data.countries;
+                $scope.selectedCountry = $scope.caterer.caterer_country;
+
+                $scope.zips = response.data.zips;
+                $scope.selectedZip = $scope.caterer.caterer_zip;
 
                 var caterer_zips = response.data.caterer.zips;
                 $scope.caterer_zips = [];
@@ -21,7 +26,7 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
                 $scope.currentZipsPage = 1;
                 $scope.numPerPageForZips = 3;
                 $scope.zipsMaxSize = 5;
-                $scope.filteredZips = $scope.caterer_zips.slice(0, $scope.numPerPageForProducts);
+                $scope.filteredZips = $scope.caterer_zips.slice(0, $scope.numPerPageForZips);
 
                 var zips = response.data.zip_codes;
                 $scope.zip_codes = [];
@@ -31,11 +36,30 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
                         name: zips[zip].ZIP + " " + zips[zip].city
                     })
                 }
-                ;
+                var caterer_kitchens = $scope.caterer.kitchens;
+                $scope.kitchens = [];
 
+                for (var i = 0; i < caterer_kitchens.length; i++) {
+                    $scope.kitchens.push({
+                        id: caterer_kitchens[i].id,
+                        name: caterer_kitchens[i].name
+                    });
+                }
 
+                $scope.currentKitchensPage = 1;
+                $scope.numPerPageForKitchens = 1;
+                $scope.kitchensMaxSize = 5;
+                $scope.filteredKitchens = $scope.kitchens.slice(0, $scope.numPerPageForKitchens);
+                
+                $scope.addingKitchens = [];
+                var addingKitchens=response.data.kitchens;
+                for (kitchen in addingKitchens) {
+                    $scope.addingKitchens.push({
+                        id: addingKitchens[kitchen].id,
+                        name:  addingKitchens[kitchen].name,
+                    })
+                }
                 $scope.cooking_time = response.data.caterer.cookingtime;
-                $scope.changeZip();
 
             }
         }, function (error) {
@@ -43,24 +67,46 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
         });
 
         $scope.selectedZipCodes = [];
-
+        $scope.selectedKitchens = [];
+        
         $scope.isActive = function (viewLocation) {
             return viewLocation === $location.path();
         };
 
+        
         $scope.updateContactPerson = function () {
-            CatererAccountModel.updateContactPerson($scope.contact_person).then(function (response) {
+            CatererAccountModel.updateContactPerson($scope.contact_person).then(
+                function (response) {
                 if (response.data.success) {
                     toastr.success(response.data.message);
                 }
                 else {
                     toastr.error(responce.data.error, 'Error');
                 }
-            }, function (error) {
+            },
+                function (error) {
                 $scope.errorMessages(error.data);
-            });
-        }
+            }
+            );
+        };
 
+        $scope.updateCaterer = function()
+        {
+            console.log($scope.caterer);
+            CatererAccountModel.updateCaterer($scope.caterer).then(
+                function (response) {
+                    if (response.data.success) {
+                        toastr.success(response.data.message);
+                    }
+                    else {
+                        toastr.error(responce.data.error, 'Error');
+                    }
+                },
+                function (error) {
+                    $scope.errorMessages(error.data);
+                }
+            );
+        };
 
         $scope.errorMessages = function (errors) {
             var data = "";
@@ -68,7 +114,17 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
                 data += value + "<br/>";
             }, data);
             toastr.error(data, 'Error');
-        }
+        };
+
+        $scope.selectZip = function($select, $model)
+        {
+            $scope.caterer.zip = $model.id;
+        };
+        $scope.selectCountry = function($select, $model)
+        {
+            $scope.caterer.country = $model.id;
+        };
+
 
         $scope.removeDeliveryArea = function (zip_id) {
             CatererAccountModel.removeDeliveryArea(zip_id).then(function (response) {
@@ -92,7 +148,6 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
         };
 
         $scope.addDeliveryArea = function () {
-            console.log($scope.selectedZipCodes);
             CatererAccountModel.addDeliveryArea($scope.selectedZipCodes).then(function (response) {
                 if (response.data.success) {
                     var bIds = {};
@@ -103,6 +158,8 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
                     $scope.zip_codes = $scope.zip_codes.filter(function (obj) {
                         return !(obj.id in bIds);
                     });
+
+                    console.log($scope.zip_codes);
 
                     $scope.selectedZipCodes.forEach(function (obj) {
                         $scope.caterer_zips.push(obj);
@@ -120,6 +177,58 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
             });
         };
 
+
+        $scope.removeKitchen = function(kitchen_id){
+            CatererAccountModel.removeKitchen(kitchen_id).then(function (response) {
+                if (response.data.success) {
+
+                    var removed = $scope.kitchens.find(function (kitchen) {
+                        return kitchen.id == kitchen_id;
+                    }, kitchen_id);
+
+                    $scope.kitchens.splice($scope.kitchens.indexOf(removed), 1);
+                    $scope.addingKitchens.push({id: removed.id, name: removed.name});
+                    $scope.changeKitchen();
+                    toastr.success(response.data.message);
+                }
+                else {
+                    toastr.error(response.data.error, 'Error');
+                }
+            }, function (error) {
+                $scope.errorMessages(error.data);
+            });
+        };
+
+        $scope.addKitchens = function () {
+            // console.log($scope.selectedKitchens);
+            CatererAccountModel.addKitchen($scope.selectedKitchens).then(function (response) {
+                if (response.data.success) {
+                    var bIds = {};
+                    $scope.selectedKitchens.forEach(function (obj) {
+                        bIds[obj.id] = obj;
+                    });
+
+                    $scope.kitchens = $scope.kitchens.filter(function (obj) {
+                        return !(obj.id in bIds);
+                    });
+
+
+                    $scope.selectedKitchens.forEach(function (obj) {
+                        $scope.kitchens.push(obj);
+                    });
+
+                    $scope.selectedKitchens = [];
+                    $scope.changeKitchen();
+                    toastr.success(response.data.message);
+                }
+                else {
+                    toastr.error(response.data.error, 'Error');
+                }
+            }, function (error) {
+                $scope.errorMessages(error.data);
+            });
+        };
+
         $scope.changedZip = 0;
 
         $scope.changeZip = function () {
@@ -127,79 +236,123 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel', '$w
                 $scope.changedZip = 0;
             else
                 $scope.changedZip = 1;
-        }
+        };
+
+        $scope.changedKitchen = 0;
+
+        $scope.changeKitchen = function () {
+            if ($scope.changedKitchen)
+                $scope.changedKitchen = 0;
+            else
+                $scope.changedKitchen = 1;
+        };
 
         $scope.addZipToSelect = function ($item, $model) {
             $scope.selectedZipCodes.push($model);
-        }
+        };
 
         $scope.removeZipFromSelect = function ($item, $model) {
             var removed = $scope.selectedZipCodes.find(function (zip) {
                 return zip.id == $model.id;
             }, $model);
             $scope.selectedZipCodes.splice($scope.selectedZipCodes.indexOf(removed), 1);
-        }
+        };
+
+        $scope.addKitchenToSelect = function ($item, $model) {
+            $scope.selectedKitchens.push($model);
+
+        };
+
+        $scope.removeKitchenFromSelect = function ($item, $model) {
+            var removed = $scope.selectedKitchens.find(function (kitchen) {
+                return kitchen.id == $model.id;
+            }, $model);
+            $scope.selectedKitchens.splice($scope.selectedKitchens.indexOf(removed), 1);
+        };
 
 
-        $scope.$watchGroup(['currentZipsPage', 'changedZip'], function (newValues, oldValues, scope) {
+        $scope.$watchGroup(['currentZipsPage', 'changedZip','currentKitchensPage', 'changedKitchen'], function (newValues, oldValues, scope) {
 
             var last_changed;
-            if (newValues[0] != oldValues[0])
-                last_changed = 'currentZipsPage';
-            if (newValues[1] != oldValues[1])
+            if (newValues[0] != oldValues[0] || newValues[1] != oldValues[1])
                 last_changed = 'changedZip';
+            
+            if (newValues[2] != oldValues[2] || newValues[3] != oldValues[3])
+                last_changed = 'changedKitchens';
 
             if (angular.isDefined(last_changed)) {
-                if (last_changed == 'currentZipsPage' || last_changed == 'changedZip') {
+                if (last_changed == 'changedZip') {
                     var begin = (($scope.currentZipsPage - 1) * $scope.numPerPageForZips), end = begin + $scope.numPerPageForZips;
                     $scope.filteredZips = $scope.caterer_zips.slice(begin, end);
+                }  
+                
+                if (last_changed == 'changedKitchens') {
+                    console.log(123);
+                    var begin = (($scope.currentKitchensPage - 1) * $scope.numPerPageForKitchens), end = begin + $scope.numPerPageForKitchens;
+                    $scope.filteredKitchens = $scope.kitchens.slice(begin, end);
                 }
             }
 
 
         });
 
-
-        $scope.showEditCookingTime = function (group, time) {
-
-            $scope.editCooking = {group: group, time: time};
-            ModalService.showModal({
-                templateUrl: "/templates/caterer/account/modals/cooking_time.blade.php",
-                controller: "CatererProfileController",
-                scope: $scope
-            }).then(function (modal) {
-                modal.element.modal();
-                console.log(22);
-                modal.close.then(function (result) {
-                    console.log(12)
-
-                    // $scope.yesNoResult = result ? "You said Yes" : "You said No";
-                });
-                console.log(33);
+        $scope.animationsEnabled = true;
+        $scope.open = function (size,group,value) {
+            console.log(123);
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalContent.html',
+                controller: 'CookingTimeModalInstanceCtrl',
+                size: size,
+                resolve: {
+                data: function () {
+                    var data = {
+                        group:group,
+                        time:value
+                    };
+                        return data;
+                    }
+                }
             });
 
+            modalInstance.result.then(function (edit) {
+                CatererAccountModel.editCookingTime(edit).then(function (response) {
+                        if (response.data.success) {
+                            $scope.cooking_time[edit.group] = edit.time;
+                            toastr.success(response.data.message);
+                        }
+                        else {
+                            toastr.error(responce.data.error, 'Error');
+                        }
+                    },
+                    function (error) {
+                        $scope.errorMessages(error.data);
+                    });
+                
+            }, function () {
+               console.log('Modal dismissed at: ' + new Date());
+            });
         };
 
-        $scope.myclose = function (result) {
-            if (result) {
-                CatererAccountModel.editCookingTime($scope.editCooking).then(function (response) {
-                    if (response.data.success) {
-                        var group = $scope.editCooking.group;
-                        $scope.cooking_time[group] = parseInt($scope.editCooking.time);
-                        console.log( $scope.cooking_time);
+        $scope.changePasswordData = {
+            old_password:"",
+            password:"",
+            password_confirmation:"",
+        };
+        $scope.changePassword = function () {
+            console.log($scope.changePasswordData);
+            CatererAccountModel.changePassword($scope.changePasswordData).then(
+                function (response) {
+                    if (response.data.success)
                         toastr.success(response.data.message);
-                    }
-                    else {
+                    else
                         toastr.error(response.data.error, 'Error');
-                    }
-                }, function (error) {
+                },
+
+                function (error) {
                     $scope.errorMessages(error.data);
-                });
-            }
-            close(result, 500); // close, but give 500ms for bootstrap to animate
-        };
-
-
-
+                }
+            );
+        }
 
     }]);

@@ -3,16 +3,16 @@
     <form href="#" method="post" class='form-horizontal' id="updateDeliveryArea">
         <label for="zip_codes" class="title fmlbold fz17">Zip Codes</label>
 
-        <ui-select multiple ng-model="selectedZipCodes" class="selectpicker form-control"
-                   id="zip_codes" name="zip_codes"
-                   on-remove="removeZipFromSelect($item, $model)" on-select="addZipToSelect($item, $model)">
-            <ui-select-match placeholder="Select zip codes"><% $item.name %></ui-select-match>
+        <ui-select searchEnabled="false" multiple ng-model="selectedZipCodes" class="selectpicker form-control" on-remove="removeZipFromSelect($item, $model)" on-select="addZipToSelect($item, $model)">
+            <ui-select-match placeholder="Select zip codes" allow-clear="true"><% $item.name %></ui-select-match>
             <ui-select-choices repeat="zip in zip_codes track by zip.id">
                 <% zip.name %>
             </ui-select-choices>
         </ui-select>
+        <div class="delivery-area-btn">
         <div class="save-btn">
             <input type="submit" class="fmlreg fz25" ng-click="addDeliveryArea()" value="Add"/>
+        </div>
         </div>
     </form>
 

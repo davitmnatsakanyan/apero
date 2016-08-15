@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "52eaf96205b031c9f831d8f08588c4d0",
-    "content-hash": "648c70524a39e9dd1cd30c183882e495",
+    "hash": "238bd31a179282d57afee4293b82f983",
+    "content-hash": "15b1d50155675bdb4bf1d0200fc2d419",
     "packages": [
         {
             "name": "anouar/paypalpayment",
@@ -695,6 +695,58 @@
             "time": "2015-12-07 04:07:13"
         },
         {
+            "name": "flowjs/flow-php-server",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flowjs/flow-php-server.git",
+                "reference": "b9da1145d7a46c90ebf8f673af02b0dcdfe31db9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flowjs/flow-php-server/zipball/b9da1145d7a46c90ebf8f673af02b0dcdfe31db9",
+                "reference": "b9da1145d7a46c90ebf8f673af02b0dcdfe31db9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "dev-master",
+                "league/phpunit-coverage-listener": "~1.1",
+                "mikey179/vfsstream": "v1.2.0",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Flow": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aidas Klimas",
+                    "email": "aidaskk@gmail.com"
+                }
+            ],
+            "description": "PHP library for handling chunk uploads. Works with flow.js html5 file uploads.",
+            "keywords": [
+                "chunks",
+                "file upload",
+                "flow",
+                "flow.js",
+                "html5 file upload",
+                "resumable",
+                "resumable.js",
+                "upload"
+            ],
+            "time": "2016-07-13 07:28:23"
+        },
+        {
             "name": "guzzle/guzzle",
             "version": "v3.8.1",
             "source": {
@@ -1270,16 +1322,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.42",
+            "version": "v5.2.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d1bf46f359d2ede2d4ef847fb79d3758d868f2b7"
+                "reference": "5490b8f00564bb60839002f86828e27edd1e5610"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d1bf46f359d2ede2d4ef847fb79d3758d868f2b7",
-                "reference": "d1bf46f359d2ede2d4ef847fb79d3758d868f2b7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5490b8f00564bb60839002f86828e27edd1e5610",
+                "reference": "5490b8f00564bb60839002f86828e27edd1e5610",
                 "shasum": ""
             },
             "require": {
@@ -1396,7 +1448,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-08-08 13:39:44"
+            "time": "2016-08-10 12:23:59"
         },
         {
             "name": "laravel/socialite",
@@ -1508,16 +1560,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.26",
+            "version": "1.0.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0"
+                "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/fb3b30dca320b36931ea878fea17ebe136fba1b0",
-                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
+                "reference": "50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
                 "shasum": ""
             },
             "require": {
@@ -1587,7 +1639,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-08-03 09:49:11"
+            "time": "2016-08-10 08:55:11"
         },
         {
             "name": "league/oauth1-client",
@@ -3175,6 +3227,58 @@
                 "environment"
             ],
             "time": "2016-06-14 14:14:52"
+        },
+        {
+            "name": "webpatser/laravel-countries",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webpatser/laravel-countries.git",
+                "reference": "2a310c0ff1b112d3710223d3bd51e8a30c5a304d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webpatser/laravel-countries/zipball/2a310c0ff1b112d3710223d3bd51e8a30c5a304d",
+                "reference": "2a310c0ff1b112d3710223d3bd51e8a30c5a304d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "laravel-library",
+            "autoload": {
+                "psr-0": {
+                    "Webpatser\\Countries": "src/"
+                },
+                "classmap": [
+                    "src/commands"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Kempen",
+                    "email": "christoph@downsized.nl",
+                    "homepage": "http://downsized.nl/",
+                    "role": "developer"
+                },
+                {
+                    "name": "Paul Kievits",
+                    "role": "developer"
+                }
+            ],
+            "description": "Laravel Countries is a bundle for Laravel, providing Almost ISO 3166_2, 3166_3, currency, Capital and more for all countries.",
+            "homepage": "https://github.com/webpatser/laravel-countries",
+            "keywords": [
+                "countries",
+                "iso_3166_2",
+                "iso_3166_3",
+                "laravel"
+            ],
+            "time": "2016-02-25 10:29:59"
         }
     ],
     "packages-dev": [
@@ -4552,7 +4656,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "webpatser/laravel-countries": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
