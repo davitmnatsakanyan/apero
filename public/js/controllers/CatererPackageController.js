@@ -293,7 +293,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
 
             ],
             function (newValues, oldValues, scope) {
-                console.log(newValues);
                 var last_changed,last_changed1;
                 if (newValues[0] != oldValues[0] || newValues[1] != oldValues[1])
                     last_changed = 'packagePage';
@@ -315,14 +314,12 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                         console.log(123);
                         var begin = (($scope.currentPackageProductsPage - 1) * $scope.numPerPageForPackageProducts), end = begin + $scope.numPerPageForPackageProducts;
                         $scope.filteredPackageProducts = $scope.package.products.slice(begin, end);
-                        // $scope.filteredPackageProducts = $scope.package.products.slice(begin, end);
                         console.log($scope.package.products);
                         console.log($scope.filteredPackageProducts);
                     }
 
                     if (last_changed == 'changeSelected') {
-                        console.log(12)
-
+                        console.log(12);
                         var begin = (($scope.currentSelectedProductsPage - 1) * $scope.numPerPageForSelected), end = begin + $scope.numPerPageForSelected;
                         $scope.filteredSelectedProducts = $scope.selectedProducts.slice(begin, end);
                     }

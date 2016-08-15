@@ -15,7 +15,7 @@
                         <div data-ng-controller="EditProductController">
                             <div class="col-sm-7 col-md-8">
                                 <div>
-                                    <uib-tabset active="activeJustified" justified="true">
+                                    <uib-tabset active="activeJustified"  class="profile-tab" justified="true">
                                         <uib-tab index="0" heading="Common information">
                                             <div ng-include='"templates/caterer/product/single/items/editCommonInformation.blade.php"'></div>
                                         </uib-tab>

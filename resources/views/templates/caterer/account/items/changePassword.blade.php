@@ -1,5 +1,5 @@
 
-<form method="post" id="changePassword">
+<form method="post" id="changePassword" class = "change-form">
 
     <div class="info-box">
         <label for="old_password" class="title fmlbold fz17 lable-width">Old Password</label>

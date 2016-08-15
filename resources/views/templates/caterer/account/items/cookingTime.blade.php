@@ -1,5 +1,5 @@
 <div ng-controller="CatererProfileController">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover cooking-time">
         <tbody>
         <tr>
             <th>Persons count</th>

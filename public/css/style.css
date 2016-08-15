@@ -744,6 +744,25 @@ a {
     color: #646262
 }
 
+
+.cooking-time{
+    margin-top: 20px;
+}
+
+.change-form{
+    margin-top: 20px;
+}
+.kitchens-td{
+    width: 7%;
+}
+.kitchens-number{
+    width: 7%;
+    text-align: center;
+}
+
+.kitchen-add .save-btn{
+    margin-top: 8px;
+}
 .profile-tab .nav-tabs.nav-justified > li > a {
     border-bottom: transparent;
 }
@@ -1507,7 +1526,9 @@ img {
     position: relative;
     cursor: pointer;
 }
-
+.kitchen-tab{
+    padding-bottom: 29px;
+}
 .cater-btn a:hover .cater-btn-txt, .cater-btn a.active .cater-btn-txt {
     color: #fff;
     cursor: pointer;
@@ -1517,6 +1538,9 @@ img {
     content: url("../images/pencil-icon-white.png");
 }
 
+.ctbtn10{
+
+}
 .ctbtn2 a:hover:before {
     content: url("../images/card-icon-white.png");
 }
@@ -1634,7 +1658,9 @@ form {
     text-align: center;
     line-height: 58px;
 }
-
+.products-icon{
+    margin-top: 30px;
+}
 .product-btn input {
     margin-top: 60px;
     float: right;
@@ -1693,6 +1719,11 @@ form {
 
 .fz14 {
     font-size: 14px;
+}
+
+
+.fz15 {
+    font-size: 15px;
 }
 
 .fz16 {
@@ -1898,7 +1929,7 @@ a {
 }
 
 .product-icons {
-    margin-top: 38px;
+    margin-top: 30px;
 }
 
 .product-txt .text {

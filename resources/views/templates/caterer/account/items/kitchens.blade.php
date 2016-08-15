@@ -8,18 +8,20 @@
                 <% kitchen.name %>
             </ui-select-choices>
         </ui-select>
+        <div class="kitchen-add">
         <div class="save-btn">
             <input type="submit" class="fmlreg fz25" ng-click="addKitchens()" value="Add"/>
         </div>
+            </div>
     </form>
 
     <h2>Kitchens</h2>
     <table class="table table-bordered table-striped table-hover">
         <tbody>
         <tr ng-repeat="kitchen in filteredKitchens">
-            <th><% (currentKitchensPage-1)*numPerPageForKitchens+$index+1 %></th>
+            <th class="kitchens-number"><% (currentKitchensPage-1)*numPerPageForKitchens+$index+1 %></th>
             <th ng-model="kitchen"><% kitchen.name %></th>
-            <td>
+            <td class="kitchens-td">
                 <button class="btn btn-danger btn-xs" title="Remove from kitchens"
                         ng-click="removeKitchen(kitchen.id)">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"/>

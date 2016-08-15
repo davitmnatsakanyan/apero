@@ -24,26 +24,26 @@
                                                     <div class="profil-form fl">
                                                         <div class="info-box">
                                                             <label for="company"
-                                                                   class="title fmlbold fz17">Company</label>
+                                                                   class="title fmlbold fz15">Company</label>
                                                             <input type="text" class="text fmlreg fz13" id="company"
                                                                    ng-model="caterer.company"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
                                                             <label for="address"
-                                                                   class="title fmlbold fz17">Address</label>
+                                                                   class="title fmlbold fz15">Address</label>
                                                             <input type="text" class="text fmlreg fz13" id="address"
                                                                    ng-model="caterer.address"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
-                                                            <label for="pobox" class="title fmlbold fz17">Pobox</label>
+                                                            <label for="pobox" class="title fmlbold fz15">Pobox</label>
                                                             <input type="text" class="text fmlreg fz13" id="pobox"
                                                                    ng-model="caterer.pobox"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
-                                                            <label for="zip" class="title fmlbold fz17">Zip</label>
+                                                            <label for="zip" class="title fmlbold fz15">Zip</label>
 
                                                             <ui-select ng-model="selectedZip" class="fmlreg fz13"
                                                                        on-select="selectZip($select.selected, $model)">
@@ -62,10 +62,10 @@
 
 
                                                             <div class="col-sm-6 no-padding">
-                                                                <label for="products_origin" class="title fmlbold fz17">Products
+                                                                <label for="products_origin" class="title fmlbold fz15">Products
                                                                     Origin</label></div>
                                                             <div class="col-sm-6 no-padding ml9">
-                                                                <textarea rows="4" cols="50"
+                                                                <textarea rows="3" cols="50"
                                                                           ng-model="caterer.products_origin"
                                                                           class="text fmlreg fz13"></textarea>
                                                             </div>
@@ -78,28 +78,28 @@
                                                     <div class="profil-form fl">
                                                         <div class="info-box">
                                                             <label for="city"
-                                                                   class="title fmlbold fz17">City</label>
+                                                                   class="title fmlbold fz15">City</label>
                                                             <input type="text" class="text fmlreg fz13" id="city"
                                                                    ng-model="caterer.city"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
                                                             <label for="phone"
-                                                                   class="title fmlbold fz17">Phone</label>
+                                                                   class="title fmlbold fz15">Phone</label>
                                                             <input type="text" class="text fmlreg fz13" id="phone"
                                                                    ng-model="caterer.phone"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
                                                             <label for="email"
-                                                                   class="title fmlbold fz17">E-mail</label>
+                                                                   class="title fmlbold fz15">E-mail</label>
                                                             <input type="email" class="text fmlreg fz13" id="email"
                                                                    ng-model="caterer.email"/>
                                                         </div><!--end-->
 
                                                         <div class="info-box">
                                                             <label for="country"
-                                                                   class="title fmlbold fz17">Country</label>
+                                                                   class="title fmlbold fz15">Country</label>
                                                             <ui-select ng-model="selectedCountry"
                                                                        class="fmlreg fz13"
                                                                        on-select="selectCountry($select.selected, $model)">
@@ -115,10 +115,10 @@
 
                                                         <div class="info-box">
                                                             <div class="col-sm-6 no-padding">
-                                                            <label for="description" class="title fmlbold fz17">Description</label>
+                                                            <label for="description" class="title fmlbold fz15">Description</label>
                                                               </div>
                                                             <div class="col-sm-6 no-padding ml9">
-                                                                <textarea rows="4" cols="50"
+                                                                <textarea rows="3" cols="50"
                                                                           ng-model="caterer.description"
                                                                           class="text fmlreg fz13"></textarea>
                                                                 </div>
@@ -148,19 +148,19 @@
                                         <form action="#" method="post">
                                             <div class="profil-form fl">
                                                 <div class="info-box">
-                                                    <label for="cp_title" class="title fmlbold fz17">Title</label>
+                                                    <label for="cp_title" class="title fmlbold fz15">Title</label>
                                                     <input type="text" class="text fmlreg fz13" id="cp_title"
                                                            ng-model="contact_person.title"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="cp_prename" class="title fmlbold fz17">Prename</label>
+                                                    <label for="cp_prename" class="title fmlbold fz15">Prename</label>
                                                     <input type="text" class="text fmlreg fz13" id="cp_prename"
                                                            ng-model="contact_person.prename"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="cp_name" class="title fmlbold fz17">Name</label>
+                                                    <label for="cp_name" class="title fmlbold fz15">Name</label>
                                                     <input type="text" class="text fmlreg fz13" id="cp_name"
                                                            ng-model="contact_person.name"/>
                                                 </div><!--end-->
@@ -169,19 +169,19 @@
 
                                             <div class="profil-form fl">
                                                 <div class="info-box">
-                                                    <label for="cp_mobile" class="title fmlbold fz17">Mobil</label>
+                                                    <label for="cp_mobile" class="title fmlbold fz15">Mobil</label>
                                                     <input type="text" class="text fmlreg fz13" id="cp_mobile"
                                                            ng-model="contact_person.mobile"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="cp_phone" class="title fmlbold fz17">Phone</label>
+                                                    <label for="cp_phone" class="title fmlbold fz15">Phone</label>
                                                     <input type="text" class="text fmlreg fz13" id="cp_phone"
                                                            ng-model="contact_person.phone"/>
                                                 </div><!--end-->
 
                                                 <div class="info-box">
-                                                    <label for="cp_email" class="title fmlbold fz17">E-mail</label>
+                                                    <label for="cp_email" class="title fmlbold fz15">E-mail</label>
                                                     <input type="email" class="text fmlreg fz13" id="cp_email"
                                                            ng-model="contact_person.email"/>
                                                 </div><!--end-->
@@ -200,7 +200,7 @@
                                     <uib-tab index="2" heading="Delivery Area">
                                         <div ng-include='"templates/caterer/account/items/deliveryArea.blade.php"'></div>
                                     </uib-tab>
-                                    <uib-tab index="3" heading="Kitchens">
+                                    <uib-tab index="3" heading="Kitchens" class="kitchen-tab">
                                         <div ng-include='"templates/caterer/account/items/kitchens.blade.php"'></div>
                                     </uib-tab>
                                     </uib-tab>

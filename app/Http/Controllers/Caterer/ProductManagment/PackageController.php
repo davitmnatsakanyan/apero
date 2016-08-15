@@ -29,7 +29,8 @@ class PackageController extends CatererBaseController
             return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
 
         $package = Package::with('products')->findOrFail($package_id);
-        $package->products = $this->getSubproducts($package->products);
+        if (count($package->products) > 0)
+            $package->products = $this->getSubproducts($package->products);
         return response()->json(['success' => 1, 'package' => $package]);
     }
 
@@ -150,21 +151,22 @@ class PackageController extends CatererBaseController
 
     public function edit($id)
     {
-        $package  = Package::with('products')->findOrFail($id);
+        $package = Package::with('products')->findOrFail($id);
         foreach ($package->products as $key => $product) {
             if ($product->pivot->subproduct_id !== 0)
                 $package->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);
         }
         $package_products = $package->products;
-        $products = Product::with('subproducts') ->get();
-        $filtered = $products -> filter(function($product)  use ($package_products){
-            foreach($package_products as $package_product) {;
+        $products = Product::with('subproducts')->get();
+        $filtered = $products->filter(function ($product) use ($package_products) {
+            foreach ($package_products as $package_product) {
+                ;
                 if ($package_product->id == $product->id)
                     return false;
             }
             return true;
-        } );
-        return response()->json([ 'addingProducts' =>  $filtered->toArray()]);
+        });
+        return response()->json(['addingProducts' => $filtered->toArray()]);
     }
 
 
