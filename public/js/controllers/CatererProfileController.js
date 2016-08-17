@@ -133,10 +133,7 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
 
         $scope.removeDeliveryArea = function (zip_id) {
             CatererAccountModel.removeDeliveryArea(zip_id).then(function (response) {
-
-
                 if (response.data.success) {
-
                     var removed = $scope.caterer_zips.find(function (zip) {
                         return zip.id == zip_id;
                     }, zip_id);
@@ -144,9 +141,7 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
                     $scope.caterer_zips.splice($scope.caterer_zips.indexOf(removed), 1);
                     $scope.zip_codes.push({id: removed.id, name: removed.name});
                     $scope.changeZip();
-                    console.log(response.data.success);
-console.log(toastr);
-                    //toastr.success(response.data.message);
+                    toastr.success(response.data.message);
                 }
                 else {
                     toastr.error(response.data.error, 'Error');
@@ -168,7 +163,6 @@ console.log(toastr);
                         return !(obj.id in bIds);
                     });
 
-                    console.log($scope.zip_codes);
 
                     $scope.selectedZipCodes.forEach(function (obj) {
                         $scope.caterer_zips.push(obj);
@@ -209,7 +203,6 @@ console.log(toastr);
         };
 
         $scope.addKitchens = function () {
-            // console.log($scope.selectedKitchens);
             CatererAccountModel.addKitchen($scope.selectedKitchens).then(function (response) {
                 if (response.data.success) {
                     var bIds = {};
@@ -282,21 +275,20 @@ console.log(toastr);
 
         $scope.$watchGroup(['currentZipsPage', 'changedZip','currentKitchensPage', 'changedKitchen'], function (newValues, oldValues, scope) {
 
-            var last_changed;
+            var last_changed,last_changed1;
             if (newValues[0] != oldValues[0] || newValues[1] != oldValues[1])
-                last_changed = 'changedZip';
+                last_changed1 = 'changedZip';
             
             if (newValues[2] != oldValues[2] || newValues[3] != oldValues[3])
                 last_changed = 'changedKitchens';
 
-            if (angular.isDefined(last_changed)) {
-                if (last_changed == 'changedZip') {
+            if (angular.isDefined(last_changed) || angular.isDefined(last_changed1)) {
+                if (last_changed1 == 'changedZip') {
                     var begin = (($scope.currentZipsPage - 1) * $scope.numPerPageForZips), end = begin + $scope.numPerPageForZips;
                     $scope.filteredZips = $scope.caterer_zips.slice(begin, end);
                 }  
                 
                 if (last_changed == 'changedKitchens') {
-                    console.log(123);
                     var begin = (($scope.currentKitchensPage - 1) * $scope.numPerPageForKitchens), end = begin + $scope.numPerPageForKitchens;
                     $scope.filteredKitchens = $scope.kitchens.slice(begin, end);
                 }
@@ -307,7 +299,6 @@ console.log(toastr);
 
         $scope.animationsEnabled = true;
         $scope.open = function (size,group,value) {
-            console.log(123);
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'myModalContent.html',
@@ -349,7 +340,6 @@ console.log(toastr);
             password_confirmation:"",
         };
         $scope.changePassword = function () {
-            console.log($scope.changePasswordData);
             CatererAccountModel.changePassword($scope.changePasswordData).then(
                 function (response) {
                     if (response.data.success)

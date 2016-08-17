@@ -1,9 +1,9 @@
 <h1> <% package.name %></h1>
 <div class="table-responsive">
-    <div class="cater-pic caterer-pic-width" ng-hide="$flow.files.length">
+    <div class="caterer-pic-width" ng-hide="$flow.files.length">
         <img class="ithumbnail"  src="images/packages/<% package.avatar %>" , alt="Mountain View" />
     </div>
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover mt20">
         <tbody>
         <tr>
             <th>ID</th>

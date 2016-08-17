@@ -1,7 +1,7 @@
 <div ng-controller="CatererPackageController" >
         <label for="products" class="title fmlbold fz17">Select Products</label>
-        <ui-select multiple ng-model="selectedProductsI.selected" class="selectpicker form-control"
-                   on-remove="removeProduct($item, $model)" on-select="addProduct($item, $model)">
+        <ui-select multiple ng-model="selectedProducts.selected" class="selectpicker form-control"
+                   title="Choose a product" on-remove="removeProduct($item, $model)" on-select="addProduct($item, $model)">
             <ui-select-match placeholder="Select products"><% $item.name %></ui-select-match>
             <ui-select-choices repeat="product in addingProducts track by product.id">
                 <% product.name %>
@@ -9,7 +9,7 @@
         </ui-select>
         <form id="addProduct">
         <div data-ng-repeat="selectedProduct in filteredSelectedProducts track by $index" class="info-box">
-            <label class="title fmlbold fz17"><% selectedProduct.name %></label>
+            <label class="title fmlbold fz15 add-product-label packages-label"><% selectedProduct.name %></label>
             <input type="number" class="text fmlreg fz13" name="products[]" ng-model="selectedProduct.product_count" value="selectedProduct.product_count">
         </div>
         </form>
@@ -31,8 +31,3 @@
 <div class="save-btn">
     <input form="addProduct" type="submit" value="Save" class="fmlreg fz25" ng-click="addProductsToPackage()" ng-if="location=='edit'"/>
 </div>
-<div ng-repeat="add in addingProducts">
-    <% add %>
-    ________________________________________
-</div>
-{{--<button type="submit" form="addProduct" ng-click="addProductsToPackage()" ng-if="location=='edit'">Add</button>--}}

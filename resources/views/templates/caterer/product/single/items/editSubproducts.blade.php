@@ -1,6 +1,6 @@
 <div ng-controller="EditProductController">
     <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table table-bordered table-striped table-hover mt20">
             <thead>
             <tr>
                 <th>S.No</th>

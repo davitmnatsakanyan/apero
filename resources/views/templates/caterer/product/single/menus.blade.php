@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xs-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello “Catering - Company”</p>
+                        <p>Hello <% caterer.company %></p>
                     </div>
                 </div>
                 <div class="col-xs-12  ">
@@ -18,9 +18,9 @@
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company">
                                 <div data-ng-controller="CatererProductsController">
-
+                                    <div class="bestellen1">
                                     <a  class="add-button" href="#/caterer/product/add">Add product</a>
-
+</div>
                                     <div ng-repeat="menu in filteredMenus">
                                         <div class="adress fl">
                                             <div class="numb1">

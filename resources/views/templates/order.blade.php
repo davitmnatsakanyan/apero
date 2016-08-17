@@ -74,57 +74,59 @@
 							<div class="adresse-col">
 
 								<form class="form-inline">
-									<div class="form-group">
-										<label for="">Company</label>
-										<input type="text"  class="form-control"  placeholder="company" ng-model="company" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label" class="order-page-label" class="pr8">Company</label>
+										<input type="text"  class="form-control order-input"  placeholder="company" ng-model="company" required>
 									</div>
-									<div class="form-group">
-										<label for="">Country</label>
-										<ui-select ng-model="delivery_country" class="selectpicker form-control" on-select = "selectCountry($select.selected, $model)">
-											<ui-select-match placeholder="Select Country"><% $select.selected.name %></ui-select-match>
-											<ui-select-choices repeat="country in countries track by country.id">
-												<% country.name %>
-											</ui-select-choices>
-										</ui-select>
+									<div class="form-group order-block1 ">
+										<label for="" class="order-page-label">Country</label>
+										<span class="order-blade-select">
+											<ui-select ng-model="country" class="selectpicker form-control" on-select = "selectCountry($select.selected, $model)">
+												<ui-select-match placeholder="Select Country" class="order-blade-select1"><% $select.selected.name %></ui-select-match>
+												<ui-select-choices repeat="country in countries track by country.id">
+													<% country.name %>
+												</ui-select-choices>
+											</ui-select>
+										</span>
 									</div>
-									<div class="form-group">
-										<label for="">City</label>
-										<input type="text"  class="form-control"  placeholder="city" ng-model="city" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label">City</label>
+										<input type="text"  class="form-control order-input"  placeholder="city" ng-model="city" required>
 									</div>
-									<div class="form-group">
-										<label for="">address</label>
-										<input type="text"  class="form-control"  placeholder="" ng-model="address" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label">address</label>
+										<input type="text"  class="form-control order-input"  placeholder="address" ng-model="address" required>
 									</div>
-									<div class="form-group">
-										<label for="">PLZ</label>
+									<div class="form-group ">
+										<label for="" class="order-page-label">PLZ</label>
 										{{--<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>--}}
 										<ui-select ng-model="delivery_zip" class="selectpicker form-control" on-select = "selectZip($select.selected, $model)">
-											<ui-select-match placeholder="Select zip codes"><% $select.selected.name %></ui-select-match>
+											<ui-select-match placeholder="Select zip codes" class="order-blade-select1"><% $select.selected.name %></ui-select-match>
 											<ui-select-choices repeat="zip in zips track by zip.id">
 												<% zip.name %>
 											</ui-select-choices>
 										</ui-select>
 									</div>
-									<div class="form-group">
-										<label for="">ort</label>
-										<input type="text"  class="form-control"  placeholder="ort" ng-model="home" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label">ort</label>
+										<input type="text"  class="form-control order-input"  placeholder="ort" ng-model="home" required>
 									</div>
-									<div class="form-group">
-										<label for="">email</label>
-										<input type="email"  class="form-control"  placeholder="email" ng-model="email" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label">email</label>
+										<input type="email"  class="form-control order-input"  placeholder="email" ng-model="email" required>
 									</div>
-									<div class="form-group">
-										<label for="">mobile</label>
-										<input type="text"  class="form-control"  placeholder="mobile" ng-model="mobile" required>
+									<div class="form-group ">
+										<label for="" class="order-page-label">mobile</label>
+										<input type="text"  class="form-control order-input"  placeholder="mobile" ng-model="mobile" required>
 									</div>
 									<div class="form-group last">
-										<label for="">phone</label>
-										<input type="text"  class="form-control"  placeholder="phone" ng-model="phone" required>
+										<label for="" class="order-page-label">phone</label>
+										<input type="text"  class="form-control order-input"  placeholder="phone" ng-model="phone" required>
 									</div>
 
 									<div ng-init="is_different = false" ng-show="is_different" class="form-group billing_address">
-										<label for="">address</label>
-										<input type="text"  class="form-control"  placeholder="address" ng-model="billing_address" required>
+										<label for="" class="order-page-label">address</label>
+										<input type="text"  class="form-control order-input"  placeholder="address" ng-model="billing_address" required>
 									</div>
 
 
@@ -218,7 +220,10 @@
 									  <textarea class="" rows="4" id="comment" ng-model="comment"></textarea>
 									</div>
 									<label class="checkbox-inline"><input type="checkbox" ng-init="is_accepted = false" ng-model="is_accepted" >Ich Akzeptiere die  AGB</label>
+									<div class="bestellen1">
 									<a ng-click="submitOrder(payment)">Bestellen</a>
+									</div>
+
 								</div>
 							</div>
 

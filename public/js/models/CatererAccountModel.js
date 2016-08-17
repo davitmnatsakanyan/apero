@@ -194,6 +194,13 @@ app.factory('CatererAccountModel', ['$http', function ($http) {
                 method :"get",
                 url : "caterer/product/package/delete/" + package_id
             });
+        },
+
+        getAllCountries: function(){
+            return $http({
+                method :"get",
+                url : "order/getAllCountries",
+            });
         }
 
     };

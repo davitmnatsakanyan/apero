@@ -9,8 +9,11 @@ use App\Models\Caterer;
 use App\Models\CatererDeliveryArea;
 use App\Models\ContactPerson;
 use App\Models\DeliveryArea;
+use App\Models\Product;
 use App\Models\CookingTime;
 use App\Models\ZipCode;
+use App\Models\PackageProduct;
+use App\Models\OrderProduct;
 use App\Models\CatererKitchen;
 use Validator, Image, Hash;
 use Flow\Config;
@@ -121,11 +124,27 @@ class SettingsController extends CatererBaseController
     public function removeKitchen($id)
     {
         if (CatererKitchen::where(['caterer_id' => $this->caterer->id(), 'kitchen_id' => $id])->delete()) {
-            Product::where(['caterer_id' => $this->caterer->id(), 'kitchen_id' => $id])->forceDelete();
+            $products = Product::where(['caterer_id' => $this->caterer->id(), 'kitchen_id' => $id])->get();
+
+            foreach($products as $product)
+                $this->deleteProduct($product->id);
             return response()->json(['success' => 1, 'message' => 'Kitchen successfully deleted.']);
         }
         return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
     }
+
+    public function deleteProduct($id)
+    {
+        $product = Product::withTrashed()->where('id', $id)->get();
+        PackageProduct::where('product_id',$id)->delete();
+        OrderProduct::where('product_id',$id)->delete();
+        $avatar = $product[0]->avatar;
+        if($avatar != "")
+            if (file_exists('images/products/' . $avatar))
+                unlink('images/products/' . $avatar);
+        Product::withTrashed()->where('id', $id)->forceDelete();
+    }
+
 
 
     public function removeDeliveryArea($id)

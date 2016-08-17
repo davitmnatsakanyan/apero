@@ -5,23 +5,25 @@
             <div class="row">
                 <div class="col-sm-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello <% caterer.name %></p>
+                        <p>Hello <% caterer.company %></p>
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row no-margin">
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererProductsController">
                             <div class="col-sm-7 col-md-8">
-                                <a  class="add-button" href="#/caterer/product/add">Add product</a>
+                                <div class="bestellen1">
+                                    <a  class="add-button" href="#/caterer/product/add">Add product</a>
+                                </div>
                                 <div class="main-product-box" data-ng-repeat="product in filteredProducts">
-                                    <div>
-                                        <img class="product-list-img" src="images/products/<% product.avatar %>" , alt="Mountain View"/>
+                                    <div class="product-pic">
+                                        <img class="product-list-img" ng-src="images/products/<% product.avatar %>" , alt="Mountain View"/>
                                     </div>
                                     {{--<div class="main-product fl"></div>--}}
-                                    <div class="product-txt fl">
-                                        <p class="fmlreg fz20 cg1 title">
+                                    <div class="product-txt fl product-list1">
+                                        <p class="fmlreg fz20 cg1 title" >
                                             <% product.name %>
                                         </p>
                                         <p class="fmlreg fz13 text">

@@ -1,5 +1,5 @@
 <div ng-if="addingProduct.customize.length==0">
-    <button ng-click="customize()" class="add-button">Customize</button>
+    <button ng-click="customize()" class="add-button add2">Customize</button>
 </div>
 <form id="addProduct">
     <div class="profil-form fl">
@@ -15,19 +15,19 @@
         </div>
 
         <div class="info-box">
-            <label for="company" class="title fmlbold fz17">Name</label>
+            <label for="company" class="title fmlbold fz15">Name</label>
             <input type="text" class="text fmlreg fz13" id="name" ng-model="addingProduct.name"/>
         </div><!--end-->
 
         <div class="info-box" ng-if="addingProduct.customize.length==0">
-            <label for="city" class="title fmlbold fz17">Price</label>
+            <label for="city" class="title fmlbold fz15">Price</label>
             <input type="text" class="text fmlreg fz13" id="ingredients" ng-model="addingProduct.price"/>
         </div><!--end-->
 
     </div>
     <div class="profil-form fl">
         <div class="info-box">
-            <label class="title fmlbold fz17">Menu</label>
+            <label class="title fmlbold fz15">Menu</label>
             <ui-select ng-model="addingProduct.menu" class="fmlreg fz13"
                        >
                 <ui-select-match placeholder="Select menu" class="select-zip"><% $select.selected.name %></ui-select-match>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="info-box">
-            <label for="city" class="title fmlbold fz17">Ingredients</label>
+            <label for="city" class="title fmlbold fz15">Ingredients</label>
             <input type="textarea" class="text fmlreg fz13" id="ingredients" ng-model="addingProduct.ingredients"/>
         </div><!--end-->
     </div>

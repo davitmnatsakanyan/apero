@@ -26,18 +26,18 @@
                                 <form method="post" id="changePassword">
 
                                         <div class="info-box">
-                                            <label for="old_password" class="title fmlbold fz17 lable-width">Old Password</label>
+                                            <label for="old_password" class="title fmlbold fz17 lable-width add-product-label">Old Password</label>
                                             <input type="password" class="text fmlreg fz13 input-width" id="old_password"
                                                    ng-model="data.old_password"/>
                                         </div><!--end-->
 
                                         <div class="info-box">
-                                            <label for="password" class="title fmlbold fz17 lable-width">New password</label>
+                                            <label for="password" class="title fmlbold fz17 lable-width add-product-label">New password</label>
                                             <input type="password" class="text fmlreg fz13 input-width" id="password" ng-model="data.password"/>
                                         </div><!--end-->
 
                                         <div class="info-box">
-                                            <label for="confirm_password" class="title fmlbold fz17 lable-width">Confirm password</label>
+                                            <label for="confirm_password" class="title fmlbold fz17 lable-width add-product-label">Confirm password</label>
                                             <input type="password" class="text fmlreg fz13 input-width" id="confirm_password"
                                                    ng-model="data.password_confirmation"/>
                                         </div>

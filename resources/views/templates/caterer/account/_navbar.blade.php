@@ -12,7 +12,7 @@
                 <div class="inputfile-label">Change Avatar</div>
             </label>
             <div class="cater-pic" ng-hide="$flow.files.length">
-                <img class="ithumbnail"  src="../images/caterers/<% caterer.avatar %>"  />
+                <img class="ithumbnail"  ng-src="../images/caterers/<% caterer.avatar %>"  />
             </div>
             <div class="cater-pic" ng-show="$flow.files.length">
                 <img class="ithumbnail" flow-img="$flow.files[0]" />

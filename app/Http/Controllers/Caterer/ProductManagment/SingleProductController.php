@@ -17,6 +17,7 @@ use App\Models\Subproduct;
 use Auth, View, Validator, Image;
 use App\Models\PackageProduct;
 use Flow\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Facade;
 
 
@@ -65,19 +66,15 @@ class SingleProductController extends CatererBaseController
     public function getMenus($id)
     {
         $kitchen = Kitchen::with(['menus' => function ($menu) use ($id) {
-            $menu->has('products');
-            $menu->with(['products' => function ($product) use ($id) {
-                $product->where(['caterer_id'=> $this->caterer->id(), 'kitchen_id' => $id]);
+            $menu->with(['products' => function ($product) use ($id, $menu) {
+                $product->where(['caterer_id'=> $this->caterer->id(),'kitchen_id' => $id]);
             }]);
         }])->findOrFail($id);
         $menus = $kitchen->menus;
-//dd($menus);
-//        $filtered = $menus->filter(function ($menu) {
-//            return count($menu->products) > 0;
-//        });
-
-
-        return response()->json(['success' => 1, 'menus' => $kitchen->menus]);
+        $filtered = $menus->filter(function ($menu) {
+        return count($menu->products) > 0;
+    });
+        return response()->json(['success' => 1, 'menus' => $filtered]);
     }
 
     public function postAdd(Request $request)
@@ -208,7 +205,7 @@ class SingleProductController extends CatererBaseController
             PackageProduct::where('product_id',$id)->delete();
             OrderProduct::where('product_id',$id)->delete();
             $avatar = $product[0]->avatar;
-        if($avatar != "")
+             if($avatar != "")
             if (file_exists('images/products/' . $avatar))
                 unlink('images/products/' . $avatar);
             if (Product::withTrashed()->where('id', $id)->forceDelete())

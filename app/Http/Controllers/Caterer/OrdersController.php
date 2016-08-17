@@ -5,6 +5,7 @@ use App\Http\Controllers\Caterer\CatererBaseController;
 use Illuminate\Http\Request;
 use App\Models\Subproduct;
 use App\Models\Order;
+use App\Models\Country;
 
 class OrdersController extends CatererBaseController
 {
@@ -46,6 +47,7 @@ class OrdersController extends CatererBaseController
             return response()->json(['success' => 0, 'error' => "Something went wrong."]);
 
             $order = Order::with('products', 'packages', 'user')->findOrFail($id);
+            $order->delivery_country = Country::findOrFail($order->delivery_country)->name;
             foreach ($order->products as $key => $product)
                 if ($product->pivot->subproduct_id !== 0)
                     $order->products[$key]['subroduct'] = Subproduct::findOrFail($product->pivot->subproduct_id);

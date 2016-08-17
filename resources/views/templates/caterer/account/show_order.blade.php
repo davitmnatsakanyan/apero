@@ -13,14 +13,15 @@
                 <div class="col-xs-12  ">
 
                     <div class="inner-cater">
-                        <div class="row">
+                        <div class="row ml15">
 
                             <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company" ng-if="order">
+                                <div class="package-tab">
                                 <uib-tabset active="activeJustified" justified="true" class="order-padding">
                                     <uib-tab index="0" heading="Common information">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive mt20">
                                             <table class="table table-bordered table-striped table-hover">
                                                 <tbody>
                                                 <tr>
@@ -81,7 +82,7 @@
                                     </uib-tab>
                                     <uib-tab index="1" heading="Products">
                                         <div data-ng-controller="CatererOrdersController" ng-if="order.products.length">
-                                        <table class="table table-bordered table-striped table-hover">
+                                        <table class="table table-bordered table-striped table-hover mt20">
                                             <thead>
                                             <tr>
                                                 <th>S.No</th>
@@ -113,7 +114,7 @@
                                     </uib-tab>
                                     <uib-tab index="2" heading="Packages">
                                         <div data-ng-controller="CatererOrdersController" ng-if="order.packages.length">
-                                        <table class="table table-bordered table-striped table-hover">
+                                        <table class="table table-bordered table-striped table-hover mt20">
                                             <thead>
                                             <tr>
                                                 <th>S.No</th>
@@ -145,7 +146,7 @@
                                         </div>
                                     </uib-tab>
                                 </uib-tabset>
-
+                                </div>
 
                             </div>
 

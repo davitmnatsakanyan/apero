@@ -85,13 +85,27 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             }
         );
 
+
+        CatererAccountModel.getAllCountries().then(
+            function(response){
+                $scope.countries = [];
+                var countries = response.data.countries;
+                for(country in countries){
+                    $scope.countries.push({
+                        id:countries[country].id,
+                        name:countries[country].name,
+                    });
+                }
+            }
+        );
+
         $scope.selectZip = function ($item, $model){
             $scope.delivery_zip =  $model;
         }
 
 
         $scope.selectCountry = function ($selected, $model){
-            $scope.delivery_country =  $model;
+            $scope.country =  $model;
         }
 
     $scope.change = function(){
@@ -199,8 +213,8 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             },
             method : "POST",
             url : "order"
-        })
-            .success(function (response) {
+        }).then(
+            function (response) {
                 if(response.data.success){
                     toastr.success(response.data.message);
                 }
@@ -208,11 +222,13 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
                 else{
                     toastr.error(responce.data.error, 'Error');
                 }
-            })
-            .error( function (error) {
+            },
+            function (error) {
                 $scope.errorMessages(error);
 
-            });
+            }
+        );
+
     }
 
     $scope.submit_login = function(){

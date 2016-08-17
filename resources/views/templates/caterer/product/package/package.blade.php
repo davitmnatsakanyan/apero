@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello “Catering - Company”</p>
+                        <p>Hello <% caterer.company %></p>
                     </div>
                 </div>
                 <div class="col-sm-12">
@@ -13,10 +13,12 @@
 
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererPackageController">
-                            <div class="col-sm-7 col-md-8" ng-init="getPackageDatas()">
+                            <div class="col-sm-7 col-md-8 package-add-btn" ng-init="getPackageDatas()">
                                 <a href="#/caterer/packages/add" class="add-button">Add package</a>
                                 <div class="main-product-box" data-ng-repeat="package in filteredPackages">
-                                    <div class="main-product fl"></div>
+                                    <div>
+                                        <img class="package-list-img" ng-src="images/packages/<% package.avatar %>" , alt="Mountain View"/>
+                                    </div>
                                     <div class="product-txt fl no-margin-top">
                                         <p class="fmlreg fz20 cg1 title no-margin-bottom">
                                             <% package.name %>

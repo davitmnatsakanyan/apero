@@ -9,7 +9,7 @@
 <form id="editCommon">
 
     <label for="packageImage">
-        <div class="inputfile-label wdth228">Upload Image</div>
+        <div class="inputfile-label wdth228 mt20">Upload Image</div>
     </label>
     <input type="file" flow-btn name="avatar" class="inputfile" id="packageImage"/>
         {{--<input type="file" flow-btn name="avatar"/>--}}
@@ -22,16 +22,16 @@
             <img class="cater-pic-width image-size" flow-img="$flow.files[0]" />
         </div>
 
-    <div class="profil-form fl">
+    <div class="profil-form fl mt30">
         <div class="info-box">
-            <label for="company" class="title fmlbold fz17">Name</label>
+            <label for="company" class="title fmlbold add-product-label  fz17">Name</label>
             <input type="text" class="text fmlreg fz13" id="company" ng-model="package.name"/>
         </div><!--end-->
     </div><!--end-->
 
-    <div class="profil-form fl">
+    <div class="profil-form fl mt30">
         <div class="info-box">
-            <label for="city" class="title fmlbold fz17">Price</label>
+            <label for="city" class="title fmlbold  add-product-label fz17">Price</label>
             <input type="text" class="text fmlreg fz13" id="city" ng-model="package.price"/>
         </div><!--end-->
     </div><!--end-->
@@ -40,7 +40,7 @@
 <div class="profile-border-box">
     <div class="profil-border"></div>
 </div>
-<div class="save-btn" ng-if="location!=='add'">
+<div class="save-btn package-save-package" ng-if="location!=='add'">
     <input form="editCommon" type="submit" value="Save" class="fmlreg fz25" ng-click="update('edit',$files, $event, $flow)"/>
 </div>'
 

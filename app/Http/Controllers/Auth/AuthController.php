@@ -148,9 +148,9 @@ class AuthController extends Controller
     }
 
     public function getLogedin(){
-
        if($this->caterer->check() || $this->user->check()){
-           return response()->json(['success' => 1]);
+           $role = $this->user->check()?'user':'caterer';
+           return response()->json(['success' => 1,'role' => $role]);
        }
         else{
             return response()->json(['success' => 0]);

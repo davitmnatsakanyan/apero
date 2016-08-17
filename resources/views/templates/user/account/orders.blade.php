@@ -33,11 +33,11 @@
                                                     <span class="cg4 fz20 fmlbold"><% todo.num %></span>
                                                 </div>
                                             </a>
-                                            <div class="numb1-txt">
+                                            <div class="numb1-txt user-order-text">
                                                 <p class=" no-padding fmlreg fz20 cg2"><% todo.address %></p>
                                             </div>
                                         </div>
-                                        <div class="username-btn fl">
+                                        <div class="username-btn fl user-order-btn">
                                             <p class="cg5 fmlreg fz16 shipping dib"><% todo.status %></p>
                                         </div>
                                         <div class="clear-both"></div>

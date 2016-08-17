@@ -5,14 +5,14 @@
         <div ng-repeat="customize in filteredCustomize">
             <div class="profil-form fl no-margin no-margin-top no-margin-bottom">
                 <div class="info-box">
-                    <label for="name" class="title fmlbold fz17">Name</label>
+                    <label for="name" class="title fmlbold fz15 add-product-label">Name</label>
                     <input type="text" class="text fmlreg fz13" id="name"
                            ng-model= "customize.name"/>
-                    <label for="price" class="title fmlbold fz17">Price</label>
+                    <label for="price" class="title fmlbold fz15 add-product-label">Price</label>
                     <input type="text" class="text fmlreg fz13" id="price"
                            ng-model= "customize.price"/>
-                    <button  class="btn btn-danger btn-xs" ng-click="remove((currentCustomizePage-1)*numPerPageForCustomize+$index)">
-                        <span class="glyphicon glyphicon-minus" aria-hidden="true"/></button>
+                    <button  class="btn btn-danger btn-xs minus-icon-btn" ng-click="remove((currentCustomizePage-1)*numPerPageForCustomize+$index)">
+                        <span class="glyphicon glyphicon-minus minus-icon" aria-hidden="true"/></button>
                 </div><!--end-->
             </div><!--end-->
         </div>

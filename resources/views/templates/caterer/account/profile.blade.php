@@ -15,7 +15,7 @@
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
 
                         <div class="col-sm-7 col-md-8">
-                            <div>
+                            <div class="package-tab">
                                 <uib-tabset active="activeJustified" class="profile-tab" justified="true">
                                     <uib-tab index="0" heading="Common information">
                                         <div class="tab-content" ng-init="getAccount()">

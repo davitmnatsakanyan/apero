@@ -15,27 +15,20 @@
                     <img src="../images/logo.png" alt="" class="img-responsive">
                 </a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-href="/#/caterers">All caterers</a></li>
-                    {{--<li ng-class="{'active': link == 'hillfe'}"><a ng-href="/#/">Hilfe</a></li>--}}
                     <li><a ng-href="/#/">Hilfe</a></li>
-
-
+                    <li ng-show="$root.is_logedin == 1 && $root.role== 'caterer'"><a ng-href="/#/caterer/orders">My account</a></li>
+                    <li ng-show="$root.is_logedin == 1 && $root.role== 'user'"><a ng-href="/#/user/orders">My account</a></li>
                     <li ng-show="$root.is_logedin == 1"><a ng-href="/#/" ng-click="logout()">Logout</a></li>
-
                     <li ng-show="$root.is_logedin == 0"><a ng-href="#/login">Login</a></li>
                     <li ng-show="$root.is_logedin == 0"><a ng-href="#/register">Registrieren</a></li>
-
-
-
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <!-- End Header Menu -->
-
 </header>
 <!-- End Header -->

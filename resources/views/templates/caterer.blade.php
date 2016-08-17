@@ -1,19 +1,12 @@
 <div ng-include='"templates/nav.blade.php"'></div>
-
 	<!-- Content -->
 	<section id="content">
-			
 		<div  class="hillfe-content kategori-content">
-			<div class="container">
-
+			<div class="container" ng-init = 'getDetails()'>
 				<div class="row">
-
 					<div class="col-md-9 col-sm-8">
-
 						<div class="apero-anbieter clearfix">
-
 							<h1>Apero - Anbieter in 9000 St. Gallin</h1>
-
 							<div class="col-md-12 anbieter-item">
 								<div class="col-md-6">
 									<div class="anbieter-img">
@@ -58,22 +51,17 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
-
 					</div>
-
 				</div>
-
 				<div class="row">
-
 					<div class="col-md-9 col-sm-8">
-
 						<div class="apero-kat clearfix">
+							<div class="package-tab">
 							<uib-tabset active="activeForm" id="caterer_page">
 								<uib-tab index="0" heading="Products">
+									<div class="mt20">
 									<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
-
 										<div class="col-md-12">
 											<div class="kategori-name">
 												<% menu.name %>
@@ -85,7 +73,6 @@
 											</div>
 										</div>
 										<div class="col-md-7">
-
 											<div class="kategori-item">
 												<form name="myForm" >
 												  <label ng-repeat="product in menu.products track by $index">
@@ -95,14 +82,13 @@
 												  </label>
 												 </form>
 											</div>
-
 										</div>
-
+									</div>
 									</div>
 								</uib-tab>
 								<uib-tab index="1" heading="Packages">
+									<div class="mt20">
 									<div class="col-md-12 anbieter-kat-item" ng-repeat="package in packages">
-
 										<div class="col-md-12">
 											<div class="kategori-name">
 												<% package.name %>
@@ -114,7 +100,6 @@
 											</div>
 										</div>
 										<div class="col-md-7">
-
 											<div class="kategori-item">
 												<form name="myForm" >
 													<label ng-repeat="product in package.products track by $index">
@@ -130,15 +115,13 @@
 												<i class="fa fa-shopping-cart btn" ng-init="package_count = 0" ng-disabled="package_count == 0" ng-click="addToCart(package, package_count, 'package')" aria-hidden="true"></i>
 											</div>
 											</div>
-
 									</div>
+										</div>
 								</uib-tab>
 							</uib-tabset>
-
+							</div>
 						</div>
-
 					</div>
-
 					<div class="col-md-3 col-sm-4">
 						<div class="filter bestellung">
 							<h2>Bestellung</h2>
@@ -149,11 +132,15 @@
 									<div class="lieferdatum">
 										<input type="text" id="datetimepicker4">
 									</div>
-									<p>products</p>
+									<div class="product-text">
+									<p>Products</p>
+									</div>
 									<div class="bestellung-produkt-number" ng-repeat="product in $root.products track by $index">
 										<p><% product.count %>x <% product.name %> <span class="bestellung-produkt-number-price"><% product.price %></span></p>
 									</div>
-									<p>packages</p>
+									<div class="product-text package-text">
+									<p>Packages</p>
+										</div>
 									<div class="bestellung-produkt-number" ng-repeat="package in $root.packages track by $index">
 										<p><% package.count %>x <% package.name %> <span class="bestellung-produkt-number-price"><% package.price %></span></p>
 									</div>
@@ -161,22 +148,16 @@
 									<div class="bestellung-produkts-total">
 										Total <span><% $root.total_price %></span>
 									</div>
-
 									<div class="bestellung-bestellen">
 										<a ng-href="/#/cart">Bestellen</a>
 									</div>
-
 								</form>
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
-
 	</section>
 	<!-- End Content -->
-
 <div ng-include='"templates/footer.blade.php"'></div>

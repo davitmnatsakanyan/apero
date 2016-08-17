@@ -3,6 +3,7 @@
     <h3 class="modal-title">Registration</h3>
 </div>
 <div class="register">
+    <div class="package-tab">
     <uib-tabset active="activeForm">
         <uib-tab index="0" heading="Caterer">
             <div ng-include='"templates/caterer/auth/register.blade.php"'></div>
@@ -11,5 +12,6 @@
             <div ng-include='"templates/user/auth/register.blade.php"'></div>
         </uib-tab>
     </uib-tabset>
+        </div>
 </div>
 

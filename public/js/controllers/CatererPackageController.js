@@ -1,5 +1,5 @@
-app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'CatererAccountModel', 'AuthService', '$location', '$routeParams','toastr','ModalService','$uibModal',
-    function ($scope,$log, $rootScope, CatererAccountModel, AuthService, $location, $routeParams,toastr,ModalService,$uibModal) {
+app.controller('CatererPackageController', ['$scope', '$log', '$rootScope', 'CatererAccountModel', 'AuthService', '$location', '$routeParams', 'toastr', 'ModalService', '$uibModal',
+    function ($scope, $log, $rootScope, CatererAccountModel, AuthService, $location, $routeParams, toastr, ModalService, $uibModal) {
 
         AuthService.auth('caterer');
 
@@ -8,9 +8,20 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
         $scope.numPerPageForSelected = 4;
         $scope.selectedMaxSize = 5;
 
+        CatererAccountModel.getAccount().then(
+            function (response) {
+                if (response.data.success) {
+                    $scope.caterer = response.data.caterer;
+                }
+            }
+        );
+
+        if(!$scope.selectedProducts)
+            $scope.selectedProducts=[];
+
         $scope.getPackageDatas = function () {
-           
-            if(!$scope.selectedProducts)
+
+            if (!$scope.selectedProducts)
                 $scope.selectedProducts = [];
 
             CatererAccountModel.getPackages().then(
@@ -39,7 +50,7 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                     function (responce) {
                         if (responce.data.success) {
                             $scope.package = responce.data.package;
-
+                             console.log($scope.package);
                             if ($scope.package.products) {
                                 $scope.currentPackageProductsPage = 1;
                                 $scope.numPerPageForPackageProducts = 8;
@@ -69,13 +80,11 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 }
             }
         }
-        
-        
-        
-        
-        if( $location.path().split("/")[3] == 'add'){
+
+
+        if ($location.path().split("/")[3] == 'add') {
             $scope.location = 'add';
-            if(!$scope.package) {
+            if (!$scope.package) {
                 $scope.package = {
                     avatar: "",
                     name: "",
@@ -83,28 +92,27 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 }
             }
             CatererAccountModel.getAllProducts().then(
-                function(response){
+                function (response) {
                     $scope.addingProducts = response.data.products;
                 }
             );
         }
-        
+
 
         $scope.createPackage = function ($files, $event, $flow) {
             $scope.package.products = $scope.selectedProducts;
             CatererAccountModel.create($scope.package).then(
-                function(response){
-                    if(response.data.success)
-                    {
-                         var forFlow = response.data.id;
+                function (response) {
+                    if (response.data.success) {
+                        var forFlow = response.data.id;
                         $flow.opts.target = "caterer/product/package/image/" + forFlow;
                         $flow.upload();
                         toastr.success(response.data.message);
                     }
                     else
-                        toastr.error(response.data.error,'Error')
+                        toastr.error(response.data.error, 'Error')
                 },
-                function(error){
+                function (error) {
                     $scope.errorMessages(error.data);
                 }
             );
@@ -114,25 +122,25 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             CatererAccountModel.deletePackage(package_id).then(
                 function (response) {
                     if (response.data.success) {
-                        var removed=$scope.packages.find(function(package){
+                        var removed = $scope.packages.find(function (package) {
                             return package_id == package.id;
-                        },package_id);
+                        }, package_id);
                         $scope.packages.splice($scope.packages.indexOf(removed), 1);
                         toastr.success(response.data.message);
                     }
                     else {
-                        toastr.error(response.data.error,'Error');
+                        toastr.error(response.data.error, 'Error');
                     }
                 }
             );
         }
 
-        $scope.updateCommmon = function(){
+        $scope.updateCommmon = function () {
             var data = {
                 name: $scope.package.name,
                 price: $scope.package.price
             };
-            CatererAccountModel.updatePackgeCommonInf(data,$scope.package.id).then(
+            CatererAccountModel.updatePackgeCommonInf(data, $scope.package.id).then(
                 function (responce) {
                     if (responce.data.success) {
                         toastr.success(responce.data.message);
@@ -147,12 +155,12 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             );
         }
 
-        $scope.updateProductCount = function (product_id,subproduct_id) {
+        $scope.updateProductCount = function (product_id, subproduct_id) {
             var updated = $scope.package.products.find(function (product) {
-                return product.pivot.product_id == product_id &&  product.pivot.subproduct_id ==subproduct_id ;
-            }, product_id,subproduct_id);
+                return product.pivot.product_id == product_id && product.pivot.subproduct_id == subproduct_id;
+            }, product_id, subproduct_id);
 
-            var data={
+            var data = {
                 package_id: $scope.package.id,
                 product_id: updated.pivot.product_id,
                 subproduct_id: updated.pivot.subproduct_id,
@@ -173,11 +181,11 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             );
         }
 
-        $scope.removeProductFromPackage = function (product_id,subproduct_id) {
+        $scope.removeProductFromPackage = function (product_id, subproduct_id) {
             var removed = $scope.package.products.find(function (product) {
-                return product.pivot.product_id == product_id &&  product.pivot.subproduct_id ==subproduct_id ;
-            }, product_id,subproduct_id);
-            var data={
+                return product.pivot.product_id == product_id && product.pivot.subproduct_id == subproduct_id;
+            }, product_id, subproduct_id);
+            var data = {
                 package_id: $scope.package.id,
                 product_id: removed.pivot.product_id,
                 subproduct_id: removed.pivot.subproduct_id,
@@ -203,8 +211,10 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             );
         }
 
-        $scope.addProduct = function($item, $model){
-            if(!$model.subproducts.length) {
+        $scope.addProduct = function ($item, $model) {
+            if (!$model.subproducts.length) {
+                if(!$scope.selectedProducts)
+                    $scope.selectedProducts=[];
                 console.log($item);
                 console.log($model);
                 $scope.selectedProducts.push({
@@ -216,47 +226,47 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             } else {
                 $scope.selectedSubproduct = $item.subproducts[0];
                 $scope.showSubproducts($item);
-            };
+            }
+            ;
         }
 
-        $scope.removeProduct = function($item, $model){
+        $scope.removeProduct = function ($item, $model) {
             var removed = $scope.selectedProducts.find(function (product) {
                 return product.product_id == $model.id;
             }, $model);
 
             $scope.selectedProducts.splice($scope.selectedProducts.indexOf(removed), 1);
-            $scope.change();
+            // $scope.change();
         }
 
         $scope.changed = 0;
 
         $scope.change = function () {
             //return $scope.changed = !$scope.changed;
-            if ($scope.changed==1)
+            if ($scope.changed == 1)
                 $scope.changed = 0;
             else
                 $scope.changed = 1;
         }
-        
+
         $scope.showSubproducts = function (product) {
             $scope.product = product;
             $scope.open($scope.product);
         };
 
-        $scope.addProductsToPackage = function()
-        {
+        $scope.addProductsToPackage = function () {
             CatererAccountModel.addProdcuts($scope.package.id, $scope.selectedProducts).then(
-                function(response){
-                    if(response.data.success){
+                function (response) {
+                    if (response.data.success) {
                         toastr.success(response.data.message);
 
-                        $scope.p =[];
+                        $scope.p = [];
                         $scope.package.products = response.data.products;
                         console.log($scope.selectedProducts);
                         // $scope.selectedProducts.selected=[];
                         // return;
-                        for(var product in  $scope.selectedProducts)
-                        {console.log('--------------product-----------');
+                        for (var product in  $scope.selectedProducts) {
+                            console.log('--------------product-----------');
                             console.log(product);
                             var a = $scope.selectedProducts[product];
                             console.log(a);
@@ -273,8 +283,8 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                             $scope.addingProducts.splice($scope.addingProducts.indexOf(removed), 1);
                             console.log($scope.addingProducts);
                         }
-                        $scope.selectedProducts=[];
-                        $scope.selectedProductsI=[];
+                        $scope.selectedProducts = [];
+                        $scope.selectedProductsI = [];
                         $scope.change();
                     }
                     else {
@@ -284,12 +294,12 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
         }
 
 
-        $scope.$watchGroup([ 'currentPackagePage', 'packages.length',
-                'currentPackageProductsPage','changed',
-                'currentSelectedProductsPage','selectedProducts.length',
+        $scope.$watchGroup(['currentPackagePage', 'packages.length',
+                'currentPackageProductsPage', 'changed',
+                'currentSelectedProductsPage', 'selectedProducts.length',
             ],
             function (newValues, oldValues, scope) {
-                var last_changed,last_changed1;
+                var last_changed, last_changed1;
                 if (newValues[0] != oldValues[0] || newValues[1] != oldValues[1])
                     last_changed = 'packagePage';
 
@@ -299,7 +309,7 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 if (newValues[4] != oldValues[4] || newValues[5] != oldValues[5])
                     last_changed = 'changeSelected';
 
-                if (angular.isDefined(last_changed ) || angular.isDefined(last_changed1 ) ) {
+                if (angular.isDefined(last_changed) || angular.isDefined(last_changed1)) {
                     if (last_changed == 'packagePage') {
                         var begin = (($scope.currentPackagePage - 1) * $scope.numPerPageForPackages),
                             end = begin + $scope.numPerPageForPackages;
@@ -347,7 +357,7 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                     product_id: $scope.selected.product_id,
                     subproduct_id: $scope.selected.id,
                     name: $scope.product.name + " " + $scope.selected.name,
-                    product_count:1,
+                    product_count: 1,
                 });
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
@@ -360,7 +370,7 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
 
 
         $scope.errorMessages = function (errors) {
-            if(angular.isArray(errors)) {
+            if (angular.isArray(errors)) {
                 var data = "";
                 angular.forEach(errors, function (value, key) {
                     data += value + "<br/>";
@@ -370,14 +380,13 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             else  toastr.error(errors, 'Error');
         }
 
-        $scope.update = function(action,$files, $event, $flow)
-        {
-            if(action == 'edit') {
+        $scope.update = function (action, $files, $event, $flow) {
+            if (action == 'edit') {
                 $flow.opts.target = "caterer/product/package/image/" + $scope.package.id;
                 $flow.upload();
                 $scope.updateCommmon();
             }
-            if(action == 'add'){
+            if (action == 'add') {
                 $scope.createPackage($files, $event, $flow);
             }
         }

@@ -36,7 +36,7 @@ app.controller('CatererOrdersController', ['$scope', 'CatererAccountModel', 'Aut
                         if ($scope.order.products) {
                             $scope.currentProductPage = 1;
                             $scope.oldProductPage = 1;
-                            $scope.numPerPageForProducts = 3;
+                            $scope.numPerPageForProducts = 8;
                             $scope.productsMaxSize = 5;
                             $scope.filteredProducts = $scope.order.products.slice(0, $scope.numPerPageForProducts);
                         }
@@ -44,7 +44,7 @@ app.controller('CatererOrdersController', ['$scope', 'CatererAccountModel', 'Aut
                         if ($scope.order.packages) {
                             $scope.currentPackagePage = 1;
                             $scope.oldPackagePage = 1;
-                            $scope.numPerPageForPackages = 1;
+                            $scope.numPerPageForPackages = 8;
                             $scope.packagesMaxSize = 5;
                             $scope.filteredPackage = $scope.order.packages.slice(0, $scope.numPerPageForPackages);
                         }
@@ -142,10 +142,10 @@ app.controller('CatererOrdersController', ['$scope', 'CatererAccountModel', 'Aut
         };
         
         $scope.acceptOrder= function(order_id){
-            CatererAccountModel.acceptOrder(order_id).then(function(responce){
+            CatererAccountModel.acceptOrder(order_id).then(function(response){
                 if(response.data.success){
                     $scope.getOrders();
-                    toastr.success(responce.data.message);
+                    toastr.success(response.data.message);
                 }
                 else {
                     toastr.error(response.data.error, 'Error');

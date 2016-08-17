@@ -3,7 +3,7 @@
     <form href="#" method="post" class='form-horizontal' id="updateDeliveryArea">
         <label for="zip_codes" class="title fmlbold fz17">Zip Codes</label>
 
-        <ui-select searchEnabled="false" multiple ng-model="selectedZipCodes" class="selectpicker form-control" on-remove="removeZipFromSelect($item, $model)" on-select="addZipToSelect($item, $model)">
+        <ui-select searchEnabled="false" multiple ng-model="selectedZipCodes.selected" class="selectpicker form-control" on-remove="removeZipFromSelect($item, $model)" on-select="addZipToSelect($item, $model)">
             <ui-select-match placeholder="Select zip codes" allow-clear="true"><% $item.name %></ui-select-match>
             <ui-select-choices repeat="zip in zip_codes track by zip.id">
                 <% zip.name %>

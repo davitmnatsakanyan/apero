@@ -15,6 +15,7 @@
                         <div data-ng-controller="CatererProductsController">
                             <div class="col-sm-7 col-md-8">
                                 <div ng-if="product.subproducts.length">
+                                    <div class="package-tab">
                                 <uib-tabset active="activeJustified" justified="true">
                                     <uib-tab index="0" heading="Common information">
                                         <div ng-include='"templates/caterer/product/single/items/showCommonInformation.blade.php"'></div>
@@ -23,6 +24,7 @@
                                         <div ng-include='"templates/caterer/product/single/items/showSubproducts.blade.php"'></div>
                                     </uib-tab>
                                 </uib-tabset>
+                                        </div>
                                 </div>
                                 <div ng-if="!product.subproducts.length">
                                     <div ng-include='"templates/caterer/product/single/items/showCommonInformation.blade.php"'></div>

@@ -6,6 +6,7 @@ app.controller('NavigationController', ['$rootScope', '$scope', '$uibModal', '$l
         url : "auth/logedin"
     }).success(function(response){
          $rootScope.is_logedin = response.success;
+         $rootScope.role = response.role;
      });
 
     $scope.logout = function () {

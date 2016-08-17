@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xs-12 hh">
                     <div class="inner-cater-txt">
-                        <p>Hello “Catering - Company”</p>
+                        <p>Hello <% caterer.company %></p>
                     </div>
                 </div>
                 <div class="col-xs-12  ">

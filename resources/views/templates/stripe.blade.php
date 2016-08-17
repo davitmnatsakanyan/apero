@@ -1,7 +1,7 @@
 <script type="text/ng-template" id="myModalContent.html">
 
     <div class="modal-header">
-        <h3 class="modal-title">I'm a modal!</h3>
+        <h3 class="modal-title">Enter cart information</h3>
     </div>
     <div class="modal-body">
         {{--<form action="" method="GET" id="payment-form">--}}
@@ -46,9 +46,18 @@
         {{--</form>--}}
 
         <form stripe-form="stripeCallback">
-            <input ng-model="number" placeholder="Card Number" />
-            <input ng-model="expiry" placeholder="Expiration" />
-            <input ng-model="cvc" placeholder="CVC" />
+            <div class="form-group ">
+                <label>Cared Number</label>
+            <input ng-model="number" placeholder="4242 4242 4242 4242" payments-format="card" payments-validate="card"/>
+                </div>
+            <div class="form-group ">
+                <label>Expiration</label>
+            <input ng-model="expiry" placeholder="12/2017" payments-format="expiry" payments-validate="expiry"/>
+                </div>
+            <div class="form-group ">
+                <label>CVC</label>
+            <input ng-model="cvc" placeholder="1234" payments-format="cvc"  payments-validate="cvc"/>
+                </div>
             <button type="submit">Submit</button>
         </form>
     </div>

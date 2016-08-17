@@ -14,6 +14,7 @@
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="CatererPackageController">
                             <div class="col-sm-7 col-md-8" ng-init="getPackageDatas()">
+                                <div class="package-tab">
                                 <uib-tabset active="activeJustified"  class="profile-tab" justified="true">
                                     <uib-tab index="0" heading="Common information">
                                         <div ng-include='"templates/caterer/product/package/items/editCommonInformation.blade.php"'></div>
@@ -25,6 +26,7 @@
                                         <div ng-include='"templates/caterer/product/package/items/addProduct.blade.php"'></div>
                                     </uib-tab>
                                 </uib-tabset>
+                                </div>
                             </div>
                         </div>
 

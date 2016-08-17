@@ -1,5 +1,4 @@
 <h2>Add kitchen</h2>
-<% addingKitchens %>
 <div ng-controller="CatererProfileController">
     <form href="#" method="post" class='form-horizontal' id="updateKitchens">
         <label for="kitchens" class="title fmlbold fz17">Kitchens</label>

@@ -2,7 +2,7 @@
 <div class="modal-header">
     <h3 class="modal-title">Login</h3>
 </div>
-<div class="register">
+<div class="register package-tab">
     <uib-tabset active="activeForm">
         <uib-tab index="0" heading="Caterer">
             <div ng-include='"templates/caterer/auth/login.blade.php"'></div>
