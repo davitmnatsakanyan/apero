@@ -88,7 +88,16 @@ app.factory('CatererProductModel', ['$http', function ($http) {
                 method:'post',
                 url:'caterer/product/single/update'
             })
+        },
+
+        deleteProduct:function (product_id) {
+            return $http({
+                method:'get',
+                url:'caterer/product/single/delete/' + product_id
+            })
         }
+        
+        
         
         
 

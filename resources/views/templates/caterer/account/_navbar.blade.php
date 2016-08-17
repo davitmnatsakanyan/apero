@@ -65,12 +65,14 @@
                     </a>
             </li>
             <li>
+                <a ng-href="#/">
                 <button class="hilife">
                     <span>
                         <i class="fa fa-exclamation-circle nn" aria-hidden="true"></i>
                     </span>
                     Hilife
                 </button>
+                    </a>
             </li>
         </ul>
     </div>

@@ -121,6 +121,7 @@ class SettingsController extends CatererBaseController
     public function removeKitchen($id)
     {
         if (CatererKitchen::where(['caterer_id' => $this->caterer->id(), 'kitchen_id' => $id])->delete()) {
+            Product::where(['caterer_id' => $this->caterer->id(), 'kitchen_id' => $id])->forceDelete();
             return response()->json(['success' => 1, 'message' => 'Kitchen successfully deleted.']);
         }
         return response()->json(['success' => 0, 'error' => 'Something went wrong.']);

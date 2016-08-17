@@ -1,6 +1,6 @@
 var app = angular.module('app', [
     'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select','ngSanitize',
-    'angularModalService','angularPayments'
+    'angularModalService','angularPayments',
 ]);
 
 app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSelectConfig','$windowProvider',

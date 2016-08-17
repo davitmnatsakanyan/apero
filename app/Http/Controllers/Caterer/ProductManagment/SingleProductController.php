@@ -5,6 +5,7 @@ use App\Events\restore;
 use App\Http\Controllers\Caterer\CatererBaseController;
 use App\Http\Services\ProductService;
 use App\Http\Services\CategoryService;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Models\CatererKitchen;
 use App\Models\Menu;
@@ -14,6 +15,7 @@ use App\Models\Caterer;
 use App\Models\Product;
 use App\Models\Subproduct;
 use Auth, View, Validator, Image;
+use App\Models\PackageProduct;
 use Flow\Config;
 use Illuminate\Support\Facades\Facade;
 
@@ -31,15 +33,17 @@ class SingleProductController extends CatererBaseController
     public function getKitchens()
     {
         $caterer = Caterer::with(['kitchens' => function ($kitchen) {
+            $kitchen->has('products');
             $kitchen->with(['products' => function ($product) {
                 $product->where('caterer_id', $this->caterer->id());
             }]);
         }])->findOrFail($this->caterer->id());
 
-        $filtered = $caterer->kitchens->filter(function ($kitchen) {
-            return count($kitchen->products) > 0;
-        });
-        $caterer->kitchens = $filtered;
+//        $filtered = $caterer->kitchens->filter(function ($kitchen) {
+//            return count($kitchen->products) > 0;
+//        });
+//        $caterer->filteredKitchens = $filtered->all();
+//        dd($caterer);
         return response()->json(['caterer' => $caterer, 'success' => 1]);
     }
 
@@ -60,19 +64,20 @@ class SingleProductController extends CatererBaseController
 
     public function getMenus($id)
     {
-        $kitchen = Kitchen::with(['menus' => function ($menu) {
-            $menu->with(['products' => function ($product) {
-                $product->where('caterer_id', $this->caterer->id());
+        $kitchen = Kitchen::with(['menus' => function ($menu) use ($id) {
+            $menu->has('products');
+            $menu->with(['products' => function ($product) use ($id) {
+                $product->where(['caterer_id'=> $this->caterer->id(), 'kitchen_id' => $id]);
             }]);
         }])->findOrFail($id);
         $menus = $kitchen->menus;
+//dd($menus);
+//        $filtered = $menus->filter(function ($menu) {
+//            return count($menu->products) > 0;
+//        });
 
-        $filtered = $menus->filter(function ($menu) {
-            return count($menu->products) > 0;
-        });
 
-
-        return response()->json(['success' => 1, 'menus' => $filtered]);
+        return response()->json(['success' => 1, 'menus' => $kitchen->menus]);
     }
 
     public function postAdd(Request $request)
@@ -97,8 +102,8 @@ class SingleProductController extends CatererBaseController
 
         $product = $request->except('menu', 'kitchen');
         $product ['caterer_id'] = $this->caterer->id();
-        $product ['menu_id'] = $request->menu;
-        $product ['kitchen_id'] = $request->kitchen;
+        $product ['menu_id'] = $request->menu['id'];
+        $product ['kitchen_id'] = $request->kitchen['id'];
 
 
         if ($product = Product::create($product)) {
@@ -194,22 +199,22 @@ class SingleProductController extends CatererBaseController
         return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
     }
 
-    public function getDelete(ProductService $service, $id)
+    public function getDelete($id)
     {
-        if ($this->hasAccess($service, $id)) {
+        if (!$this->hasAccess($id))
+            return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
+
             $product = Product::withTrashed()->where('id', $id)->get();
+            PackageProduct::where('product_id',$id)->delete();
+            OrderProduct::where('product_id',$id)->delete();
             $avatar = $product[0]->avatar;
+        if($avatar != "")
             if (file_exists('images/products/' . $avatar))
                 unlink('images/products/' . $avatar);
             if (Product::withTrashed()->where('id', $id)->forceDelete())
-                return redirect('caterer/product/single')->with('success', 'Product successfully Deleted.');
+                return response()->json(['success' => 1, 'message' => 'Product successfully deleted.']);
             else
-                return redirect()
-                    ->back()
-                    ->withErrors('Something went wrong.');
-        } else {
-            return redirect()->back()->withErrors('You have no access.');
-        }
+                return response()->json(['success' => 0, 'error' => 'Something went wrong.']);
 
     }
 

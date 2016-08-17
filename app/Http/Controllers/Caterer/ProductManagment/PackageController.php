@@ -122,14 +122,16 @@ class PackageController extends CatererBaseController
 
     public function deleteProduct(Request $request)
     {
-        $delete = $product = PackageProduct::where([
+        $delete = PackageProduct::where([
             'package_id' => $request->package_id,
             'product_id' => $request->product_id,
             'subproduct_id' => $request->subproduct_id
         ])->delete();
+        
+        $product = Product::with('subproducts')->findOrFail($request->product_id);
 
         if ($delete) {
-            return response()->json(['success' => 1, 'message' => 'Product successfully removed from package.']);
+            return response()->json(['success' => 1, 'message' => 'Product successfully removed from package.','product' => $product]);
         }
     }
 

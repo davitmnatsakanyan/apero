@@ -2,10 +2,7 @@
 
 Route::get('aaa', 'User\SettingsController@getUpdate');
 
-Route::get('bbb',function(){
-    $avatar = App\Models\Product::select('avatar')->where('id',10)->get();
-    dd($avatar);
-});
+Route::get('bbb/{id}','Caterer\ProductManagment\SingleProductController@getMenus');
 
 Route::get('ccc','PaypalController@getCheckout');
 
@@ -242,6 +239,7 @@ Route::group([
 
 Route::post('order','OrderController@index');
 Route::get('order/getAllZips','OrderController@getAllZips');
+Route::get('order/getAllCountries','OrderController@getAllCountries');
 
 /**
  * Caterer routes

@@ -3,94 +3,76 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
 
         AuthService.auth('caterer');
 
-        if(!$scope.selectedProducts)
-        $scope.selectedProducts = [];
-        
+
         $scope.currentSelectedProductsPage = 1;
         $scope.numPerPageForSelected = 4;
         $scope.selectedMaxSize = 5;
 
+        $scope.getPackageDatas = function () {
+           
+            if(!$scope.selectedProducts)
+                $scope.selectedProducts = [];
 
-        CatererAccountModel.getPackages().then(
-            function (response) {
-                if (response.data.success) {
-                    $scope.caterer = response.data.caterer;
-                    $scope.packages = $scope.caterer.packages;
-
-                    if ($scope.packages) {
-                        $scope.currentPackagePage = 1;
-                        $scope.numPerPageForPackages = 4;
-                        $scope.packagesMaxSize = 5;
-                        $scope.filteredPackages = $scope.packages.slice(0, $scope.numPerPageForPackages);
-                    }
-
-                }
-            },
-            function (error) {
-
-            }
-        );
-
-        $scope.deletePackage = function (package_id) {
-            CatererAccountModel.deletePackage(package_id).then(
+            CatererAccountModel.getPackages().then(
                 function (response) {
                     if (response.data.success) {
-                        var removed=$scope.packages.find(function(package){
-                            return package_id == package.id;
-                        },package_id);
+                        console.log(11);
+                        $scope.caterer = response.data.caterer;
+                        $scope.packages = $scope.caterer.packages;
 
-                        $scope.packages.splice($scope.packages.indexOf(removed), 1);
-                        toastr.success(response.data.message);
-                    }
-                    else {
-                        toastr.error(response.data.error,'Error');
-                    }
-                }
-            );
-
-        }
-
-        if ($routeParams.package_id) {
-            var package_id = $routeParams.package_id;
-            CatererAccountModel.getPackage(package_id).then(
-                function (responce) {
-                    if (responce.data.success) {
-                        $scope.package = responce.data.package;
-                        console.log( $scope.package);
-                        if ($scope.package.products) {
-                            $scope.currentPackageProductsPage = 1;
-                            $scope.numPerPageForPackageProducts = 8;
-                            $scope.packageProductsMaxSize = 5;
-                            $scope.filteredPackageProducts = $scope.package.products.slice(0, $scope.numPerPageForPackageProducts);
+                        if ($scope.packages) {
+                            $scope.currentPackagePage = 1;
+                            $scope.numPerPageForPackages = 4;
+                            $scope.packagesMaxSize = 5;
+                            $scope.filteredPackages = $scope.packages.slice(0, $scope.numPerPageForPackages);
                         }
-
-
-                    }
-                    else {
-                        toastr.error(responce.data.error, 'Error');
                     }
                 },
-
                 function (error) {
-                    // $scope.errorMessages(error.data);
+
                 }
             );
 
-            if( $location.path().split("/")[3] == 'edit') {
-                $scope.location = 'edit';
-                CatererAccountModel.getAddingProducts(package_id).then(
-                    function (response) {
-                        $scope.addingProducts = [];
-                        angular.forEach(response.data.addingProducts, function (element) {
-                            $scope.addingProducts.push(element);
-                        });
+            if ($routeParams.package_id) {
+                var package_id = $routeParams.package_id;
+                CatererAccountModel.getPackage(package_id).then(
+                    function (responce) {
+                        if (responce.data.success) {
+                            $scope.package = responce.data.package;
 
-                        console.log($scope.addingProducts);
-                    });
+                            if ($scope.package.products) {
+                                $scope.currentPackageProductsPage = 1;
+                                $scope.numPerPageForPackageProducts = 8;
+                                $scope.packageProductsMaxSize = 5;
+                                $scope.filteredPackageProducts = $scope.package.products.slice(0, $scope.numPerPageForPackageProducts);
+                            }
+                        }
+                        else {
+                            toastr.error(responce.data.error, 'Error');
+                        }
+                    },
+
+                    function (error) {
+                        // $scope.errorMessages(error.data);
+                    }
+                );
+
+                if ($location.path().split("/")[3] == 'edit') {
+                    $scope.location = 'edit';
+                    CatererAccountModel.getAddingProducts(package_id).then(
+                        function (response) {
+                            $scope.addingProducts = [];
+                            angular.forEach(response.data.addingProducts, function (element) {
+                                $scope.addingProducts.push(element);
+                            });
+                        });
+                }
             }
         }
-
-
+        
+        
+        
+        
         if( $location.path().split("/")[3] == 'add'){
             $scope.location = 'add';
             if(!$scope.package) {
@@ -105,17 +87,11 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                     $scope.addingProducts = response.data.products;
                 }
             );
-
         }
-
-        if( !$scope.selectedProducts)
-            $scope.selectedProducts = [];
-
+        
 
         $scope.createPackage = function ($files, $event, $flow) {
-            console.log($scope.selectedProducts);
             $scope.package.products = $scope.selectedProducts;
-            console.log($scope.package);
             CatererAccountModel.create($scope.package).then(
                 function(response){
                     if(response.data.success)
@@ -134,6 +110,22 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             );
         }
 
+        $scope.deletePackage = function (package_id) {
+            CatererAccountModel.deletePackage(package_id).then(
+                function (response) {
+                    if (response.data.success) {
+                        var removed=$scope.packages.find(function(package){
+                            return package_id == package.id;
+                        },package_id);
+                        $scope.packages.splice($scope.packages.indexOf(removed), 1);
+                        toastr.success(response.data.message);
+                    }
+                    else {
+                        toastr.error(response.data.error,'Error');
+                    }
+                }
+            );
+        }
 
         $scope.updateCommmon = function(){
             var data = {
@@ -149,7 +141,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                         toastr.error(responce.data.error, 'Error');
                     }
                 },
-
                 function (error) {
                     // $scope.errorMessages(error.data);
                 }
@@ -157,7 +148,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
         }
 
         $scope.updateProductCount = function (product_id,subproduct_id) {
-            console.log($scope.package.products)
             var updated = $scope.package.products.find(function (product) {
                 return product.pivot.product_id == product_id &&  product.pivot.subproduct_id ==subproduct_id ;
             }, product_id,subproduct_id);
@@ -177,7 +167,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                         toastr.error(responce.data.error, 'Error');
                     }
                 },
-
                 function (error) {
                     // $scope.errorMessages(error.data);
                 }
@@ -188,7 +177,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             var removed = $scope.package.products.find(function (product) {
                 return product.pivot.product_id == product_id &&  product.pivot.subproduct_id ==subproduct_id ;
             }, product_id,subproduct_id);
-
             var data={
                 package_id: $scope.package.id,
                 product_id: removed.pivot.product_id,
@@ -198,8 +186,10 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 function (responce) {
                     if (responce.data.success) {
                         $scope.package.products.splice($scope.package.products.indexOf(removed), 1);
-                        $scope.addingProducts.push(removed);
-                        console.log( $scope.addingProducts);
+                        console.log($scope.addingProducts);
+                        console.log(removed);
+                        $scope.addingProducts.push(responce.data.product);
+                        console.log($scope.addingProducts);
                         $scope.change();
                         toastr.success(responce.data.message);
                     }
@@ -207,7 +197,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                         toastr.error(responce.data.error, 'Error');
                     }
                 },
-
                 function (error) {
                     // $scope.errorMessages(error.data);
                 }
@@ -215,24 +204,22 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
         }
 
         $scope.addProduct = function($item, $model){
-            if(! $model.subproducts.length) {
+            if(!$model.subproducts.length) {
+                console.log($item);
+                console.log($model);
                 $scope.selectedProducts.push({
-                    product_id: $model.id,
+                    product_id: $item.id,
                     subproduct_id: 0,
-                    name: $model.name,
+                    name: $item.name,
                     product_count: 1
                 });
-            }
-
-            else
-            {
-                $scope.selectedSubproduct = $model.subproducts[0];
-                $scope.showSubproducts($model);
+            } else {
+                $scope.selectedSubproduct = $item.subproducts[0];
+                $scope.showSubproducts($item);
             };
         }
 
         $scope.removeProduct = function($item, $model){
-            console.log('removed!');
             var removed = $scope.selectedProducts.find(function (product) {
                 return product.product_id == $model.id;
             }, $model);
@@ -249,13 +236,11 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 $scope.changed = 0;
             else
                 $scope.changed = 1;
-            console.log('mta')
         }
         
         $scope.showSubproducts = function (product) {
             $scope.product = product;
             $scope.open($scope.product);
-
         };
 
         $scope.addProductsToPackage = function()
@@ -264,33 +249,44 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 function(response){
                     if(response.data.success){
                         toastr.success(response.data.message);
-                        // console.log(response.data.products);
+
                         $scope.p =[];
                         $scope.package.products = response.data.products;
+                        console.log($scope.selectedProducts);
+                        // $scope.selectedProducts.selected=[];
+                        // return;
                         for(var product in  $scope.selectedProducts)
-                        {
+                        {console.log('--------------product-----------');
+                            console.log(product);
+                            var a = $scope.selectedProducts[product];
+                            console.log(a);
+                            console.log($scope.selectedProducts);
+                            console.log('-----------adding products before---------------')
+                            console.log($scope.addingProducts);
+                            // $scope.selectedProducts.splice($scope.selectedProducts.indexOf(product), 1);
                             var removed = $scope.addingProducts.find(function (addingProduct) {
-                                return addingProduct.product_id == product.product_id;
-                            }, product);
-
+                                return addingProduct.product_id == a.product_id;
+                            }, a);
+                            console.log('-----------removed---------------')
+                            console.log(removed);
+                            console.log('-----------adding products after---------------')
                             $scope.addingProducts.splice($scope.addingProducts.indexOf(removed), 1);
+                            console.log($scope.addingProducts);
                         }
-                        console.log('addProductsToPackage');
                         $scope.selectedProducts=[];
+                        $scope.selectedProductsI=[];
                         $scope.change();
                     }
                     else {
                         toastr.error(responce.data.error, 'Error');
                     }
                 });
-
         }
 
 
         $scope.$watchGroup([ 'currentPackagePage', 'packages.length',
                 'currentPackageProductsPage','changed',
                 'currentSelectedProductsPage','selectedProducts.length',
-
             ],
             function (newValues, oldValues, scope) {
                 var last_changed,last_changed1;
@@ -311,15 +307,11 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                     }
 
                     if (last_changed1 == 'packageProductsPage') {
-                        console.log(123);
                         var begin = (($scope.currentPackageProductsPage - 1) * $scope.numPerPageForPackageProducts), end = begin + $scope.numPerPageForPackageProducts;
                         $scope.filteredPackageProducts = $scope.package.products.slice(begin, end);
-                        console.log($scope.package.products);
-                        console.log($scope.filteredPackageProducts);
                     }
 
                     if (last_changed == 'changeSelected') {
-                        console.log(12);
                         var begin = (($scope.currentSelectedProductsPage - 1) * $scope.numPerPageForSelected), end = begin + $scope.numPerPageForSelected;
                         $scope.filteredSelectedProducts = $scope.selectedProducts.slice(begin, end);
                     }
@@ -330,9 +322,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             // return $location.path().indexOf(viewLocation) == 0;
             return viewLocation === $location.path();
         };
-
-
-
 
         $scope.items = ['item1', 'item2', 'item3'];
 
@@ -353,7 +342,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             });
 
             modalInstance.result.then(function (selectedItem) {
-                console.log(132);
                 $scope.selected = selectedItem;
                 $scope.selectedProducts.push({
                     product_id: $scope.selected.product_id,
@@ -361,7 +349,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                     name: $scope.product.name + " " + $scope.selected.name,
                     product_count:1,
                 });
-                console.log($scope.selected);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -383,7 +370,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
             else  toastr.error(errors, 'Error');
         }
 
-
         $scope.update = function(action,$files, $event, $flow)
         {
             if(action == 'edit') {
@@ -391,7 +377,6 @@ app.controller('CatererPackageController', ['$scope','$log', '$rootScope', 'Cate
                 $flow.upload();
                 $scope.updateCommmon();
             }
-
             if(action == 'add'){
                 $scope.createPackage($files, $event, $flow);
             }

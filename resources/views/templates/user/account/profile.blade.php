@@ -74,8 +74,8 @@
 
                                         <div class="info-box">
                                             <label for="zip" class="title fmlbold fz17">Zip</label>
-                                            <ui-select ng-model="selectedZipCode"  class="text fmlreg fz13" on-select="selectZip($select.selected, $model)">
-                                                <ui-select-match ><% $select.selected.name %></ui-select-match>
+                                            <ui-select ng-model="selectedZipCode"  class="fmlreg fz13" on-select="selectZip($select.selected, $model)">
+                                                <ui-select-match class="select-zip"><% $select.selected.name %></ui-select-match>
                                                 <ui-select-choices repeat="zip in zip_codes track by zip.id">
                                                     <% zip.name %>
                                                 </ui-select-choices>
@@ -89,8 +89,8 @@
 
                                         <div class="info-box">
                                             <label for="country" class="title fmlbold fz17">Country</label>
-                                            <ui-select ng-model="selectedCountry"  class="text fmlreg fz13" on-select="selectCountry($select.selected, $model)">
-                                                <ui-select-match ><% $select.selected.name %></ui-select-match>
+                                            <ui-select ng-model="selectedCountry"  class=" fmlreg fz13" on-select="selectCountry($select.selected, $model)">
+                                                <ui-select-match class="select-zip"><% $select.selected.name %></ui-select-match>
                                                 <ui-select-choices repeat="country in countries track by country.id">
                                                     <% country.name %>
                                                 </ui-select-choices>

@@ -29,7 +29,7 @@
         <div class="info-box">
             <label class="title fmlbold fz17">Menu</label>
             <ui-select ng-model="addingProduct.menu" class="fmlreg fz13"
-                       on-select="selectMenu($select.selected, $model)">
+                       >
                 <ui-select-match placeholder="Select menu" class="select-zip"><% $select.selected.name %></ui-select-match>
                 <ui-select-choices repeat="menu in allMenus track by menu.id">
                     <% menu.name %>

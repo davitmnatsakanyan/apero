@@ -31,6 +31,7 @@
             </tbody>
         </table>
     </div>
+
     <ul uib-pagination ng-model="currentPackageProductsPage"
         total-items="package.products.length"
         max-size="packageProductsMaxSize"

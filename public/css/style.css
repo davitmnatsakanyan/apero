@@ -161,6 +161,18 @@ a {
 .mt40{
     margin-top: -40px;
 }
+
+.mt20{
+    margin-top: 20px;
+}
+
+.product-list-img{
+    max-width: 121px;
+    max-height: 100px;
+    float: left;
+    margin-right: 20px;
+}
+
 .navbar-right li a {
     font-family: OpenSansLight;
     color: #655e5f !important;

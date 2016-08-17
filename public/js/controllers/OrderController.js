@@ -1,6 +1,6 @@
 app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthService','$uibModal','$document','CatererAccountModel',
-    'toastr',
-    function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel,toastr) {
+    'toastr','$window',
+    function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel,toastr,$window) {
 
     $('#datetimepicker4').datetimepicker();
 
@@ -13,7 +13,7 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
     else{
         $scope.products = '';
     }
-    
+        
     if(localStorage.getItem('total_price'))
         $scope.total_price = localStorage.getItem('total_price');
     else
@@ -85,8 +85,13 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             }
         );
 
-        $scope.selectZip =function ($item, $model){
-            $scope.delivery_zip =  $model.id;
+        $scope.selectZip = function ($item, $model){
+            $scope.delivery_zip =  $model;
+        }
+
+
+        $scope.selectCountry = function ($selected, $model){
+            $scope.delivery_country =  $model;
         }
 
     $scope.change = function(){
@@ -114,8 +119,17 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
             $http({
                 method : "get",
                 url : "ccc"
-            });
+            }).success(function (response) {
+            if(response.redirectUrl)
+                $window.location.href = response.redirectUrl;
+            else {
+                console.log('redirecturl is broken');
+            }
+        }).error( function (error) {
+            console.log('redirecturl is broken');
+        });
         }
+        
         if(payment.name == 'cash'){
             $scope.registerOrder();
         }
@@ -125,11 +139,11 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
     {
         console.log(12);
         var company = $scope.company;
-        var delivery_country = $scope.country;
+        var delivery_country = $scope.country.id;
         var delivery_city = $scope.city;
         var orders = JSON.parse(localStorage.getItem('cart'))[0];
         var delivery_address = $scope.address+' '+ $scope.home;
-        var delivery_zip = $scope.delivery_zip;
+        var delivery_zip = $scope.delivery_zip.id;
         var email = $scope.email;
         var mobile = $scope.mobile;
         var phone = $scope.phone;

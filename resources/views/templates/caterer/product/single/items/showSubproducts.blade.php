@@ -1,5 +1,5 @@
 <div ng-controller="CatererProductsController">
-    <div class="table-responsive">
+    <div class="table-responsive mt20">
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>

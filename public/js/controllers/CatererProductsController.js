@@ -16,6 +16,7 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                 }
             },
             function (error) {
+                console.log(1122);
             }
         );
 
@@ -30,10 +31,6 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                             for(menu in response.data.menus)
                                 $scope.menus.push(response.data.menus[menu]);
                         console.log($scope.menus);
-
-                        // if($scope.menus.length)
-                        //     $scope.menus.length=1;
-
                         $scope.currentMenusPage = 1;
                         $scope.numPerPageForMenus = 4;
                         $scope.menusMaxSize = 5;
@@ -92,8 +89,8 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
         }
 
         $scope.selectKitchen = function ($item, $model) {
-            $scope.addingProduct.kitchen = $model.id;
-            CatererProductModel.getAllMenus($scope.addingProduct.kitchen).then(
+            $scope.addingProduct.kitchen = $model;
+            CatererProductModel.getAllMenus($scope.addingProduct.kitchen.id).then(
                 function (response) {
                     $scope.allMenus = response.data.menus;
                 },
@@ -106,7 +103,7 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
 
 
         $scope.selectMenu = function ($item, $model) {
-            $scope.addingProduct.menu = $model.id;
+            $scope.addingProduct.menu = $model;
         }
 
 
@@ -134,6 +131,9 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
 
             $scope.createProduct = function () {
                 console.log($scope.addingProduct);
+                // $scope.addingProduct.kitchen = $scope.addingProduct.kitchen.id;
+                // $scope.addingProduct.menu = $scope.addingProduct.menu.id;
+
                 CatererProductModel.createProduct($scope.addingProduct).then(
                     function (response) {
                         if (response.data.success) {
@@ -151,7 +151,6 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                 );
             }
 
-
         if ($routeParams.product_id) {
             var product_id = $routeParams.product_id;
             var route = $location.path().split("/")[3];
@@ -162,7 +161,7 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                             $scope.product = response.data.product;
                             $scope.subproducts = $scope.product.subproducts;
                             $scope.currentSubproductsPage = 1;
-                            $scope.numPerPageForSubproducts = 1;
+                            $scope.numPerPageForSubproducts = 10;
                             $scope.subproductsMaxSize = 5;
                             $scope.filteredSubproducts = $scope.subproducts.slice(0, $scope.numPerPageForSubproducts);
                         },
@@ -172,9 +171,7 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                     );
                     // $scope.showProduct(product_id);
                     break;
-                case 'delete':
-                    $scope.deleteProduct(product_id);
-                    break;
+                
             }
 
         }
@@ -191,6 +188,26 @@ app.controller('CatererProductsController', ['$scope', 'CatererProductModel', 'A
                 },
                 function (error) {
 
+                }
+            );
+        }
+        
+        $scope.deleteProduct = function(product_id){
+            CatererProductModel.deleteProduct(product_id).then(
+                function (response) {
+                    if(response.data.success) {
+                        var removed = $scope.products.find(function (product) {
+                            return product.id == product_id;
+                        }, product_id);
+
+                        $scope.products.splice($scope.products.indexOf(removed), 1);
+                        toastr.success(response.data.message);
+                    }
+                    else 
+                        toastr.error(response.data.error);
+                },
+                function (error) {
+                    $scope.errorMessages(error.data);
                 }
             );
         }

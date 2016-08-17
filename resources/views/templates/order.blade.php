@@ -80,7 +80,12 @@
 									</div>
 									<div class="form-group">
 										<label for="">Country</label>
-										<input type="text"  class="form-control"  placeholder="country" ng-model="country" required>
+										<ui-select ng-model="delivery_country" class="selectpicker form-control" on-select = "selectCountry($select.selected, $model)">
+											<ui-select-match placeholder="Select Country"><% $select.selected.name %></ui-select-match>
+											<ui-select-choices repeat="country in countries track by country.id">
+												<% country.name %>
+											</ui-select-choices>
+										</ui-select>
 									</div>
 									<div class="form-group">
 										<label for="">City</label>
@@ -93,8 +98,8 @@
 									<div class="form-group">
 										<label for="">PLZ</label>
 										{{--<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>--}}
-										<ui-select ng-model="delivery_zip" class="selectpicker form-control" on-select = "selectZip($item, $model)">
-											<ui-select-match placeholder="Select zip codes"><% $item.name %></ui-select-match>
+										<ui-select ng-model="delivery_zip" class="selectpicker form-control" on-select = "selectZip($select.selected, $model)">
+											<ui-select-match placeholder="Select zip codes"><% $select.selected.name %></ui-select-match>
 											<ui-select-choices repeat="zip in zips track by zip.id">
 												<% zip.name %>
 											</ui-select-choices>

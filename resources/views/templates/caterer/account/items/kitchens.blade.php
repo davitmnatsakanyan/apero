@@ -1,9 +1,13 @@
 <h2>Add kitchen</h2>
+<% addingKitchens %>
 <div ng-controller="CatererProfileController">
     <form href="#" method="post" class='form-horizontal' id="updateKitchens">
         <label for="kitchens" class="title fmlbold fz17">Kitchens</label>
-        <ui-select  searchEnabled="false" multiple ng-model="selectedKitchens" class="selectpicker form-control" on-remove="removeKitchenFromSelect($item, $model)" on-select="addKitchenToSelect($item, $model)">
-            <ui-select-match placeholder="Select Kitchen"><% $item.name %></ui-select-match>
+        <ui-select searchEnabled="false" multiple ng-model="selectedKitchens.selected" class="selectpicker form-control" on-remove="removeKitchenFromSelect($item, $model)" on-select="addKitchenToSelect($item, $model)">
+            <ui-select-match placeholder="Select Kitchen">
+                <% $item.name %>
+            </ui-select-match>
+
             <ui-select-choices repeat="kitchen in addingKitchens track by kitchen.id">
                 <% kitchen.name %>
             </ui-select-choices>

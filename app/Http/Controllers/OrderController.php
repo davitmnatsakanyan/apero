@@ -11,6 +11,7 @@ use App\Http\Controllers\User\UserBaseController;
 use App\Models\Product;
 use App\Models\OrderPackage;
 use App\Models\Subproduct;
+use App\Models\Country;
 use Auth, View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class OrderController extends UserBaseController
         $this->store_order_products($order->id, $request->orders);
         if($data['payment_type'] == 'stripe')
             $this->execStripePayment($data['stripeToken'],$data ['total_cost']);
-        return response()->json(['success' => 1]);
+        return response()->json(['success' => 1, 'message' => 'Order done.']);
     }
 
     public function store_order_products($order_id, $orders )
@@ -103,7 +104,7 @@ class OrderController extends UserBaseController
         if($data['payment_type'] == 'stripe')
             $this->execStripePayment($data['stripeToken'],$data ['total_cost']);
 
-        return response()->json(['success' => 1]);
+        return response()->json(['success' => 1,'message' => 'Order done']);
     }
 
 
@@ -185,6 +186,12 @@ class OrderController extends UserBaseController
             "is_accepted" => 'required',
             "stripeToken" => 'required_if:payment_type,stripe',
         ]);
+    }
+    
+    public function getAllCountries()
+    {
+        $countries = Country::all();
+        return response()->json(['countries' => $countries ]);
     }
 }
 

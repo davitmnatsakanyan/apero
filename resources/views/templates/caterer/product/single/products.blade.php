@@ -16,7 +16,10 @@
                             <div class="col-sm-7 col-md-8">
                                 <a  class="add-button" href="#/caterer/product/add">Add product</a>
                                 <div class="main-product-box" data-ng-repeat="product in filteredProducts">
-                                    <div class="main-product fl"></div>
+                                    <div>
+                                        <img class="product-list-img" src="images/products/<% product.avatar %>" , alt="Mountain View"/>
+                                    </div>
+                                    {{--<div class="main-product fl"></div>--}}
                                     <div class="product-txt fl">
                                         <p class="fmlreg fz20 cg1 title">
                                             <% product.name %>
@@ -29,7 +32,7 @@
                                         <ul class="product-icons dib clear-fix">
                                             <li class="fl"><a href="#/caterer/product/show/<% product.id %>" class="eye-icon"></a></li>
                                             <li class="fl"><a href="#/caterer/product/edit/<% product.id %>" class="pencil-red-icon"></a></li>
-                                            <li class="fl"><a href="#/caterer/product/delete/<% product.id %>" class="red-times-icon"></a></li>
+                                            <li class="fl"><a ng-click="deleteProduct(product.id)" class="red-times-icon"></a></li>
                                         </ul>
                                     </div>
                                     <div class="clear-both"></div>

@@ -1,70 +1,74 @@
-app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$window', 'AuthService', '$location',
-    'toastr',
-    function ($scope, CatererAccountModel, $window, AuthService,$location,$uibModal, toastr) {
+app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$window', 'AuthService', '$location', '$uibModal', '$routeParams', 'toastr',
+    function ($scope, CatererAccountModel, $window, AuthService,$location,$uibModal, $routeParams, toastr ) {
 
         AuthService.auth('caterer');
+        $scope.expression = function () {
+            console.log('change');
+        }
+        
+        $scope.getAccount = function () {
+            CatererAccountModel.getAccount().then(function (response) {
+                if (response.data.success) {
+                    $scope.caterer = response.data.caterer;
+                    $scope.contact_person = response.data.caterer.contact_person;
+                    $scope.countries = response.data.countries;
+                    $scope.selectedCountry = $scope.caterer.caterer_country;
 
-        CatererAccountModel.getAccount().then(function (response) {
-            if (response.data.success) {
-                $scope.caterer = response.data.caterer;
-                $scope.contact_person = response.data.caterer.contact_person;
-                $scope.countries = response.data.countries;
-                $scope.selectedCountry = $scope.caterer.caterer_country;
+                    $scope.zips = response.data.zips;
+                    $scope.selectedZip = $scope.caterer.caterer_zip;
 
-                $scope.zips = response.data.zips;
-                $scope.selectedZip = $scope.caterer.caterer_zip;
+                    var caterer_zips = response.data.caterer.zips;
+                    $scope.caterer_zips = [];
+                    for (var i = 0; i < caterer_zips.length; i++) {
+                        $scope.caterer_zips.push({
+                            id: caterer_zips[i].id,
+                            name: caterer_zips[i].ZIP + " " + caterer_zips[i].city
+                        });
+                    }
 
-                var caterer_zips = response.data.caterer.zips;
-                $scope.caterer_zips = [];
-                for (var i = 0; i < caterer_zips.length; i++) {
-                    $scope.caterer_zips.push({
-                        id: caterer_zips[i].id,
-                        name: caterer_zips[i].ZIP + " " + caterer_zips[i].city
-                    });
+                    $scope.currentZipsPage = 1;
+                    $scope.numPerPageForZips = 3;
+                    $scope.zipsMaxSize = 5;
+                    $scope.filteredZips = $scope.caterer_zips.slice(0, $scope.numPerPageForZips);
+
+                    var zips = response.data.zip_codes;
+                    $scope.zip_codes = [];
+                    for (zip in zips) {
+                        $scope.zip_codes.push({
+                            id: zips[zip].id,
+                            name: zips[zip].ZIP + " " + zips[zip].city
+                        })
+                    }
+                    var caterer_kitchens = $scope.caterer.kitchens;
+                    $scope.kitchens = [];
+
+                    for (var i = 0; i < caterer_kitchens.length; i++) {
+                        $scope.kitchens.push({
+                            id: caterer_kitchens[i].id,
+                            name: caterer_kitchens[i].name
+                        });
+                    }
+
+                    $scope.currentKitchensPage = 1;
+                    $scope.numPerPageForKitchens = 1;
+                    $scope.kitchensMaxSize = 5;
+                    $scope.filteredKitchens = $scope.kitchens.slice(0, $scope.numPerPageForKitchens);
+
+                    $scope.addingKitchens = [];
+                    var addingKitchens = response.data.kitchens;
+                    for (kitchen in addingKitchens) {
+                        $scope.addingKitchens.push({
+                            id: addingKitchens[kitchen].id,
+                            name:  addingKitchens[kitchen].name,
+                        });
+                    }
+                    $scope.cooking_time = response.data.caterer.cookingtime;
+
                 }
-
-                $scope.currentZipsPage = 1;
-                $scope.numPerPageForZips = 3;
-                $scope.zipsMaxSize = 5;
-                $scope.filteredZips = $scope.caterer_zips.slice(0, $scope.numPerPageForZips);
-
-                var zips = response.data.zip_codes;
-                $scope.zip_codes = [];
-                for (zip in zips) {
-                    $scope.zip_codes.push({
-                        id: zips[zip].id,
-                        name: zips[zip].ZIP + " " + zips[zip].city
-                    })
-                }
-                var caterer_kitchens = $scope.caterer.kitchens;
-                $scope.kitchens = [];
-
-                for (var i = 0; i < caterer_kitchens.length; i++) {
-                    $scope.kitchens.push({
-                        id: caterer_kitchens[i].id,
-                        name: caterer_kitchens[i].name
-                    });
-                }
-
-                $scope.currentKitchensPage = 1;
-                $scope.numPerPageForKitchens = 1;
-                $scope.kitchensMaxSize = 5;
-                $scope.filteredKitchens = $scope.kitchens.slice(0, $scope.numPerPageForKitchens);
-                
-                $scope.addingKitchens = [];
-                var addingKitchens=response.data.kitchens;
-                for (kitchen in addingKitchens) {
-                    $scope.addingKitchens.push({
-                        id: addingKitchens[kitchen].id,
-                        name:  addingKitchens[kitchen].name,
-                    })
-                }
-                $scope.cooking_time = response.data.caterer.cookingtime;
-
-            }
-        }, function (error) {
-            console.log(error);
-        });
+            }, function (error) {
+                console.log(error);
+            });
+        }
 
         $scope.selectedZipCodes = [];
         $scope.selectedKitchens = [];
@@ -120,6 +124,7 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
         {
             $scope.caterer.zip = $model.id;
         };
+        
         $scope.selectCountry = function($select, $model)
         {
             $scope.caterer.country = $model.id;
@@ -128,6 +133,8 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
 
         $scope.removeDeliveryArea = function (zip_id) {
             CatererAccountModel.removeDeliveryArea(zip_id).then(function (response) {
+
+
                 if (response.data.success) {
 
                     var removed = $scope.caterer_zips.find(function (zip) {
@@ -137,7 +144,9 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
                     $scope.caterer_zips.splice($scope.caterer_zips.indexOf(removed), 1);
                     $scope.zip_codes.push({id: removed.id, name: removed.name});
                     $scope.changeZip();
-                    toastr.success(response.data.message);
+                    console.log(response.data.success);
+console.log(toastr);
+                    //toastr.success(response.data.message);
                 }
                 else {
                     toastr.error(response.data.error, 'Error');
@@ -208,7 +217,7 @@ app.controller('CatererProfileController', ['$scope', 'CatererAccountModel','$wi
                         bIds[obj.id] = obj;
                     });
 
-                    $scope.kitchens = $scope.kitchens.filter(function (obj) {
+                    $scope.addingKitchens = $scope.addingKitchens.filter(function (obj) {
                         return !(obj.id in bIds);
                     });
 

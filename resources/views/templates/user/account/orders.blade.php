@@ -35,11 +35,6 @@
                                             </a>
                                             <div class="numb1-txt">
                                                 <p class=" no-padding fmlreg fz20 cg2"><% todo.address %></p>
-                                                <small class="cg3 fmlreg fz14">Price:
-                                                <span class="numb2">
-                                                    <% todo.price %>
-                                                </span>
-                                                </small>
                                             </div>
                                         </div>
                                         <div class="username-btn fl">

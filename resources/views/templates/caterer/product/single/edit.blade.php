@@ -13,7 +13,7 @@
 
                         <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
                         <div data-ng-controller="EditProductController">
-                            <div class="col-sm-7 col-md-8">
+                            <div class="col-sm-7 col-md-8" ng-init="getPrDts()">
                                 <div>
                                     <uib-tabset active="activeJustified"  class="profile-tab" justified="true">
                                         <uib-tab index="0" heading="Common information">

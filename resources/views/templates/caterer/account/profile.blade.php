@@ -18,7 +18,7 @@
                             <div>
                                 <uib-tabset active="activeJustified" class="profile-tab" justified="true">
                                     <uib-tab index="0" heading="Common information">
-                                        <div class="tab-content">
+                                        <div class="tab-content" ng-init="getAccount()">
                                             <div role="tabpanel" class="tab-pane active" id="home profile-tabs">
                                                 <form method="post">
                                                     <div class="profil-form fl">

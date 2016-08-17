@@ -15,6 +15,16 @@ app.controller('CartController',  ['$scope', function($scope){
     else
         $scope.total_price = 0;
 
+    if(localStorage.getItem('delivery_time'))
+        $scope.delivery_time = localStorage.getItem('delivery_time');
+    else
+        $scope.delivery_time = new Date;
+    $scope.setTime = function () {
+        console.log(11);
+        localStorage.setItem('delivery_time',$scope.delivery_time);
+    }
+
+
     var new_total_price;
     $scope.removeFromCart = function(index, total_price, type){
 

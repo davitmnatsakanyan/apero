@@ -19,7 +19,7 @@
 						<div class="lieferdatum carterer-lieferdatum">
 							<label>
 								<span>Lieferdatum</span>
-								<input type="text" id="datetimepicker4">
+								<input type="datetime" id="datetimepicker4" ng-model="delivery_time" ng-change="setTime()">
 							</label>
 						</div>
 

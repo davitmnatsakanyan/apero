@@ -58,7 +58,8 @@ class PaypalController extends Controller
 
         $response = $payment->create($this->_apiContext);
         $redirectUrl = $response->links[1]->href;
-        return Redirect::to($redirectUrl);
+//        return Redirect::to($redirectUrl);
+        return response()->json(['redirectUrl' => $redirectUrl]);
     }
 
     public function getDone(Request $request)

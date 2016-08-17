@@ -1,7 +1,7 @@
 <h1> <% product.name %></h1>
 <div class="table-responsive">
     <div class="cater-pic caterer-pic-width" ng-hide="$flow.files.length">
-        <img class="ithumbnail"  src="images/products/<% product.avatar %>" , alt="Mountain View" />
+        <img class="thumbnail"  src="images/products/<% product.avatar %>" , alt="Mountain View"  />
     </div>
     <table class="table table-bordered table-striped table-hover">
         <tbody>
