@@ -13,20 +13,28 @@
 					<div class="apero-carterer clearfix">
 
 						<h2 class="clearfix">Ihr Warenkorb bei Spitzen-Apero Caterer
-							<img src="../images/<% caterer.avatar %>" alt="">
+							<img ng-src="/images/<% caterer.avatar %>" alt="">
 						</h2>
 
 						<div class="lieferdatum carterer-lieferdatum">
 							<label>
 								<span>Lieferdatum</span>
-								<input type="datetime" id="datetimepicker4" ng-model="delivery_time" ng-change="setTime()">
+								{{-- <input type="datetime" id="datetimepicker4" ng-model="" ng-change="setTime()">--}}
+								<div class="dropdown">
+									<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" >
+										<input type="text" class="form-control" data-ng-model="delivery_time">
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<datetimepicker data-ng-model="delivery_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+									</ul>
+								</div>
 							</label>
 						</div>
 
 						<div class="carterer-product" ng-repeat="product in products track by $index">
 							<ul>
 								<li>
-									<img ng-src="../images/products/<% product.avatar %>" alt="">
+									<img ng-src="/images/products/<% product.avatar %>" alt="">
 								</li>
 								<li>
 									<p>

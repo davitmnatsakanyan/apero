@@ -1197,6 +1197,7 @@ a {
     background-color: #fff;
     text-align: center;
     color: #5d5b5b;
+    width: 55%;
 }
 
 .carterer-lieferdatum span {
@@ -1205,6 +1206,7 @@ a {
     font-family: OpenSansLight;
     float: left;
     margin-top: 4px;
+    margin-right: 10px;
 }
 
 .carterer-product {

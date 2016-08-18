@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" media="screen">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen">
-    <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" href="/css/datetimepicker.css"/>
+    <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css"/>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/custom.css">
@@ -61,6 +63,8 @@
 <script src="/bower_components/angular-touch/angular-touch.js"></script>
 <script src="/bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
 <script src="/bower_components/angular-payments/lib/angular-payments.js"> </script>
+<script type="text/javascript" src="/js/datetimepicker.js"></script>
+<script type="text/javascript" src="/js/datetimepicker.templates.js"></script>
 
 <script src="/js/angular-modal-service.min.js"></script>
 <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
@@ -93,10 +97,10 @@
 <script src="/js/controllers/UserOrdersController.js"></script>
 <script src="/js/controllers/CatererPackageController.js"></script>
 <script src="/js/controllers/EditProductController.js"></script>
-<script src="/js/controllers/ModalInstanceController.js">
-</script><script src="/js/controllers/CookingTimeModalInstanceController.js"></script>
-</script><script src="/js/controllers/UploadImageModalInstanceController.js"></script>
-</script><script src="/js/controllers/SubproductModalInstanceController.js"></script>
+<script src="/js/controllers/ModalInstanceController.js"></script>
+<script src="/js/controllers/CookingTimeModalInstanceController.js"></script>
+<script src="/js/controllers/UploadImageModalInstanceController.js"></script>
+<script src="/js/controllers/SubproductModalInstanceController.js"></script>
 
 
 <!-- end controllers -->

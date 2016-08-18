@@ -1,6 +1,6 @@
 app.controller('CartController',  ['$scope', function($scope){
-    $('#datetimepicker4').datetimepicker();
-
+   // $('#datetimepicker4').datetimepicker();
+    $scope.delivery_time = new Date();
     if(JSON.parse(localStorage.getItem('cart'))){
         $scope.products = JSON.parse(localStorage.getItem('cart'))[0].products;
         $scope.packages = JSON.parse(localStorage.getItem('cart'))[0].packages;
@@ -15,7 +15,7 @@ app.controller('CartController',  ['$scope', function($scope){
     else
         $scope.total_price = 0;
 
-    if(localStorage.getItem('delivery_time'))
+   /* if(localStorage.getItem('delivery_time'))
         $scope.delivery_time = localStorage.getItem('delivery_time');
     else
         $scope.delivery_time = new Date;
@@ -23,6 +23,14 @@ app.controller('CartController',  ['$scope', function($scope){
         console.log(11);
         localStorage.setItem('delivery_time',$scope.delivery_time);
     }
+*/
+    /* if(localStorage.getItem('delivery_time')) {
+        $scope.delivery_time = JSON.parse(localStorage.getItem('delivery_time'));
+    }*/
+
+    $scope.$watch("delivery_time",function (newValues, oldValues, scope) {
+        localStorage.setItem('delivery_time', JSON.stringify($scope.delivery_time));
+    });
 
 
     var new_total_price;
