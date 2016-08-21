@@ -27,7 +27,7 @@ class SearchController extends Controller
            
         }
         else {
-            $caterers = Caterer::with('kitchens')->get();
+            $caterers = Caterer::with('kitchens','cookingtime')->get();
         }
 
         $kitchens = Kitchen::all();

@@ -19,10 +19,10 @@
                                     <uib-tab index="0" heading="Common information">
                                         <div ng-include='"templates/caterer/product/package/items/editCommonInformation.blade.php"'></div>
                                     </uib-tab>
-                                    <uib-tab index="1" heading="Products">
-                                        <div ng-include='"templates/caterer/product/package/items/editProducts.blade.php"'></div>
+                                    <uib-tab {{--class='order-tab'--}} index="1" heading="Products">
+                                        <div  ng-include='"templates/caterer/product/package/items/editProducts.blade.php"'></div>
                                     </uib-tab>
-                                    <uib-tab index="2" heading="Add Products">
+                                    <uib-tab {{--class='order-tab'--}} index="2" heading="Add Products">
                                         <div ng-include='"templates/caterer/product/package/items/addProduct.blade.php"'></div>
                                     </uib-tab>
                                 </uib-tabset>

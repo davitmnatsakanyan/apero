@@ -26,7 +26,15 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="lieferdatum">
-									<input type='text'  ng-model="date"  placeholder="Lieferdatum" id='datetimepicker4'>
+									{{--<input type='text'  ng-model="date"  placeholder="Lieferdatum" id='datetimepicker4'>--}}
+									<div class="dropdown home">
+										<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" >
+											<input type="text" class="form-control" data-ng-model="delivery_time">
+										</a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<datetimepicker data-ng-model="delivery_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+										</ul>
+									</div>
 								</div>
 							</div>
 							<% date %>

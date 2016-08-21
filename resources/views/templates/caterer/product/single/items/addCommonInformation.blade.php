@@ -5,7 +5,7 @@
     <div class="profil-form fl">
         <div class="info-box">
             <label class="title fmlbold fz17">Kitchen</label>
-            <ui-select ng-model="addingProduct.kitchen" class="fmlreg fz13"
+            <ui-select ng-model="addingProduct.kitchen" class="fmlreg fz13 mb1"
                        on-select="selectKitchen($select.selected, $model)">
                 <ui-select-match placeholder="Select kitchen" class="select-zip"><% $select.selected.name %></ui-select-match>
                 <ui-select-choices repeat="kitchen in allKitchens track by kitchen.id">
@@ -28,7 +28,7 @@
     <div class="profil-form fl">
         <div class="info-box">
             <label class="title fmlbold fz15">Menu</label>
-            <ui-select ng-model="addingProduct.menu" class="fmlreg fz13"
+            <ui-select ng-model="addingProduct.menu" class="fmlreg fz13 mb1"
                        >
                 <ui-select-match placeholder="Select menu" class="select-zip"><% $select.selected.name %></ui-select-match>
                 <ui-select-choices repeat="menu in allMenus track by menu.id">

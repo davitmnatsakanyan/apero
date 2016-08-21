@@ -1,7 +1,15 @@
 app.controller('HomeController', ['$q', '$location', 'sharedProperties', 'SearchModel', '$http', '$scope', '$timeout', function ($q, $location, sharedProperties, SearchModel, $http, $scope, $timeout) {
 
-    $('#datetimepicker4').datetimepicker();
+    // $('#datetimepicker4').datetimepicker();
 
+    $scope.delivery_time = new Date();
+    if(localStorage.getItem('delivery_time')) {
+        $scope.delivery_time = new Date(JSON.parse(localStorage.getItem('delivery_time')));
+    }
+
+    $scope.$watch("delivery_time",function (newValues, oldValues, scope) {
+        localStorage.setItem('delivery_time', JSON.stringify($scope.delivery_time));
+    });
 
     $scope.search = function(){
         SearchModel.getIndex($scope.data).then(function (response) {

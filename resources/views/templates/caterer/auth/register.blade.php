@@ -64,8 +64,8 @@
                                                 Your form validation is successful!
                                             </div>
                                             <div class="tab-pane active" id="tab1">
-                                                <div class="col-md-6">
-                                                    <h3 class="block">Provide your caterer details</h3>
+                                                <div class="col-md-6 mt40p">
+                                                    <h3 class="block fz30">Provide your caterer details</h3>
                                                     <input type="hidden" name="role" ng-init="data.role='caterer'" ng-model="data.role">
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
@@ -228,8 +228,8 @@
                                                     </div>
                                                 </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <h3 class="block">Contact person</h3>
+                                                <div class="col-md-6 mt40p">
+                                                    <h3 class="block fz30">Contact person</h3>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-5">Title
                                                     <span class="required">

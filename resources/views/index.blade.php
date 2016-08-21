@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen">
 
     <link rel="stylesheet" href="/css/datetimepicker.css"/>
-    <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    {{--<link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css"/>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    {{--<link rel="stylesheet" href="/css/custom.css">--}}
 
 
     {{--<!-- BEGIN GLOBAL MANDATORY STYLES -->--}}
@@ -31,15 +31,19 @@
     {{--<!-- END PAGE LEVEL SCRIPTS -->--}}
     {{--<!-- BEGIN THEME STYLES -->--}}
 
-    <link href="/administration/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
-    <link href="/administration/assets/css/style.css" rel="stylesheet" type="text/css"/>
+    {{-- admin css--}}
 
-    <link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-    <link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/select.css" rel="stylesheet" type="text/css"/>
+    {{--<link href="/administration/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>--}}
+    {{--<link href="/administration/assets/css/style.css" rel="stylesheet" type="text/css"/>--}}
 
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    {{--<link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>--}}
+    {{--<link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>--}}
+    {{--<link href="/css/custom.css" rel="stylesheet" type="text/css"/>--}}
+    {{--<link href="/css/select.css" rel="stylesheet" type="text/css"/>--}}
+
+    {{-- end admin css --}}
+
+    {{--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">--}}
     <script>
         var BASE_URL = '{{ url('/') }}';
     </script>
@@ -52,7 +56,7 @@
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/moment/moment.js"></script>
-<script src="/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+{{--<script src="/js/bootstrap-datetimepicker.js" type="text/javascript"></script>--}}
 
 <script src="/bower_components/angular/angular.js"></script>
 <script src="/bower_components/angular-route/angular-route.js"></script>
@@ -72,7 +76,7 @@
 <script src="/js/select.js"></script>
 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>--}}
 
 <script src="/js/app.js"></script>
 

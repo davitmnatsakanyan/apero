@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" ng-href="#/">
-                    <img src="../images/logo.png" alt="" class="img-responsive">
+                    <img ng-src="../images/logo.png" alt="" class="img-responsive">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->

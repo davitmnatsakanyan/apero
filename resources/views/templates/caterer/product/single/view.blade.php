@@ -16,7 +16,7 @@
                             <div class="col-sm-7 col-md-8">
                                 <div ng-if="product.subproducts.length">
                                     <div class="package-tab">
-                                <uib-tabset active="activeJustified" justified="true">
+                                <uib-tabset active="activeJustified" justified="true" class="mt20">
                                     <uib-tab index="0" heading="Common information">
                                         <div ng-include='"templates/caterer/product/single/items/showCommonInformation.blade.php"'></div>
                                     </uib-tab>

@@ -1,4 +1,4 @@
-<h2>Add kitchen</h2>
+<h2 class="fz30 mb10 mt10">Add kitchen</h2>
 <div ng-controller="CatererProfileController">
     <form href="#" method="post" class='form-horizontal' id="updateKitchens">
         <label for="kitchens" class="title fmlbold fz17">Kitchens</label>
@@ -18,7 +18,7 @@
             </div>
     </form>
 
-    <h2>Kitchens</h2>
+    <h2 class="fz30 mb10 mt10">Kitchens</h2>
     <table class="table table-bordered table-striped table-hover">
         <tbody>
         <tr ng-repeat="kitchen in filteredKitchens">

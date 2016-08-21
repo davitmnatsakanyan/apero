@@ -19,8 +19,8 @@
                                     <div>
                                         <img class="package-list-img" ng-src="images/packages/<% package.avatar %>" , alt="Mountain View"/>
                                     </div>
-                                    <div class="product-txt fl no-margin-top">
-                                        <p class="fmlreg fz20 cg1 title no-margin-bottom">
+                                    <div class="product-txt fl">
+                                        <p class="fmlreg fz20 cg1 title mb5">
                                             <% package.name %>
                                             <span><%(currentPackagePage-1)*numPerPageForPackages +$index+1 %></span>
                                         </p>

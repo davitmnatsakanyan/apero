@@ -17,7 +17,7 @@
                         <div class="col-sm-7 col-md-8">
                             <div class="package-tab">
                                 <uib-tabset active="activeJustified" class="profile-tab" justified="true">
-                                    <uib-tab index="0" heading="Common information">
+                                    <uib-tab index="0" heading="Common information" class="profile-tab-1">
                                         <div class="tab-content" ng-init="getAccount()">
                                             <div role="tabpanel" class="tab-pane active" id="home profile-tabs">
                                                 <form method="post">
@@ -45,7 +45,7 @@
                                                         <div class="info-box">
                                                             <label for="zip" class="title fmlbold fz15">Zip</label>
 
-                                                            <ui-select ng-model="selectedZip" class="fmlreg fz13"
+                                                            <ui-select ng-model="selectedZip" class="fmlreg fz13 mb1"
                                                                        on-select="selectZip($select.selected, $model)">
                                                                 <ui-select-match class="select-zip"><%
                                                                     $select.selected.ZIP + " " +
@@ -101,7 +101,7 @@
                                                             <label for="country"
                                                                    class="title fmlbold fz15">Country</label>
                                                             <ui-select ng-model="selectedCountry"
-                                                                       class="fmlreg fz13"
+                                                                       class="fmlreg fz13 mb1"
                                                                        on-select="selectCountry($select.selected, $model)">
                                                                 <ui-select-match class="select-zip"><%
                                                                     $select.selected.name %>
@@ -144,7 +144,7 @@
                                             </div>
                                         </div>
                                     </uib-tab>
-                                    <uib-tab index="1" heading="Contact person">
+                                    <uib-tab index="1" heading="Contact person" class="profile-tab-1">
                                         <form action="#" method="post">
                                             <div class="profil-form fl">
                                                 <div class="info-box">
@@ -197,17 +197,17 @@
                                                    ng-click="updateContactPerson()"/>
                                         </div>
                                     </uib-tab>
-                                    <uib-tab index="2" heading="Delivery Area">
+                                    <uib-tab index="2" heading="Delivery Area" class="profile-tab-1">
                                         <div ng-include='"templates/caterer/account/items/deliveryArea.blade.php"'></div>
                                     </uib-tab>
-                                    <uib-tab index="3" heading="Kitchens" class="kitchen-tab">
+                                    <uib-tab index="3" heading="Kitchens"  class="profile-tab-1">
                                         <div ng-include='"templates/caterer/account/items/kitchens.blade.php"'></div>
                                     </uib-tab>
                                     </uib-tab>
-                                    <uib-tab index="4" heading="Cooking Time">
+                                    <uib-tab index="4" heading="Cooking Time" class="profile-tab-1">
                                         <div ng-include='"templates/caterer/account/items/cookingTime.blade.php"'></div>
-                                    </uib-tab>
-                                    <uib-tab index="5" heading="Change Password">
+                                    </uib-tab >
+                                    <uib-tab index="5" heading="Change Password" class="profile-tab-1">
                                         <div ng-include='"templates/caterer/account/items/changePassword.blade.php"'></div>
                                     </uib-tab>
                                 </uib-tabset>

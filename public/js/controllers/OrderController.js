@@ -2,7 +2,7 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
     'toastr','$window',
     function ( $rootScope, $scope, $http, AuthService,$uibModal,$document,CatererAccountModel,toastr,$window) {
 
-    $('#datetimepicker4').datetimepicker();
+    // $('#datetimepicker4').datetimepicker();
 
     $scope.number="";$scope.expiry="";$scope.cvc="";
 
@@ -13,16 +13,29 @@ app.controller('OrderController', [ '$rootScope', '$scope', '$http', 'AuthServic
     else{
         $scope.products = '';
     }
-        
-    if(localStorage.getItem('total_price'))
-        $scope.total_price = localStorage.getItem('total_price');
-    else
-        $scope.total_price = 0;
 
-        if(localStorage.getItem('delivery_time'))
-            $scope.delivery_time = localStorage.getItem('delivery_time');
-        else
-            $scope.delivery_time = new Date();
+
+
+        $scope.delivery_time = new Date();
+        if(localStorage.getItem('delivery_time')) {
+            $scope.delivery_time = new Date(JSON.parse(localStorage.getItem('delivery_time')));
+        }
+
+        $scope.$watch("delivery_time",function (newValues, oldValues, scope) {
+            localStorage.setItem('delivery_time', JSON.stringify($scope.delivery_time));
+        });
+        
+        
+    //    
+    // if(localStorage.getItem('total_price'))
+    //     $scope.total_price = localStorage.getItem('total_price');
+    // else
+    //     $scope.total_price = 0;
+    //
+    //     if(localStorage.getItem('delivery_time'))
+    //         $scope.delivery_time = localStorage.getItem('delivery_time');
+    //     else
+    //         $scope.delivery_time = new Date();
 
     var new_total_price;
     $scope.removeFromCart = function(index, total_price, type){

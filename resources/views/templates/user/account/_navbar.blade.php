@@ -1,6 +1,6 @@
 <div class="col-sm-5 col-md-4 cater-left-box">
     <div class="apero-pic">
-        <img src="images/apero-pic.png" alt=""/>
+        <img ng-src="images/apero-pic.png" alt=""/>
     </div>
     <div class="cater-btn ctbtn1">
         <div>

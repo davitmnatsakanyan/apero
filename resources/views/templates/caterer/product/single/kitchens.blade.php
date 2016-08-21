@@ -31,7 +31,7 @@
                                             </span>
                                             </div>
                                             <div class="numb1-txt">
-                                                <p class="fmlreg fz20 cg2"> <% kitchen.name %></p>
+                                                <p class="fmlreg fz20 cg2 mt6"> <% kitchen.name %></p>
                                             </div>
                                         </div>
 

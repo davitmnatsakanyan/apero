@@ -10,7 +10,7 @@
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
-                <h3 class="block">Provide your personal details</h3>
+                <h3 class="block fz30 ml195">Provide your personal details</h3>
                 <div class="col-md-12">
                     <form action="#" class="form-horizontal" id="submit_form" ng-submit="reg_submit()">
 

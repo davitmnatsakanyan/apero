@@ -14,7 +14,7 @@
         <div class="col-md-5">
             <ul class="rigth_items">
                 <li>
-                    <img class="img-responsive" src="/images/products/<% product.avatar %>">
+                    <img class="img-responsive" ng-src="/images/products/<% product.avatar %>">
                 </li>
                 <li>
                     <div class="count">Count: <strong><% product_count %></strong></div>

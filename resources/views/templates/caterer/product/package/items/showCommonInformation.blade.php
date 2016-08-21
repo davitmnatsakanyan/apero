@@ -1,7 +1,7 @@
-<h1> <% package.name %></h1>
+<h1 class="fz40 mb10"> <% package.name %></h1>
 <div class="table-responsive">
     <div class="caterer-pic-width" ng-hide="$flow.files.length">
-        <img class="ithumbnail"  src="images/packages/<% package.avatar %>" , alt="Mountain View" />
+        <img class="ithumbnail"  ng-src="images/packages/<% package.avatar %>" , alt="Mountain View" />
     </div>
     <table class="table table-bordered table-striped table-hover mt20">
         <tbody>

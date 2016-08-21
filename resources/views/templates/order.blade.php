@@ -20,14 +20,22 @@
 								<span class="bestellen-etap">1</span>
 								<label>
 									<span>Apero-Bestelliste</span>
-									<input type="datetime" id="datetimepicker4" ng-model="delivery_time">
+									{{-- <input type="datetime" id="datetimepicker4" ng-model="" ng-change="setTime()">--}}
+									<div class="dropdown">
+										<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" >
+											<input type="text" class="form-control" data-ng-model="delivery_time">
+										</a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<datetimepicker data-ng-model="delivery_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+										</ul>
+									</div>
 								</label>
 							</div>
 
 							<div class="carterer-product" ng-repeat="product in products track by $index">
 								<ul>
 									<li>
-										<img src="../images/products/<% product.avatar %>" alt="">
+										<img ng-src="../images/products/<% product.avatar %>" alt="">
 									</li>
 									<li>
 										<p>
@@ -44,7 +52,7 @@
 							<div class="carterer-product" ng-repeat="package in packages track by $index">
 								<ul>
 									<li>
-										<img src="../images/products/<% package.avatar %>" alt="">
+										<img ng-src="../images/products/<% package.avatar %>" alt="">
 									</li>
 									<li>
 										<p>
@@ -81,7 +89,7 @@
 									<div class="form-group order-block1 ">
 										<label for="" class="order-page-label">Country</label>
 										<span class="order-blade-select">
-											<ui-select ng-model="country" class="selectpicker form-control" on-select = "selectCountry($select.selected, $model)">
+											<ui-select ng-model="country" class="selectpicker form-control order1" on-select = "selectCountry($select.selected, $model)">
 												<ui-select-match placeholder="Select Country" class="order-blade-select1"><% $select.selected.name %></ui-select-match>
 												<ui-select-choices repeat="country in countries track by country.id">
 													<% country.name %>
@@ -100,7 +108,7 @@
 									<div class="form-group ">
 										<label for="" class="order-page-label">PLZ</label>
 										{{--<input type="text"  class="form-control"  placeholder="PLZ" ng-model="delivery_zip" required>--}}
-										<ui-select ng-model="delivery_zip" class="selectpicker form-control" on-select = "selectZip($select.selected, $model)">
+										<ui-select ng-model="delivery_zip" class="selectpicker form-control order1" on-select = "selectZip($select.selected, $model)">
 											<ui-select-match placeholder="Select zip codes" class="order-blade-select1"><% $select.selected.name %></ui-select-match>
 											<ui-select-choices repeat="zip in zips track by zip.id">
 												<% zip.name %>
@@ -177,15 +185,15 @@
 
 								   <label class="radio">
 									  <input type="radio" name="optradio" checked=""  ng-model="payment.name" value="stripe">
-									  <img src="../images/visa.png">
-										<img src="../images/master.png">
+									  <img ng-src="../images/visa.png">
+										<img ng-src="../images/master.png">
 										<span>Kreditkarte(Stripe)</span>
 									</label>
 
 
 									 <label class="radio">
 										<input type="radio" name="optradio"  ng-model="payment.name" value="paypal">
-										<img src="../images/paypal.png">
+										<img ng-src="../images/paypal.png">
 
 										<span>PayPal</span>
 									</label>
@@ -199,7 +207,7 @@
 
 								<div class="bestellen-etap-left">
 									<ul>
-										<li><img src="../images/block.png"></li>
+										<li><img ng-src="../images/block.png"></li>
 										<li>
 											<p>
 												Lorem Ipsum is simply dummy text of the printing and typesetting

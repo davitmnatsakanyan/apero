@@ -10,7 +10,7 @@
 							<div class="col-md-12 anbieter-item">
 								<div class="col-md-6">
 									<div class="anbieter-img">
-										<img src="../images/caterers/<% caterer.avatar %>" alt="">
+										<img ng-src="../images/caterers/<% caterer.avatar %>" alt="">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -59,7 +59,7 @@
 						<div class="apero-kat clearfix">
 							<div class="package-tab">
 							<uib-tabset active="activeForm" id="caterer_page">
-								<uib-tab index="0" heading="Products">
+								<uib-tab index="0" heading="Products" class="w50">
 									<div class="mt20">
 									<div class="col-md-12 anbieter-kat-item" ng-repeat="menu in menus">
 										<div class="col-md-12">
@@ -69,7 +69,7 @@
 										</div>
 										<div class="col-md-5">
 											<div class="anbieter-img">
-												<img src="../images/menus/<% menu.avatar  %>" alt="">
+												<img ng-src="../images/menus/<% menu.avatar  %>" alt="">
 											</div>
 										</div>
 										<div class="col-md-7">
@@ -86,7 +86,7 @@
 									</div>
 									</div>
 								</uib-tab>
-								<uib-tab index="1" heading="Packages">
+								<uib-tab index="1" heading="Packages" class="w50">
 									<div class="mt20">
 									<div class="col-md-12 anbieter-kat-item" ng-repeat="package in packages">
 										<div class="col-md-12">
@@ -96,7 +96,7 @@
 										</div>
 										<div class="col-md-5">
 											<div class="anbieter-img">
-												<img src="../images/packages/<% package.avatar  %>" alt="">
+												<img ng-src="../images/packages/<% package.avatar  %>" alt="">
 											</div>
 										</div>
 										<div class="col-md-7">
@@ -130,7 +130,15 @@
 
 									<h4>Lieferdatium</h4>
 									<div class="lieferdatum">
-										<input type="text" id="datetimepicker4">
+										{{--<input type="text" id="datetimepicker4">--}}
+										<div class="dropdown">
+											<a class="dropdown-toggle" id="dropdown2"  role="button" data-toggle="dropdown" data-target="#" >
+												<input type="text" class="form-control" data-ng-model="delivery_time">
+											</a>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+												<datetimepicker data-ng-model="delivery_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+											</ul>
+										</div>
 									</div>
 									<div class="product-text">
 									<p>Products</p>

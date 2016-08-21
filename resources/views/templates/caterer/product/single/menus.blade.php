@@ -19,8 +19,8 @@
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company">
                                 <div data-ng-controller="CatererProductsController">
                                     <div class="bestellen1">
-                                    <a  class="add-button" href="#/caterer/product/add">Add product</a>
-</div>
+                                        <a class="add-button" href="#/caterer/product/add">Add product</a>
+                                    </div>
                                     <div ng-repeat="menu in filteredMenus">
                                         <div class="adress fl">
                                             <div class="numb1">
@@ -31,7 +31,7 @@
                                             </span>
                                             </div>
                                             <div class="numb1-txt">
-                                                <p class="fmlreg fz20 cg2"> <% menu.name %></p>
+                                                <p class="fmlreg fz20 cg2 mt6"> <% menu.name %></p>
                                             </div>
                                         </div>
 

@@ -1,5 +1,5 @@
 app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope', '$routeParams', 'CatererModel', 'sharedProperties', '$timeout',   function ($rootScope, $log, $uibModal, $scope, $routeParams, CatererModel, sharedProperties, $timeout) {
-    $timeout($('#datetimepicker4').datetimepicker(), 2000);
+    // $timeout($('#datetimepicker4').datetimepicker(), 2000);
 
     var caterer_id = $routeParams.caterer_id;
     if(cart = localStorage.getItem('cart')) {
@@ -17,49 +17,53 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
         $scope.caterer  = response.data.caterer;
 
     });
-    if (localStorage.getItem('cart')) {
 
+    if (localStorage.getItem('cart')) {
         var orders = [{
             'products': JSON.parse(localStorage.getItem('cart'))[0].products,
             'packages': JSON.parse(localStorage.getItem('cart'))[0].packages
         }]
     }
     else {
-
         var orders = [{
             'products': [],
             'packages': []
         }];
     }
 
-
     if(localStorage.getItem('total_price')) {
         var total_price = localStorage.getItem('total_price');
-
     }
     else {
         var total_price = 0;
     }
 
+
+
+    $scope.delivery_time = new Date();
+    if(localStorage.getItem('delivery_time')) {
+        $scope.delivery_time = new Date(JSON.parse(localStorage.getItem('delivery_time')));
+    }
+
+    $scope.$watch("delivery_time",function (newValues, oldValues, scope) {
+        localStorage.setItem('delivery_time', JSON.stringify($scope.delivery_time));
+    });
+
+    
     $rootScope.total_price = total_price;
     $rootScope.products = orders[0].products;
     $rootScope.packages = orders[0].packages;
-
 
     var i=0;
     $scope.addToCart = function(order, count, type){
         console.log(order);
         console.log(count);
         console.log(type);
-
         if(type == 'product') {
             if (order.subproducts.length > 0 && count > 0) {
-
                 $scope.items = order.subproducts;
-
                 $scope.animationsEnabled = true;
                 var size = '';
-
                 var modalInstance = $uibModal.open({
                     animation: $scope.animationsEnabled,
                     templateUrl: 'templates/modals/subproducts_modal.blade.php',
@@ -67,7 +71,6 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
                     size: size,
                     resolve: {
                         items: function () {
-
                             return $scope.items;
                         },
                         product: function () {
@@ -76,10 +79,8 @@ app.controller('CatererController', ['$rootScope', '$log', '$uibModal', '$scope'
                         product_count: function () {
                             return count;
                         }
-
                     }
                 });
-
 
                 $scope.toggleAnimation = function () {
                     $scope.animationsEnabled = !$scope.animationsEnabled;

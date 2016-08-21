@@ -1,17 +1,29 @@
 <div ng-include='"templates/nav.blade.php"'></div>
 <div class="modal-header">
-    <h3 class="modal-title">Login</h3>
+    <h3 class="modal-title fz40">Login</h3>
 </div>
 <div class="register package-tab">
     <uib-tabset active="activeForm">
-        <uib-tab index="0" heading="Caterer">
+        <uib-tab index="0" heading="Caterer" class="w50">
+            <div class="mt20">
             <div ng-include='"templates/caterer/auth/login.blade.php"'></div>
+            </div>
         </uib-tab>
-        <uib-tab index="1" heading="User">
+        <uib-tab index="1" heading="User" class="w50">
+            <div class="mt20">
             <div ng-include='"templates/user/auth/login.blade.php"'></div>
+                </div>
         </uib-tab>
     </uib-tabset>
 </div>
+
+<link href="/administration/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="/administration/assets/css/style.css" rel="stylesheet" type="text/css"/>
+
+<link href="/administration/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+<link href="/administration/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/css/select.css" rel="stylesheet" type="text/css"/>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 {{--<script type="text/javascript" src="/administration/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>--}}

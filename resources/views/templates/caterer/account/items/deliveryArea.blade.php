@@ -1,4 +1,4 @@
-<h2>Add delivery area</h2>
+<h2 class="fz30 mb10 mt10">Add delivery area</h2>
 <div ng-controller="CatererProfileController">
     <form href="#" method="post" class='form-horizontal' id="updateDeliveryArea">
         <label for="zip_codes" class="title fmlbold fz17">Zip Codes</label>
@@ -16,7 +16,7 @@
         </div>
     </form>
 
-    <h2>Delivery areas</h2>
+    <h2 class="fz30 mb10 mt10">Delivery areas</h2>
     <table class="table table-bordered table-striped table-hover">
         <tbody>
         <tr ng-repeat="zip in filteredZips">

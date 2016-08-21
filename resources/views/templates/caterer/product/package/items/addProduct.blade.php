@@ -1,5 +1,5 @@
 <div ng-controller="CatererPackageController" >
-        <label for="products" class="title fmlbold fz17">Select Products</label>
+        <label for="products" class="title fmlbold fz17 mt20 pb5">Select Products</label>
         <ui-select multiple ng-model="selectedProducts.selected" class="selectpicker form-control"
                    title="Choose a product" on-remove="removeProduct($item, $model)" on-select="addProduct($item, $model)">
             <ui-select-match placeholder="Select products"><% $item.name %></ui-select-match>

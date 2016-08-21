@@ -108,6 +108,19 @@ a {
     margin: 0 0 10px
 }
 
+.mb1{
+    margin-bottom: 1px !important;
+}
+.pb5{
+    padding-bottom: 5px;
+}
+
+.mb5{
+    margin-bottom: 5px;
+}
+
+
+
 .wrapper920 {
     max-width: 950px;
 }
@@ -161,6 +174,18 @@ a {
 
 .ml0{
     margin-left: 0 !important;
+}
+
+.mt6{
+    margin-top: 6px;
+}
+
+.mt10{
+    margin-top: 10px;
+}
+
+.mt40p{
+    margin-top: 40px;
 }
 .mt40{
     margin-top: -40px;
@@ -300,7 +325,7 @@ a {
 }
 
 .add-product-label{
-    padding: 7px 40px 8px 9px !important;
+    padding: 10px 40px 12px 10px !important;
 }
 
 .minus-icon{
@@ -711,11 +736,11 @@ a {
     margin-bottom: 5px;
     padding-left: 30px;
 }
- .product-list1 p{
-    margin-bottom: 0 ;
-    margin-top: -14px !important;
+ /*.product-list1 p{*/
+    /*margin-bottom: 0 ;*/
+    /*margin-top: -14px !important;*/
 
-}
+/*}*/
 
  .pr8{
      padding-right: 8px !important;
@@ -903,12 +928,21 @@ a {
 .kitchen-add .save-btn{
     margin-top: 8px;
 }
+
 .profile-tab .nav-tabs.nav-justified > li > a {
+    font-size:14px;
     border-bottom: transparent;
 }
+
+.profile-tab-1 a{
+    height: 80px;
+    border-bottom: none;
+}
+
 .profile-tab{
     margin-top: 20px;
 }
+
 
 .profile-page-btn .save-btn{
     margin-top: -20px;
@@ -919,8 +953,18 @@ a {
 .company-title-username .btn:hover, .btn:focus {
     color: #fff;
 }
+
+.ml195{
+    margin-bottom: 20px;
+    margin-left: 195px;
+}
+
 .ml15{
     margin-left: 0 !important;
+}
+
+.ml20{
+    margin-left: 20px;
 }
 
 .anbieter-filter .btn:hover .fa, .anbieter-filter .btn.focus .fa {
@@ -1634,6 +1678,7 @@ img {
 .inner-cater {
     height: 590px;
     background-color: #fff;
+    font-family: OpenSans;
 }
 
 .cater-btn-txt {
@@ -1668,7 +1713,7 @@ img {
 .cater-left-box {
     margin-top: 20px;
     max-width: 290px;
-    padding-left: 35px;
+    /*padding-left: 35px;*/
 }
 
 .cater-left-box img {
@@ -1725,7 +1770,7 @@ img {
 }
 
 .hilife {
-    padding: 0 29px;
+    padding: 0 35px;
     border-radius: 4px;
     background-color: #edebeb;
     border: 0;
@@ -1736,7 +1781,7 @@ img {
 }
 
 .logout {
-    padding: 0 28px;
+    padding: 0 30px;
     border-radius: 4px;
     background-color: #cd6060;
     border: 0;
@@ -1798,9 +1843,9 @@ form {
     padding-right: 0 !important;
 }
 .select-zip{
-    height:44px !important;
-    line-height: 44px;
-    width: 126px;
+    height:38px !important;
+    line-height: 40px;
+    width: 124px;
     text-align: center;
     padding-top: 8px !important;
     background-color: #F2F3F3;
@@ -1857,6 +1902,11 @@ form {
 
 .dib {
     display: inline-block;
+}
+
+
+.fz40{
+    font-size: 40px;
 }
 
 .fz20 {
@@ -2078,14 +2128,14 @@ a {
     background-image: url("images/red-times-icon.png");
 }
 
-.product-txt .title {
-    margin-bottom: 15px;
-    padding-right: 20px;
-}
+/*.product-txt .title {*/
+    /*margin-bottom: 15px;*/
+    /*padding-right: 20px;*/
+/*}*/
 
-.product-txt {
-    margin-top: 5px;
-}
+/*.product-txt {*/
+    /*margin-top: 5px;*/
+/*}*/
 
 .product-icons {
     margin-top: 24px;
@@ -2155,7 +2205,7 @@ a {
 }
 
 form .profil-form  {
-    margin: 45px 0px 0px 45px;
+    margin: 25px 0px 0px 23px;
 }
 
 
@@ -2167,6 +2217,10 @@ form .profil-form  {
     width: 104px;
 }
 
+
+.fz30{
+    font-size: 30px;
+}
 .profil-border {
     border: 1px solid #c8c7c6;
     margin: 53px auto 44px;
@@ -2362,11 +2416,13 @@ form .profil-form  {
     margin-bottom: 6px;
 }
 
+
 .inner-cater .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     border: 3px solid #e2e1e2;
     border-bottom: 0;
     border-top-left-radius: 13px;
     border-top-right-radius: 13px;
+    font-size: 16px
 }
 
 .inner-cater .nav-tabs > li:last-child {
@@ -3155,3 +3211,71 @@ form .profil-form  {
 }
 
 /*content-main-page-media*/
+
+/* style changes*/
+.inner-cater .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border: 3px solid #e2e1e2;
+    border-bottom: 0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.order-tab:hover, .order-tab:focus, .order-tab.active {
+    height: 65px;
+}
+
+.order-tab a {
+    height: 72px;
+    padding-top: 20px;
+}
+
+/*.fmlreg input{*/
+    /*display: none;*/
+/*}*/
+
+/*.fmlreg input:focus{*/
+    /*display: inline;*/
+/*}*/
+.select2-container .select2-choice{
+    border-radius: 0 !important;
+}
+
+
+.pagination>li:first-child>a, .pagination>li:first-child>span{
+     border-top-left-radius: 0;
+     border-bottom-left-radius: 0;
+}
+
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.register, .modal-header,.modal-body ,.modal-footer{
+    font-family: OpenSans;
+}
+
+.w50{
+    width: 50%;
+}
+
+.order1 input{
+    display: none;
+}
+
+
+
+.rigth_items li{
+    margin-top:5px ;
+}
+
+
+.home .form-control{
+    padding: 20px 10px;
+    border-radius: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+

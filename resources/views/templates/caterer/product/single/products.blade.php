@@ -23,7 +23,7 @@
                                     </div>
                                     {{--<div class="main-product fl"></div>--}}
                                     <div class="product-txt fl product-list1">
-                                        <p class="fmlreg fz20 cg1 title" >
+                                        <p class="fmlreg fz20 cg1 title mb5" >
                                             <% product.name %>
                                         </p>
                                         <p class="fmlreg fz13 text">

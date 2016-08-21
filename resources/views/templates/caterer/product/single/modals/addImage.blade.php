@@ -16,7 +16,7 @@
 
                 <input type="file" flow-btn name="avatar"/>
                 <div class="cater-pic" ng-hide="$flow.files.length">
-                    <img class="ithumbnail" src="../images/restaurant-pic.png"/>
+                    <img class="ithumbnail" ng-src="../images/restaurant-pic.png"/>
                 </div>
                 <div class="cater-pic" ng-show="$flow.files.length">
                     <img class="ithumbnail" flow-img="$flow.files[0]"/>

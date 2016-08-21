@@ -116,6 +116,7 @@ app.controller('EditProductController', ['$scope', 'CatererProductModel', 'Cater
 
         $scope.remove = function (index) {
             $scope.customize.splice(index, 1);
+            $scope.changeCustomize();
         },
 
             $scope.selectKitchenForEdit = function (selected, $model) {

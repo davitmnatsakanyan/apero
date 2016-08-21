@@ -15,7 +15,7 @@
         {{--<input type="file" flow-btn name="avatar"/>--}}
 
         <div class="cater-pic caterer-pic-width" ng-hide="$flow.files.length">
-            <img class="cater-pic-width image-size"  src="../images/packages/<% package.avatar %>" alt="no picture"/>
+            <img class="cater-pic-width image-size"  ng-src="../images/packages/<% package.avatar %>" alt="no picture"/>
         </div>
 
         <div class="cater-pic caterer-pic-width" ng-show="$flow.files.length">

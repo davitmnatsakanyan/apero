@@ -80,7 +80,7 @@
                                             </table>
                                         </div>
                                     </uib-tab>
-                                    <uib-tab index="1" heading="Products">
+                                    <uib-tab index="1" class='order-tab' heading="Products">
                                         <div data-ng-controller="CatererOrdersController" ng-if="order.products.length">
                                         <table class="table table-bordered table-striped table-hover mt20">
                                             <thead>
@@ -112,7 +112,7 @@
                                             <p class="fz28 fmlreg cg1 db">No products</p>
                                         </div>
                                     </uib-tab>
-                                    <uib-tab index="2" heading="Packages">
+                                    <uib-tab index="2" class='order-tab' heading="Packages">
                                         <div data-ng-controller="CatererOrdersController" ng-if="order.packages.length">
                                         <table class="table table-bordered table-striped table-hover mt20">
                                             <thead>
