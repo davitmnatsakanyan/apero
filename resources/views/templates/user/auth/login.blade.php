@@ -43,6 +43,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-5">
                                 <input type="submit" class="btn green button-submit" value="Log In" >
+                                <input type="button" class="btn green button-submit" value="Forgot password?" ng-click="open('sm','user')">
                             </div>
                         </div>
                     </form>

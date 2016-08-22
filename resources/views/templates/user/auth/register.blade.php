@@ -24,7 +24,6 @@
                         </div>
                         <div class="col-md-6">
                             <input type="hidden" name="role" ng-init="data.role='user'" ng-model="data.role">
-                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="control-label col-md-5">Name
                                 <span class="required">

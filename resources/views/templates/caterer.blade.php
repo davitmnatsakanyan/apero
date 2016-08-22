@@ -76,8 +76,9 @@
 											<div class="kategori-item">
 												<form name="myForm" >
 												  <label ng-repeat="product in menu.products track by $index">
-													<span ><a id="product_name" ng-click="show_modal(product, product_count)"><% product.name %></a></span>
-													<input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
+													<span ><a id="product_name" ng-click="show_modal(product, product_count)"><% product.name %></a>
+														<div ng-if="!product.subproducts.length" class="fr"><% product.price %> €</div></span>
+													  <input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
 													<i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count, 'product')" aria-hidden="true"></i>
 												  </label>
 												 </form>
@@ -96,7 +97,7 @@
 										</div>
 										<div class="col-md-5">
 											<div class="anbieter-img">
-												<img ng-src="../images/packages/<% package.avatar  %>" alt="">
+												<img ng-src="/images/packages/<% package.avatar  %>" alt="">
 											</div>
 										</div>
 										<div class="col-md-7">

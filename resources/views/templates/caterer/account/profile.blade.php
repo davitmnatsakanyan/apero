@@ -45,7 +45,7 @@
                                                         <div class="info-box">
                                                             <label for="zip" class="title fmlbold fz15">Zip</label>
 
-                                                            <ui-select ng-model="selectedZip" class="fmlreg fz13 mb1"
+                                                            <ui-select ng-model="selectedZip" class="fmlreg fz13 mb1 order1"
                                                                        on-select="selectZip($select.selected, $model)">
                                                                 <ui-select-match class="select-zip"><%
                                                                     $select.selected.ZIP + " " +
@@ -101,7 +101,7 @@
                                                             <label for="country"
                                                                    class="title fmlbold fz15">Country</label>
                                                             <ui-select ng-model="selectedCountry"
-                                                                       class="fmlreg fz13 mb1"
+                                                                       class="fmlreg fz13 mb1 order1"
                                                                        on-select="selectCountry($select.selected, $model)">
                                                                 <ui-select-match class="select-zip"><%
                                                                     $select.selected.name %>

@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\ZipCode;
+use App\Models\Country;
+use App\Models\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -35,7 +37,8 @@ class MembersController extends AdminBaseController
     public function create()
     {
         $zips = ZipCode::all();
-        return view('admin.members.create', compact('zips'));
+        $countries = Country::all();
+        return view('admin.members.create', compact('zips','countries'));
     }
 
     /**
@@ -47,18 +50,24 @@ class MembersController extends AdminBaseController
     {
         $this->validate($request, [
             'name' => 'required',
+            'title' => 'required',
             'address' => 'required',
             'pobox' => 'required',
             'zip' => 'required',
             'city' => 'required',
             'country' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|email|unique:users,email,NULL,id,is_user,1',
             'phone' => 'required',
             'mobile' => 'required',
             'password' => 'required',
+            'fax' =>'required',
+
+            
         ]);
+        
         User::create([
             'name' => $request->name,
+            'title' => $request->title,
             'address' => $request->address,
             'pobox' => $request->pobox,
             'zip' => $request->zip,
@@ -103,8 +112,9 @@ class MembersController extends AdminBaseController
     {
         $member = User::where('is_user', 1)->findOrFail($id);
         $zips = ZipCode::all();
+        $countries = Country::all();
 
-        return view('admin.members.edit', compact('member', 'zips'));
+        return view('admin.members.edit', compact('member', 'zips','countries'));
     }
 
     /**
@@ -124,13 +134,14 @@ class MembersController extends AdminBaseController
             'zip' => 'required',
             'city' => 'required',
             'country' => 'required',
-            'email' => 'required|unique:users,email,' . $member->id,
+            'email' => 'required|unique:users,email,' . $member->id . ',id,is_user,1',
             'phone' => 'required',
             'mobile' => 'required',
         ]);
 
         $member->update([
             'name' => $request->name,
+            'title' => $request->title,
             'address' => $request->address,
             'pobox' => $request->pobox,
             'zip' => $request->zip,
@@ -139,6 +150,7 @@ class MembersController extends AdminBaseController
             'email' => $request->email,
             'phone' => $request->phone,
             'mobile' => $request->mobile,
+            'fax' => $request->fax,
         ]);
         if (!is_null($request->password)) {
             $member->update(['password' => bcrypt($request->password)]);
@@ -176,9 +188,12 @@ class MembersController extends AdminBaseController
      */
     public function block($id)
     {
-        if (User::find($id)->is_user)
-            if (User::destroy($id))
+        $user = User::findOrfail($id);
+        if ($user->is_user)
+            if (User::destroy($id)) {
+                $user->update(['admin_id' => $this->admin->id()]);
                 return redirect('admin/members')->with('success', 'User successfully blocked.');
+            }
         return redirect()->back()->with('error', 'Something went wrong');
     }
 
@@ -186,6 +201,8 @@ class MembersController extends AdminBaseController
     public function getBlocked()
     {
         $members = User::onlyTrashed()->paginate(15);
+        foreach($members as $member)
+            $member->admin = Admin::findOrFail($member->admin_id)->name;
         return view('admin/members/blocked', compact('members'));
     }
 

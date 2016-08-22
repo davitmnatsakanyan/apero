@@ -32,7 +32,7 @@
                 <option value="{{ $zip->id }}"}}>{{$zip['ZIP'] ."  ". $zip['city']}}</option>
             @endforeach
         </select>
-        {!! $errors->first('kitchen', '<p class="help-block">:message</p>') !!}
+        {!! $errors->first('zip', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('city') ? 'has-error' : ''}}">
@@ -59,7 +59,11 @@
 <div class="form-group {{ $errors->has('contry') ? 'has-error' : ''}}">
     {!! Form::label('country', 'Country', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::text('country', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        <select class="selectpicker form-control" id="zip" name="zip">
+            @foreach($countries as $country)
+                <option value="{{ $country->id }}"}}>{{$country->name}}</option>
+            @endforeach
+        </select>
         {!! $errors->first('country', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -88,7 +92,7 @@
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-3">
         {{--{!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}--}}
-        <button type="submit" name="edit"  value="ci_edit" class="btn btn-primary form-control">Updtae</button>
+        <button type="submit" name="edit"  value="ci_edit" class="btn btn-primary form-control">Create</button>
     </div>
 </div>
 

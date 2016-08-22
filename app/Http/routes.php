@@ -1,6 +1,13 @@
 <?php
 
-Route::get('aaa', 'User\SettingsController@getUpdate');
+Route::get('aaa', function(){
+    // the message
+    Mail::raw('some text', function ($m) {
+        $m->from('sona.khachatryan1995@gmail.com', 'Your Application');
+
+        $m->to('sona.khachatryan1995@gmail.com', 'aaaaa')->subject('Your Reminder!');
+    });
+});
 
 Route::get('bbb/{id}','Caterer\ProductManagment\SingleProductController@getMenus');
 
@@ -135,6 +142,7 @@ Route::group([], function () {
         return view('index');
     });
 
+    Route::post('auth/passwordReset/checkEmailExists','Auth\PasswordController@checkEmailExists');
     Route::controller('home', 'HomeController');
     Route::controller('auth', 'Auth\AuthController');
 

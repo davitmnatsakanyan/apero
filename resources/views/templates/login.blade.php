@@ -17,6 +17,10 @@
     </uib-tabset>
 </div>
 
+<div ng-include='"templates/modals/passwordResetEmail.blade.php"'></div>
+
+
+
 <link href="/administration/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="/administration/assets/css/style.css" rel="stylesheet" type="text/css"/>
 

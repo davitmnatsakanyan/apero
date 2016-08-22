@@ -31,6 +31,10 @@
                     <td> {{ $member->name }} </td>
                 </tr>
                 <tr>
+                    <th> Title </th>
+                    <td> {{ $member->title }} </td>
+                </tr>
+                <tr>
                     <th> Address </th>
                     <td> {{ $member->address }} </td>
                 </tr>
@@ -61,6 +65,10 @@
                 <tr>
                     <th> Mobile </th>
                     <td> {{ $member->mobile }} </td>
+                </tr>
+                <tr>
+                    <th> Fax </th>
+                    <td> {{ $member->fax }} </td>
                 </tr>
             </tbody>
         </table>

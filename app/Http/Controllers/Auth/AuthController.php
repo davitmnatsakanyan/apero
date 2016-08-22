@@ -79,8 +79,6 @@ class AuthController extends Controller
     */
    public function postRegister(Request $request)
    {
-
-//       dd($request->zip);
        if($request->role == 'user'){
            $this->validate($request, [
                'address'            => 'required|max:250',
@@ -88,14 +86,15 @@ class AuthController extends Controller
                'zip'                => 'required|max:5',
                'city'               => 'required|max:250',
                'country'            => 'required|max:3',
-               'email'              => 'required|email|max:100|unique:users',
+               'email'              => 'required|email|unique:users,email,NULL,id,is_user,1',
                'phone'              => 'required|max:50',
                'password'           => 'required|confirmed',
                'password_confirmation'  => 'required',
                'fax'                => 'required',
                'name'               => 'required',
                'title'              => 'required',
-               'mobile'             => 'required'
+               'mobile'             => 'required',
+
            ]);
        }
         $role = strtolower($request->role);
@@ -103,6 +102,7 @@ class AuthController extends Controller
         $service = \App::make('App\Http\Services\\'.$roleService);
         $data = $request->except(['_token','role']);
         $password = $data['password'];
+        $data['remember_token'] = $request->_token;
         $data['password'] = bcrypt($data['password']);
         $data['created_ip'] = $request->ip();
         $data['is_user'] = 1;

@@ -105,6 +105,7 @@
 <script src="/js/controllers/CookingTimeModalInstanceController.js"></script>
 <script src="/js/controllers/UploadImageModalInstanceController.js"></script>
 <script src="/js/controllers/SubproductModalInstanceController.js"></script>
+<script src="/js/controllers/ResetPasswordModalInstanceController.js"></script>
 
 
 <!-- end controllers -->

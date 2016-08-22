@@ -7,11 +7,18 @@
             <form>
                 <div class="form-group">
                     <ul class="prod_list">
-                        <li ng-repeat="item in items" >
-                            <label  for="<% item.id %>"><% item.name  %>
-                                <input ng-value="{ price: item.price, sub_id: item.id }" ng-model="i.product" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">
+                        <li ng-repeat="item in items" class="border-dotted" >
+                            <label  for="<% item.id %>">
+                                <span >
+                                    <% item.name  %>
+                                </span>
+                                {{--<input ng-value="{ price: item.price, sub_id: item.id }" ng-model="i.product" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">--}}
                             </label>
 
+                            <div class="fr">
+                            <span class="pr10"><% item.price %> €</span>
+                            <input ng-value="{ price: item.price, sub_id: item.id }" ng-model="i.product" class="pull-right" ng-checked="$first == true" type="radio" name="sub_product" id="<% item.id %>">
+                            </div>
                         </li>
 
                     </ul>

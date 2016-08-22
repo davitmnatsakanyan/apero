@@ -3278,4 +3278,12 @@ form .profil-form  {
 }
 
 
+.border-dotted{
+    border-bottom: 1px dotted black
+}
+
+.pr10{
+    padding-right: 10px;
+}
+
 

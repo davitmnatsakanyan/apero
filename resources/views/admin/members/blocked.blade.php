@@ -13,6 +13,7 @@
                         <th> Name </th>
                         <th> Address </th>
                         <th> Pobox </th>
+                        <th> Admin </th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -25,6 +26,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->pobox }}</td>
+                            <td>{{ $item->admin }}</td>
                             <td>
                                 <a href="{{ url('/admin/members/active', $item->id ) }}" class="btn btn-success btn-xs"
                                    title="Block Caterer"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"/></a>

@@ -1,4 +1,5 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService', 'CatererAccountModel',   function ($scope, $http, $location, $window, AuthService, CatererAccountModel) {
+app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'AuthService', 'CatererAccountModel','$uibModal','toastr',
+  function ($scope, $http, $location, $window, AuthService, CatererAccountModel,$uibModal,toastr) {
     
     // redirect to home, if loged in
     AuthService.auth_check('user').then(function(response){
@@ -113,4 +114,58 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
             }
         });
     }
+
+
+
+    $scope.animationsEnabled = true;
+    $scope.open = function (size,role) {
+        console.log(123);
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ResetPasswordModalInstanceCtrl',
+            size: size,
+        });
+
+        modalInstance.result.then(function (email) {
+            console.log(email);
+            data ={
+                role:role,
+                email:email,
+            }
+
+            $http({
+                    data: data,
+                    method : "POST",
+                    url : "auth/passwordReset/checkEmailExists"
+                }
+            ).then(
+                function(response){
+                if (response.data.success) {
+                    console.log(response.data);
+                    toastr.success(response.data.message);
+                }
+                else {
+                    console.log(response.data)
+                    toastr.error(response.data.error, 'Error');
+                }
+            },
+            function (error) {
+                $scope.errorMessages(error.data);
+            });
+            console.log('sax lava');
+
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+
+      $scope.errorMessages = function (errors) {
+          var data = "";
+          angular.forEach(errors, function (value, key) {
+              data += value + "<br/>";
+          }, data);
+          toastr.error(data, 'Error');
+      };
 }]);

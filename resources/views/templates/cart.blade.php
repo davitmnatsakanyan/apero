@@ -51,7 +51,7 @@
 						<div class="carterer-product" ng-repeat="package in packages track by $index">
 							<ul>
 								<li>
-									<img ng-src="../images/products/<% package.avatar %>" alt="">
+									<img ng-src="/images/packages/<% package.avatar %>" alt="">
 								</li>
 								<li>
 									<p>
