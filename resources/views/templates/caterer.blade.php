@@ -77,7 +77,7 @@
 												<form name="myForm" >
 												  <label ng-repeat="product in menu.products track by $index">
 													<span ><a id="product_name" ng-click="show_modal(product, product_count)"><% product.name %></a>
-														<div ng-if="!product.subproducts.length" class="fr"><% product.price %> €</div></span>
+														<div ng-if="!product.subproducts.length" class="fr">CHF <% product.price %></div></span>
 													  <input type="number" ng-model="product_count" name="input"  min="0" max="99" required>
 													<i class="fa fa-shopping-cart btn" ng-init="product_count = 0" ng-disabled="product_count == 0" ng-click="addToCart(product, product_count, 'product')" aria-hidden="true"></i>
 												  </label>
@@ -129,7 +129,7 @@
 							<div class="filter-content">
 								<form action="" class="clearfix">
 
-									<h4>Lieferdatium</h4>
+									<h4>Lieferdatum</h4>
 									<div class="lieferdatum">
 										{{--<input type="text" id="datetimepicker4">--}}
 										<div class="dropdown">

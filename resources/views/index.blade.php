@@ -6,7 +6,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="/images/logo.png">
+    <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" media="screen">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen">
@@ -69,6 +69,7 @@
 <script src="/bower_components/angular-payments/lib/angular-payments.js"> </script>
 <script type="text/javascript" src="/js/datetimepicker.js"></script>
 <script type="text/javascript" src="/js/datetimepicker.templates.js"></script>
+<script type="text/javascript" src="/js/dateTimeInput.js"></script>
 
 <script src="/js/angular-modal-service.min.js"></script>
 <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
@@ -121,7 +122,7 @@
 <script src="/js/models/SearchModel.js"></script>
 <script src="/js/models/UserModel.js"></script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb-bWFpEeZ2AN5uAlZQG2iY8n5GhQOkE4">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQLMj-xrg-e3un3DrjtQ9mmi6CuIbfbDg">
 </script>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>

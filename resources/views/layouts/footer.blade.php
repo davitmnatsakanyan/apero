@@ -19,7 +19,7 @@
 						<div class="footer-menu">
 							<h3>Kontakt</h3>
 							<ul>
-								<li><a href="#">Faq</a></li>
+								<li><a href="#">FAQ</a></li>
 								<li><a href="#">Hilfe</a></li>
 								<li><a href="#">Impressum</a></li>
 							</ul>
@@ -27,10 +27,10 @@
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-12">
 						<div class="footer-menu">
-							<h3>Fur Carerer</h3>
+							<h3>Für Caterer</h3>
 							<ul>
 								<li><a href="#">Anmelden</a></li>
-								<li><a href="#">Faq</a></li>
+								<li><a href="#">FAQ</a></li>
 								<li><a href="#">Caterer - Verzeichnis</a></li>
 							</ul>
 						</div>

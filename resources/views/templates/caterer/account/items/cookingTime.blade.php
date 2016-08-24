@@ -7,7 +7,7 @@
             <th> Action </th>
         </tr>
         <tr>
-            <td> Anlassgrosse </td>
+            <td> Anlassgrösse </td>
             <td> <% cooking_time.group1 %></td>
             <td>
                 <button class="btn btn-primary btn-xs" title="Edit" ng-click="open('sm','group1', cooking_time.group1)">

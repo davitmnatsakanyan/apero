@@ -1,6 +1,6 @@
 var app = angular.module('app', [
     'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'toastr', 'flow','ui.select','ngSanitize',
-    'angularModalService','angularPayments','ui.bootstrap.datetimepicker'
+    'angularModalService','angularPayments','ui.bootstrap.datetimepicker','ui.dateTimeInput'
 ]);
 
 app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSelectConfig','$windowProvider',
@@ -78,7 +78,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/caterer/packages/add', {
             templateUrl: 'templates/caterer/product/package/add',
             controller: 'CatererPackageController'
-        }) 
+        })
         .when('/caterer/packages/show/:package_id', {
             templateUrl: 'templates/caterer/product/package/show',
             controller: 'CatererPackageController'

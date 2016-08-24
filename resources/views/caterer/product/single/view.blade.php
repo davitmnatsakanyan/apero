@@ -19,7 +19,7 @@
             ))!!}
             {!! Form::close() !!}
         </h1>
-        <img src="{{url('images/products/' . $product->avatar)}}", alt="Mountain View" style="width:304px;height:228px;">
+        <img src="{{url('images/products/' . $product->avatar)}}", alt="Produktbild" style="width:304px;height:228px;">
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <tbody>

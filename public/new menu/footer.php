@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <div class="footer-menu">
-                        <h3>Fur Carerer</h3>
+                        <h3>Für Carerer</h3>
                         <ul>
                             <li><a href="#">Anmelden</a></li>
                             <li><a href="#">Faq</a></li>

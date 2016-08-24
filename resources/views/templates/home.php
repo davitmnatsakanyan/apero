@@ -1,5 +1,4 @@
-@include('templates/nav')
-
+<div ng-include='"templates/nav.php"'></div>
 <!-- Content -->
 <section id="content">
 
@@ -12,36 +11,27 @@
 						<form class="clearfix">
 							<div class="col-sm-4">
 								<div class="search">
-									<input type="text" ng-model="data.city" name="search" placeholder="PLZ eingeben...">
+									<input type="text" name="search" placeholder="PLZ  eingeben...">
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="anlassgrosse">
-									<select name="group" ng-model="group">
-										<option value="group1" selected>Anlassgrösse</option>
-										<option value="group2">1-5 Personen</option>
-										<option value="group3">6-10 Personen</option>
-										<option value="group4">Mehr als 11 Personen</option>
+									<select name="anlassgrosse">
+										<option value="volvo">Anlassgrösse</option>
+										<option value="saab">1-5</option>
+										<option value="opel">6-10</option>
+										<option value="audi">11-X</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="lieferdatum">
-									{{--<input type='text'  ng-model="date"  placeholder="Lieferdatum" id='datetimepicker4'>--}}
-									<div class="dropdown home">
-										<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" >
-											<input type="text" class="form-control" data-ng-model="delivery_time" data-date-time-input="DD.MM.YYYY">
-										</a>
-										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-											<datetimepicker data-ng-model="delivery_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }"/>
-										</ul>
-									</div>
+									<input type='text' placeholder="Lieferdatum" id='datetimepicker4'>
 								</div>
 							</div>
-							<% date %>
 							<div class="col-xs-12">
 								<div class="finden">
-									<a ng-click="search()" class="btn">Apero-Anbieter finden</a>
+									<a ng-href="#/hillfe" class="btn">Apero-Anbieter finden</a>
 								</div>
 							</div>
 						</form>
@@ -74,5 +64,4 @@
 
 </section>
 <!-- End Content -->
-
-@include('templates/footer')
+<div ng-include='"templates/footer.php"'></div>

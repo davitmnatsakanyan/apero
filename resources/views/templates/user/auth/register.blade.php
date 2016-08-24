@@ -10,7 +10,7 @@
         <div class="page-content">
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
-                <h3 class="block fz30 ml195">Provide your personal details</h3>
+                <h3 class="block fz30 ml195">Benutzerangaben</h3>
                 <div class="col-md-12">
                     <form action="#" class="form-horizontal" id="submit_form" ng-submit="reg_submit()">
 
@@ -198,9 +198,6 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-5">Fax
-                                <span class="required">
-                                     *
-                                </span>
                                 </label>
                                 <div class="col-md-7">
                                     <input type="text" class="form-control" name="fax" ng-model="data.fax" />
@@ -213,7 +210,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-3 ">
-                                <input type="submit" value="Register" class="btn green button-submit">
+                                <input type="submit" value="Registrieren" class="btn green button-submit">
                             </div>
 
                         </div>

@@ -4,7 +4,7 @@
             <div class="filter-content">
                     <form action="" class="clearfix">
 
-                            <h2>Kuche</h2>
+                            <h2>Küche</h2>
 
                             <label class="checkbox-inline"><input type="checkbox" value="">Japanische</label>
 
@@ -14,7 +14,7 @@
 
                             <label class="checkbox-inline"><input type="checkbox" value="">Schweizersch</label>
 
-                            <h3>Kuche</h3>
+                            <h3>Küche</h3>
                             <div class="" data-toggle="buttons-checkbox"> 
                             <button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>1-5</button>
                             <button class="btn" type="submit"><i class="fa fa-user-times" aria-hidden="true"></i>6-10</button>
