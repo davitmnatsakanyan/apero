@@ -1,15 +1,196 @@
 <?php
 
 Route::get('aaa', function(){
+    return view('test');
     // the message
-    Mail::raw('some text', function ($m) {
-        $m->from('sona.khachatryan1995@gmail.com', 'Your Application');
-
-        $m->to('sona.khachatryan1995@gmail.com', 'aaaaa')->subject('Your Reminder!');
-    });
+//    Mail::raw('some text', function ($m) {
+//        $m->from('sona.khachatryan1995@gmail.com', 'Your Application');
+//
+//        $m->to('sona.khachatryan1995@gmail.com', 'aaaaa')->subject('Your Reminder!');
+//    });
 });
 
-Route::get('bbb/{id}','Caterer\ProductManagment\SingleProductController@getMenus');
+Route::get('bbb',function(){
+    
+try {
+    $mandrill = new Mandrill('5lflfmsstLJrAvfqEir6Lg');
+    $message = array(
+        'html' => '<a>Example HTML content</a>',
+        'text' => 'Please follow the link below to reset the password.',
+        'subject' => 'example subject',
+        'from_email' => 'bastianjung8@gmail.com',
+        'from_name' => 'Example Name',
+        'to' => array(
+            array(
+                'email' => 'bastinjung8@gmail.com',
+                'name' => 'Recipient Name',
+                'type' => 'to'
+            )
+        ),
+        'headers' => array('Reply-To' => 'bastinjung8@gmail.com'),
+        'important' => true,
+        'track_opens' => null,
+        'track_clicks' => null,
+        'auto_text' => null,
+        'auto_html' => null,
+        'inline_css' => null,
+        'url_strip_qs' => null,
+        'preserve_recipients' => null,
+        'view_content_link' => null,
+        'bcc_address' => 'bastinjung8@gmail.com',
+        'tracking_domain' => null,
+        'signing_domain' => null,
+        'return_path_domain' => null,
+        'merge' => true,
+        'merge_language' => 'mailchimp',
+        'global_merge_vars' => array(
+            array(
+                'name' => 'merge1',
+                'content' => 'merge1 content'
+            )
+        ),
+        'merge_vars' => array(
+            array(
+                'rcpt' => 'bastinjung8@gmail.com',
+                'vars' => array(
+                    array(
+                        'name' => 'merge2',
+                        'content' => 'merge2 content'
+                    )
+                )
+            )
+        ),
+        'tags' => array('password-resets'),
+//        'subaccount' => 'customer-123',
+        'google_analytics_domains' => array('example.com'),
+        'google_analytics_campaign' => 'bastinjung8@gmail.com',
+//        'metadata' => array('website' => 'www.example.com'),
+//        'recipient_metadata' => array(
+//            array(
+//                'rcpt' => 'bastinjung8@gmail.com',
+//                'values' => array('user_id' => 123456)
+//            )
+//        ),
+//        'attachments' => array(
+//            array(
+//                'type' => 'text/plain',
+//                'name' => 'myfile.txt',
+//                'content' => 'ZXhhbXBsZSBmaWxl'
+//            )
+//        ),
+//        'images' => array(
+//            array(
+//                'type' => 'image/png',
+//                'name' => 'IMAGECID',
+//                'content' => 'ZXhhbXBsZSBmaWxl'
+//            )
+//        )
+    );
+    $async = false;
+    $ip_pool = 'Main Pool';
+//    $send_at = 'example send_at';
+    $result = $mandrill->messages->send($message, $async, $ip_pool,\Carbon\Carbon::now()->toDateTimeString());
+    print_r($result);
+    dd(1111);
+    /*
+    Array
+    (
+        [0] => Array
+            (
+                [email] => recipient.email@example.com
+                [status] => sent
+                [reject_reason] => hard-bounce
+                [_id] => abc123abc123abc123abc123abc123
+            )
+
+    )
+    */
+} catch(Mandrill_Error $e) {
+    // Mandrill errors are thrown as exceptions
+    echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
+    // A mandrill error occurred: Mandrill_Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+    throw $e;
+}
+
+
+//    $apikey = 'c66eb8edb757c87f6a6a5ff519ece7c9-us13';
+//
+//    $to_emails = array('bastianjung8@gmail.com');
+//    $to_names = array('You');
+//
+//    $message = [
+//        'html'=>'Yo, this is the <b>html</b> portion',
+//        'text'=>'Yo, this is the *text* portion',
+//        'subject'=>'This is the subject',
+//        'from_name'=>'Me!',
+//        'from_email'=>'verifed@example.com',
+//        'to_email'=>$to_emails,
+//        'to_name'=>$to_names
+//    ];
+//
+//    $tags = ['WelcomeEmail'];
+//
+//    $params = [
+//        'apikey'=>$apikey,
+//        'message'=>$message,
+//        'track_opens'=>true,
+//        'track_clicks'=>false,
+//        'tags'=>$tags
+//    ];
+//
+//    $url = "http://us1.sts.mailchimp.com/1.0/SendEmail";
+//
+//
+//
+//
+//
+//
+//    try {
+//        $ch = curl_init();
+//
+////        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+////            'Content-Type: application/x-www-form-urlencoded',
+////        ));
+//
+//        curl_setopt($ch, CURLOPT_URL, $url.'?'.http_build_query($params));
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//
+//        $result = curl_exec($ch);
+////
+////        curl_setopt($ch, CURLOPT_URL, "https://www.linkedin.com/oauth/v2/accessToken");
+////
+////        curl_setopt($ch, CURLOPT_POST, true);
+////
+////        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+////            'grant_type' => 'authorization_code',
+////            'code' => $code,
+////            'client_id' => '754enxbfv82979',
+////            'client_secret' => 'jtN3EjVD1hqYkjeG'
+////        ));
+////
+////
+////        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+////
+////        $server_output = curl_exec($ch);
+//
+//        if (FALSE === $result)
+//            throw new Exception(curl_error($ch), curl_errno($ch));
+//    }
+//    catch(Exception $e) {
+//
+////        print_r($e->getMessage());die;
+//        trigger_error(sprintf(
+//            'Curl failed with error #%d: %s',
+//            $e->getCode(), $e->getMessage()),
+//            E_USER_ERROR);
+//
+//    }
+//
+////    $data = json_decode($result);
+////    echo "Status = ".$data->status."\n";
+//
+////    SendEmail('c66eb8edb757c87f6a6a5ff519ece7c9-us13', array message, bool track_opens, bool track_clicks, array tags)
+});
 
 Route::get('ccc','PaypalController@getCheckout');
 
@@ -142,7 +323,9 @@ Route::group([], function () {
         return view('index');
     });
 
-    Route::post('auth/passwordReset/checkEmailExists','Auth\PasswordController@checkEmailExists');
+    Route::post('auth/passwordReset/checkEmailExists','Auth\PasswordController@checkEmailExists'); 
+    Route::get('auth/passwordReset/checkEmail','Auth\PasswordController@checkEmail');
+    Route::post('auth/passwordReset/reset','Auth\PasswordController@reset');
     Route::controller('home', 'HomeController');
     Route::controller('auth', 'Auth\AuthController');
 

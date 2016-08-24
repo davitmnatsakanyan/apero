@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <main>
     <div class="top-banner3">
         <div class="container-fluid wrapper920 caret-inner-box">
@@ -11,7 +11,7 @@
                 <div class="col-sm-12">
                     <div class="inner-cater">
                         <div class="row no-margin">
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
                         <div data-ng-controller="CatererProductsController">
                             <div class="col-sm-7 col-md-8">
                                 <div class="bestellen1">
@@ -58,4 +58,4 @@
         </div>
     </div>
 </main>
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

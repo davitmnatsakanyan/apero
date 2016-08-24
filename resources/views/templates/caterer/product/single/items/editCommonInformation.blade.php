@@ -75,5 +75,3 @@
                ng-click="updateProduct($files, $event, $flow)"/>
     </div>
 </div>
-
-{{--<div ng-include='"templates/caterer/product/single/modals/addImage.blade.php"'></div>--}}

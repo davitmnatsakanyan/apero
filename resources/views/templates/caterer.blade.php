@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 	<!-- Content -->
 	<section id="content">
 		<div  class="hillfe-content kategori-content">
@@ -169,4 +169,4 @@
 		</div>
 	</section>
 	<!-- End Content -->
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

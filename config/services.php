@@ -52,4 +52,9 @@ return [
        'secret' => 'EMCoH9iNqMW-MM3JVThjtURFovxSTc4GFzPuW-iRsBIcXzuJl0pYoDU53_msq05cMG7_Ezn8iih7jKCQ'
 ],
 
+    'mandrill' => [
+        'secret' => env('MANDRILL_KEY'),
+    ],
+
+
 ];

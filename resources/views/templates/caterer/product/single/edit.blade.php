@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <main>
     <div class="top-banner3">
         <div class="container-fluid wrapper920 caret-inner-box">
@@ -11,19 +11,19 @@
                 <div class="col-sm-12">
                     <div class="inner-cater">
 
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
                         <div data-ng-controller="EditProductController">
                             <div class="col-sm-7 col-md-8" ng-init="getPrDts()">
                                 <div class="package-tab">
                                     <uib-tabset active="activeJustified"  class="profile-tab" justified="true">
                                         <uib-tab index="0" heading="Common information">
-                                            <div ng-include='"templates/caterer/product/single/items/editCommonInformation.blade.php"'></div>
+                                            @include('templates/caterer/product/single/items/editCommonInformation')
                                         </uib-tab>
                                         <uib-tab index="1" {{--class='order-tab'--}} heading="Subroducts" ng-if="product.subproducts.length">
-                                            <div ng-include='"templates/caterer/product/single/items/editSubproducts.blade.php"'></div>
+                                            @include('templates/caterer/product/single/items/editSubproducts')
                                         </uib-tab>
                                         <uib-tab index="2"  {{--class='order-tab'--}} heading="Add subproducts">
-                                            <div ng-include='"templates/caterer/product/single/items/editCustomize.blade.php"'></div>
+                                            @include('templates/caterer/product/single/items/editCustomize')
                                         </uib-tab>
                                     </uib-tabset>
                                 </div>
@@ -35,4 +35,4 @@
         </div>
     </div>
 </main>
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

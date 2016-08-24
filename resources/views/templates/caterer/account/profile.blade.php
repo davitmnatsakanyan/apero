@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <!-- Content -->
 <main>
     <div class="top-banner3">
@@ -12,7 +12,7 @@
                 <div class="col-sm-12">
                     <div class="inner-cater">
 
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
 
                         <div class="col-sm-7 col-md-8">
                             <div class="package-tab">
@@ -198,17 +198,17 @@
                                         </div>
                                     </uib-tab>
                                     <uib-tab index="2" heading="Delivery Area" class="profile-tab-1">
-                                        <div ng-include='"templates/caterer/account/items/deliveryArea.blade.php"'></div>
+                                        @include('templates/caterer/account/items/deliveryArea')
                                     </uib-tab>
                                     <uib-tab index="3" heading="Kitchens"  class="profile-tab-1">
-                                        <div ng-include='"templates/caterer/account/items/kitchens.blade.php"'></div>
+                                        @include('templates/caterer/account/items/kitchens')
                                     </uib-tab>
                                     </uib-tab>
                                     <uib-tab index="4" heading="Cooking Time" class="profile-tab-1">
-                                        <div ng-include='"templates/caterer/account/items/cookingTime.blade.php"'></div>
+                                        @include('templates/caterer/account/items/cookingTime')
                                     </uib-tab >
                                     <uib-tab index="5" heading="Change Password" class="profile-tab-1">
-                                        <div ng-include='"templates/caterer/account/items/changePassword.blade.php"'></div>
+                                        @include('templates/caterer/account/items/changePassword')
                                     </uib-tab>
                                 </uib-tabset>
                             </div>
@@ -220,4 +220,4 @@
     </div>
 </main>
 <!-- End Content -->
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

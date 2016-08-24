@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <!-- Content -->
 <main>
     <div class="top-banner3">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="inner-cater pl10">
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
 
                         <div class="col-sm-7 col-md-8">
                             <div class="bestelungen">
@@ -108,4 +108,4 @@
     </div>
 </main>
 <!-- End Content -->
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

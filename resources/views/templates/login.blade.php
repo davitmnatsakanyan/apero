@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <div class="modal-header">
     <h3 class="modal-title fz40">Login</h3>
 </div>
@@ -6,18 +6,18 @@
     <uib-tabset active="activeForm">
         <uib-tab index="0" heading="Caterer" class="w50">
             <div class="mt20">
-            <div ng-include='"templates/caterer/auth/login.blade.php"'></div>
+            @include('templates/caterer/auth/login')
             </div>
         </uib-tab>
         <uib-tab index="1" heading="User" class="w50">
             <div class="mt20">
-            <div ng-include='"templates/user/auth/login.blade.php"'></div>
+            @include('templates/user/auth/login')
                 </div>
         </uib-tab>
     </uib-tabset>
 </div>
 
-<div ng-include='"templates/modals/passwordResetEmail.blade.php"'></div>
+@include('templates/modals/passwordResetEmail')
 
 
 

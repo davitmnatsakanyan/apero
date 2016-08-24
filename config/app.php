@@ -167,7 +167,8 @@ return [
 
         Ixudra\Curl\CurlServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
-        Webpatser\Countries\CountriesServiceProvider::class
+        Webpatser\Countries\CountriesServiceProvider::class,
+        Weblee\Mandrill\MandrillServiceProvider::class
 
     ],
 
@@ -223,7 +224,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Curl' => Ixudra\Curl\Facades\Curl::class,
-        'Countries' => Webpatser\Countries\CountriesFacade::class
+        'Countries' => Webpatser\Countries\CountriesFacade::class,
+        'MandrillMail'  => Weblee\Mandrill\MandrillFacade::class,
 
     ],
 

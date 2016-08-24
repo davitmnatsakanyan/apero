@@ -55,4 +55,4 @@
     <input form="addProduct" type="submit" value="Save" class="fmlreg fz25" ng-click="createProduct()"/>
 </div>
 
-<div ng-include='"templates/caterer/product/single/modals/addImage.blade.php"'></div>
+@include('templates/caterer/product/single/modals/addImage')

@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 
 <!-- Content -->
 <main>
@@ -15,7 +15,7 @@
                     <div class="inner-cater">
                         <div class="row no-margin">
 
-                            <div ng-include='"templates/user/account/_navbar.blade.php"'></div>
+                            @include('templates/user/account/_navbar')
 
                             <div class="col-sm-7 col-md-8 company-apero company-apero-company" ng-if="order">
                                 <div class="company-title-username">
@@ -61,7 +61,7 @@
 </main>
 <!-- End Content -->
 
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')
 
 
 {{--<div class="pricessing fl">--}}

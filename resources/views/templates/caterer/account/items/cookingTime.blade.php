@@ -47,4 +47,4 @@
 
 </div>
 
-<div ng-include='"templates/caterer/account/modals/cooking_time.blade.php"'></div>
+@include('templates/caterer/account/modals/cooking_time')

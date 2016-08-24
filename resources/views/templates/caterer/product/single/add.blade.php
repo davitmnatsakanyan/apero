@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <main>
     <div class="top-banner3">
         <div class="container-fluid wrapper920 caret-inner-box">
@@ -11,21 +11,21 @@
                 <div class="col-sm-12">
                     <div class="inner-cater">
 
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
                         <div data-ng-controller="CatererProductsController">
                             <div class="col-sm-7 col-md-8">
                                 <div ng-if="addingProduct.customize.length">
                                     <uib-tabset active="activeJustified" class="profile-tab" justified="true">
                                         <uib-tab index="0" heading="Common information">
-                                            <div ng-include='"templates/caterer/product/single/items/addCommonInformation.blade.php"'></div>
+                                            @include('templates/caterer/product/single/items/addCommonInformation')
                                         </uib-tab>
                                         <uib-tab index="1" heading="Subroducts">
-                                            <div ng-include='"templates/caterer/product/single/items/addSubproducts.blade.php"'></div>
+                                            @include('templates/caterer/product/single/items/addSubproducts')
                                         </uib-tab>
                                     </uib-tabset>
                                 </div>
                                 <div ng-if="!addingProduct.customize.length">
-                                    <div ng-include='"templates/caterer/product/single/items/addCommonInformation.blade.php"'></div>
+                                    @include('templates/caterer/product/single/items/addCommonInformation')
                                 </div>
                             </div>
                         </div>
@@ -35,4 +35,4 @@
         </div>
     </div>
 </main>
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

@@ -160,6 +160,41 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$window', 'Au
         });
     };
 
+      $scope.initFunction= function() {
+
+          if ($location.search().role) {
+              console.log('reset');
+
+              $scope.role = $location.search().role;
+              $scope.email = $location.search().email;
+              console.log($scope.role);
+          }
+      }
+
+      $scope.changePassword = function(){
+          data={
+              password:$scope.password,
+              password_confirmation:$scope.password_confirmation,
+              email:$scope.email,
+              role:$scope.role ,
+          };
+
+          console.log(data);
+
+          $http({
+                  data: data,
+                  method : "POST",
+                  url : "auth/passwordReset/reset",
+              }
+          ).then(
+              function(response){
+                  if(response.data.success)
+                      $location.path($scope.role+'/orders')
+              }
+          );
+          
+          
+      }
 
       $scope.errorMessages = function (errors) {
           var data = "";

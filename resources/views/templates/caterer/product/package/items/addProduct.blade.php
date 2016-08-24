@@ -14,7 +14,7 @@
         </div>
         </form>
 
-    <div ng-include='"templates/caterer/product/package/modals/products.blade.php"'></div>
+    @include('templates/caterer/product/package/modals/products')
         <ul uib-pagination ng-model="currentSelectedProductsPage"
             total-items="selectedProducts.length"
             max-size="selectedMaxSize"

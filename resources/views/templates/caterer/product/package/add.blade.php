@@ -1,4 +1,4 @@
-<div ng-include='"templates/nav.blade.php"'></div>
+@include('templates/nav')
 <main>
     <div class="top-banner3">
         <div class="container-fluid wrapper920 caret-inner-box">
@@ -11,15 +11,15 @@
                 <div class="col-sm-12">
                     <div class="inner-cater">
 
-                        <div ng-include='"templates/caterer/account/_navbar.blade.php"'></div>
+                        @include('templates/caterer/account/_navbar')
                         <div data-ng-controller="CatererPackageController">
                             <div class="col-sm-7 col-md-8">
                                 <uib-tabset active="activeJustified" class="profile-tab" justified="true">
                                     <uib-tab index="0" heading="Common information">
-                                        <div ng-include='"templates/caterer/product/package/items/editCommonInformation.blade.php"'></div>
+                                        @include('templates/caterer/product/package/items/editCommonInformation')
                                     </uib-tab>
                                     <uib-tab index="2" heading="Add Products">
-                                        <div ng-include='"templates/caterer/product/package/items/addProduct.blade.php"'></div>
+                                        @include('templates/caterer/product/package/items/addProduct')
                                     </uib-tab>
                                 </uib-tabset>
                             </div>
@@ -31,4 +31,4 @@
         </div>
     </div>
 </main>
-<div ng-include='"templates/footer.blade.php"'></div>
+@include('templates/footer')

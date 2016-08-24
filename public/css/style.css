@@ -3286,4 +3286,14 @@ form .profil-form  {
     padding-right: 10px;
 }
 
+.passwordReset{
+    background: #fff;
+    margin: 10px;
+    padding: 10px 108px;
+}
+
+
+.font-family-class{
+    font-family: OpenSans;
+}
 

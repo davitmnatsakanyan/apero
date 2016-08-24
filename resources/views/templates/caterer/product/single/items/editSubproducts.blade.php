@@ -35,4 +35,4 @@
     </ul>
 </div>
 
-<div ng-include='"templates/caterer/product/single/modals/editSubproduct.blade.php"'></div>
+@include('templates/caterer/product/single/modals/editSubproduct')

@@ -36,103 +36,107 @@ app.config(['$interpolateProvider', 'toastrConfig', 'flowFactoryProvider','uiSel
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/login', {
-            templateUrl: 'templates/login.blade.php',
+            templateUrl: 'templates/login',
             controller: 'AuthController'
         })
         .when('/register', {
-            templateUrl: 'templates/register.blade.php',
+            templateUrl: 'templates/register',
+            controller: 'AuthController'
+        })
+        .when('/passwordReset', {
+            templateUrl: 'templates/passwordReset',
             controller: 'AuthController'
         })
         .when('/user/account', {
-            templateUrl: 'templates/user/account/profile.blade.php',
+            templateUrl: 'templates/user/account/profile',
             controller: 'UserProfileController'
         })
         .when('/user/account/changePassword', {
-            templateUrl: 'templates/user/account/changePassword.blade.php',
+            templateUrl: 'templates/user/account/changePassword',
             controller: 'UserProfileController'
         })
         .when('/user/orders', {
-            templateUrl: 'templates/user/account/orders.blade.php',
+            templateUrl: 'templates/user/account/orders',
             controller: 'UserOrdersController'
         })
         .when('/user/orders/:order_id', {
-            templateUrl: 'templates/user/account/show_order.blade.php',
+            templateUrl: 'templates/user/account/show_order',
             controller: 'UserOrdersController'
         })
         .when('/caterers', {
-            templateUrl: 'templates/caterers.blade.php',
+            templateUrl: 'templates/caterers',
             controller: 'SearchController'
         })
         .when('/caterer', {
-            templateUrl: 'templates/caterer/account/profile.blade.php',
+            templateUrl: 'templates/caterer/account/profile',
             controller: 'CatererProfileController'
         })
         .when('/caterer/packages', {
-            templateUrl: 'templates/caterer/product/package/package.blade.php',
+            templateUrl: 'templates/caterer/product/package/package',
             controller: 'CatererPackageController'
         })
         .when('/caterer/packages/add', {
-            templateUrl: 'templates/caterer/product/package/add.blade.php',
+            templateUrl: 'templates/caterer/product/package/add',
             controller: 'CatererPackageController'
         }) 
         .when('/caterer/packages/show/:package_id', {
-            templateUrl: 'templates/caterer/product/package/show.blade.php',
+            templateUrl: 'templates/caterer/product/package/show',
             controller: 'CatererPackageController'
         })
         .when('/caterer/packages/edit/:package_id', {
-            templateUrl: 'templates/caterer/product/package/edit.blade.php',
+            templateUrl: 'templates/caterer/product/package/edit',
             controller: 'CatererPackageController'
         })
         .when('/caterer/product/edit/:product_id', {
-            templateUrl: 'templates/caterer/product/single/edit.blade.php',
+            templateUrl: 'templates/caterer/product/single/edit',
             controller: 'EditProductController'
         })
         .when('/caterer/profile', {
-            templateUrl: 'templates/caterer/account/profile.blade.php',
+            templateUrl: 'templates/caterer/account/profile',
             controller: 'CatererProfileController'
         })
         .when('/caterer/products', {
-            templateUrl: 'templates/caterer/product/single/kitchens.blade.php',
+            templateUrl: 'templates/caterer/product/single/kitchens',
             controller: 'CatererProductsController'
         })
         .when('/caterer/:kitchen_id/menus', {
-            templateUrl: 'templates/caterer/product/single/menus.blade.php',
+            templateUrl: 'templates/caterer/product/single/menus',
             controller: 'CatererProductsController'
         })
         .when('/caterer/:k_id/:menu_id/products',{
-            templateUrl: 'templates/caterer/product/single/products.blade.php',
+            templateUrl: 'templates/caterer/product/single/products',
             controller: 'CatererProductsController'
         })
         .when('/caterer/product/add',{
-            templateUrl: 'templates/caterer/product/single/add.blade.php',
+            templateUrl: 'templates/caterer/product/single/add',
             controller: 'CatererProductsController'
         })
         .when('/caterer/product/show/:product_id',{
-            templateUrl: 'templates/caterer/product/single/view.blade.php',
+            templateUrl: 'templates/caterer/product/single/view',
             controller: 'CatererProductsController'
         })
         .when('/caterer/orders', {
-            templateUrl: 'templates/caterer/account/orders.blade.php',
+            templateUrl: 'templates/caterer/account/orders',
             controller: 'CatererOrdersController'
         })
         .when('/caterer/orders/:order_id', {
-            templateUrl: 'templates/caterer/account/show_order.blade.php',
+            templateUrl: 'templates/caterer/account/show_order',
             controller: 'CatererOrdersController'
         })
         .when('/caterer/show/:caterer_id', {
-            templateUrl: 'templates/caterer.blade.php',
+            templateUrl: 'templates/caterer',
             controller: 'CatererController'
         })
         .when('/cart', {
-            templateUrl: 'templates/cart.blade.php',
+            templateUrl: 'templates/cart',
             controller: 'CartController'
         })
         .when('/order', {
-            templateUrl: 'templates/order.blade.php',
+            templateUrl: 'templates/order',
             controller: 'OrderController'
         })
         .when('/', {
-            templateUrl: 'templates/home.blade.php',
+            templateUrl: 'templates/home',
             controller: 'HomeController'
         })
         .otherwise({
