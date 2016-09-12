@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="/css/datetimepicker.css"/>
     {{--<link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">--}}
-    <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css"/>
     <link rel="stylesheet" href="/css/style.css">
     {{--<link rel="stylesheet" href="/css/custom.css">--}}
 
@@ -72,7 +72,7 @@
 <script type="text/javascript" src="/js/dateTimeInput.js"></script>
 
 <script src="/js/angular-modal-service.min.js"></script>
-<script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
 <script src="/js/ng-flow-standalone.min.js"></script>
 <script src="/js/select.js"></script>
 
